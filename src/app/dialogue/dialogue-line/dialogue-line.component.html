@@ -1,0 +1,10 @@
+<div *ngIf="!edit" (click)="onClick($event)">
+    {{ line.line }}
+</div>
+<div *ngIf="edit">
+    <mat-form-field>
+        <textarea matInput matTextareaAutosize
+                  matAutosizeMinRows="2" matAutosizeMaxRows="5"
+                  placeholder="Autosize textarea" [(ngModel)]="line.line"></textarea>
+    </mat-form-field>
+</div>
