@@ -17,13 +17,13 @@ export class AppComponent implements OnInit {
   }
 
   createDialogue() {
-    this.dialogue.addGreetings(['Doberek!', 'Siemanko!', 'Hejka!', 'Czołem!', 'Hej tam!']);
+    this.dialogue.addGreetings(['Howdy!', 'Hello!', 'Hey there!', 'Mornin\'', '*grunt*']);
 
-    this.dialogue.addTopic('No... siemka');
-    this.dialogue.topics[0].addLine('No hejka');
-    this.dialogue.topics[0].addLine('Co tam?');
-    this.dialogue.addTopic('Mam coś dla Ciebie');
-    this.dialogue.topics[1].addLine('A co masz?');
-    this.dialogue.topics[1].addLine('Pokaż!');
+    this.dialogue.addTopic('Um... Hi.');
+    this.dialogue.topics[0].addLine('Hey, hey!');
+    this.dialogue.topics[0].addLine('What\'s up?');
+    this.dialogue.addTopic('I\'ve got something for you.');
+    this.dialogue.topics[1].addLine('Oooh, whatchu got?');
+    this.dialogue.topics[1].addLine('Show me!');
   }
 }
