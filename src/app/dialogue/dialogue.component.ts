@@ -25,5 +25,6 @@ import { DialogueTopic } from './dialogue-topic/dialogue-topic.class';
 
     public ngOnInit(): void {
         this.dialogue.reset();
+        // this.dialogue.finished.subscribe(status => {});
     }
   }

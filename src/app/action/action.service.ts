@@ -7,7 +7,7 @@ import {
     playerActions, questActions
 } from './action-type.enum';
 
-import { SplitUpperCasePipe } from '../pipe/split-upper-case.pipe';
+import { SplitUpperCasePipe } from '../shared/pipes/split-upper-case.pipe';
 
 @Injectable()
 export class ActionService {
