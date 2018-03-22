@@ -42,7 +42,6 @@ export class Dialogue extends ArrayToolkit {
 
     public get options(): DialogueTopic[] {
         const futureOptions = (this.currentTopic === null ? this.topics : this.currentTopic.topics);
-        console.log(futureOptions);
         return futureOptions.filter(option => option.available);
     }
 
