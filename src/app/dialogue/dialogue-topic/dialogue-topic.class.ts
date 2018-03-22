@@ -29,8 +29,8 @@ export class DialogueTopic extends ConditionDependent {
         return this.lastOf(this.lines);
     }
 
-    public addTopic(topic: DialogueTopic): DialogueTopic {
-        this.topics.push(topic);
+    public addTopic(topic: string): DialogueTopic {
+        this.topics.push(new DialogueTopic(topic));
         return this.lastOf(this.topics);
     }
 }

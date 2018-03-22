@@ -8,7 +8,7 @@ export class ConditionDependent extends ActionContainer {
         super();
     }
 
-    public isAvailable(): boolean {
+    public get available(): boolean {
         for (const cnd of this.conditions) {
             if (!cnd.evaluate()) {
                 return false;

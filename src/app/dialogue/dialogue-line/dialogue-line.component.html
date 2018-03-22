@@ -1,10 +1,10 @@
-<div *ngIf="!edit" (click)="onClick($event)">
+<span *ngIf="!edit" (click)="onClick($event)">
     {{ line.line }}
-</div>
+</span>
 <div *ngIf="edit">
     <mat-form-field>
         <textarea matInput matTextareaAutosize
                   matAutosizeMinRows="2" matAutosizeMaxRows="5"
-                  placeholder="Autosize textarea" [(ngModel)]="line.line"></textarea>
+                  placeholder="What is the character saying?" [(ngModel)]="line.line"></textarea>
     </mat-form-field>
 </div>
