@@ -1,7 +1,9 @@
 import { Action } from './actions/action.interface';
 import { ActionResult } from './action-result.class';
 
-export class ActionContainer {
+import { ArrayToolkit } from '../shared/array-toolkit.class';
+
+export class ActionContainer extends ArrayToolkit {
     public actions: Action[] = [];
 
     public addAction(action: Action): Action {
