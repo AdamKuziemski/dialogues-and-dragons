@@ -1,27 +1,30 @@
 import { NgModule } from '@angular/core';
 
-import { Action } from './action.class';
+import { AddItem } from './actions/add-item.action';
+import { RemoveItem } from './actions/remove-item.action';
+import { SetQuestStage } from './actions/set-quest-stage.action';
+
 import { ActionContainer } from './action-container.class';
-import { ActionService } from './action.service';
 
 @NgModule({
   declarations: [
-    Action,
-    ActionContainer,
-    ActionService
+    AddItem,
+    RemoveItem,
+    SetQuestStage,
+    ActionContainer
   ],
   imports: [
-    Action,
-    ActionContainer,
-    ActionService
+    AddItem,
+    RemoveItem,
+    SetQuestStage,
+    ActionContainer
   ],
-  providers: [
-      ActionService
-  ],
+  providers: [ ],
   exports: [
-    Action,
-    ActionContainer,
-    ActionService
+    AddItem,
+    RemoveItem,
+    SetQuestStage,
+    ActionContainer
   ]
 })
 export class ActionModule { }

@@ -1,27 +1,34 @@
 import { NgModule } from '@angular/core';
 
-import { Condition } from './condition.class';
 import { ConditionDependent } from './condition-dependent.class';
-import { ConditionService } from './condition.service';
+
+import { DispositionTowardsPlayer } from './conditions/disposition-towards-player.condition';
+import { GetItemCount } from './conditions/get-item-count.condition';
+import { HasItem } from './conditions/has-item.condition';
+import { QuestStage } from './conditions/quest-stage.condition';
 
 @NgModule({
   declarations: [
-    Condition,
     ConditionDependent,
-    ConditionService
+    DispositionTowardsPlayer,
+    GetItemCount,
+    HasItem,
+    QuestStage
   ],
   imports: [
-    Condition,
     ConditionDependent,
-    ConditionService
+    DispositionTowardsPlayer,
+    GetItemCount,
+    HasItem,
+    QuestStage
   ],
-  providers: [
-      ConditionService
-  ],
+  providers: [ ],
   exports: [
-    Condition,
     ConditionDependent,
-    ConditionService
+    DispositionTowardsPlayer,
+    GetItemCount,
+    HasItem,
+    QuestStage
   ]
 })
 export class ConditionModule { }
