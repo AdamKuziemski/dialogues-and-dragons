@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { DialogueModule } from './dialogue/dialogue.module';
+import { GameModule } from './game/game.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { DialogueModule } from './dialogue/dialogue.module';
   ],
   imports: [
     BrowserModule,
-    DialogueModule
+    DialogueModule,
+    GameModule
   ],
   providers: [],
   bootstrap: [AppComponent]

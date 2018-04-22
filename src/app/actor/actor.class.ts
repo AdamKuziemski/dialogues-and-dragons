@@ -1,41 +1,49 @@
+import { GameService } from '../game/game.service';
+
 import { Item } from '../item/item.class';
 
 export class Actor {
-    private readonly NotAnItem = new Item('NotAnItem', 'Not An Item');
     public backpack: {};
     public money = 0;
+    public gender: 'Male' | 'Female';
+    protected game: GameService;
 
     constructor(public name: string) { }
 
-    public addItem(item: Item): void {
-        if (this.hasItem(item)) {
-            this.getItem(item).count += item.count;
+    public addItem(id: string, count = 1): void {
+        if (this.hasItem(id)) {
+            this.increaseItemCount(id, count);
         } else {
-            this.backpack[item.id] = item;
+            this.createItem(id, count);
         }
     }
 
-    public removeItem(item: Item): void {
-        if (!this.hasItem(item)) {
+    public removeItem(id: string, count = 1): void {
+        if (!this.hasItem(id) || count < 0) {
             return;
         }
 
-        const myItem = this.getItem(item);
-        if ((myItem.count -= item.count) < 0) {
-            delete this.backpack[item.id];
+        if (this.getItemCount(id) > count) {
+            this.decreaseItemCount(id, count);
+        } else {
+            delete this.backpack[id];
         }
     }
 
-    public hasItem(item: Item): boolean {
-        return this.backpack.hasOwnProperty(item.id);
+    public hasItem(id: string): boolean {
+        return this.backpack.hasOwnProperty(id);
     }
 
-    public getItemCount(item: Item): number {
-        return this.getItem(item).count;
+    public getItemCount(id: string): number {
+        if (this.hasItem(id)) {
+            const item = this.getItem(id);
+            return (Array.isArray(item) ? item.length : item.count);
+        }
+        return 0;
     }
 
-    public getItem(item: Item): Item {
-        return this.backpack.hasOwnProperty(item.id) ? this.backpack[item.id] : { count: 0 };
+    public getItem(id: string): Item | Item[] {
+        return this.hasItem(id) ? this.backpack[id] : null;
     }
 
     public addMoney(amount: number): void {
@@ -50,5 +58,48 @@ export class Actor {
 
     public hasMoney(amount: number): boolean {
         return this.money >= amount;
+    }
+
+    private createItem(id: string, count: number): void {
+        const newItem = this.game.item(id);
+
+        if (newItem.isCountable) {
+            newItem.count = count;
+            this.backpack[id] = newItem;
+        } else {
+            const itemArray: Item[] = [];
+
+            for (let i = 0; i < count; ++i) {
+                itemArray.push(newItem.clone());
+            }
+
+            this.backpack[id] = itemArray;
+        }
+    }
+
+    private increaseItemCount(id: string, count: number): void {
+        this.changeItemCount(id, count, true);
+    }
+
+    private decreaseItemCount(id: string, count: number): void {
+        this.changeItemCount(id, count, false);
+    }
+
+    private changeItemCount(id: string, count: number, increase: boolean): void {
+        const base = this.game.item(id);
+
+        if (base.isCountable) {
+            const item = <Item>this.getItem(id);
+            item.count += (increase ? count : count * -1);
+        } else {
+            const items = <Item[]>this.getItem(id);
+            while (count--) {
+                if (increase) {
+                    items.push(this.game.item(id));
+                } else {
+                    items.pop();
+                }
+            }
+        }
     }
 }

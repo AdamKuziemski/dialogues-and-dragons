@@ -1,9 +1,9 @@
-import { ArrayToolkit } from '../shared/array-toolkit.class';
+import { ExtendedObject } from '../shared/extended-object.class';
 import { ConditionDependent } from '../condition/condition-dependent.class';
 import { DialogueTopic } from './dialogue-topic/dialogue-topic.class';
 import { DialogueLine } from './dialogue-line/dialogue-line.class';
 
-export class Dialogue extends ArrayToolkit {
+export class Dialogue extends ExtendedObject {
     public greetings: DialogueLine[] = [];
     public topics: DialogueTopic[] = [];
 
