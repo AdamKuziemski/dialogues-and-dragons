@@ -16,6 +16,14 @@ export class DialogueLineComponent {
 
     onClick(event) {
         event.stopPropagation();
-        this.click.emit(this.line);
+
+        if (!this.edit) {
+            this.click.emit(this.line);
+        }
+    }
+
+    toggleEdit(event) {
+        event.stopPropagation();
+        this.edit = !this.edit;
     }
 }

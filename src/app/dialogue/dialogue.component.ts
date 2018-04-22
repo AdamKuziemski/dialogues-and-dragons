@@ -12,6 +12,7 @@ import { DialogueTopic } from './dialogue-topic/dialogue-topic.class';
   export class DialogueComponent implements OnInit {
     @Input() public dialogue: Dialogue;
     @Input() public edit = false;
+    @Input() public speaker = 'Some NPC';
 
     @Output() public goodbye = new EventEmitter<Dialogue>();
 

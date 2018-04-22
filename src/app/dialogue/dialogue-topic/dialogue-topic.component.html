@@ -1,6 +1,10 @@
-<div (click)="onClick($event)">
-    {{ topic.label }}
+<div *ngIf="!edit" class="ncv-topic-clickable">
+    <span (click)="onClick($event)">{{ topic.label }}</span>
+    <i class="material-icons ncv-edit" (click)="toggleEdit($event)">edit</i>
 </div>
 <div *ngIf="edit">
-    Edytowanko
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Topic text" [(ngModel)]="topic.label">
+    </mat-form-field>
+    <i class="material-icons ncv-edit" (click)="toggleEdit($event)">save</i>
 </div>

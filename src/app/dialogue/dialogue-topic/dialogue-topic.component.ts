@@ -16,6 +16,14 @@ export class DialogueTopicComponent {
 
     onClick(event) {
         event.stopPropagation();
-        this.click.emit(this.topic);
+
+        if (!this.edit) {
+            this.click.emit(this.topic);
+        }
+    }
+
+    toggleEdit(event) {
+        event.stopPropagation();
+        this.edit = !this.edit;
     }
 }
