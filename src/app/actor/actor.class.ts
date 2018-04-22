@@ -46,6 +46,24 @@ export class Actor {
         return this.hasItem(id) ? this.backpack[id] : null;
     }
 
+    public getBackpack(): Item[] {
+        const items = Object.keys(this.backpack);
+        const result: Item[] = [];
+
+        for (let i = 0; i < items.length; ++i) {
+            const key = items[i];
+            const item = this.backpack[key];
+
+            if (Array.isArray(item)) {
+                result.push(...<Item[]>item);
+            } else {
+                result.push(<Item>item);
+            }
+        }
+
+        return result;
+    }
+
     public addMoney(amount: number): void {
         this.money += amount;
     }
