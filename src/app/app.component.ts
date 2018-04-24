@@ -29,4 +29,13 @@ export class AppComponent implements OnInit {
     this.dialogue.topics[1].addTopic(`I was kidding. I don't have anything.`).goodbye = true;
     this.dialogue.topics[1].topics[0].addLine(`You're a bad person! Go away`);
   }
+
+  private isInternetExploder(): boolean {
+    const agent = window.navigator.userAgent;
+    return agent.indexOf('MSIE') > -1 || agent.indexOf('Trident') > -1 || agent.indexOf('Edge') > -1;
+  }
+
+  private isBrowser(): boolean {
+    return !this.isInternetExploder();
+  }
 }
