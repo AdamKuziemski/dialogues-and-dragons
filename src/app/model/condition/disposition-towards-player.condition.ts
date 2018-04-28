@@ -9,6 +9,11 @@ export class DispositionTowardsPlayer implements Condition {
     public value: number;
 
     evaluate(): boolean {
-        return this.operator.compare(this.value, 0);
+        try {
+            return this.operator.compare(this.value, 0);
+        } catch (e) {
+            console.log(this.name + ': ' + e.message);
+            return false;
+        }
     }
 }

@@ -1,4 +1,4 @@
-export class ExtendedObject {
+export class GameObject {
     public clone<T>(): T {
         const otherHalf = new (this.constructor as { new (): T });
         const keys = Object.keys(this);

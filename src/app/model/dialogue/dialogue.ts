@@ -1,9 +1,9 @@
-import { ExtendedObject } from '../extended-object';
+import { GameObject } from '../game-object';
 import { ConditionDependent } from '../condition/condition-dependent';
 import { DialogueTopic } from './dialogue-topic';
 import { DialogueLine } from './dialogue-line';
 
-export class Dialogue extends ExtendedObject {
+export class Dialogue extends GameObject {
     public greetings: DialogueLine[] = [];
     public topics: DialogueTopic[] = [];
 
@@ -12,9 +12,10 @@ export class Dialogue extends ExtendedObject {
         this.reset();
     }
 
-    private currentLine: DialogueLine;
-    private currentTopic: DialogueTopic;
-    private lineIndex: number;
+    private currentLine: DialogueLine = null;
+    private currentTopic: DialogueTopic = null;
+    private lineIndex = -1;
+    private open = false;
 
     public get availableGreetings(): DialogueLine[] {
         return this.greetings.filter(greet => greet.available);
@@ -95,6 +96,13 @@ export class Dialogue extends ExtendedObject {
         this.setCurrentLine();
     }
 
+    public reset(): void {
+        this.lineIndex = 0;
+        this.currentTopic = null;
+        this.currentLine = this.randomGreeting;
+        this.open = false;
+    }
+
     private setCurrentLine(): void {
         if (!this.linesFinished) {
             this.currentLine = this.currentTopic.lines[this.lineIndex];
@@ -105,12 +113,6 @@ export class Dialogue extends ExtendedObject {
             console.log('goodbye');
             this.reset();
         }
-    }
-
-    public reset(): void {
-        this.lineIndex = 0;
-        this.currentTopic = null;
-        this.currentLine = this.randomGreeting;
     }
 
     private getRandomInt(max: number): number {

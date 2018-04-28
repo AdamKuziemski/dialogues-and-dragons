@@ -1,9 +1,9 @@
 import { Action } from './action.interface';
 import { ActionResult } from './action-result';
 
-import { ExtendedObject } from '../extended-object';
+import { GameObject } from '../game-object';
 
-export class ActionContainer extends ExtendedObject {
+export class ActionContainer extends GameObject {
     public actions: Action[] = [];
 
     public addAction(action: Action): Action {
