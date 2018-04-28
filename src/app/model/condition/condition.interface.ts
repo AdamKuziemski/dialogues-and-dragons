@@ -1,4 +1,4 @@
-import { CompareOperator } from '../../shared/compare-operator.class';
+import { CompareOperator } from '../compare-operator';
 
 export interface Condition {
   readonly name: string;

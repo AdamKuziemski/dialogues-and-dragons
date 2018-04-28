@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { AddItem } from './actions/add-item.action';
-import { RemoveItem } from './actions/remove-item.action';
-import { SetQuestStage } from './actions/set-quest-stage.action';
+import { AddItem } from '../model/action/add-item.action';
+import { RemoveItem } from '../model/action/remove-item.action';
+import { SetQuestStage } from '../model/action/set-quest-stage.action';
 
-import { ActionContainer } from './action-container.class';
+import { ActionContainer } from '../model/action/action-container';
 
 @NgModule({
   declarations: [

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Dialogue } from './dialogue/dialogue.class';
+import { Dialogue } from './model/dialogue/dialogue';
 
 @Component({
   selector: 'ncv-root',

@@ -1,4 +1,4 @@
-import { ActionResult } from '../action-result.class';
+import { ActionResult } from './action-result';
 
 export interface Action {
     readonly name: string;

@@ -1,6 +1,6 @@
-import { Actor } from '../actor/actor.class';
+import { Actor } from '../actor/actor';
 
-import { Dialogue } from '../dialogue/dialogue.class';
+import { Dialogue } from '../dialogue/dialogue';
 
 import { GameService } from '../game/game.service';
 

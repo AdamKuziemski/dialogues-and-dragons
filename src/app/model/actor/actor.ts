@@ -1,11 +1,11 @@
 import { GameService } from '../game/game.service';
 
-import { Item } from '../item/item.class';
+import { Item } from '../item/item';
 
 export class Actor {
     public backpack: {};
     public money = 0;
-    public gender: 'Male' | 'Female';
+    public gender: 'Male' | 'Female' = 'Male';
     protected game: GameService;
 
     constructor(public name: string) { }

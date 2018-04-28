@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
-import { ConditionDependent } from './condition-dependent.class';
+import { ConditionDependent } from '../model/condition/condition-dependent';
 
-import { DispositionTowardsPlayer } from './conditions/disposition-towards-player.condition';
-import { GetItemCount } from './conditions/get-item-count.condition';
-import { HasItem } from './conditions/has-item.condition';
-import { QuestStage } from './conditions/quest-stage.condition';
+import { DispositionTowardsPlayer } from '../model/condition/disposition-towards-player.condition';
+import { GetItemCount } from '../model/condition/get-item-count.condition';
+import { HasItem } from '../model/condition/has-item.condition';
+import { QuestStage } from '../model/condition/quest-stage.condition';
 
 @NgModule({
   declarations: [

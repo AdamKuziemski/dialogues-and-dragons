@@ -1,4 +1,4 @@
-import { ActionContainer } from '../action/action-container.class';
+import { ActionContainer } from '../action/action-container';
 
 export class Item extends ActionContainer {
     public isCountable = false;

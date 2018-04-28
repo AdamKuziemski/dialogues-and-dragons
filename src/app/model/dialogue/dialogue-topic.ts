@@ -1,5 +1,5 @@
-import { ConditionDependent } from '../../condition/condition-dependent.class';
-import { DialogueLine } from '../dialogue-line/dialogue-line.class';
+import { ConditionDependent } from '../condition/condition-dependent';
+import { DialogueLine } from './dialogue-line';
 
 export class DialogueTopic extends ConditionDependent {
     public goodbye = false;

@@ -1,6 +1,6 @@
-import { ActionContainer } from '../action/action-container.class';
+import { ActionContainer } from '../action/action-container';
 
-import { Condition } from './conditions/condition.interface';
+import { Condition } from './condition.interface';
 
 export class ConditionDependent extends ActionContainer {
     private conditions: Condition[] = [];

@@ -1,7 +1,7 @@
-import { Action } from './actions/action.interface';
-import { ActionResult } from './action-result.class';
+import { Action } from './action.interface';
+import { ActionResult } from './action-result';
 
-import { ExtendedObject } from '../shared/extended-object.class';
+import { ExtendedObject } from '../extended-object';
 
 export class ActionContainer extends ExtendedObject {
     public actions: Action[] = [];

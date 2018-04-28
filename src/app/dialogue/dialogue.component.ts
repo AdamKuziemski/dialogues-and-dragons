@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Dialogue } from './dialogue.class';
-import { DialogueLine } from './dialogue-line/dialogue-line.class';
-import { DialogueTopic } from './dialogue-topic/dialogue-topic.class';
+import { Dialogue } from '../model/dialogue/dialogue';
+import { DialogueLine } from '../model/dialogue/dialogue-line';
+import { DialogueTopic } from '../model/dialogue/dialogue-topic';
 
 @Component({
     selector: 'ncv-dialogue',

@@ -1,8 +1,8 @@
 import { Action } from './action.interface';
-import { ActionResult } from '../action-result.class';
+import { ActionResult } from './action-result';
 
-export class RemoveItem implements Action {
-    public readonly name = 'Remove Item';
+export class SetQuestStage implements Action {
+    public readonly name = 'Set Quest Stage';
 
     constructor(
         public targetId: string,

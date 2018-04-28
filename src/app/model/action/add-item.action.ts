@@ -1,7 +1,7 @@
 import { Action } from './action.interface';
-import { ActionResult } from '../action-result.class';
-import { GameService } from '../../game/game.service';
-import { Item } from '../../item/item.class';
+import { ActionResult } from './action-result';
+import { GameService } from '../game/game.service';
+import { Item } from '../item/item';
 
 export class AddItem implements Action {
     public readonly name = 'Add Item';

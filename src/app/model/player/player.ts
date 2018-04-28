@@ -1,4 +1,4 @@
-import { Actor } from '../actor/actor.class';
+import { Actor } from '../actor/actor';
 
 import { GameService } from '../game/game.service';
 

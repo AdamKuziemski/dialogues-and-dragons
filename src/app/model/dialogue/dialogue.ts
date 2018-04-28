@@ -1,7 +1,7 @@
-import { ExtendedObject } from '../shared/extended-object.class';
-import { ConditionDependent } from '../condition/condition-dependent.class';
-import { DialogueTopic } from './dialogue-topic/dialogue-topic.class';
-import { DialogueLine } from './dialogue-line/dialogue-line.class';
+import { ExtendedObject } from '../extended-object';
+import { ConditionDependent } from '../condition/condition-dependent';
+import { DialogueTopic } from './dialogue-topic';
+import { DialogueLine } from './dialogue-line';
 
 export class Dialogue extends ExtendedObject {
     public greetings: DialogueLine[] = [];

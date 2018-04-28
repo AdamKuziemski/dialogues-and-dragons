@@ -1,6 +1,6 @@
-import { Item } from '../item/item.class';
-import { Player } from '../player/player.class';
-import { NPC } from '../npc/npc.class';
+import { Item } from '../item/item';
+import { Player } from '../player/player';
+import { NPC } from '../npc/npc';
 
 export class Game {
   constructor(public title: string) {}

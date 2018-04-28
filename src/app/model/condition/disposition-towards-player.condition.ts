@@ -1,6 +1,6 @@
 import { Condition } from './condition.interface';
 
-import { CompareOperator } from '../../shared/compare-operator.class';
+import { CompareOperator } from '../compare-operator';
 
 export class DispositionTowardsPlayer implements Condition {
     public readonly name = 'Disposition Towards Player';

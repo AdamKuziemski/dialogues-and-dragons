@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Game } from './game.class';
-import { Item } from '../item/item.class';
-import { Player } from '../player/player.class';
-import { NPC } from '../npc/npc.class';
+import { Game } from './game';
+import { Item } from '../item/item';
+import { Player } from '../player/player';
+import { NPC } from '../npc/npc';
 
 @Injectable()
 export class GameService {
