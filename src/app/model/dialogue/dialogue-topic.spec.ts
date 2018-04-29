@@ -11,19 +11,19 @@ describe('DialogueTopic', () => {
     expect(topic.length).toBe(2);
   });
 
-  it('should have 2 topics', () => {
+  it('should have 2 child topics', () => {
     topic.addTopic('Yes, I am.');
     topic.addTopic('Are you?');
     expect(topic.totalTopics).toBe(2);
   });
 
-  it('should have 4 lines (including children)', () => {
+  it(`should have 4 lines (including children's lines)`, () => {
     topic.topics[0].addLine('Whoa! I knew it!');
     topic.topics[1].addLine(`Do you know something I don't?`);
     expect(topic.length).toBe(4);
   });
 
-  it('should have 4 topics (including children)', () => {
+  it(`should have 4 topics (including children's topics)`, () => {
     topic.topics[0].addTopic('I need you to keep it a secret, though');
     topic.topics[1].addTopic('Maybe.');
     expect(topic.totalTopics).toBe(4);

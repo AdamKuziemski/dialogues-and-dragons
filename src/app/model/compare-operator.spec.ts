@@ -10,7 +10,7 @@ const greaterThan = new CompareOperator('>');
 describe('CompareOperator - numbers', () => {
   it('should return that 2 == 2', () => expect(equals.compare(2, 2)).toBe(true));
   it('should return that 4 != 2', () => expect(notEquals.compare(4, 2)).toBe(true));
-  it('should return that 2 < 4', () => expect(lessThan.compare(2, 3)).toBe(true));
+  it('should return that 2 < 4', () => expect(lessThan.compare(2, 4)).toBe(true));
   it('should return that 4 > 2', () => expect(greaterThan.compare(4, 2)).toBe(true));
 
   it('should return that 2 <= 2, and 1 <= 2', () => {
