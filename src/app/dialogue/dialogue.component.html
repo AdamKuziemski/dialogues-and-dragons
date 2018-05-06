@@ -7,14 +7,14 @@
     <mat-card-content>
         <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
 
-        <mat-list [disableRipple]="false" *ngIf="dialogue.linesFinished">
+        <mat-list [disableRipple]="false" *ngIf="dialogue.displayOptions">
             <mat-list-item *ngFor="let option of dialogue.options" [disableRipple]="false" >
                 <ncv-dialogue-topic [topic]="option" (click)="topicClicked($event)"></ncv-dialogue-topic>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
  
-    <mat-card-footer *ngIf="dialogue.linesFinished">
+    <mat-card-footer *ngIf="dialogue.displayOptions">
         <mat-chip-list>
             <mat-chip>{{ dialogue.length }} lines</mat-chip>
             <mat-chip>{{ dialogue.totalTopics }} topics</mat-chip>

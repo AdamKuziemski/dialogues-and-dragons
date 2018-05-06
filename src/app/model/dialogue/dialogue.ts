@@ -34,6 +34,10 @@ export class Dialogue extends GameObject {
             (this.currentTopic === null || this.lineIndex >= this.currentTopic.lines.length) :
             true;
     }
+
+    private get linesFinished(): boolean {
+        return this.currentTopic !== null && this.lineIndex >= this.currentTopic.lines.length;
+    }
     //#endregion
     //#region conversation
     public open(): void {
@@ -62,6 +66,24 @@ export class Dialogue extends GameObject {
 
         const index = this.getRandomInt(greets.length);
         return greets[index];
+    }
+
+    public topic(traverse: number[]): DialogueTopic {
+        if (!traverse || traverse.length < 1) {
+            return null;
+        }
+
+        let result = this.topics[traverse[0]];
+
+        for (let i = 1; i < traverse.length; ++i) {
+            if (result.topics.length < traverse[i]) {
+                return null;
+            } else {
+                result = result.topics[traverse[i]];
+            }
+        }
+
+        return result;
     }
 
     public advanceLine(line: DialogueLine): void {
