@@ -16,27 +16,39 @@ export class Dialogue extends GameObject {
         super();
     }
 
-    //#region flow control flags
+    //#region flow control
     public get backToStart(): boolean {
         return this.isOpen ?
-            this.currentTopic === null || (this.currentTopic.backToStart || this.currentTopic.topics.length === 0) :
+            !this.hasTopic || (this.currentTopic.backToStart || (this.linesFinished && this.topicOptions.length === 0)) :
             true;
     }
 
     public get goodbye(): boolean {
         return this.isOpen ?
-            (this.displayOptions && this.currentTopic !== null && this.currentTopic.goodbye) :
+            (this.displayOptions && this.hasTopic && this.currentTopic.goodbye) :
             true;
     }
 
     public get displayOptions(): boolean {
         return this.isOpen ?
-            (this.currentTopic === null || this.lineIndex >= this.currentTopic.lines.length) :
+            (!this.hasTopic || (this.hasTopic && this.lineIndex >= this.topicLinesCount)) :
             true;
     }
 
     private get linesFinished(): boolean {
-        return this.currentTopic !== null && this.lineIndex >= this.currentTopic.lines.length;
+        return this.hasTopic && this.lineIndex >= this.topicLinesCount;
+    }
+
+    private get hasTopic(): boolean {
+        return this.currentTopic !== null;
+    }
+
+    private get topicLinesCount(): number {
+        return this.hasTopic ? this.currentTopic.lines.length : 0;
+    }
+
+    private get topicOptions(): DialogueTopic[] {
+        return this.hasTopic ? this.currentTopic.topics.filter(topic => topic.available) : [];
     }
     //#endregion
     //#region conversation
@@ -50,8 +62,7 @@ export class Dialogue extends GameObject {
             return [];
         }
 
-        const futureOptions = (this.currentTopic === null ? this.topics : this.currentTopic.topics);
-        return futureOptions.filter(option => option.available);
+        return (this.hasTopic ? this.topicOptions : this.topics.filter(option => option.available));
     }
 
     public get availableGreetings(): DialogueLine[] {
@@ -69,7 +80,7 @@ export class Dialogue extends GameObject {
     }
 
     public topic(traverse: number[]): DialogueTopic {
-        if (!traverse || traverse.length < 1) {
+        if (!Array.isArray(traverse) || traverse.length < 1 || traverse[0] >= this.topics.length) {
             return null;
         }
 
@@ -97,10 +108,15 @@ export class Dialogue extends GameObject {
 
         ++this.lineIndex;
 
-        if (this.backToStart) {
+        if (!this.displayOptions) {
+            this.currentLine = this.currentTopic.lines[this.lineIndex];
+        } else if (this.goodbye) {
+            // temporary - update an observable in the future
+            console.log('goodbye');
+            // this.isOpen = false;
             this.reset();
-        } else {
-            this.setCurrentLine();
+        } else if (this.backToStart) {
+            this.reset();
         }
     }
 
@@ -112,7 +128,9 @@ export class Dialogue extends GameObject {
         this.currentTopic = topic;
         this.lineIndex = 0;
 
-        this.setCurrentLine();
+        if (!this.displayOptions) {
+            this.currentLine = this.currentTopic.lines[this.lineIndex];
+        }
     }
 
     public reset(): void {
@@ -154,19 +172,6 @@ export class Dialogue extends GameObject {
         return this.lastOf(this.topics);
     }
     //#endregion
-
-    private setCurrentLine(): void {
-        if (!this.displayOptions) {
-            this.currentLine = this.currentTopic.lines[this.lineIndex];
-        } else if (this.backToStart) {
-            this.reset();
-        } else if (this.goodbye) {
-            // temporary - update an observable in the future
-            console.log('goodbye');
-            // this.isOpen = false;
-            this.reset();
-        }
-    }
 
     private getRandomInt(max: number): number {
         return Math.floor(Math.random() * Math.floor(max));

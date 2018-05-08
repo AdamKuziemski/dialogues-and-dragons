@@ -1,11 +1,9 @@
 <span *ngIf="!edit" class="ncv-line-clickable" (click)="onClick($event)">
     {{ line.line }}
-    <i class="material-icons ncv-line-edit" (click)="toggleEdit($event)">edit</i>
 </span>
 <div *ngIf="edit">
     <mat-form-field>
         <textarea matInput placeholder="What is the character saying?" [(ngModel)]="line.line"
                   matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     </mat-form-field>
-    <i class="material-icons ncv-line-edit" (click)="toggleEdit($event)">save</i>
 </div>

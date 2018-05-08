@@ -5,6 +5,7 @@ export function createTestDialogue(): Dialogue {
 
   testDialogue.addGreeting(`Hello. I suppose we're going to test some things?`);
 
+  // this topic is used for depth testing
   testDialogue.addTopic('Yes. Yes, we are.');
   testDialogue.topics[0].addLine('Yay! I love tesing!');
   testDialogue.topics[0].addLine(`It's so exciting!`);
@@ -28,12 +29,14 @@ export function createTestDialogue(): Dialogue {
   testDialogue.topic([0, 0, 1]).addTopic('Uh... Sure.').goodbye = true;
   testDialogue.topic([0, 0, 1, 1]).addLine(`Great! Let's waste no more time and get to testing.`);
 
+  // this topic should just display all lines and go back to the start
   testDialogue.addTopic(`Sure. And then we're going to test some more things.`);
   testDialogue.topics[1].addLine(`My God, this is too much.`);
   testDialogue.topics[1].addLine(`You're killing me.`);
   testDialogue.topics[1].addLine(`It's like early Christmas...`);
   testDialogue.topics[1].addLine(`Alright, I can't take it anymore. Let's get to testing.`);
 
+  // this topic is here for the last case - display all lines and say goodbye
   testDialogue.addTopic(`Aw hell, no. Ain't nobody got time for that!`);
   testDialogue.topics[2].addLine('But... But... Why?');
   testDialogue.topics[2].addLine(`Don't you like it when you're sure your code works as expected?`);
