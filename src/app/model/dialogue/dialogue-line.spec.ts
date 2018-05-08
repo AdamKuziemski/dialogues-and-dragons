@@ -1,1 +1,3 @@
-// empty for now
+xdescribe('DialogueLine', () => {
+  // empty for now
+});
