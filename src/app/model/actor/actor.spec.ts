@@ -6,6 +6,7 @@ describe('Actor', () => {
   const badIdentifiers = ['test', '', null, undefined];
   const bwhoa = 'DBBladeOfWoe01';
   const arrow = 'IronArrow01';
+  const usles = 'UselessWasteOfSpace';
 
   let service: GameService = new GameService;
 
@@ -16,6 +17,7 @@ describe('Actor', () => {
     service.createGame('The Elder Parchments');
     service.createItem(bwhoa, 'Blade of Whoa');
     service.createItem(arrow, 'Iron Arrow').isCountable = true;
+    service.createItem(usles, 'Waste Of Space');
   });
 
   it('should return false when looking for non-existent, null or undefined items', () => {
@@ -32,19 +34,25 @@ describe('Actor', () => {
 
   it(`should add items to the actor's backpack`, () => {
     testActor.addItem(bwhoa);
+    testActor.addItem(bwhoa);
     testActor.addItem(arrow, 10);
 
     expect(testActor.hasItem(bwhoa)).toBe(true);
+    expect(testActor.getItemCount(bwhoa)).toBe(2);
     expect(testActor.getItemCount(arrow)).toBe(10);
   });
 
-  it('should have 2 items in the backpack', () => expect(testActor.getBackpack().length).toBe(2));
+  it('should have 4 items in the backpack', () => {
+    testActor.addItem(usles);
+    expect(testActor.getBackpack().length).toBe(4);
+  });
 
   it(`should remove some items from the actor's backpack`, () => {
     testActor.removeItem(bwhoa);
     testActor.removeItem(arrow, 5);
 
-    expect(testActor.hasItem(bwhoa)).toBe(false);
+    expect(testActor.hasItem(bwhoa)).toBe(true);
+    expect(testActor.getItemCount(bwhoa)).toBe(1);
     expect(testActor.getItemCount(arrow)).toBe(5);
   });
 
