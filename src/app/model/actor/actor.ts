@@ -71,6 +71,10 @@ export class Actor extends GameObject {
     }
 
     public addMoney(amount: number): void {
+        if (amount < 0) {
+            throw Error('Cannot remove money when adding it');
+        }
+
         this.money += amount;
     }
 
