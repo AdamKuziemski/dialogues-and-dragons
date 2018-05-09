@@ -1,25 +1,26 @@
 import { Action } from './action.interface';
 import { ActionResult } from './action-result';
-import { GameService } from '../game/game.service';
-import { Item } from '../item/item';
 
-export class AddItem implements Action {
+import { GameObject } from '../game-object';
+
+export class AddItem extends GameObject implements Action {
     public readonly name = 'Add Item';
 
     constructor(
         public targetId: string,
         public value: string,
-        public count: number,
-        private gameService: GameService
-    ) { }
+        public count: number
+    ) {
+        super();
+    }
 
     perform(): ActionResult {
-        if (this.targetId === 'player') {
-            this.gameService.player.addItem(this.value);
-        } else {
-            this.gameService.npc(this.targetId).addItem(this.value);
+        const target = AddItem.game.actor(this.targetId);
+        if (target === null) {
+            return new ActionResult(false, `Actor '${this.targetId}' doesn't exist.`);
         }
 
+        target.addItem(this.value, this.count);
         return new ActionResult(true);
     }
 }

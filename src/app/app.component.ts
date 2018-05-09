@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Dialogue } from './model/dialogue/dialogue';
 import { createTestDialogue } from './model/dialogue/testing/test-dialogue';
 
+// import { GameObject } from './model/game-object';
+
 @Component({
   selector: 'ncv-root',
   templateUrl: './app.component.html',
@@ -14,6 +16,8 @@ export class AppComponent implements OnInit {
   dialogue: Dialogue = new Dialogue();
 
   ngOnInit() {
+    // GameObject.initializeGameService(null);
+
     this.dialogue = createTestDialogue();
     this.dialogue.open();
   }

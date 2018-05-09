@@ -5,9 +5,9 @@ import { NPC } from '../npc/npc';
 export class Game {
   constructor(public title: string) {}
 
-  public items: {};
+  public items = {};
   public player: Player = null;
-  public npcs: {};
+  public npcs = {};
 
   createItem(id: string, name: string): Item {
     if (!this.hasItem(id)) {
@@ -23,7 +23,7 @@ export class Game {
   }
 
   createNPC(id: string, name: string): NPC {
-    if (!this.items.hasOwnProperty(id)) {
+    if (!this.hasNPC(id)) {
       this.npcs[id] = new NPC(name);
     }
 

@@ -1,14 +1,16 @@
 import { GameService } from '../game/game.service';
 
 import { Item } from '../item/item';
+import { GameObject } from '../game-object';
 
-export class Actor {
-    public backpack: {};
+export class Actor extends GameObject {
+    public backpack = {};
     public money = 0;
     public gender: 'Male' | 'Female' = 'Male';
-    protected game: GameService;
 
-    constructor(public name: string) { }
+    constructor(public name: string) {
+        super();
+    }
 
     public addItem(id: string, count = 1): void {
         if (this.hasItem(id)) {
@@ -31,6 +33,10 @@ export class Actor {
     }
 
     public hasItem(id: string): boolean {
+        if (id === null || id === undefined || id === '') {
+            return false;
+        }
+
         return this.backpack.hasOwnProperty(id);
     }
 
@@ -79,7 +85,7 @@ export class Actor {
     }
 
     private createItem(id: string, count: number): void {
-        const newItem = this.game.item(id);
+        const newItem = Actor.game.item(id);
 
         if (newItem.isCountable) {
             newItem.count = count;
@@ -104,7 +110,7 @@ export class Actor {
     }
 
     private changeItemCount(id: string, count: number, increase: boolean): void {
-        const base = this.game.item(id);
+        const base = Actor.game.item(id);
 
         if (base.isCountable) {
             const item = <Item>this.getItem(id);
@@ -113,7 +119,7 @@ export class Actor {
             const items = <Item[]>this.getItem(id);
             while (count--) {
                 if (increase) {
-                    items.push(this.game.item(id));
+                    items.push(Actor.game.item(id));
                 } else {
                     items.pop();
                 }

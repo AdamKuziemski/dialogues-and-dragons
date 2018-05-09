@@ -1,4 +1,12 @@
+import { GameService } from './game/game.service';
+
 export class GameObject {
+    protected static game: GameService;
+
+    public static initializeGameService(gameService: GameService) {
+        this.game = gameService;
+    }
+
     public clone<T>(): T {
         const otherHalf = new (this.constructor as { new (): T });
         const keys = Object.keys(this);
