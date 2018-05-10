@@ -19,7 +19,7 @@ export class Dialogue extends GameObject {
     //#region flow control
     public get backToStart(): boolean {
         return this.isOpen ?
-            !this.hasTopic || (this.currentTopic.backToStart || (this.linesFinished && this.topicOptions.length === 0)) :
+            !this.hasTopic || (this.linesFinished && (this.currentTopic.backToStart || this.topicOptions.length === 0)) :
             true;
     }
 
@@ -30,9 +30,7 @@ export class Dialogue extends GameObject {
     }
 
     public get displayOptions(): boolean {
-        return this.isOpen ?
-            (!this.hasTopic || (this.hasTopic && this.lineIndex >= this.topicLinesCount)) :
-            true;
+        return this.isOpen ? (!this.hasTopic || this.linesFinished) : true;
     }
 
     private get linesFinished(): boolean {
@@ -97,11 +95,13 @@ export class Dialogue extends GameObject {
         return result;
     }
 
-    public advanceLine(line: DialogueLine): void {
-        if (!line) {
-            throw Error('Cannot advance from ' + line);
+    public skipToOptions(): void {
+        while (!this.displayOptions) {
+            this.advanceLine();
         }
+    }
 
+    public advanceLine(): void {
         if (this.currentLine.isGreeting) {
             return;
         }

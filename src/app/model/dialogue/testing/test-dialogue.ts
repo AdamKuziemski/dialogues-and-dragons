@@ -29,11 +29,25 @@ export function createTestDialogue(): Dialogue {
   testDialogue.topic([0, 0, 1]).addTopic('Uh... Sure.').goodbye = true;
   testDialogue.topic([0, 0, 1, 1]).addLine(`Great! Let's waste no more time and get to testing.`);
 
+  // this nested topic explicitly says to go back to start, after displaying all lines
+  testDialogue.topics[0].addTopic(`I won't tell you.`).backToStart = true;
+  testDialogue.topic([0, 1]).addLine('This makes me sad.');
+  testDialogue.topic([0, 1]).addLine('Like, really sad.');
+  testDialogue.topic([0, 1]).addLine(`I like to know people's names.`);
+  testDialogue.topic([0, 1]).addLine(`Let's start over.`);
+
+  // this topic should go back to the "What's your name?" question
+  testDialogue.topics[0].addTopic('[Say nothing.]');
+  testDialogue.topic([0, 2]).addLine(`You must've confused me with someone else.`);
+  testDialogue.topic([0, 2]).addLine(`I'm not from the Dark Brotherhood. This will not work on me.`);
+  testDialogue.topic([0, 2]).addLine('Can we start talking now?');
+
   // this topic should just display all lines and go back to the start
   testDialogue.addTopic(`Sure. And then we're going to test some more things.`);
   testDialogue.topics[1].addLine(`My God, this is too much.`);
   testDialogue.topics[1].addLine(`You're killing me.`);
   testDialogue.topics[1].addLine(`It's like early Christmas...`);
+  testDialogue.topics[1].addLine(`Are you sure it's not Christmas?`);
   testDialogue.topics[1].addLine(`Alright, I can't take it anymore. Let's get to testing.`);
 
   // this topic is here for the last case - display all lines and say goodbye
