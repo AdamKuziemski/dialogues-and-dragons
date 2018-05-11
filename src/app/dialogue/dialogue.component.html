@@ -1,5 +1,4 @@
-<mat-card>
-
+<mat-card *ngIf="!edit">
     <mat-card-title>
         {{ speaker }}
     </mat-card-title>
@@ -8,18 +7,13 @@
         <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
 
         <mat-list [disableRipple]="false" *ngIf="dialogue.displayOptions">
-            <mat-list-item *ngFor="let option of dialogue.options" [disableRipple]="false" >
+            <mat-list-item *ngFor="let option of dialogue.options" [disableRipple]="false">
                 <ncv-dialogue-topic [topic]="option" (click)="topicClicked($event)"></ncv-dialogue-topic>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
- 
-    <mat-card-footer *ngIf="dialogue.displayOptions">
-        <mat-chip-list>
-            <mat-chip>{{ dialogue.length }} lines</mat-chip>
-            <mat-chip>{{ dialogue.totalTopics }} topics</mat-chip>
-            <mat-chip>{{ dialogue.totalGreetings }} greetings</mat-chip>
-        </mat-chip-list>
-    </mat-card-footer>
-
 </mat-card>
+<div *ngIf="edit" class="ncv-editor-container">
+    <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)" class="ncv-nav-tree"></ncv-dialogue-topic-tree>
+    <ncv-dialogue-topic [topic]="currentTopic" [edit]="true" class="ncv-editor"></ncv-dialogue-topic>
+</div>

@@ -8,13 +8,15 @@ import { DialogueTopic } from '../model/dialogue/dialogue-topic';
     selector: 'ncv-dialogue',
     templateUrl: './dialogue.component.html',
     styleUrls: ['./dialogue.component.scss']
-  })
-  export class DialogueComponent implements OnInit {
+})
+export class DialogueComponent implements OnInit {
     @Input() public dialogue: Dialogue;
     @Input() public edit = false;
     @Input() public speaker = 'Some NPC';
 
     @Output() public goodbye = new EventEmitter<Dialogue>();
+
+    private currentTopic: DialogueTopic;
 
     public lineClicked(line: DialogueLine): void {
         this.dialogue.advanceLine();
@@ -25,7 +27,12 @@ import { DialogueTopic } from '../model/dialogue/dialogue-topic';
     }
 
     public ngOnInit(): void {
+        this.currentTopic = this.dialogue.topics[0];
         this.dialogue.reset();
         // this.dialogue.finished.subscribe(status => {});
     }
-  }
+
+    private onTopicClicked(topic: DialogueTopic): void {
+        this.currentTopic = topic;
+    }
+}

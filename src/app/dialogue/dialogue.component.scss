@@ -1,0 +1,27 @@
+.ncv-editor-container {
+  width: 100%;
+  display: inline-flex;
+  overflow-x: scroll;
+  height: stretch;
+
+  @media only screen and (min-width: 600px) {
+    overflow-x: hidden;
+  }
+}
+
+.ncv-nav-tree {
+  min-width: 99%;
+  margin: 2px 16px 0px 2px;
+
+  @media only screen and (min-width: 600px) {
+    min-width: 25%;
+  }
+}
+
+.ncv-editor {
+  min-width: 99%;
+
+  @media only screen and (min-width: 600px) {
+    min-width: 70%;
+  }
+}

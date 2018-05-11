@@ -1,11 +1,7 @@
 <div *ngIf="isBrowser()">
   <ncv-navbar [title]="title" (action)="handleNavbarAction($event)"></ncv-navbar>
   <div class="ncv-app-content">
-    <ncv-dialogue *ngIf="!edit" [dialogue]="dialogue" [edit]="false"></ncv-dialogue>
-    <div *ngIf="edit" class="ncv-editor-container">
-      <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)" class="ncv-nav-tree"></ncv-dialogue-topic-tree>
-      <ncv-dialogue-topic [topic]="currentTopic" [edit]="true" class="ncv-editor"></ncv-dialogue-topic>
-    </div>
+    <ncv-dialogue [dialogue]="dialogue" [edit]="edit"></ncv-dialogue>
   </div>
 </div>
 <div *ngIf="isInternetExploder()">

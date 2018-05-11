@@ -15,21 +15,15 @@ export class AppComponent implements OnInit {
   title = 'NPC Conversations';
   edit = true;
 
-  dialogue: Dialogue = createTestDialogue();
-  currentTopic: DialogueTopic;
+  dialogue: Dialogue = createTestDialogue();  
 
   ngOnInit() {
     // GameObject.initializeGameService(null);
-    this.currentTopic = this.dialogue.topics[0];
     this.dialogue.open();
   }
 
   handleNavbarAction(action: string): void {
     this.edit = action === 'edit';
-  }
-
-  onTopicClicked(topic: DialogueTopic): void {
-    this.currentTopic = topic;
   }
 
   private isInternetExploder(): boolean {
