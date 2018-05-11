@@ -17,7 +17,7 @@ import { DialogueTopic } from '../model/dialogue/dialogue-topic';
     @Output() public goodbye = new EventEmitter<Dialogue>();
 
     public lineClicked(line: DialogueLine): void {
-        this.dialogue.advanceLine(line);
+        this.dialogue.advanceLine();
     }
 
     public topicClicked(topic: DialogueTopic): void {
