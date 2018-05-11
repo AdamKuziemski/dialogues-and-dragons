@@ -1,10 +1,8 @@
 <mat-toolbar color="primary" class="mat-elevation-z6 ncv-navbar">
-  <mat-toolbar-row>
-    <span>{{ title }}</span>
-    <span class="ncv-navbar-spacer"></span>
-    <button mat-icon-button (click)="toggleConversation()">
-      <mat-icon *ngIf="edit" aria-label="Chat">sms</mat-icon>
-      <mat-icon *ngIf="!edit" aria-label="Edit conversation">edit</mat-icon>
-    </button>
-  </mat-toolbar-row>
+  <span>{{ title }}</span>
+  <span class="ncv-navbar-spacer"></span>
+  <button mat-icon-button (click)="toggleConversation()">
+    <mat-icon *ngIf="edit" aria-label="Chat">sms</mat-icon>
+    <mat-icon *ngIf="!edit" aria-label="Edit conversation">edit</mat-icon>
+  </button>
 </mat-toolbar>
