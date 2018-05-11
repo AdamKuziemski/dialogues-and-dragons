@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Dialogue } from './model/dialogue/dialogue';
 import { createTestDialogue } from './model/dialogue/testing/test-dialogue';
+import { DialogueTopic } from './model/dialogue/dialogue-topic';
 
 // import { GameObject } from './model/game-object';
 
@@ -14,17 +15,21 @@ export class AppComponent implements OnInit {
   title = 'NPC Conversations';
   edit = true;
 
-  dialogue: Dialogue = new Dialogue();
+  dialogue: Dialogue = createTestDialogue();
+  currentTopic: DialogueTopic;
 
   ngOnInit() {
     // GameObject.initializeGameService(null);
-
-    this.dialogue = createTestDialogue();
+    this.currentTopic = this.dialogue.topics[0];
     this.dialogue.open();
   }
 
   handleNavbarAction(action: string): void {
     this.edit = action === 'edit';
+  }
+
+  onTopicClicked(topic: DialogueTopic): void {
+    this.currentTopic = topic;
   }
 
   private isInternetExploder(): boolean {

@@ -1,0 +1,15 @@
+.ncv-topic-tree-invisible {
+  display: none;
+}
+
+.ncv-tree-container {
+  position: relative;
+  left: -12px;
+  width: calc(100% + 20px);
+}
+
+ul, li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}

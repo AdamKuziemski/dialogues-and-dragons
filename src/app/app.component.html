@@ -2,7 +2,10 @@
   <ncv-navbar [title]="title" (action)="handleNavbarAction($event)"></ncv-navbar>
   <div class="ncv-app-content">
     <ncv-dialogue *ngIf="!edit" [dialogue]="dialogue" [edit]="false"></ncv-dialogue>
-    <ncv-dialogue-topic *ngIf="edit" [topic]="dialogue.topics[0]" [edit]="true"></ncv-dialogue-topic>
+    <div *ngIf="edit" class="ncv-editor-container">
+      <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)" class="ncv-nav-tree"></ncv-dialogue-topic-tree>
+      <ncv-dialogue-topic [topic]="currentTopic" [edit]="true" class="ncv-editor"></ncv-dialogue-topic>
+    </div>
   </div>
 </div>
 <div *ngIf="isInternetExploder()">

@@ -10,16 +10,19 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatTreeModule, MatTree } from '@angular/material/tree';
 
 import { DialogueComponent } from './dialogue.component';
 import { DialogueLineComponent } from './dialogue-line/dialogue-line.component';
 import { DialogueTopicComponent } from './dialogue-topic/dialogue-topic.component';
+import { DialogueTopicTreeComponent } from './dialogue-topic-tree/dialogue-topic-tree.component';
 
 @NgModule({
   declarations: [
     DialogueComponent,
     DialogueLineComponent,
-    DialogueTopicComponent
+    DialogueTopicComponent,
+    DialogueTopicTreeComponent
   ],
   imports: [
     CommonModule,
@@ -31,13 +34,15 @@ import { DialogueTopicComponent } from './dialogue-topic/dialogue-topic.componen
     MatExpansionModule,
     MatIconModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    MatTreeModule
   ],
   providers: [],
   exports: [
     DialogueComponent,
     DialogueLineComponent,
-    DialogueTopicComponent
+    DialogueTopicComponent,
+    DialogueTopicTreeComponent
   ]
 })
 export class DialogueModule { }

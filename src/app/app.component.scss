@@ -1,8 +1,35 @@
 .ncv-app-content {
-  padding: 16px;
-  padding-top: 78px;
+  padding: 78px 10px 16px 16px;
 
   @media only screen and (max-width: 599px) {
     padding-top: 70px;
+  }
+}
+
+.ncv-editor-container {
+  width: 100%;
+  display: inline-flex;
+  overflow-x: scroll;
+  height: -webkit-fill-available;
+
+  @media only screen and (min-width: 600px) {
+    overflow-x: hidden;
+  }
+}
+
+.ncv-nav-tree {
+  min-width: 99%;
+  margin: 2px 16px 0px 2px;
+
+  @media only screen and (min-width: 600px) {
+    min-width: 25%;
+  }
+}
+
+.ncv-editor {
+  min-width: 99%;
+
+  @media only screen and (min-width: 600px) {
+    min-width: 70%;
   }
 }

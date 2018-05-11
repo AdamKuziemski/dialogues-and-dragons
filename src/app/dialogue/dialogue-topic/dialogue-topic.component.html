@@ -1,7 +1,7 @@
 <div *ngIf="!edit" class="ncv-topic-clickable">
     <span (click)="onClick($event)">{{ topic.label }}</span>
 </div>
-<div *ngIf="edit">
+<div *ngIf="edit" style="width: 99%">
     <mat-card class="ncv-topic-basics">
         <mat-form-field style="width: 100%">
             <input matInput #topicContent placeholder="Topic text" [maxlength]="maximumLength" [(ngModel)]="topic.label">
@@ -25,7 +25,7 @@
 
                 <div *ngIf="!moveLines" class="ncv-line-buttons">
                     <button mat-icon-button *ngIf="canShowDeleteButton()">
-                        <mat-icon aria-label="Delete line">remove_circle_outline</mat-icon>
+                        <mat-icon aria-label="Delete line">delete</mat-icon>
                     </button>
                     <button mat-icon-button>
                         <mat-icon aria-label="More">more_vert</mat-icon>
