@@ -2,7 +2,51 @@
     <span (click)="onClick($event)">{{ topic.label }}</span>
 </div>
 <div *ngIf="edit">
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Topic text" [(ngModel)]="topic.label">
-    </mat-form-field>
+    <mat-card class="ncv-topic-basics">
+        <mat-form-field style="width: 100%">
+            <input matInput placeholder="Topic text" [(ngModel)]="topic.label">
+        </mat-form-field>
+        <div class="ncv-topic-flags">
+            <mat-checkbox [(ngModel)]="topic.goodbye">Goodbye</mat-checkbox>
+            <mat-checkbox [(ngModel)]="topic.backToStart">Back to start</mat-checkbox>
+        </div>
+    </mat-card>
+
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="openPanel === 'lines'" (opened)="openLinesPanel()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Lines</mat-panel-title>
+                <mat-panel-description>What is the NPC saying?</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ncv-dialogue-line-list [lines]="topic.lines"></ncv-dialogue-line-list>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="openPanel === 'actions'" (opened)="openActionsPanel()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Actions</mat-panel-title>
+                <mat-panel-description>What should happen?</mat-panel-description>
+            </mat-expansion-panel-header>
+            Under construction
+            <!--<mat-list [disableRipple]="false">
+                    <mat-list-item *ngFor="let line of topic.lines" [disableRipple]="false" class="ncv-line-padded">
+                        <ncv-dialogue-line [line]="line" [edit]="true"></ncv-dialogue-line>
+                    </mat-list-item>
+                </mat-list>-->
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="openPanel === 'conditions'" (opened)="openConditionsPanel()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Conditions</mat-panel-title>
+                <mat-panel-description>When is it available?</mat-panel-description>
+            </mat-expansion-panel-header>
+            Under construction
+            <!--<mat-list [disableRipple]="false">
+                        <mat-list-item *ngFor="let line of topic.lines" [disableRipple]="false" class="ncv-line-padded">
+                            <ncv-dialogue-line [line]="line" [edit]="true"></ncv-dialogue-line>
+                        </mat-list-item>
+                    </mat-list>-->
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>

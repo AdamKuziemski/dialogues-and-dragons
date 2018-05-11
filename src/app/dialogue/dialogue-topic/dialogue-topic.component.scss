@@ -2,6 +2,12 @@
   cursor: pointer;
 }
 
-.ncv-topic-edit {
-  float: right;
+.ncv-topic-basics {
+  margin-bottom: 16px;
+}
+
+.ncv-topic-flags {
+  mat-checkbox:nth-child(2n) {
+    float: right;
+  }
 }

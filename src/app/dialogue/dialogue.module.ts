@@ -3,35 +3,39 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
-import { Dialogue } from '../model/dialogue/dialogue';
 import { DialogueComponent } from './dialogue.component';
-import { DialogueLine } from '../model/dialogue/dialogue-line';
 import { DialogueLineComponent } from './dialogue-line/dialogue-line.component';
-import { DialogueTopic } from '../model/dialogue/dialogue-topic';
+import { DialogueLineListComponent } from './dialogue-line-list/dialogue-line-list.component';
 import { DialogueTopicComponent } from './dialogue-topic/dialogue-topic.component';
 
 @NgModule({
   declarations: [
     DialogueComponent,
     DialogueLineComponent,
+    DialogueLineListComponent,
     DialogueTopicComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MatCardModule,
+    MatCheckboxModule,
     MatChipsModule,
+    MatExpansionModule,
     MatInputModule,
     MatListModule
   ],
-  providers: [ ],
+  providers: [],
   exports: [
     DialogueComponent,
     DialogueLineComponent,
+    DialogueLineListComponent,
     DialogueTopicComponent
   ]
 })

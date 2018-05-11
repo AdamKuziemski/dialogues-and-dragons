@@ -7,7 +7,7 @@ export function createTestDialogue(): Dialogue {
 
   // this topic is used for depth testing
   testDialogue.addTopic('Yes. Yes, we are.');
-  testDialogue.topics[0].addLine('Yay! I love tesing!');
+  testDialogue.topics[0].addLine('Yay! I love testing!');
   testDialogue.topics[0].addLine(`It's so exciting!`);
   testDialogue.topics[0].addLine(`I'm Karma, by the way.`);
   testDialogue.topics[0].addLine(`What's your name?`);

@@ -2,8 +2,8 @@
     {{ line.line }}
 </span>
 <div *ngIf="edit">
-    <mat-form-field>
-        <textarea matInput placeholder="What is the character saying?" [(ngModel)]="line.line"
+    <mat-form-field style="width: 100%;">
+        <textarea matInput [(ngModel)]="line.line"
                   matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     </mat-form-field>
 </div>
