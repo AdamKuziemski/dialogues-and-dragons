@@ -4,7 +4,8 @@
 <div *ngIf="edit">
     <mat-card class="ncv-topic-basics">
         <mat-form-field style="width: 100%">
-            <input matInput placeholder="Topic text" [(ngModel)]="topic.label">
+            <input matInput #topicContent placeholder="Topic text" [maxlength]="maximumLength" [(ngModel)]="topic.label">
+            <mat-hint align="end">{{topicContent.value?.length || 0}}/{{maximumLength}}</mat-hint>
         </mat-form-field>
         <div class="ncv-topic-flags">
             <mat-checkbox [(ngModel)]="topic.goodbye">Goodbye</mat-checkbox>
@@ -13,17 +14,30 @@
     </mat-card>
 
     <mat-accordion>
-        <mat-expansion-panel [expanded]="openPanel === 'lines'" (opened)="openLinesPanel()">
+        <mat-expansion-panel [expanded]="currentPanel === 'lines'" (opened)="openLinesPanel()">
             <mat-expansion-panel-header>
                 <mat-panel-title>Lines</mat-panel-title>
                 <mat-panel-description>What is the NPC saying?</mat-panel-description>
             </mat-expansion-panel-header>
 
-            <ncv-dialogue-line-list [lines]="topic.lines"></ncv-dialogue-line-list>
+            <div *ngFor="let line of topic.lines" class="ncv-line-container">
+                <ncv-dialogue-line [line]="line" [edit]="true" class="ncv-line-fill"></ncv-dialogue-line>
+                <div class="ncv-line-buttons">
+                    <!--<button mat-icon-button>
+                        <mat-icon aria-label="Delete line">remove_circle_outline</mat-icon>
+                    </button>-->
+                    <button mat-icon-button>
+                        <mat-icon aria-label="More">more_vert</mat-icon>
+                    </button>
+                </div>
+            </div>
 
+            <mat-action-row>
+                <button mat-button color="primary" (click)="addLine()">Add</button>
+            </mat-action-row>
         </mat-expansion-panel>
 
-        <mat-expansion-panel [expanded]="openPanel === 'actions'" (opened)="openActionsPanel()">
+        <mat-expansion-panel [expanded]="currentPanel === 'actions'" (opened)="openActionsPanel()">
             <mat-expansion-panel-header>
                 <mat-panel-title>Actions</mat-panel-title>
                 <mat-panel-description>What should happen?</mat-panel-description>
@@ -36,7 +50,7 @@
                 </mat-list>-->
         </mat-expansion-panel>
 
-        <mat-expansion-panel [expanded]="openPanel === 'conditions'" (opened)="openConditionsPanel()">
+        <mat-expansion-panel [expanded]="currentPanel === 'conditions'" (opened)="openConditionsPanel()">
             <mat-expansion-panel-header>
                 <mat-panel-title>Conditions</mat-panel-title>
                 <mat-panel-description>When is it available?</mat-panel-description>

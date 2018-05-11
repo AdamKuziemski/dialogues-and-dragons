@@ -7,7 +7,24 @@
 }
 
 .ncv-topic-flags {
+  margin-top: 10px;
+
   mat-checkbox:nth-child(2n) {
     float: right;
   }
+}
+
+.ncv-line-fill {
+  width: 100%;
+}
+
+.ncv-line-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.ncv-line-buttons {
+  display: flex;
+  margin-right: -16px;
 }

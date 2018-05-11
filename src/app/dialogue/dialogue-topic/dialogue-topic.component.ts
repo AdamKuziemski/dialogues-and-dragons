@@ -14,7 +14,8 @@ export class DialogueTopicComponent implements OnInit {
     @Output() public click = new EventEmitter<DialogueTopic>();
     @Output() public topicChange = new EventEmitter<DialogueTopic>();
 
-    private openPanel: string;
+    private currentPanel: string;
+    private maximumLength = 100;
 
     ngOnInit() {
         this.openLinesPanel();
@@ -45,9 +46,13 @@ export class DialogueTopicComponent implements OnInit {
         this.expandPanel('conditions');
     }
 
+    addLine() {
+        this.topic.addLine('');
+    }
+
     private expandPanel(label: string) {
         if (this.edit) {
-            this.openPanel = label;
+            this.currentPanel = label;
         }
     }
 }

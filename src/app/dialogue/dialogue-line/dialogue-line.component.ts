@@ -14,6 +14,8 @@ export class DialogueLineComponent {
     @Output() public click = new EventEmitter<DialogueLine>();
     @Output() public lineChange = new EventEmitter<DialogueLine>();
 
+    private maximumLength = 200;
+
     onClick(event) {
         event.stopPropagation();
 
