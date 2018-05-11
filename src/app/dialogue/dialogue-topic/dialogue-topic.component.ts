@@ -16,12 +16,13 @@ export class DialogueTopicComponent implements OnInit {
 
     private currentPanel: string;
     private maximumLength = 100;
+    private moveLines = false;
 
     ngOnInit() {
         this.openLinesPanel();
     }
 
-    onClick(event) {
+    public onClick(event): void {
         event.stopPropagation();
 
         if (!this.edit) {
@@ -29,25 +30,45 @@ export class DialogueTopicComponent implements OnInit {
         }
     }
 
-    toggleEdit(event) {
-        event.stopPropagation();
-        this.edit = !this.edit;
-    }
-
-    openLinesPanel() {
+    public openLinesPanel(): void {
         this.expandPanel('lines');
+        this.moveLines = false;
     }
 
-    openActionsPanel() {
+    public openActionsPanel(): void {
         this.expandPanel('actions');
     }
 
-    openConditionsPanel() {
+    public openConditionsPanel(): void {
         this.expandPanel('conditions');
     }
 
-    addLine() {
+    private addLine(): void {
         this.topic.addLine('');
+    }
+
+    private toggleMoveLines(): void {
+        this.moveLines = !this.moveLines;
+    }
+
+    private moveDown(index: number): void {
+        this.topic.swapLines(index + 1, index);
+    }
+
+    private moveUp(index: number): void {
+        this.topic.swapLines(index - 1, index);
+    }
+
+    private isFirstLine(index: number): boolean {
+        return index === 0;
+    }
+
+    private isLastLine(index: number): boolean {
+        return index === this.topic.lines.length - 1;
+    }
+
+    private canShowDeleteButton(): boolean {
+        return document.documentElement.clientWidth >= 450;
     }
 
     private expandPanel(label: string) {

@@ -20,20 +20,32 @@
                 <mat-panel-description>What is the NPC saying?</mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div *ngFor="let line of topic.lines" class="ncv-line-container">
-                <ncv-dialogue-line [line]="line" [edit]="true" class="ncv-line-fill"></ncv-dialogue-line>
-                <div class="ncv-line-buttons">
-                    <!--<button mat-icon-button>
+            <div *ngFor="let line of topic.lines; let i = index" class="ncv-line-container">
+                <ncv-dialogue-line [line]="line" [edit]="!moveLines" class="ncv-line-fill"></ncv-dialogue-line>
+
+                <div *ngIf="!moveLines" class="ncv-line-buttons">
+                    <button mat-icon-button *ngIf="canShowDeleteButton()">
                         <mat-icon aria-label="Delete line">remove_circle_outline</mat-icon>
-                    </button>-->
+                    </button>
                     <button mat-icon-button>
                         <mat-icon aria-label="More">more_vert</mat-icon>
                     </button>
                 </div>
+                <div *ngIf="moveLines" class="ncv-line-buttons">
+                    <button mat-icon-button [disabled]="isFirstLine(i)" (click)="moveUp(i)">
+                        <mat-icon aria-label="Move up">arrow_upward</mat-icon>
+                    </button>
+                    <button mat-icon-button [disabled]="isLastLine(i)" (click)="moveDown(i)">
+                        <mat-icon aria-label="Move down">arrow_downward</mat-icon>
+                    </button>
+                </div>
+
             </div>
 
             <mat-action-row>
                 <button mat-button color="primary" (click)="addLine()">Add</button>
+                <button *ngIf="!moveLines" mat-button color="primary" (click)="toggleMoveLines()">Move</button>
+                <button *ngIf="moveLines" mat-raised-button color="primary" (click)="toggleMoveLines()">Edit</button>
             </mat-action-row>
         </mat-expansion-panel>
 
@@ -42,12 +54,7 @@
                 <mat-panel-title>Actions</mat-panel-title>
                 <mat-panel-description>What should happen?</mat-panel-description>
             </mat-expansion-panel-header>
-            Under construction
-            <!--<mat-list [disableRipple]="false">
-                    <mat-list-item *ngFor="let line of topic.lines" [disableRipple]="false" class="ncv-line-padded">
-                        <ncv-dialogue-line [line]="line" [edit]="true"></ncv-dialogue-line>
-                    </mat-list-item>
-                </mat-list>-->
+            <p>Under construction</p>
         </mat-expansion-panel>
 
         <mat-expansion-panel [expanded]="currentPanel === 'conditions'" (opened)="openConditionsPanel()">
@@ -55,12 +62,7 @@
                 <mat-panel-title>Conditions</mat-panel-title>
                 <mat-panel-description>When is it available?</mat-panel-description>
             </mat-expansion-panel-header>
-            Under construction
-            <!--<mat-list [disableRipple]="false">
-                        <mat-list-item *ngFor="let line of topic.lines" [disableRipple]="false" class="ncv-line-padded">
-                            <ncv-dialogue-line [line]="line" [edit]="true"></ncv-dialogue-line>
-                        </mat-list-item>
-                    </mat-list>-->
+            <p>Under construction</p>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

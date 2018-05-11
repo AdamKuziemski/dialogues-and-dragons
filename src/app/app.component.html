@@ -1,4 +1,10 @@
-<ncv-dialogue *ngIf="isBrowser()" [dialogue]="dialogue" [edit]="false"></ncv-dialogue>
+<div *ngIf="isBrowser()">
+  <ncv-navbar [title]="title" (action)="handleNavbarAction($event)"></ncv-navbar>
+  <div class="ncv-app-content">
+    <ncv-dialogue *ngIf="!edit" [dialogue]="dialogue" [edit]="false"></ncv-dialogue>
+    <ncv-dialogue-topic *ngIf="edit" [topic]="dialogue.topics[0]" [edit]="true"></ncv-dialogue-topic>
+  </div>
+</div>
 <div *ngIf="isInternetExploder()">
   <h1>Sorry</h1>
   <p>You're using Internet Exploder. This site only works in web browsers.</p>

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { DialogueModule } from './dialogue/dialogue.module';
 import { GameModule } from './game/game.module';
+import { NavbarModule } from './navbar/navbar.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { GameModule } from './game/game.module';
     BrowserAnimationsModule,
     BrowserModule,
     DialogueModule,
-    GameModule
+    GameModule,
+    NavbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

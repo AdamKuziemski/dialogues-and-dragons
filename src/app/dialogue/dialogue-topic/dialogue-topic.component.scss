@@ -9,8 +9,16 @@
 .ncv-topic-flags {
   margin-top: 10px;
 
-  mat-checkbox:nth-child(2n) {
-    float: right;
+  @media only screen and (max-width: 449px) {
+    mat-checkbox:nth-child(2n) {
+      float: right;
+    }
+  }
+
+  @media only screen and (min-width: 450px) {
+    mat-checkbox {
+      margin-right: 20px;
+    }
   }
 }
 

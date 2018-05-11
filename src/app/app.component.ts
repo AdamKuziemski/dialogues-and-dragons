@@ -8,10 +8,11 @@ import { createTestDialogue } from './model/dialogue/testing/test-dialogue';
 @Component({
   selector: 'ncv-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = 'NPC Conversations';
+  edit = true;
 
   dialogue: Dialogue = new Dialogue();
 
@@ -20,6 +21,10 @@ export class AppComponent implements OnInit {
 
     this.dialogue = createTestDialogue();
     this.dialogue.open();
+  }
+
+  handleNavbarAction(action: string): void {
+    this.edit = action === 'edit';
   }
 
   private isInternetExploder(): boolean {

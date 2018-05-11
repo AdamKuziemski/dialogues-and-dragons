@@ -11,6 +11,12 @@ describe('DialogueTopic', () => {
     expect(topic.length).toBe(2);
   });
 
+  it('should swap lines successfully', () => {
+    topic.swapLines(0, 1);
+    expect(topic.lines[0].line).toBe('I thought you would come sooner or later');
+    expect(topic.lines[1].line).toBe('Are you the Tester?');
+  });
+
   it('should have 2 child topics', () => {
     topic.addTopic('Yes, I am.');
     topic.addTopic('Are you?');

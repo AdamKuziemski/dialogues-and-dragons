@@ -33,4 +33,8 @@ export class DialogueTopic extends ConditionDependent {
         this.topics.push(new DialogueTopic(topic));
         return this.lastOf(this.topics);
     }
+
+    public swapLines(a: number, b: number): void {
+        this.lines[a] = this.lines.splice(b, 1, this.lines[a])[0];
+    }
 }
