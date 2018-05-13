@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 import { Dialogue } from './model/dialogue/dialogue';
 import { createTestDialogue } from './model/dialogue/testing/test-dialogue';
 import { DialogueTopic } from './model/dialogue/dialogue-topic';
+import { ResponsiveService } from './shared/services/responsive.service';
 
 // import { GameObject } from './model/game-object';
 
@@ -15,11 +16,20 @@ export class AppComponent implements OnInit {
   title = 'NPC Conversations';
   edit = true;
 
-  dialogue: Dialogue = createTestDialogue();  
+  dialogue: Dialogue = createTestDialogue();
+
+  constructor(private responsive: ResponsiveService) {
+    this.responsive.setWidth(window.innerWidth);
+  }
 
   ngOnInit() {
     // GameObject.initializeGameService(null);
     this.dialogue.open();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.responsive.setWidth(event.target.innerWidth);
   }
 
   handleNavbarAction(action: string): void {

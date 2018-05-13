@@ -7,6 +7,8 @@ import { of as observableOf } from 'rxjs';
 import { Dialogue } from '../../model/dialogue/dialogue';
 import { DialogueTopic } from '../../model/dialogue/dialogue-topic';
 
+import { ResponsiveService } from '../../shared/services/responsive.service';
+
 @Component({
   selector: 'ncv-dialogue-topic-tree',
   templateUrl: 'dialogue-topic-tree.component.html',
@@ -19,7 +21,7 @@ export class DialogueTopicTreeComponent implements OnInit {
   private nestedTreeControl: NestedTreeControl<DialogueTopic>;
   private nestedDataSource: MatTreeNestedDataSource<DialogueTopic>;
 
-  constructor() {
+  constructor(private responsive: ResponsiveService) {
     this.nestedTreeControl = new NestedTreeControl<DialogueTopic>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
   }

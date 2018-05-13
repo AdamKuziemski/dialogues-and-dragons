@@ -8,6 +8,8 @@ import { DialogueModule } from './dialogue/dialogue.module';
 import { GameModule } from './game/game.module';
 import { NavbarModule } from './navbar/navbar.module';
 
+import { ResponsiveService } from './shared/services/responsive.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -17,9 +19,11 @@ import { NavbarModule } from './navbar/navbar.module';
     BrowserModule,
     DialogueModule,
     GameModule,
-    NavbarModule
+    NavbarModule,
   ],
-  providers: [],
+  providers: [
+    ResponsiveService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

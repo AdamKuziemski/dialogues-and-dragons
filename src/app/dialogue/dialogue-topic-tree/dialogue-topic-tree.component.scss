@@ -8,6 +8,10 @@
   width: calc(100% + 20px);
 }
 
+ul {
+  -webkit-padding-start: 16px;
+}
+
 ul, li {
   margin-top: 0;
   margin-bottom: 0;

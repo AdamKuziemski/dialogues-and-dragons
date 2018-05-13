@@ -13,7 +13,22 @@
         </mat-list>
     </mat-card-content>
 </mat-card>
-<div *ngIf="edit" class="ncv-editor-container">
-    <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)" class="ncv-nav-tree"></ncv-dialogue-topic-tree>
-    <ncv-dialogue-topic [topic]="currentTopic" [edit]="true" class="ncv-editor"></ncv-dialogue-topic>
+<div *ngIf="edit">
+    <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tabs-fill-available">
+        <mat-tab label="Topics">
+            <div class="ncv-tab-card">
+                <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+            </div>
+        </mat-tab>
+        <mat-tab label="Editor">
+            <div class="ncv-tab-card">
+                <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div *ngIf="responsive.isDesktop()" class="ncv-dialogue-editor">
+        <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+        <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+    </div>
 </div>

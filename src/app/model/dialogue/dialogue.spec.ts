@@ -5,8 +5,6 @@ describe('Dialogue - opened', () => {
   const dialogue = createTestDialogue();
   let topic = null;
 
-  dialogue.open();
-
   const startTopicAndSkip = function(index: number): void {
     topic = dialogue.options[index];
     dialogue.startTopic(topic);
@@ -19,6 +17,7 @@ describe('Dialogue - opened', () => {
     expect(dialogue.options).toEqual(optionContainer.topics);
   };
 
+  dialogue.open();
   beforeEach(() => {
     spyOn(dialogue, 'advanceLine').and.callThrough();
   });

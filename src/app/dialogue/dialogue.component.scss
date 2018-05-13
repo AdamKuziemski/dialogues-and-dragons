@@ -1,27 +1,29 @@
-.ncv-editor-container {
-  width: 100%;
+.ncv-dialogue-editor {
   display: inline-flex;
-  overflow-x: scroll;
-  height: stretch;
+  width: stretch;
+}
+
+.ncv-tab-card {
+  padding: 0 16px;
+}
+
+.ncv-tabs-fill-available {
+  max-height: calc(100vh - 68px);
+}
+
+ncv-dialogue-topic-tree {
+  margin: 0px 16px 16px 16px;
 
   @media only screen and (min-width: 600px) {
-    overflow-x: hidden;
+    width: 35%;
   }
 }
 
-.ncv-nav-tree {
-  min-width: 99%;
-  margin: 2px 16px 0px 2px;
+ncv-dialogue-topic {
+  margin: 0px 16px 16px 16px;
 
   @media only screen and (min-width: 600px) {
-    min-width: 25%;
-  }
-}
-
-.ncv-editor {
-  min-width: 99%;
-
-  @media only screen and (min-width: 600px) {
-    min-width: 70%;
+    margin-left: 0px;
+    width: stretch;
   }
 }

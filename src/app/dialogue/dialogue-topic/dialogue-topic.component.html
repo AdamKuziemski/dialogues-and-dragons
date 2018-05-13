@@ -1,10 +1,11 @@
 <div *ngIf="!edit" class="ncv-topic-clickable">
     <span (click)="onClick($event)">{{ topic.label }}</span>
 </div>
-<div *ngIf="edit" style="width: 99%">
+<div *ngIf="edit">
     <mat-card class="ncv-topic-basics">
-        <mat-form-field style="width: 100%">
-            <input matInput #topicContent placeholder="Topic text" [maxlength]="maximumLength" [(ngModel)]="topic.label">
+        <mat-form-field style="width: 100%;">
+            <textarea #topicContent [(ngModel)]="topic.label" [maxlength]="maximumLength" matInput placeholder="Topic text"
+                matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
             <mat-hint align="end">{{topicContent.value?.length || 0}}/{{maximumLength}}</mat-hint>
         </mat-form-field>
         <div class="ncv-topic-flags">

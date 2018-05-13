@@ -1,7 +1,10 @@
 .ncv-app-content {
-  padding: 78px 10px 16px 16px;
+  position: relative;
+  top: 70px;
+}
 
-  @media only screen and (max-width: 599px) {
-    padding-top: 70px;
+@media only screen and (min-width: 600px) {
+  .ncv-app-content {
+    top: 78px;
   }
 }

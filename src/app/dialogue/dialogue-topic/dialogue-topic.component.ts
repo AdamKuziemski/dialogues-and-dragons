@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { DialogueTopic } from '../../model/dialogue/dialogue-topic';
 
+import { ResponsiveService } from '../../shared/services/responsive.service';
+
 @Component({
     selector: 'ncv-dialogue-topic',
     templateUrl: './dialogue-topic.component.html',
@@ -14,9 +16,11 @@ export class DialogueTopicComponent implements OnInit {
     @Output() public click = new EventEmitter<DialogueTopic>();
     @Output() public topicChange = new EventEmitter<DialogueTopic>();
 
-    private currentPanel: string;
+    private currentPanel = '';
     private maximumLength = 100;
     private moveLines = false;
+
+    constructor(private responsive: ResponsiveService) {}
 
     ngOnInit() {
         this.openLinesPanel();
@@ -64,7 +68,7 @@ export class DialogueTopicComponent implements OnInit {
     }
 
     private canShowDeleteButton(): boolean {
-        return document.documentElement.clientWidth >= 450;
+        return this.responsive.isDesktop();
     }
 
     private expandPanel(label: string) {
