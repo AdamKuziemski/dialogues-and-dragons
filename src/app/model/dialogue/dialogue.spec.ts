@@ -28,6 +28,7 @@ describe('Dialogue - opened', () => {
   it('should be at the beginning', () => expect(dialogue.backToStart).toBe(true));
   it('should be displaying topics', () => expect(dialogue.displayOptions).toBe(true));
   it('should have 3 topics at the start', () => expect(dialogue.options.length).toBe(3));
+  it('should have 14 total topics', () => expect(dialogue.totalTopics).toBe(14));
 
   it('should click the first option', () => {
     topic = dialogue.topics[0];

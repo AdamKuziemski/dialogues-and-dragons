@@ -24,7 +24,7 @@
                 <ncv-dialogue-line [line]="line" [edit]="!moveLines" class="ncv-line-fill"></ncv-dialogue-line>
 
                 <div *ngIf="!moveLines" class="ncv-line-buttons">
-                    <button mat-icon-button *ngIf="canShowDeleteButton()">
+                    <button mat-icon-button *ngIf="canShowDeleteButton()" (click)="deleteLine(i)">
                         <mat-icon aria-label="Delete line">delete</mat-icon>
                     </button>
                     <button mat-icon-button>

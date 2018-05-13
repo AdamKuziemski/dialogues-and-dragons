@@ -21,7 +21,7 @@ export class DialogueTopic extends ConditionDependent {
     }
 
     get totalTopics(): number {
-        return this.topics.length + this.getTotalOfChildren(this.topics, topic => topic.topics.length);
+        return this.topics.length + this.getTotalOfChildren(this.topics, topic => topic.totalTopics);
     }
 
     public addLine(line: string): DialogueLine {
@@ -37,4 +37,10 @@ export class DialogueTopic extends ConditionDependent {
     public swapLines(a: number, b: number): void {
         this.lines[a] = this.lines.splice(b, 1, this.lines[a])[0];
     }
+
+    public removeLine(index: number): void {
+        this.lines.splice(index, 1);
+    }
+
+    // public removeTopic()
 }

@@ -43,8 +43,12 @@ export class DialogueTopicComponent implements OnInit {
         this.expandPanel('conditions');
     }
 
-    private addLine(): void {
+    public addLine(): void {
         this.topic.addLine('');
+    }
+
+    public deleteLine(index: number): void {
+        this.topic.removeLine(index);
     }
 
     private toggleMoveLines(): void {
@@ -59,14 +63,6 @@ export class DialogueTopicComponent implements OnInit {
         this.topic.swapLines(index - 1, index);
     }
 
-    private isFirstLine(index: number): boolean {
-        return index === 0;
-    }
-
-    private isLastLine(index: number): boolean {
-        return index === this.topic.lines.length - 1;
-    }
-
     private canShowDeleteButton(): boolean {
         return document.documentElement.clientWidth >= 450;
     }
@@ -75,5 +71,13 @@ export class DialogueTopicComponent implements OnInit {
         if (this.edit) {
             this.currentPanel = label;
         }
+    }
+
+    private isFirstLine(index: number): boolean {
+        return index === 0;
+    }
+
+    private isLastLine(index: number): boolean {
+        return index === this.topic.lines.length - 1;
     }
 }
