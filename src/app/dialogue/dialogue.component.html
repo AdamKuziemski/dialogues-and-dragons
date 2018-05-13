@@ -1,4 +1,4 @@
-<mat-card *ngIf="!edit">
+<mat-card *ngIf="!edit" class="margin-no-top">
     <mat-card-title>
         {{ speaker }}
     </mat-card-title>
@@ -14,7 +14,16 @@
     </mat-card-content>
 </mat-card>
 <div *ngIf="edit">
-    <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tabs-fill-available">
+    <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tabs-fill-available" [(selectedIndex)]="currentTab">
+        <!--<mat-tab label="Greetings">
+            <div class="ncv-tab-card" style="margin-top: 16px; margin-bottom: 16px;">
+                <mat-card>
+                    <div *ngFor="let greeting of dialogue.greetings">
+                        <ncv-dialogue-line [line]="greeting" [edit]="true"></ncv-dialogue-line>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-tab>-->
         <mat-tab label="Topics">
             <div class="ncv-tab-card">
                 <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>

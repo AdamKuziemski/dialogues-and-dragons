@@ -18,6 +18,7 @@ export class DialogueComponent implements OnInit {
     @Output() public goodbye = new EventEmitter<Dialogue>();
 
     private currentTopic: DialogueTopic;
+    private currentTab = 0;
 
     constructor(private responsive: ResponsiveService) { }
 
@@ -37,5 +38,6 @@ export class DialogueComponent implements OnInit {
 
     private onTopicClicked(topic: DialogueTopic): void {
         this.currentTopic = topic;
+        this.currentTab = 1;
     }
 }

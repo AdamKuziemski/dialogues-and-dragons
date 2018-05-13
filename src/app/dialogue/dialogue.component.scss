@@ -11,16 +11,20 @@
   max-height: calc(100vh - 68px);
 }
 
-ncv-dialogue-topic-tree {
+.margin-no-top {
   margin: 0px 16px 16px 16px;
+}
 
+ncv-dialogue-topic-tree {
+  @extend .margin-no-top;
+  
   @media only screen and (min-width: 600px) {
     width: 35%;
   }
 }
 
 ncv-dialogue-topic {
-  margin: 0px 16px 16px 16px;
+  @extend .margin-no-top;
 
   @media only screen and (min-width: 600px) {
     margin-left: 0px;
