@@ -33,11 +33,13 @@
             </div>
         </mat-tab>
         <mat-tab label="Editor">
-            <div class="ncv-swiper" (swiperight)="swipeRight()">
-                <div class="ncv-tab-card">
-                    <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+            <ng-template matTabContent> <!-- to fix incorrect accordion behavior -->
+                <div class="ncv-swiper" (swiperight)="swipeRight()">
+                    <div class="ncv-tab-card">
+                        <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+                    </div>
                 </div>
-            </div>
+            </ng-template>
         </mat-tab>
     </mat-tab-group>
 

@@ -23,7 +23,9 @@ export class DialogueTopicComponent implements OnInit {
 
     constructor(private responsive: ResponsiveService) {}
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.closePanels();
+    }
 
     public onClick(event): void {
         event.stopPropagation();
@@ -31,6 +33,10 @@ export class DialogueTopicComponent implements OnInit {
         if (!this.edit) {
             this.click.emit(this.topic);
         }
+    }
+
+    public closePanels(): void {
+        this.expandPanel('none');
     }
 
     public openLinesPanel(): void {
@@ -78,9 +84,9 @@ export class DialogueTopicComponent implements OnInit {
         this.topic.swapLines(index - 1, index);
     }
 
-    private expandPanel(label: OpenPanel) {
+    private expandPanel(panel: OpenPanel) {
         if (this.edit) {
-            this.currentPanel = label;
+            this.currentPanel = panel;
         }
     }
 }

@@ -46,6 +46,6 @@ export class DialogueComponent implements OnInit {
 
     private onTopicClicked(topic: DialogueTopic): void {
         this.currentTopic = topic;
-        this.currentTab = 1;
+        this.currentTab = 2;
     }
 }
