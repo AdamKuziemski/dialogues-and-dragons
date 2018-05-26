@@ -1,7 +1,4 @@
 <mat-card *ngIf="responsive.isMobile()">
-  <mat-card-header>
-    Greetings ({{ dialogue.totalGreetings }})
-  </mat-card-header>
   <ncv-line-container [lines]="dialogue.greetings" [edit]="true" (delete)="deleteGreeting($event)"></ncv-line-container>
   <mat-card-actions>
     <button mat-button color="primary" (click)="addGreeting()">Add</button>
