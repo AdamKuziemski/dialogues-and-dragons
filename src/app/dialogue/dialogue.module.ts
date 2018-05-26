@@ -18,6 +18,7 @@ import { DialogueLineComponent } from './dialogue-line/dialogue-line.component';
 import { DialogueTopicComponent } from './dialogue-topic/dialogue-topic.component';
 import { DialogueTopicTreeComponent } from './dialogue-topic-tree/dialogue-topic-tree.component';
 import { LineContainerComponent } from './line-container/line-container.component';
+import { GreetingContainerComponent } from './greeting-container/greeting-container.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LineContainerComponent } from './line-container/line-container.componen
     DialogueLineComponent,
     DialogueTopicComponent,
     DialogueTopicTreeComponent,
-    LineContainerComponent
+    LineContainerComponent,
+    GreetingContainerComponent
   ],
   imports: [
     CommonModule,

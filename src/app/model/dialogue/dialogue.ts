@@ -156,7 +156,7 @@ export class Dialogue extends GameObject {
         return this.topics.length + this.getTotalOfChildren(this.topics, elem => elem.totalTopics);
     }
     //#endregion
-    //#region adders
+    //#region adders/removers
     public addGreeting(greeting: string): DialogueLine {
         this.greetings.push(new DialogueLine(greeting, true));
         return this.lastOf(this.greetings);
@@ -170,6 +170,10 @@ export class Dialogue extends GameObject {
     public addTopic(label: string): DialogueTopic {
         this.topics.push(new DialogueTopic(label));
         return this.lastOf(this.topics);
+    }
+
+    public removeGreeting(index: number): void {
+        this.greetings.splice(index, 1);
     }
     //#endregion
 

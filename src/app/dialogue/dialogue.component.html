@@ -18,10 +18,7 @@
         <mat-tab label="Greetings">
             <div class="ncv-swiper" (swipeleft)="swipeLeft()">
                 <div class="ncv-tab-card" style="margin-top: 16px; margin-bottom: 16px;">
-                    <mat-card>
-                        <ncv-line-container [lines]="dialogue.greetings" [edit]="edit" [moveLines]="moveLines" (moveUp)="moveUp($event)" (moveDown)="moveDown($event)"
-                            (delete)="deleteLine($event)"></ncv-line-container>
-                    </mat-card>
+                    <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
                 </div>
             </div>
         </mat-tab>
@@ -33,7 +30,8 @@
             </div>
         </mat-tab>
         <mat-tab label="Editor">
-            <ng-template matTabContent> <!-- to fix incorrect accordion behavior -->
+            <ng-template matTabContent>
+                <!-- to fix incorrect accordion behavior -->
                 <div class="ncv-swiper" (swiperight)="swipeRight()">
                     <div class="ncv-tab-card">
                         <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
@@ -43,8 +41,13 @@
         </mat-tab>
     </mat-tab-group>
 
-    <div *ngIf="responsive.isDesktop()" class="ncv-dialogue-editor">
-        <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
-        <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+    <div *ngIf="responsive.isDesktop()">
+        <div class="ncv-tab-card" style="margin-bottom: 16px">
+            <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
+        </div>
+        <div class="ncv-dialogue-editor">
+            <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+            <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+        </div>
     </div>
 </div>

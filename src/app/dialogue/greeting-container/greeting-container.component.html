@@ -1,0 +1,25 @@
+<mat-card *ngIf="responsive.isMobile()">
+  <mat-card-header>
+    Greetings ({{ dialogue.totalGreetings }})
+  </mat-card-header>
+  <ncv-line-container [lines]="dialogue.greetings" [edit]="true" (delete)="deleteGreeting($event)"></ncv-line-container>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="addGreeting()">Add</button>
+  </mat-card-actions>
+</mat-card>
+<mat-accordion *ngIf="responsive.isDesktop()">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Greetings</mat-panel-title>
+      <mat-panel-description>
+        {{ dialogue.totalGreetings }} total
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ncv-line-container [lines]="dialogue.greetings" [edit]="true" (delete)="deleteGreeting($event)"></ncv-line-container>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="addGreeting()">Add</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
