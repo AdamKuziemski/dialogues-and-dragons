@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
-import { DialogueTopic } from '../../model/dialogue/dialogue-topic';
+import { DialogueTopic } from '@dialogue/dialogue-topic';
+import { ResponsiveService } from '@responsive-service';
 
-import { ResponsiveService } from '../../shared/services/responsive.service';
+type OpenPanel = 'none' | 'lines' | 'actions' | 'conditions';
 
 @Component({
     selector: 'ncv-dialogue-topic',
@@ -16,15 +17,13 @@ export class DialogueTopicComponent implements OnInit {
     @Output() public click = new EventEmitter<DialogueTopic>();
     @Output() public topicChange = new EventEmitter<DialogueTopic>();
 
-    private currentPanel = '';
+    private currentPanel: OpenPanel = 'none';
     private maximumLength = 100;
     private moveLines = false;
 
     constructor(private responsive: ResponsiveService) {}
 
-    ngOnInit() {
-        this.openLinesPanel();
-    }
+    ngOnInit() { }
 
     public onClick(event): void {
         event.stopPropagation();
@@ -55,6 +54,18 @@ export class DialogueTopicComponent implements OnInit {
         this.topic.removeLine(index);
     }
 
+    private get isLinesOpen(): boolean {
+        return this.currentPanel === 'lines';
+    }
+
+    private get isActionsOpen(): boolean {
+        return this.currentPanel === 'actions';
+    }
+
+    private get isConditionsOpen(): boolean {
+        return this.currentPanel === 'conditions';
+    }
+
     private toggleMoveLines(): void {
         this.moveLines = !this.moveLines;
     }
@@ -67,7 +78,7 @@ export class DialogueTopicComponent implements OnInit {
         this.topic.swapLines(index - 1, index);
     }
 
-    private expandPanel(label: string) {
+    private expandPanel(label: OpenPanel) {
         if (this.edit) {
             this.currentPanel = label;
         }

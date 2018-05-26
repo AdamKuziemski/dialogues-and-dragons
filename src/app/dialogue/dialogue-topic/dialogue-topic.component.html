@@ -15,7 +15,7 @@
     </mat-card>
 
     <mat-accordion>
-        <mat-expansion-panel [expanded]="currentPanel === 'lines'" (opened)="openLinesPanel()">
+        <mat-expansion-panel [expanded]="isLinesOpen" (opened)="openLinesPanel()">
             <mat-expansion-panel-header>
                 <mat-panel-title>Lines</mat-panel-title>
                 <mat-panel-description>What is the NPC saying?</mat-panel-description>
@@ -31,7 +31,7 @@
             </mat-action-row>
         </mat-expansion-panel>
 
-        <mat-expansion-panel [expanded]="currentPanel === 'actions'" (opened)="openActionsPanel()">
+        <mat-expansion-panel [expanded]="isActionsOpen" (opened)="openActionsPanel()">
             <mat-expansion-panel-header>
                 <mat-panel-title>Actions</mat-panel-title>
                 <mat-panel-description>What should happen?</mat-panel-description>
@@ -39,7 +39,7 @@
             <p>Under construction</p>
         </mat-expansion-panel>
 
-        <mat-expansion-panel [expanded]="currentPanel === 'conditions'" (opened)="openConditionsPanel()">
+        <mat-expansion-panel [expanded]="isConditionsOpen" (opened)="openConditionsPanel()">
             <mat-expansion-panel-header>
                 <mat-panel-title>Conditions</mat-panel-title>
                 <mat-panel-description>When is it available?</mat-panel-description>

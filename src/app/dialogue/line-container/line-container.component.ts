@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DialogueLine } from '../../model/dialogue/dialogue-line';
-import { ResponsiveService } from '../../shared/services/responsive.service';
+import { DialogueLine } from '@dialogue/dialogue-line';
+import { ResponsiveService } from '@responsive-service';
 
 @Component({
   selector: 'ncv-line-container',

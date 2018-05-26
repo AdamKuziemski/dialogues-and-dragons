@@ -11,6 +11,13 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "baseUrl": "src",
+    "paths": {
+      "@action/*": ["app/model/action/*"],
+      "@condition/*": ["app/model/condition/*"],
+      "@dialogue/*": ["app/model/dialogue/*"],
+      "@responsive-service": ["app/shared/services/responsive.service"]
+    },
     "lib": [
       "es2017",
       "dom"

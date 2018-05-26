@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DialogueLine } from '../../model/dialogue/dialogue-line';
+import { DialogueLine } from '@dialogue/dialogue-line';
 
 @Component({
     selector: 'ncv-dialogue-line',

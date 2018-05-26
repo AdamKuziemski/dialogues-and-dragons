@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Dialogue } from '../model/dialogue/dialogue';
-import { DialogueLine } from '../model/dialogue/dialogue-line';
-import { DialogueTopic } from '../model/dialogue/dialogue-topic';
-import { ResponsiveService } from '../shared/services/responsive.service';
+import { Dialogue } from '@dialogue/dialogue';
+import { DialogueLine } from '@dialogue/dialogue-line';
+import { DialogueTopic } from '@dialogue/dialogue-topic';
+import { ResponsiveService } from '@responsive-service';
 
 @Component({
     selector: 'ncv-dialogue',
