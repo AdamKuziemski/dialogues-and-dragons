@@ -15,22 +15,28 @@
 </mat-card>
 <div *ngIf="edit">
     <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tabs-fill-available" [(selectedIndex)]="currentTab">
-        <!--<mat-tab label="Greetings">
-            <div class="ncv-tab-card" style="margin-top: 16px; margin-bottom: 16px;">
-                <mat-card>
-                    <ncv-line-container [lines]="dialogue.greetings" [edit]="edit" [moveLines]="moveLines"
-                        (moveUp)="moveUp($event)" (moveDown)="moveDown($event)" (delete)="deleteLine($event)"></ncv-line-container>
-                </mat-card>
+        <mat-tab label="Greetings">
+            <div class="ncv-swiper" (swipeleft)="swipeLeft()">
+                <div class="ncv-tab-card" style="margin-top: 16px; margin-bottom: 16px;">
+                    <mat-card>
+                        <ncv-line-container [lines]="dialogue.greetings" [edit]="edit" [moveLines]="moveLines" (moveUp)="moveUp($event)" (moveDown)="moveDown($event)"
+                            (delete)="deleteLine($event)"></ncv-line-container>
+                    </mat-card>
+                </div>
             </div>
-        </mat-tab>-->
+        </mat-tab>
         <mat-tab label="Topics">
-            <div class="ncv-tab-card">
-                <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+            <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+                <div class="ncv-tab-card">
+                    <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+                </div>
             </div>
         </mat-tab>
         <mat-tab label="Editor">
-            <div class="ncv-tab-card">
-                <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+            <div class="ncv-swiper" (swiperight)="swipeRight()">
+                <div class="ncv-tab-card">
+                    <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+                </div>
             </div>
         </mat-tab>
     </mat-tab-group>

@@ -15,6 +15,10 @@
   margin: 0px 16px 16px 16px;
 }
 
+.ncv-swiper {
+  min-height: calc(100vh - 150px);
+}
+
 ncv-dialogue-topic-tree {
   @extend .margin-no-top;
   

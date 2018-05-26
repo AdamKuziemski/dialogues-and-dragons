@@ -36,6 +36,14 @@ export class DialogueComponent implements OnInit {
         this.dialogue.startTopic(topic);
     }
 
+    private swipeLeft(event) {
+        this.currentTab += 1;
+    }
+
+    private swipeRight(event) {
+        this.currentTab -= 1;
+    }
+
     private onTopicClicked(topic: DialogueTopic): void {
         this.currentTopic = topic;
         this.currentTab = 1;
