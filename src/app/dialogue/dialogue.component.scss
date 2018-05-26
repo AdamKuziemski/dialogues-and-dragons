@@ -19,6 +19,14 @@
   min-height: calc(100vh - 150px);
 }
 
+mat-list {
+  margin-top: 8px;
+}
+
+mat-list-item {
+  height: fit-content;
+}
+
 ncv-dialogue-topic-tree {
   @extend .margin-no-top;
   
