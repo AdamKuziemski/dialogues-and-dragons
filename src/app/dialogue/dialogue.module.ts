@@ -17,13 +17,15 @@ import { DialogueComponent } from './dialogue.component';
 import { DialogueLineComponent } from './dialogue-line/dialogue-line.component';
 import { DialogueTopicComponent } from './dialogue-topic/dialogue-topic.component';
 import { DialogueTopicTreeComponent } from './dialogue-topic-tree/dialogue-topic-tree.component';
+import { LineContainerComponent } from './line-container/line-container.component';
 
 @NgModule({
   declarations: [
     DialogueComponent,
     DialogueLineComponent,
     DialogueTopicComponent,
-    DialogueTopicTreeComponent
+    DialogueTopicTreeComponent,
+    LineContainerComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { DialogueTopicTreeComponent } from './dialogue-topic-tree/dialogue-topic
     DialogueComponent,
     DialogueLineComponent,
     DialogueTopicComponent,
-    DialogueTopicTreeComponent
+    DialogueTopicTreeComponent,
+    LineContainerComponent
   ]
 })
 export class DialogueModule { }

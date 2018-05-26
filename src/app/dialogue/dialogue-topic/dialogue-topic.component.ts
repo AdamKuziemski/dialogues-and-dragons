@@ -67,21 +67,9 @@ export class DialogueTopicComponent implements OnInit {
         this.topic.swapLines(index - 1, index);
     }
 
-    private canShowDeleteButton(): boolean {
-        return this.responsive.isDesktop();
-    }
-
     private expandPanel(label: string) {
         if (this.edit) {
             this.currentPanel = label;
         }
-    }
-
-    private isFirstLine(index: number): boolean {
-        return index === 0;
-    }
-
-    private isLastLine(index: number): boolean {
-        return index === this.topic.lines.length - 1;
     }
 }

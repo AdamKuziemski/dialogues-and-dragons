@@ -18,9 +18,8 @@
         <!--<mat-tab label="Greetings">
             <div class="ncv-tab-card" style="margin-top: 16px; margin-bottom: 16px;">
                 <mat-card>
-                    <div *ngFor="let greeting of dialogue.greetings">
-                        <ncv-dialogue-line [line]="greeting" [edit]="true"></ncv-dialogue-line>
-                    </div>
+                    <ncv-line-container [lines]="dialogue.greetings" [edit]="edit" [moveLines]="moveLines"
+                        (moveUp)="moveUp($event)" (moveDown)="moveDown($event)" (delete)="deleteLine($event)"></ncv-line-container>
                 </mat-card>
             </div>
         </mat-tab>-->

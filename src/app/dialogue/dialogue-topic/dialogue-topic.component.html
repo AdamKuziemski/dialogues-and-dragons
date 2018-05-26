@@ -21,27 +21,8 @@
                 <mat-panel-description>What is the NPC saying?</mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div *ngFor="let line of topic.lines; let i = index" class="ncv-line-container">
-                <ncv-dialogue-line [line]="line" [edit]="!moveLines" class="ncv-line-fill"></ncv-dialogue-line>
-
-                <div *ngIf="!moveLines" class="ncv-line-buttons">
-                    <button mat-icon-button *ngIf="canShowDeleteButton()" (click)="deleteLine(i)">
-                        <mat-icon aria-label="Delete line">delete</mat-icon>
-                    </button>
-                    <button mat-icon-button>
-                        <mat-icon aria-label="More">more_vert</mat-icon>
-                    </button>
-                </div>
-                <div *ngIf="moveLines" class="ncv-line-buttons">
-                    <button mat-icon-button [disabled]="isFirstLine(i)" (click)="moveUp(i)">
-                        <mat-icon aria-label="Move up">arrow_upward</mat-icon>
-                    </button>
-                    <button mat-icon-button [disabled]="isLastLine(i)" (click)="moveDown(i)">
-                        <mat-icon aria-label="Move down">arrow_downward</mat-icon>
-                    </button>
-                </div>
-
-            </div>
+            <ncv-line-container [lines]="topic.lines" [edit]="edit" [moveLines]="moveLines"
+                (moveUp)="moveUp($event)" (moveDown)="moveDown($event)" (delete)="deleteLine($event)"></ncv-line-container>
 
             <mat-action-row>
                 <button mat-button color="primary" (click)="addLine()">Add</button>
