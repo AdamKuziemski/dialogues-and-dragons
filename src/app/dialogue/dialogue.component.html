@@ -1,53 +1,53 @@
-<mat-card *ngIf="!edit" class="margin-no-top">
-    <mat-card-title>
-        {{ speaker }}
-    </mat-card-title>
+<mat-card *ngIf="!edit" class="ncv-margin-around-no-top">
+  <mat-card-title>
+    {{ speaker }}
+  </mat-card-title>
 
-    <mat-card-content>
-        <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
+  <mat-card-content>
+    <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
 
-        <mat-list [disableRipple]="false" *ngIf="dialogue.displayOptions">
-            <mat-list-item *ngFor="let option of dialogue.options" [disableRipple]="false">
-                <ncv-dialogue-topic [topic]="option" (click)="topicClicked($event)"></ncv-dialogue-topic>
-            </mat-list-item>
-        </mat-list>
-    </mat-card-content>
+    <mat-list [disableRipple]="false" *ngIf="dialogue.displayOptions">
+      <mat-list-item *ngFor="let option of dialogue.options" [disableRipple]="false">
+        <ncv-dialogue-topic [topic]="option" (click)="topicClicked($event)"></ncv-dialogue-topic>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
 </mat-card>
 <div *ngIf="edit">
-    <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tabs-fill-available" [(selectedIndex)]="currentTab">
-        <mat-tab label="Greetings">
-            <div class="ncv-swiper" (swipeleft)="swipeLeft()">
-                <div class="ncv-tab-card" style="margin-top: 16px; margin-bottom: 16px;">
-                    <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
-                </div>
-            </div>
-        </mat-tab>
-        <mat-tab label="Topics">
-            <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-                <div class="ncv-tab-card">
-                    <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
-                </div>
-            </div>
-        </mat-tab>
-        <mat-tab label="Editor">
-            <ng-template matTabContent>
-                <!-- to fix incorrect accordion behavior -->
-                <div class="ncv-swiper" (swiperight)="swipeRight()">
-                    <div class="ncv-tab-card">
-                        <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
-                    </div>
-                </div>
-            </ng-template>
-        </mat-tab>
-    </mat-tab-group>
-
-    <div *ngIf="responsive.isDesktop()">
-        <div class="ncv-tab-card" style="margin-bottom: 16px">
-            <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
+  <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tabs-fill-available" [(selectedIndex)]="currentTab">
+    <mat-tab label="Greetings">
+      <div class="ncv-swiper" (swipeleft)="swipeLeft()">
+        <div class="ncv-tab-card ncv-margin-top-bottom">
+          <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
         </div>
-        <div class="ncv-dialogue-editor">
-            <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+      </div>
+    </mat-tab>
+    <mat-tab label="Topics">
+      <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+        <div class="ncv-tab-card">
+          <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Editor">
+      <!-- to fix incorrect accordion behavior -->
+      <ng-template matTabContent>
+        <div class="ncv-swiper" (swiperight)="swipeRight()">
+          <div class="ncv-tab-card">
             <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+          </div>
         </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div *ngIf="responsive.isDesktop()">
+    <div class="ncv-tab-card" style="margin-bottom: 16px">
+      <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
     </div>
+    <div class="ncv-dialogue-editor">
+      <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+      <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+    </div>
+  </div>
 </div>

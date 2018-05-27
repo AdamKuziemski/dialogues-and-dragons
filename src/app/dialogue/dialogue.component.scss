@@ -11,8 +11,13 @@
   max-height: calc(100vh - 68px);
 }
 
-.margin-no-top {
+.ncv-margin-around-no-top {
   margin: 0px 16px 16px 16px;
+}
+
+.ncv-margin-top-bottom {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .ncv-swiper {
@@ -23,12 +28,13 @@ mat-list {
   margin-top: 8px;
 }
 
-mat-list-item {
-  height: fit-content;
+.mat-list .mat-list-item {
+  min-height: 48px;
+  height: fit-content; // we want the lines to always fit content, no matter the screen size
 }
 
 ncv-dialogue-topic-tree {
-  @extend .margin-no-top;
+  @extend .ncv-margin-around-no-top;
   
   @media only screen and (min-width: 600px) {
     width: 35%;
@@ -36,7 +42,7 @@ ncv-dialogue-topic-tree {
 }
 
 ncv-dialogue-topic {
-  @extend .margin-no-top;
+  @extend .ncv-margin-around-no-top;
 
   @media only screen and (min-width: 600px) {
     margin-left: 0px;
