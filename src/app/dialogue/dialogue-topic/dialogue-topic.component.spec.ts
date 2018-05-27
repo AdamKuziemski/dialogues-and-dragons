@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogueTopicComponent } from './dialogue-topic.component';
 
-describe('DialogueTopicComponent', () => {
+xdescribe('DialogueTopicComponent', () => {
   let component: DialogueTopicComponent;
   let fixture: ComponentFixture<DialogueTopicComponent>;
 
