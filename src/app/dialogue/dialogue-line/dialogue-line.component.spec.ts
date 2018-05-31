@@ -41,10 +41,13 @@ describe('DialogueLineComponent', () => {
   });
 
   it('should emit a click event with the test line when the span is clicked', () => {
+    spyOn(component, 'onClick');
     component.click.subscribe(line => expect(line).toBe(testLine));
 
     const span = fixture.nativeElement.querySelector('span');
     span.click();
+
+    expect(component.onClick).toHaveBeenCalled();
   });
 
   it('should display a div with a textarea when in edit mode', () => {
