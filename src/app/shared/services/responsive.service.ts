@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ResponsiveService {
-  private workspaceWidth: number;
+  private workspaceWidth: number = window.innerWidth;
 
   public setWidth(newWidth: number): void {
     this.workspaceWidth = newWidth;

@@ -14,8 +14,6 @@ describe('LineContainerComponent', () => {
   let fixture: ComponentFixture<LineContainerComponent>;
   let lines: DialogueLine[] = [];
 
-  const responsiveServiceStub = { isMobile: () => false, isDesktop: () => !this.isMobile };
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -25,7 +23,7 @@ describe('LineContainerComponent', () => {
         DialogueLineComponent,
         LineContainerComponent
       ],
-      providers: [ { provide: ResponsiveService, useValue: responsiveServiceStub } ],
+      providers: [ ResponsiveService ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
@@ -54,7 +52,7 @@ describe('LineContainerComponent', () => {
   });
 
   it('should display 3 lines', () => {
-    expect(fixture.debugElement.queryAll(By.css('.ncv-line-container')).length).toBe(3);
+    expect(fixture.debugElement.queryAll(By.css('.ncv-line-container')).length).toBe(lines.length);
   });
 
   it('should react to the #delete click', () => {
@@ -91,5 +89,12 @@ describe('LineContainerComponent', () => {
 
     expect(component.onMoveDown).toHaveBeenCalled();
     expect(component.onMoveDown).toHaveBeenCalledWith(1);
+  });
+
+  it('should not have a delete button on mobile', () => {
+    fixture.debugElement.injector.get(ResponsiveService).setWidth(300);
+    fixture.detectChanges();
+
+    expect(fixture.debugElement.queryAll(By.css('button')).length).toBe(lines.length);
   });
 });
