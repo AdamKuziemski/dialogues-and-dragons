@@ -11,7 +11,6 @@ import { ResponsiveService } from '@responsive-service';
 export class LineContainerComponent {
   @Input() lines: DialogueLine[];
   @Input() moveLines = false;
-  @Input() edit = false;
 
   @Output() moveUp: EventEmitter<number> = new EventEmitter();
   @Output() moveDown: EventEmitter<number> = new EventEmitter();

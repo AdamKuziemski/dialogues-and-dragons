@@ -13,7 +13,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <ncv-line-container [lines]="dialogue.greetings" [edit]="true" (delete)="deleteGreeting($event)"></ncv-line-container>
+    <ncv-line-container [lines]="dialogue.greetings" (delete)="deleteGreeting($event)"></ncv-line-container>
 
     <mat-action-row>
       <button mat-button color="primary" (click)="addGreeting()">Add</button>

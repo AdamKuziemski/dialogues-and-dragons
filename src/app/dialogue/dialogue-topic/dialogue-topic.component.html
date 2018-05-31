@@ -21,7 +21,7 @@
         <mat-panel-description>What is the NPC saying?</mat-panel-description>
       </mat-expansion-panel-header>
 
-      <ncv-line-container [lines]="topic.lines" [edit]="edit" [moveLines]="moveLines" (moveUp)="moveUp($event)" (moveDown)="moveDown($event)"
+      <ncv-line-container [lines]="topic.lines" [moveLines]="moveLines" (moveUp)="moveUp($event)" (moveDown)="moveDown($event)"
         (delete)="deleteLine($event)"></ncv-line-container>
 
       <mat-action-row>
