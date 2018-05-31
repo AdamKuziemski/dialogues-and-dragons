@@ -1,11 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { DialogueLine } from '@dialogue/dialogue-line';
 import { DialogueLineComponent } from './dialogue-line.component';
-
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 describe('DialogueLineComponent', () => {
   let component: DialogueLineComponent;
@@ -17,9 +20,10 @@ describe('DialogueLineComponent', () => {
       imports: [
         FormsModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        NoopAnimationsModule
       ],
-      declarations: [DialogueLineComponent]
+      declarations: [DialogueLineComponent],
     }).compileComponents();
   }));
 
@@ -29,7 +33,6 @@ describe('DialogueLineComponent', () => {
 
     testLine = new DialogueLine('Test line');
     component.line = testLine;
-
     fixture.detectChanges();
   });
 
@@ -37,10 +40,32 @@ describe('DialogueLineComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit a click event with the test line', () => {
+  it('should emit a click event with the test line when the span is clicked', () => {
     component.click.subscribe(line => expect(line).toBe(testLine));
 
     const span = fixture.nativeElement.querySelector('span');
     span.click();
+  });
+
+  it('should display a div with a textarea when in edit mode', () => {
+    component.edit = true;
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('div')).toBeTruthy();
+  });
+
+  it('should be bound to the input line', () => {
+    component.edit = true;
+    fixture.detectChanges();
+
+    const debugComponent: DebugElement = fixture.debugElement;
+    const debugArea = debugComponent.query(By.css('textarea'));
+    const textarea: HTMLInputElement = debugArea.nativeElement;
+
+    textarea.value = 'Hello';
+    textarea.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    expect(testLine.line).toEqual('Hello');
   });
 });
