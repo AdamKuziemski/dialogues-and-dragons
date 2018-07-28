@@ -22,11 +22,7 @@ xdescribe('DialogueComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeDefined();
-  });
+  it('should create', () => expect(component).toBeDefined());
+  it('should have a dialogue', () => expect(component.dialogue).toBeDefined());
 
-  it('should have a dialogue', () => {
-    expect(component.dialogue).toBeDefined();
-  });
 });
