@@ -49,9 +49,7 @@ describe('LineContainerComponent', () => {
     spyOn(component, 'onMoveDown');
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => expect(component).toBeTruthy());
 
   it('should display 3 lines', () => {
     expect(fixture.debugElement.queryAll(By.css('.ncv-line-container')).length).toBe(lines.length);
