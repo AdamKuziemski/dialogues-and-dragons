@@ -51,13 +51,8 @@ function setupTestModule(importedModules: any[], screenWidth: number): void {
 describe('GreetingContainerComponent - desktop', () => {
   beforeEach(async(() => setupTestModule([MatExpansionModule, NoopAnimationsModule], 800)));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should have an expansion panel', () => {
-    expect(fixture.debugElement.query(By.css('mat-expansion-panel'))).toBeDefined();
-  });
+  it('should create', () => expect(component).toBeTruthy());
+  it('should have an expansion panel', () => expect(fixture.debugElement.query(By.css('mat-expansion-panel'))).toBeDefined());
 
   it('should display the number of greetings', () => {
     const compiled = fixture.debugElement.nativeElement;
@@ -88,13 +83,8 @@ describe('GreetingContainerComponent - desktop', () => {
 describe('GreetingContainerComponent - mobile', () => {
   beforeEach(async(() => setupTestModule([MatCardModule, NoopAnimationsModule], 300)));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should display a mat-card', () => {
-    expect(fixture.debugElement.query(By.css('mat-card'))).toBeDefined();
-  });
+  it('should create', () => expect(component).toBeTruthy());
+  it('should display a mat-card', () => expect(fixture.debugElement.query(By.css('mat-card'))).toBeDefined());
 
   it('should react to #addGreeting click', () => {
     const buttons = fixture.debugElement.queryAll(By.css('button'));
