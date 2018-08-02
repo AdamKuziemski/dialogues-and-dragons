@@ -1,6 +1,7 @@
 <div *ngIf="!edit" class="ncv-topic-clickable">
   <span (click)="onClick($event)">{{ topic.label }}</span>
 </div>
+
 <div *ngIf="edit">
   <mat-card class="ncv-topic-basics">
     <mat-form-field>
@@ -21,8 +22,8 @@
         <mat-panel-description>What is the NPC saying?</mat-panel-description>
       </mat-expansion-panel-header>
 
-      <ncv-line-container [lines]="topic.lines" [moveLines]="moveLines" (moveUp)="moveUp($event)" (moveDown)="moveDown($event)"
-        (delete)="deleteLine($event)"></ncv-line-container>
+      <ncv-line-container [lines]="topic.lines" [moveLines]="moveLines"
+        (moveUp)="moveUp($event)" (moveDown)="moveDown($event)" (delete)="deleteLine($event)"></ncv-line-container>
 
       <mat-action-row>
         <button mat-button color="primary" (click)="addLine()">Add</button>

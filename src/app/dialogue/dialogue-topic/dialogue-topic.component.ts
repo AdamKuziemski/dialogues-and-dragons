@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { DialogueTopic } from '@dialogue/dialogue-topic';
-import { ResponsiveService } from '@responsive-service';
+// import { ResponsiveService } from '@responsive-service'; // might be needed later
 
 type OpenPanel = 'none' | 'lines' | 'actions' | 'conditions';
 
@@ -21,7 +21,8 @@ export class DialogueTopicComponent implements OnInit {
   private maximumLength = 100;
   private moveLines = false;
 
-  constructor(private responsive: ResponsiveService) { }
+  // constructor(private responsive: ResponsiveService) { } // if responsive service is needed
+  constructor() { }
 
   ngOnInit() {
     this.closePanels();
@@ -60,15 +61,15 @@ export class DialogueTopicComponent implements OnInit {
     this.topic.removeLine(index);
   }
 
-  private get isLinesOpen(): boolean {
+  public get isLinesOpen(): boolean {
     return this.currentPanel === 'lines';
   }
 
-  private get isActionsOpen(): boolean {
+  public get isActionsOpen(): boolean {
     return this.currentPanel === 'actions';
   }
 
-  private get isConditionsOpen(): boolean {
+  public get isConditionsOpen(): boolean {
     return this.currentPanel === 'conditions';
   }
 
