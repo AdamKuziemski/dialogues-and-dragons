@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTreeModule, MatTree } from '@angular/material/tree';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { DialogueComponent } from './dialogue.component';
 import { DialogueLineComponent } from './dialogue-line/dialogue-line.component';
