@@ -36,9 +36,7 @@ describe('DialogueLineComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => expect(component).toBeTruthy());
 
   it('should emit a click event with the test line when the span is clicked', () => {
     spyOn(component, 'onClick');
