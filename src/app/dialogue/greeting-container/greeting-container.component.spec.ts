@@ -42,9 +42,6 @@ function setupTestModule(importedModules: any[], screenWidth: number): void {
 
     spyOn(component, 'addGreeting');
     spyOn(component, 'deleteGreeting');
-
-    spyOn(component.dialogue, 'addGreeting');
-    spyOn(component.dialogue, 'removeGreeting');
   });
 }
 
