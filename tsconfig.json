@@ -16,7 +16,8 @@
       "@action/*": ["app/model/action/*"],
       "@condition/*": ["app/model/condition/*"],
       "@dialogue/*": ["app/model/dialogue/*"],
-      "@responsive-service": ["app/shared/services/responsive.service"]
+      "@responsive-service": ["app/shared/services/responsive.service"],
+      "@testing/*": ["app/shared/testing/*"]
     },
     "lib": [
       "es2017",
