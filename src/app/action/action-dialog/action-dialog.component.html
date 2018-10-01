@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{ edit ? 'Edit' : 'Add' }} Action</h2>
+
+<mat-dialog-content>
+  <ncv-action-edit [(action)]="data"></ncv-action-edit>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSave()">{{ edit ? 'Save' : 'Add' }}</button>
+</mat-dialog-actions>

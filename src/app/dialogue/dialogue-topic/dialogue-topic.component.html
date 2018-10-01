@@ -23,7 +23,8 @@
       </mat-expansion-panel-header>
 
       <ncv-line-container [lines]="topic.lines" [moveLines]="moveLines"
-        (moveUp)="moveUp($event)" (moveDown)="moveDown($event)" (delete)="deleteLine($event)"></ncv-line-container>
+        (moveUp)="moveLineUp($event)" (moveDown)="moveLineDown($event)" (delete)="deleteLine($event)">
+      </ncv-line-container>
 
       <mat-action-row>
         <button mat-button color="primary" (click)="addLine()">Add</button>
@@ -37,7 +38,21 @@
         <mat-panel-title>Actions</mat-panel-title>
         <mat-panel-description>What should happen?</mat-panel-description>
       </mat-expansion-panel-header>
-      <p>Under construction</p>
+
+      <mat-list>
+        <mat-list-item *ngFor="let action of topic.actions; index as i">
+          <ncv-action [action]="action"
+                      (actionChange)="handleActionChange($event, i)"
+                      (click)="handleActionClick($event, i)"></ncv-action>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="addAction()">Add</button>
+        <button *ngIf="!moveActions" mat-button color="primary" (click)="toggleMoveActions()">Move</button>
+        <button *ngIf="moveActions" mat-raised-button color="primary" (click)="toggleMoveActions()">Edit</button>
+      </mat-action-row>
+
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="isConditionsOpen" (opened)="openConditionsPanel()">

@@ -1,0 +1,35 @@
+<div class="ncv-action-form">
+  <mat-form-field>
+    <mat-label>Action Type</mat-label>
+    <mat-select [ngModel]="action?.name" (ngModelChange)="handleTypeChange($event)" [compareWith]="compareActions">
+      <mat-option *ngFor="let availableAction of actions" [value]="availableAction">
+        {{ availableAction.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="action.hasTargetId">
+    <mat-label>Target Id</mat-label>
+    <mat-select [(ngModel)]="action.targetId">
+      <mat-option value="Player">
+        Player
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="action.hasValue">
+    <mat-label>Value</mat-label>
+    <mat-select [(ngModel)]="action.value">
+      <mat-option value="Something">
+        Something
+      </mat-option>
+      <mat-option value="Potion">
+        Potion
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="action.hasCount">
+    <input matInput type="number" placeholder="Count" [(ngModel)]="action.count">
+  </mat-form-field>
+</div>

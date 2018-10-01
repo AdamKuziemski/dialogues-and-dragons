@@ -1,0 +1,10 @@
+<div *ngIf="responsive.isMobile()" class="ncv-action-code-clickable" (click)="handleActionClick($event)">
+    <span *ngIf="action?.hasTargetId">{{ action?.targetId | removeSpaces }}.</span>
+
+    <span class="ncv-action-name">{{ action?.name | removeSpaces }}</span>
+
+    (<span *ngIf="action?.hasValue" class="ncv-action-value">{{ action?.value | removeSpaces }}</span>
+    <span *ngIf="action?.hasCount === action?.hasValue">, </span>
+    <span *ngIf="action?.hasCount" class="ncv-action-count">{{ action?.count }}</span>);
+</div>
+<ncv-action-edit *ngIf="responsive.isDesktop()" [action]="action" (actionChange)="handleActionChange($event)"></ncv-action-edit>

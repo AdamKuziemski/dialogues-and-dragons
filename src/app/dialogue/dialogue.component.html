@@ -6,8 +6,8 @@
   <mat-card-content>
     <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
 
-    <mat-list [disableRipple]="false" *ngIf="dialogue.displayOptions">
-      <mat-list-item *ngFor="let option of dialogue.options" [disableRipple]="false">
+    <mat-list *ngIf="dialogue.displayOptions">
+      <mat-list-item *ngFor="let option of dialogue.options">
         <ncv-dialogue-topic [topic]="option" (click)="topicClicked($event)"></ncv-dialogue-topic>
       </mat-list-item>
     </mat-list>

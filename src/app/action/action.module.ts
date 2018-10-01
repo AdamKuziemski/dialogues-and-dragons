@@ -1,30 +1,43 @@
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { AddItem } from '../model/action/add-item.action';
-import { RemoveItem } from '../model/action/remove-item.action';
-import { SetQuestStage } from '../model/action/set-quest-stage.action';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
-import { ActionContainer } from '../model/action/action-container';
+import { ActionComponent } from './action.component';
+import { ActionDialogComponent } from './action-dialog/action-dialog.component';
+import { ActionEditComponent } from './action-edit/action-edit.component';
+import { ResponsiveService } from '@responsive-service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    AddItem,
-    RemoveItem,
-    SetQuestStage,
-    ActionContainer
+    ActionComponent,
+    ActionDialogComponent,
+    ActionEditComponent,
   ],
   imports: [
-    AddItem,
-    RemoveItem,
-    SetQuestStage,
-    ActionContainer
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    SharedModule
   ],
-  providers: [ ],
+  entryComponents: [
+    ActionDialogComponent
+  ],
+  providers: [
+    ResponsiveService
+  ],
   exports: [
-    AddItem,
-    RemoveItem,
-    SetQuestStage,
-    ActionContainer
+    ActionComponent,
+    ActionDialogComponent,
+    ActionEditComponent
   ]
 })
 export class ActionModule { }

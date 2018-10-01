@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { DialogueTopicComponent } from './dialogue-topic.component';
 import { DialogueTopic } from '@dialogue/dialogue-topic';
+import { ResponsiveService } from '@responsive-service';
 
 import { click } from '@testing/click.function';
 
@@ -27,6 +28,7 @@ function setupTestModule(importedModules: any[], editMode = false): void {
   TestBed.configureTestingModule({
     declarations: [DialogueTopicComponent],
     imports: importedModules,
+    providers: [ResponsiveService],
     schemas: [NO_ERRORS_SCHEMA]
   }).compileComponents().then(() => {
     topic = new DialogueTopic('Hey there, Ellie');
