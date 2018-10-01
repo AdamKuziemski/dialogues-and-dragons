@@ -1,16 +1,31 @@
-import { Action } from './action.interface';
+import { Action, ActionValue } from './action.interface';
 import { ActionResult } from './action-result';
 
-export class SetQuestStage implements Action {
-    public readonly name = 'Set Quest Stage';
+import { GameObject } from '../game-object';
 
-    constructor(
-        public targetId: string,
-        public value: string,
-        public count: number
-    ) { }
+export class SetQuestStage extends GameObject implements Action {
+    public readonly name = 'Set Quest Stage';
+    public readonly hasCount = true;
+    public readonly hasTargetId = false;
+    public readonly hasValue = true;
+
+    public count = 0;
+    public targetId = '';
+    public value = 0;
+
+    constructor() {
+        super();
+    }
 
     perform(): ActionResult {
         return new ActionResult(true);
+    }
+
+    getTargetIds(): string[] {
+        return [];
+    }
+
+    getValues(): ActionValue[] {
+        return [];
     }
 }

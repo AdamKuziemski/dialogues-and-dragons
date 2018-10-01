@@ -1,6 +1,8 @@
 import { GameService } from './game/game.service';
 
-export class GameObject {
+import { Cloneable } from './cloneable.interface';
+
+export class GameObject implements Cloneable {
     protected static game: GameService;
 
     public static initializeGameService(gameService: GameService) {

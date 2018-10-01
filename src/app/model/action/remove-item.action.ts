@@ -1,16 +1,19 @@
-import { Action } from './action.interface';
+import { Action, ActionValue } from './action.interface';
 import { ActionResult } from './action-result';
 
 import { GameObject } from '../game-object';
 
 export class RemoveItem extends GameObject implements Action {
     public readonly name = 'Remove Item';
+    public readonly hasCount = true;
+    public readonly hasTargetId = true;
+    public readonly hasValue = true;
 
-    constructor(
-        public targetId: string,
-        public value: string,
-        public count: number
-    ) {
+    public count = 0;
+    public targetId = '';
+    public value = '';
+
+    constructor() {
         super();
     }
 
@@ -22,5 +25,13 @@ export class RemoveItem extends GameObject implements Action {
 
         target.removeItem(this.value, this.count);
         return new ActionResult(true);
+    }
+
+    getTargetIds(): string[] {
+        return [];
+    }
+
+    getValues(): ActionValue[] {
+        return [];
     }
 }

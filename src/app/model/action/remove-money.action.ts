@@ -3,27 +3,27 @@ import { ActionResult } from './action-result';
 
 import { GameObject } from '../game-object';
 
-export class AddItem extends GameObject implements Action {
-    public readonly name = 'Add Item';
+export class RemoveMoney extends GameObject implements Action {
+    public readonly name = 'Remove Money';
     public readonly hasCount = true;
     public readonly hasTargetId = true;
-    public readonly hasValue = true;
+    public readonly hasValue = false;
 
     public count = 0;
     public targetId = '';
-    public value = '';
+    public value = 0;
 
     constructor() {
         super();
     }
 
     perform(): ActionResult {
-        const target = AddItem.game.actor(this.targetId);
+        const target = RemoveMoney.game.actor(this.targetId);
         if (target === null) {
             return new ActionResult(false, `Actor '${this.targetId}' doesn't exist.`);
         }
 
-        target.addItem(this.value, this.count);
+        target.removeMoney(this.count);
         return new ActionResult(true);
     }
 
