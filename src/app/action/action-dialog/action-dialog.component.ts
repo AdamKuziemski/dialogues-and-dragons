@@ -14,10 +14,13 @@ export class ActionDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ActionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Action) {
-      this.initialData = data.clone<Action>();
-      this.dialogRef.beforeClose().subscribe(() => this.onCancel());
-    }
+    @Inject(MAT_DIALOG_DATA) public data: Action
+  ) {
+    this.initialData = data.clone<Action>();
+    this.dialogRef.beforeClose().subscribe(
+        result => result === undefined ? this.onCancel() : this.onSave()
+    );
+  }
 
   onCancel(): void {
     this.dialogRef.close(this.edit ? this.initialData : undefined);
