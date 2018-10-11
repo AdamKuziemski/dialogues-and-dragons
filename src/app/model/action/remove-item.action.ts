@@ -9,7 +9,7 @@ export class RemoveItem extends GameObject implements Action {
     public readonly hasTargetId = true;
     public readonly hasValue = true;
 
-    public count = 0;
+    public count = 1;
     public targetId = '';
     public value = '';
 
