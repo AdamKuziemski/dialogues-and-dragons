@@ -1,12 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
+
+import { MatDialog } from '@angular/material';
 
 import { DialogueTopicComponent } from './dialogue-topic.component';
 import { DialogueTopic } from '@dialogue/dialogue-topic';
@@ -28,12 +31,12 @@ function setupTestModule(importedModules: any[], editMode = false): void {
   TestBed.configureTestingModule({
     declarations: [DialogueTopicComponent],
     imports: importedModules,
-    providers: [ResponsiveService],
+    providers: [MatDialog, ResponsiveService],
     schemas: [NO_ERRORS_SCHEMA]
   }).compileComponents().then(() => {
     topic = new DialogueTopic('Hey there, Ellie');
-    topic.addLine('Oh, howdy! I didn\'t see you there.');
-    topic.addLine('Name\'s Ellie. I like cuddles and murder.');
+    topic.addLine(`Oh, howdy! I didn't see you there.`);
+    topic.addLine(`Name's Ellie. I like cuddles and murder.`);
 
     fixture = TestBed.createComponent(DialogueTopicComponent);
     component = fixture.componentInstance;
@@ -51,7 +54,7 @@ function setupTestModule(importedModules: any[], editMode = false): void {
 }
 
 describe('DialogueTopicComponent - read mode', () => {
-  beforeEach(async(() => setupTestModule([])));
+  beforeEach(async(() => setupTestModule([MatDialogModule])));
 
   it('should create', () => expect(component).toBeTruthy());
 
@@ -70,6 +73,7 @@ describe('DialogueTopicComponent - edit mode', () => {
   beforeEach(async(() => setupTestModule([
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatExpansionModule,
     MatInputModule,
     NoopAnimationsModule

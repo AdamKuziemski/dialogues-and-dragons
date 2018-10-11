@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActionDialogComponent } from './action-dialog.component';
 
-describe('ActionDialogComponent', () => {
+xdescribe('ActionDialogComponent', () => {
   let component: ActionDialogComponent;
   let fixture: ComponentFixture<ActionDialogComponent>;
 

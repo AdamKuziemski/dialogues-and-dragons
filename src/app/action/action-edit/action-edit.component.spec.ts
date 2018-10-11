@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActionEditComponent } from './action-edit.component';
 
-describe('ActionEditComponent', () => {
+xdescribe('ActionEditComponent', () => {
   let component: ActionEditComponent;
   let fixture: ComponentFixture<ActionEditComponent>;
 

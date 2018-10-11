@@ -18,7 +18,7 @@ export class ActionDialogComponent {
   ) {
     this.initialData = data.clone<Action>();
     this.dialogRef.beforeClose().subscribe(
-        result => result === undefined ? this.onCancel() : this.onSave()
+      result => result === undefined ? this.onCancel() : this.onSave()
     );
   }
 
