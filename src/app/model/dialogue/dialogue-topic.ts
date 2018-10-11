@@ -17,11 +17,11 @@ export class DialogueTopic extends ConditionDependent {
     }
 
     get length(): number {
-        return this.lines.length + this.getTotalOfChildren(this.topics, topic => topic.length);
+        return this.topics.reduce((sum, topic) => sum + topic.length, this.lines.length);
     }
 
     get totalTopics(): number {
-        return this.topics.length + this.getTotalOfChildren(this.topics, topic => topic.totalTopics);
+        return this.topics.reduce((sum, topic) => sum + topic.totalTopics, this.topics.length);
     }
 
     public addLine(line: string): DialogueLine {

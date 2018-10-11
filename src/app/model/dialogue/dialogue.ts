@@ -145,7 +145,7 @@ export class Dialogue extends GameObject {
     }
 
     public get length(): number {
-        return this.totalTopics + this.getTotalOfChildren(this.topics, elem => elem.length);
+        return this.topics.reduce((sum, topic) => sum + topic.length, this.totalTopics);
     }
 
     public get totalGreetings(): number {
@@ -153,7 +153,7 @@ export class Dialogue extends GameObject {
     }
 
     public get totalTopics(): number {
-        return this.topics.length + this.getTotalOfChildren(this.topics, elem => elem.totalTopics);
+        return this.topics.reduce((sum, topic) => sum + topic.totalTopics, this.topics.length);
     }
     //#endregion
     //#region adders/removers
