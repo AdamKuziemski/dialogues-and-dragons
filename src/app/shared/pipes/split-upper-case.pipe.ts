@@ -1,13 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'splitUpperCase'
+  name: 'splitUpperCase'
 })
 export class SplitUpperCasePipe implements PipeTransform {
-    transform(value: string): string {
-        if (!value) {
-            return '';
-        }
-        return value.split(/(?=[A-Z])/).join(' ');
-    }
+  transform(value: string): string {
+    return (!!value ? value.split(/(?=[A-Z])/).join(' ') : '');
+  }
 }
