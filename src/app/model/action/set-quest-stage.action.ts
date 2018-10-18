@@ -4,28 +4,28 @@ import { ActionResult } from './action-result';
 import { GameObject } from '../game-object';
 
 export class SetQuestStage extends GameObject implements Action {
-    public readonly name = 'Set Quest Stage';
-    public readonly hasCount = true;
-    public readonly hasTargetId = false;
-    public readonly hasValue = true;
+  public readonly name = 'Set Quest Stage';
+  public readonly hasCount = true;
+  public readonly hasTargetId = false;
+  public readonly hasValue = true;
 
-    public count = 0;
-    public targetId = '';
-    public value = 0;
+  public count = 0;
+  public targetId = '';
+  public value = 0;
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    perform(): ActionResult {
-        return new ActionResult(true);
-    }
+  perform(): ActionResult {
+    return new ActionResult(true);
+  }
 
-    getTargetIds(): string[] {
-        return [];
-    }
+  getTargetIds(): string[] {
+    return [];
+  }
 
-    getValues(): ActionValue[] {
-        return [];
-    }
+  getValues(): ActionValue[] {
+    return [];
+  }
 }

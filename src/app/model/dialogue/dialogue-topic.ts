@@ -2,45 +2,45 @@ import { ConditionDependent } from '../condition/condition-dependent';
 import { DialogueLine } from './dialogue-line';
 
 export class DialogueTopic extends ConditionDependent {
-    public goodbye = false;
-    public backToStart = false;
+  public goodbye = false;
+  public backToStart = false;
 
-    public lines: DialogueLine[] = [];
-    public topics: DialogueTopic[] = [];
+  public lines: DialogueLine[] = [];
+  public topics: DialogueTopic[] = [];
 
-    constructor(public label: string) {
-        super();
-    }
+  constructor(public label: string) {
+    super();
+  }
 
-    get empty(): boolean {
-        return this.topics.length === 0 && this.lines.length === 0;
-    }
+  get empty(): boolean {
+    return this.topics.length === 0 && this.lines.length === 0;
+  }
 
-    get length(): number {
-        return this.topics.reduce((sum, topic) => sum + topic.length, this.lines.length);
-    }
+  get length(): number {
+    return this.topics.reduce((sum, topic) => sum + topic.length, this.lines.length);
+  }
 
-    get totalTopics(): number {
-        return this.topics.reduce((sum, topic) => sum + topic.totalTopics, this.topics.length);
-    }
+  get totalTopics(): number {
+    return this.topics.reduce((sum, topic) => sum + topic.totalTopics, this.topics.length);
+  }
 
-    public addLine(line: string): DialogueLine {
-        this.lines.push(new DialogueLine(line));
-        return this.lastOf(this.lines);
-    }
+  public addLine(line: string): DialogueLine {
+    this.lines.push(new DialogueLine(line));
+    return this.lastOf(this.lines);
+  }
 
-    public addTopic(topic: string): DialogueTopic {
-        this.topics.push(new DialogueTopic(topic));
-        return this.lastOf(this.topics);
-    }
+  public addTopic(topic: string): DialogueTopic {
+    this.topics.push(new DialogueTopic(topic));
+    return this.lastOf(this.topics);
+  }
 
-    public swapLines(a: number, b: number): void {
-        this.lines[a] = this.lines.splice(b, 1, this.lines[a])[0];
-    }
+  public swapLines(a: number, b: number): void {
+    this.lines[a] = this.lines.splice(b, 1, this.lines[a])[0];
+  }
 
-    public removeLine(index: number): void {
-        this.lines.splice(index, 1);
-    }
+  public removeLine(index: number): void {
+    this.lines.splice(index, 1);
+  }
 
-    // public removeTopic()
+  // public removeTopic()
 }
