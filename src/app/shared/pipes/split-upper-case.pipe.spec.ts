@@ -4,8 +4,8 @@ describe('SplitUpperCasePipe', () => {
   const pipe = new SplitUpperCasePipe();
 
   it('should create an instance', () => expect(pipe).toBeTruthy());
-  it('should split a camelCase', () => expect(pipe.transform('camelCase')).toBe('camel Case'));
-  it('should split a PascalCase', () => expect(pipe.transform('PascalCase')).toBe('Pascal Case'));
+  it('should split a camelCase string', () => expect(pipe.transform('camelCaseString')).toBe('camel Case String'));
+  it('should split a PascalCase string', () => expect(pipe.transform('PascalCaseString')).toBe('Pascal Case String'));
   it('should not split an all lowercase string', () => expect(pipe.transform('lowercase')).toBe('lowercase'));
   it('should not split a number', () => expect(pipe.transform('123123')).toBe('123123'));
   it('should return an empty string when transforming an empty string', () => expect(pipe.transform('')).toBe(''));
