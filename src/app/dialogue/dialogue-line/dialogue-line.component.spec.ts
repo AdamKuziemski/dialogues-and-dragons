@@ -24,17 +24,15 @@ describe('DialogueLineComponent', () => {
         NoopAnimationsModule
       ],
       declarations: [DialogueLineComponent],
-    }).compileComponents();
+    }).compileComponents().then(() => {
+      fixture = TestBed.createComponent(DialogueLineComponent);
+      component = fixture.componentInstance;
+
+      testLine = new DialogueLine('Test line');
+      component.line = testLine;
+      fixture.detectChanges();
+    });
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DialogueLineComponent);
-    component = fixture.componentInstance;
-
-    testLine = new DialogueLine('Test line');
-    component.line = testLine;
-    fixture.detectChanges();
-  });
 
   it('should create', () => expect(component).toBeTruthy());
 

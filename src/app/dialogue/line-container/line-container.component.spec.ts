@@ -25,29 +25,26 @@ describe('LineContainerComponent', () => {
         DialogueLineComponent,
         LineContainerComponent
       ],
-      providers: [ ResponsiveService ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
+      providers: [ResponsiveService],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents().then(() => {
+      fixture = TestBed.createComponent(LineContainerComponent);
+      component = fixture.componentInstance;
+
+      lines = [
+        new DialogueLine('Hello'),
+        new DialogueLine('Testing'),
+        new DialogueLine('Components')
+      ];
+      component.lines = lines;
+
+      fixture.detectChanges();
+
+      spyOn(component, 'deleteLine');
+      spyOn(component, 'onMoveUp');
+      spyOn(component, 'onMoveDown');
+    });
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LineContainerComponent);
-    component = fixture.componentInstance;
-
-    lines = [
-      new DialogueLine('Hello'),
-      new DialogueLine('Testing'),
-      new DialogueLine('Components')
-    ];
-    component.lines = lines;
-
-    fixture.detectChanges();
-
-    spyOn(component, 'deleteLine');
-    spyOn(component, 'onMoveUp');
-    spyOn(component, 'onMoveDown');
-  });
 
   it('should create', () => expect(component).toBeTruthy());
 

@@ -9,20 +9,17 @@ xdescribe('DialogueComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogueComponent ]
-    }).compileComponents();
+      declarations: [DialogueComponent]
+    }).compileComponents().then(() => {
+      fixture = TestBed.createComponent(DialogueComponent);
+      component = fixture.componentInstance;
+
+      component.dialogue = createTestDialogue();
+
+      fixture.detectChanges();
+    });
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DialogueComponent);
-    component = fixture.componentInstance;
-
-    component.dialogue = createTestDialogue();
-
-    fixture.detectChanges();
-  });
 
   it('should create', () => expect(component).toBeDefined());
   it('should have a dialogue', () => expect(component.dialogue).toBeDefined());
-
 });

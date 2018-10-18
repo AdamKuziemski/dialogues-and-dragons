@@ -8,18 +8,13 @@ xdescribe('ActionDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActionDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [ActionDialogComponent]
+    }).compileComponents().then(() => {
+        fixture = TestBed.createComponent(ActionDialogComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ActionDialogComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => expect(component).toBeTruthy());
 });
