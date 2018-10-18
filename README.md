@@ -1,5 +1,7 @@
 # NpcConversations
 
+**Note: this describes the future state of the app. It's still in development and it's not even an alpha. This readme describes the idea behind it, nothing more, nothing less.**
+
 This project was created with a certain idea in mind. The idea is that, if you're a game maker (or a wannabe, doesn't matter), you have lots of ideas for your stuff. You don't always have your PC or laptop on you - which is where you do most of the work on the game. You're on a bus or on a plane, or wherever. You witness a funny situation and think 'Oh, this should appear in the dialogue somewhere'. So what do you do? You open OneNote, create a page and jot it down. You come back home, you open your editor (if you have one), you create the stuff from OneNote, save, compile, run.
 
 ## But what if I told you...
