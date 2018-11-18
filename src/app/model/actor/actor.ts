@@ -51,21 +51,8 @@ export class Actor extends GameObject {
   }
 
   public getBackpack(): Item[] {
-    const items = Object.keys(this.backpack);
-    const result: Item[] = [];
-
-    for (let i = 0; i < items.length; ++i) {
-      const key = items[i];
-      const item = this.backpack[key];
-
-      if (Array.isArray(item)) {
-        result.push(...<Item[]>item);
-      } else {
-        result.push(<Item>item);
-      }
-    }
-
-    return result;
+    return Object.keys(this.backpack)
+      .reduce((pack, id) => pack.concat(this.backpack[id]), []);
   }
 
   public addMoney(amount: number): void {
@@ -93,13 +80,7 @@ export class Actor extends GameObject {
       newItem.count = count;
       this.backpack[id] = newItem;
     } else {
-      const itemArray: Item[] = [];
-
-      for (let i = 0; i < count; ++i) {
-        itemArray.push(newItem.clone());
-      }
-
-      this.backpack[id] = itemArray;
+      this.backpack[id] = new Array(count).fill(newItem.clone());
     }
   }
 
@@ -119,12 +100,11 @@ export class Actor extends GameObject {
       item.count += (increase ? count : count * -1);
     } else {
       const items = <Item[]>this.getItem(id);
-      while (count--) {
-        if (increase) {
-          items.push(Actor.game.item(id));
-        } else {
-          items.pop();
-        }
+
+      if (increase) {
+        items.concat(new Array(count).fill(base.clone<Item>()));
+      } else {
+        items.splice(0, count);
       }
     }
   }

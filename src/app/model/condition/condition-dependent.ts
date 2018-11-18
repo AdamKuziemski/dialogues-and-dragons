@@ -10,12 +10,7 @@ export class ConditionDependent extends ActionContainer {
   }
 
   public get available(): boolean {
-    for (const cnd of this.conditions) {
-      if (!cnd.evaluate()) {
-        return false;
-      }
-    }
-    return true;
+    return this.conditions.filter(condition => condition.evaluate()).length === this.conditions.length;
   }
 
   public addCondition(added: Condition): void {
