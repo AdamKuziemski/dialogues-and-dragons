@@ -17,6 +17,10 @@ export class GameObject implements Cloneable {
     return otherHalf;
   }
 
+  public cloneArray<T>(howMany: number): T[] {
+    return howMany > 0 ? Array.from({ length: howMany }, () => this.clone<T>()) : [];
+  }
+
   protected lastOf(array: any[]): any {
     return array.length > 0 ? array[array.length - 1] : null;
   }
