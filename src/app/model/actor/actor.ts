@@ -102,7 +102,7 @@ export class Actor extends GameObject {
       const items = <Item[]>this.getItem(id);
 
       if (increase) {
-        items.concat(new Array(count).fill(base.clone<Item>()));
+        items.concat(Array.from({ length: count }, () => base.clone<Item>()));
       } else {
         items.splice(0, count);
       }
