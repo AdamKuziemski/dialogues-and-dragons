@@ -3,10 +3,10 @@ import { Condition } from './condition.interface';
 import { CompareOperator } from '../compare-operator';
 
 export class DispositionTowardsPlayer implements Condition {
-  public readonly name = 'Disposition Towards Player';
-  public operator: CompareOperator;
-  public id: string;
-  public value: number;
+  readonly name = 'Disposition Towards Player';
+  operator: CompareOperator;
+  id: string;
+  value: number;
 
   evaluate(): boolean {
     try {

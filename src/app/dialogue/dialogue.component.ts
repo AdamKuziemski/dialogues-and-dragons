@@ -1,8 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Dialogue } from '@dialogue/dialogue';
 import { DialogueLine } from '@dialogue/dialogue-line';
 import { DialogueTopic } from '@dialogue/dialogue-topic';
+
+import { GameService } from '@game-service';
 import { ResponsiveService } from '@responsive-service';
 
 @Component({
@@ -11,40 +14,57 @@ import { ResponsiveService } from '@responsive-service';
   styleUrls: ['./dialogue.component.scss']
 })
 export class DialogueComponent implements OnInit {
-  @Input() public dialogue: Dialogue;
-  @Input() public edit = false;
-  @Input() public speaker = 'Some NPC';
+  @Input() dialogue: Dialogue;
+  @Input() speaker = 'Some NPC';
 
-  @Output() public goodbye = new EventEmitter<Dialogue>();
+  @Output() goodbye = new EventEmitter<Dialogue>();
 
-  private currentTopic: DialogueTopic;
-  private currentTab = 1;
+  currentTopic: DialogueTopic;
+  currentTab = 1;
 
-  constructor(private responsive: ResponsiveService) { }
+  constructor(
+    public game: GameService,
+    public responsive: ResponsiveService,
+    private route: ActivatedRoute
+    ) { }
 
-  public ngOnInit(): void {
-    this.currentTopic = this.dialogue.topics[0];
-    this.dialogue.reset();
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const npc = this.game.npc(params['id']);
+      if (!npc) {
+        return;
+      }
+
+      this.speaker = npc.name;
+      this.dialogue = npc.dialogue;
+
+      if (this.dialogue.topics.length === 0) {
+        this.dialogue.addTopic('Example Topic');
+      }
+      
+      this.currentTopic = this.dialogue.topics[0];
+      this.dialogue.reset();
+    });
     // this.dialogue.finished.subscribe(status => {});
   }
 
-  public lineClicked(line: DialogueLine): void {
+  lineClicked(line: DialogueLine): void {
     this.dialogue.advanceLine();
   }
 
-  public topicClicked(topic: DialogueTopic): void {
+  topicClicked(topic: DialogueTopic): void {
     this.dialogue.startTopic(topic);
   }
 
-  private swipeLeft(event) {
+  swipeLeft(): void {
     this.currentTab += 1;
   }
 
-  private swipeRight(event) {
+  swipeRight(): void {
     this.currentTab -= 1;
   }
 
-  private onTopicClicked(topic: DialogueTopic): void {
+  onTopicClicked(topic: DialogueTopic): void {
     this.currentTopic = topic;
     this.currentTab = 2;
   }

@@ -12,7 +12,7 @@ export class ActionEditComponent implements OnInit {
   @Input() action: Action;
   @Output() actionChange: EventEmitter<Action> = new EventEmitter();
 
-  public actions = actionList;
+  actions = actionList;
 
   constructor() { }
 
@@ -23,7 +23,7 @@ export class ActionEditComponent implements OnInit {
     this.actionChange.emit(this.action);
   }
 
-  public compareActions(a: Action, b: string): boolean {
+  compareActions(a: Action, b: string): boolean {
     return a.name === b;
   }
 

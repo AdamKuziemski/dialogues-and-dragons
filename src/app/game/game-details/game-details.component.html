@@ -1,0 +1,7 @@
+<mat-card>
+  <mat-form-field class="ncv-full-width">
+    <textarea #gameTitle [(ngModel)]="game.title" [maxlength]="maximumLength" matInput placeholder="Game title"
+      matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    <mat-hint align="end">{{gameTitle.value?.length || 0}}/{{maximumLength}}</mat-hint>
+  </mat-form-field>
+</mat-card>

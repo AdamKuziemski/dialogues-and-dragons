@@ -1,0 +1,27 @@
+<mat-card *ngIf="item">
+
+  <mat-form-field class="ncv-full-width">
+    <textarea #itemName [(ngModel)]="item.name" [maxlength]="maximumNameLength" matInput placeholder="Name"
+      matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    <mat-hint align="end">{{itemName.value?.length || 0}}/{{maximumNameLength}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="ncv-half-width">
+    <input type="number" [(ngModel)]="item.value" matInput placeholder="Value" />
+  </mat-form-field>
+
+  <mat-form-field class="ncv-half-width">
+    <input type="number" [(ngModel)]="item.weight" matInput placeholder="Weight" />
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="item.isCountable">Countable</mat-checkbox>
+  <mat-checkbox [(ngModel)]="item.isWearable">Wearable</mat-checkbox>
+  <mat-checkbox [(ngModel)]="item.isReadable">Readable</mat-checkbox>
+
+</mat-card>
+<mat-card *ngIf="item.isReadable">
+  <mat-form-field class="ncv-full-width">
+    <textarea #itemContent [(ngModel)]="item.content" matInput placeholder="Content" matTextareaAutosize
+      matAutosizeMinRows="2"></textarea>
+  </mat-form-field>
+</mat-card>

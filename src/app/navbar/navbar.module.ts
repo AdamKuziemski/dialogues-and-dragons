@@ -7,6 +7,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NavbarComponent } from './navbar.component';
 
+import { GameService } from '@game-service';
+
 @NgModule({
   declarations: [
     NavbarComponent
@@ -16,6 +18,9 @@ import { NavbarComponent } from './navbar.component';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule
+  ],
+  providers: [
+    GameService
   ],
   exports: [
     NavbarComponent

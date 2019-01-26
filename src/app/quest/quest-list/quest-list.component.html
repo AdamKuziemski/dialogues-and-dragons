@@ -1,0 +1,8 @@
+<mat-card>
+  <mat-card-title>Quests</mat-card-title>
+  <mat-list>
+    <mat-list-item *ngFor="let quest of game.quests | keyvalue" [routerLink]="['/quest', quest.key]">
+      {{ quest.value.name }}
+    </mat-list-item>
+  </mat-list>
+</mat-card>

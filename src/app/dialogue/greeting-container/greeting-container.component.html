@@ -5,19 +5,21 @@
   </mat-card-actions>
 </mat-card>
 
-<mat-accordion *ngIf="responsive.isDesktop()">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>Greetings</mat-panel-title>
-      <mat-panel-description>
-        {{ dialogue.totalGreetings }} total
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+<div *ngIf="responsive.isDesktop()" class="ncv-margin-sides ncv-margin-top">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Greetings</mat-panel-title>
+        <mat-panel-description>
+          {{ dialogue.totalGreetings }} total
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <ncv-line-container [lines]="dialogue.greetings" (delete)="deleteGreeting($event)"></ncv-line-container>
+      <ncv-line-container [lines]="dialogue.greetings" (delete)="deleteGreeting($event)"></ncv-line-container>
 
-    <mat-action-row>
-      <button mat-button color="primary" (click)="addGreeting()">Add</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="addGreeting()">Add</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

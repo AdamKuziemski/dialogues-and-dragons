@@ -2,11 +2,11 @@ import { ConditionDependent } from '../condition/condition-dependent';
 import { DialogueLine } from './dialogue-line';
 
 export class DialogueTopic extends ConditionDependent {
-  public goodbye = false;
-  public backToStart = false;
+  goodbye = false;
+  backToStart = false;
 
-  public lines: DialogueLine[] = [];
-  public topics: DialogueTopic[] = [];
+  lines: DialogueLine[] = [];
+  topics: DialogueTopic[] = [];
 
   constructor(public label: string) {
     super();
@@ -24,23 +24,23 @@ export class DialogueTopic extends ConditionDependent {
     return this.topics.reduce((sum, topic) => sum + topic.totalTopics, this.topics.length);
   }
 
-  public addLine(line: string): DialogueLine {
+  addLine(line: string): DialogueLine {
     this.lines.push(new DialogueLine(line));
     return this.lastOf(this.lines);
   }
 
-  public addTopic(topic: string): DialogueTopic {
+  addTopic(topic: string): DialogueTopic {
     this.topics.push(new DialogueTopic(topic));
     return this.lastOf(this.topics);
   }
 
-  public swapLines(a: number, b: number): void {
+  swapLines(a: number, b: number): void {
     this.lines[a] = this.lines.splice(b, 1, this.lines[a])[0];
   }
 
-  public removeLine(index: number): void {
+  removeLine(index: number): void {
     this.lines.splice(index, 1);
   }
 
-  // public removeTopic()
+  // removeTopic()
 }

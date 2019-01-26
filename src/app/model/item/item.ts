@@ -1,14 +1,20 @@
 import { ActionContainer } from '../action/action-container';
 
 export class Item extends ActionContainer {
-  public isCountable = false;
-  public count = 0;
-  public icon = '';
-  public description = '';
-  public weight: number;
-  public value = 0;
+  description = '';
+  content = '';
+  type = '';
+  icon = '';
 
-  constructor(public name: string) {
+  isCountable = false;
+  isWearable = false;
+  isReadable = false;
+
+  count = 0;
+  value = 0;
+  weight = 0;
+
+  constructor(public name = '') {
     super();
   }
 }

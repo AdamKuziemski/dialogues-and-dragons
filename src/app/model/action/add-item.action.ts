@@ -4,14 +4,14 @@ import { ActionResult } from './action-result';
 import { GameObject } from '../game-object';
 
 export class AddItem extends GameObject implements Action {
-  public readonly name = 'Add Item';
-  public readonly hasCount = true;
-  public readonly hasTargetId = true;
-  public readonly hasValue = true;
+  readonly name = 'Add Item';
+  readonly hasCount = true;
+  readonly hasTargetId = true;
+  readonly hasValue = true;
 
-  public count = 1;
-  public targetId = '';
-  public value = '';
+  count = 1;
+  targetId = '';
+  value = '';
 
   constructor() {
     super();

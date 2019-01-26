@@ -16,7 +16,7 @@ export class LineContainerComponent {
   @Output() moveDown: EventEmitter<number> = new EventEmitter();
   @Output() delete: EventEmitter<number> = new EventEmitter();
 
-  constructor(private responsive: ResponsiveService) { }
+  constructor(public responsive: ResponsiveService) { }
 
   onMoveUp(index: number): void {
     this.moveUp.emit(index);
@@ -30,15 +30,15 @@ export class LineContainerComponent {
     this.delete.emit(index);
   }
 
-  private isFirstLine(index: number): boolean {
+  isFirstLine(index: number): boolean {
     return index === 0;
   }
 
-  private isLastLine(index: number): boolean {
+  isLastLine(index: number): boolean {
     return index === this.lines.length - 1;
   }
 
-  private canShowDeleteButton(): boolean {
+  canShowDeleteButton(): boolean {
     return this.responsive.isDesktop();
   }
 

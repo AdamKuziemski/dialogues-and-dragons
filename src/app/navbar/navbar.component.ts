@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { GameService } from '@game-service';
+
 @Component({
   selector: 'ncv-navbar',
   templateUrl: './navbar.component.html',
@@ -9,10 +11,10 @@ export class NavbarComponent {
   @Input() title = '';
   @Output() action: EventEmitter<string> = new EventEmitter();
 
-  private edit = true;
+  constructor(public game: GameService) { }
 
-  private toggleConversation(): void {
-    this.edit = !this.edit;
-    this.action.emit(this.edit ? 'edit' : 'chat');
+  toggleEditMode(): void {
+    this.game.toggleEditMode();
+    this.action.emit(this.game.editMode ? 'edit' : 'play');
   }
 }

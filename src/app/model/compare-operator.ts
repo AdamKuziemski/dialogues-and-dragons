@@ -1,7 +1,7 @@
 export class CompareOperator {
   constructor (public operator: '==' | '!=' | '<=' | '<' | '>' | '>=') {}
 
-  public compare(left: string | number | boolean, right: string | number | boolean): boolean {
+  compare(left: string | number | boolean, right: string | number | boolean): boolean {
     if (left === undefined || left === null || right === undefined || right === null) {
       throw Error('Trying to compare (to) a null or undefined value: ' + left + ' ' + right);
     }

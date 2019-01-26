@@ -15,7 +15,7 @@ export class ActionComponent implements OnInit {
   @Output() actionChange: EventEmitter<Action> = new EventEmitter();
   @Output() click: EventEmitter<Action> = new EventEmitter();
 
-  constructor(private responsive: ResponsiveService) { }
+  constructor(public responsive: ResponsiveService) { }
 
   ngOnInit() {}
 

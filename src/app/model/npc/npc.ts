@@ -2,17 +2,16 @@ import { Actor } from '../actor/actor';
 
 import { Dialogue } from '../dialogue/dialogue';
 
-import { GameService } from '../game/game.service';
-
 export class NPC extends Actor {
   constructor(public name: string) {
     super(name);
   }
 
-  dialogue: Dialogue;
+  dialogue: Dialogue = new Dialogue();
   disposition = {};
+  isMerchant = false;
 
-  setDisposition(id: string, value: number) {
+  setDisposition(id: string, value: number): void {
     this.disposition[id] = value;
   }
 }

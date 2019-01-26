@@ -1,13 +1,18 @@
 import { Item } from '../item/item';
-import { Player } from '../player/player';
 import { NPC } from '../npc/npc';
+import { Player } from '../player/player';
+import { Quest } from '../quest/quest';
 
 export class Game {
-  constructor(public title: string) {}
+  constructor(public title: string) { }
 
-  public items = {};
-  public player: Player = null;
-  public npcs = {};
+  items = {};
+  itemTypes: string[] = [];
+
+  player: Player = null;
+  npcs = {};
+
+  quests = {};
 
   createItem(id: string, name: string): Item {
     if (!this.hasItem(id)) {
@@ -15,6 +20,12 @@ export class Game {
     }
 
     return this.items[id];
+  }
+
+  createItemType(name: string): void {
+    if (!this.hasItemType(name)) {
+      this.itemTypes.push(name);
+    }
   }
 
   createPlayer(name: string): Player {
@@ -30,8 +41,20 @@ export class Game {
     return this.npcs[id];
   }
 
+  createQuest(id: string, name: string): Quest {
+    if (!this.hasQuest(id)) {
+      this.quests[id] = new Quest(name);
+    }
+
+    return this.quests[id];
+  }
+
   hasItem(id: string): boolean {
     return this.items.hasOwnProperty(id);
+  }
+
+  hasItemType(name: string): boolean {
+    return this.itemTypes.includes(name);
   }
 
   hasPlayer(): boolean {
@@ -40,5 +63,9 @@ export class Game {
 
   hasNPC(id: string): boolean {
     return this.npcs.hasOwnProperty(id);
+  }
+
+  hasQuest(id: string): boolean {
+    return this.quests.hasOwnProperty(id);
   }
 }

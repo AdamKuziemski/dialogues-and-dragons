@@ -9,3 +9,14 @@
 .ncv-navbar-spacer {
   flex: 1 1 auto;
 }
+
+.ncv-navbar-offset {
+  top: 0;
+  height: 52px;
+}
+
+@media only screen and (min-width: 600px) {
+  .ncv-navbar-offset {
+    height: 60px;
+  }
+}

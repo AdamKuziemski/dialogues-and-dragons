@@ -3,10 +3,11 @@
 
   <span class="ncv-navbar-spacer"></span>
 
-  <button mat-icon-button (click)="toggleConversation()">
-    <mat-icon aria-label="Simulate conversation">
-      {{ edit ? 'sms' : 'edit' }}
+  <button mat-icon-button *ngIf="game.isEditModeAvailable" (click)="toggleEditMode()">
+    <mat-icon aria-label="Toggle edit mode">
+      {{ game.editMode ? 'play_arrow' : 'edit' }}
     </mat-icon>
   </button>
 
 </mat-toolbar>
+<div class="ncv-navbar-offset"></div>

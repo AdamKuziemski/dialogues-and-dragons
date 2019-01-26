@@ -2,7 +2,7 @@
   {{ line.line }}
 </span>
 <div *ngIf="edit">
-  <mat-form-field>
+  <mat-form-field class="ncv-full-width">
     <textarea #lineContent [(ngModel)]="line.line" maxlength="maximumLength" matInput
       matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     <mat-hint align="end">{{lineContent.value?.length || 0}}/{{maximumLength}}</mat-hint>

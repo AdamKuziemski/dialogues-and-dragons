@@ -1,9 +1,8 @@
 <div *ngIf="isBrowser()">
   <ncv-navbar [title]="title" (action)="handleNavbarAction($event)"></ncv-navbar>
-  <div class="ncv-app-content">
-    <ncv-dialogue [dialogue]="dialogue" [edit]="edit"></ncv-dialogue>
-  </div>
+  <router-outlet></router-outlet>
 </div>
+
 <div *ngIf="isInternetExploder()">
   <h1>Sorry</h1>
   <p>You're using Internet Exploder. This site only works in web browsers.</p>
@@ -11,8 +10,10 @@
   <p>You can choose from
     <a href="https://www.google.com/chrome/">Chrome</a>,
     <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>,
-    <a href="https://www.opera.com">Opera</a> and
-    <a href="https://support.apple.com/downloads/safari">Safari</a>.
+    <a href="https://www.opera.com">Opera</a>,
+    <a href="https://support.apple.com/downloads/safari">Safari</a>,
+    <a href="https://vivaldi.com">Vivaldi</a>, and
+    <a href="https://en.wikipedia.org/wiki/List_of_web_browsers">many more</a>.
   </p>
   <p>Thank you, and have a nice day.</p>
 </div>

@@ -3,58 +3,59 @@ import { DialogueTopic } from './dialogue-topic';
 import { DialogueLine } from './dialogue-line';
 
 export class Dialogue extends GameObject {
-  public greetings: DialogueLine[] = [];
-  public topics: DialogueTopic[] = [];
-  public isOpen = false;
+  greetings: DialogueLine[] = [];
+  topics: DialogueTopic[] = [];
+  isOpen = false;
 
-  private currentLine: DialogueLine = null;
-  private currentTopic: DialogueTopic = null;
-  private lineIndex = -1;
+  currentLine: DialogueLine = null;
+  currentTopic: DialogueTopic = null;
+  lineIndex = -1;
 
   constructor() {
     super();
   }
 
   //#region flow control
-  public get backToStart(): boolean {
+  get backToStart(): boolean {
     return this.isOpen ?
       !this.hasTopic || (this.linesFinished && (this.currentTopic.backToStart || this.topicOptions.length === 0)) :
       true;
   }
 
-  public get goodbye(): boolean {
+  get goodbye(): boolean {
     return this.isOpen ?
       (this.displayOptions && this.hasTopic && this.currentTopic.goodbye) :
       true;
   }
 
-  public get displayOptions(): boolean {
+  get displayOptions(): boolean {
     return this.isOpen ? (!this.hasTopic || this.linesFinished) : true;
   }
 
-  private get linesFinished(): boolean {
+  get linesFinished(): boolean {
     return this.hasTopic && this.lineIndex >= this.topicLinesCount;
   }
 
-  private get hasTopic(): boolean {
+  get hasTopic(): boolean {
     return this.currentTopic !== null;
   }
 
-  private get topicLinesCount(): number {
+  get topicLinesCount(): number {
     return this.hasTopic ? this.currentTopic.lines.length : 0;
   }
 
-  private get topicOptions(): DialogueTopic[] {
+  get topicOptions(): DialogueTopic[] {
     return this.hasTopic ? this.currentTopic.topics.filter(topic => topic.available) : [];
   }
   //#endregion
+  
   //#region conversation
-  public open(): void {
+  open(): void {
     this.isOpen = true;
     this.reset();
   }
 
-  public get options(): DialogueTopic[] {
+  get options(): DialogueTopic[] {
     if (!this.isOpen) {
       return [];
     }
@@ -62,11 +63,11 @@ export class Dialogue extends GameObject {
     return (this.hasTopic ? this.topicOptions : this.topics.filter(option => option.available));
   }
 
-  public get availableGreetings(): DialogueLine[] {
+  get availableGreetings(): DialogueLine[] {
     return this.greetings.filter(greet => greet.available);
   }
 
-  public get randomGreeting(): DialogueLine {
+  get randomGreeting(): DialogueLine {
     const greets = this.availableGreetings;
     if (greets.length === 0) {
       return null;
@@ -76,7 +77,7 @@ export class Dialogue extends GameObject {
     return greets[index];
   }
 
-  public topic(traverse: number[]): DialogueTopic {
+  topic(traverse: number[]): DialogueTopic {
     if (!Array.isArray(traverse) || traverse.length < 1 || traverse[0] >= this.topics.length) {
       return null;
     }
@@ -94,13 +95,13 @@ export class Dialogue extends GameObject {
     return result;
   }
 
-  public skipToOptions(): void {
+  skipToOptions(): void {
     while (!this.displayOptions) {
       this.advanceLine();
     }
   }
 
-  public advanceLine(): void {
+  advanceLine(): void {
     if (this.currentLine.isGreeting) {
       return;
     }
@@ -119,7 +120,7 @@ export class Dialogue extends GameObject {
     }
   }
 
-  public startTopic(topic: DialogueTopic): void {
+  startTopic(topic: DialogueTopic): void {
     if (!topic) {
       throw Error('Cannot start a topic that is ' + topic);
     }
@@ -132,46 +133,48 @@ export class Dialogue extends GameObject {
     }
   }
 
-  public reset(): void {
+  reset(): void {
     this.lineIndex = -1;
     this.currentTopic = null;
     this.currentLine = this.randomGreeting;
   }
   //#endregion
+
   //#region counters
-  public get empty(): boolean {
+  get empty(): boolean {
     return this.totalGreetings === 0 && this.topics.length === 0;
   }
 
-  public get length(): number {
+  get length(): number {
     return this.topics.reduce((sum, topic) => sum + topic.length, this.totalTopics);
   }
 
-  public get totalGreetings(): number {
+  get totalGreetings(): number {
     return this.greetings.length;
   }
 
-  public get totalTopics(): number {
+  get totalTopics(): number {
     return this.topics.reduce((sum, topic) => sum + topic.totalTopics, this.topics.length);
   }
   //#endregion
+
   //#region adders/removers
-  public addGreeting(greeting: string): DialogueLine {
+  addGreeting(greeting: string): DialogueLine {
     this.greetings.push(new DialogueLine(greeting, true));
     return this.lastOf(this.greetings);
   }
 
-  public addGreetings(greetings: string[]): DialogueLine {
+  addGreetings(greetings: string[]): DialogueLine {
     greetings.forEach(elem => this.addGreeting(elem));
     return this.lastOf(this.greetings);
   }
 
-  public addTopic(label: string): DialogueTopic {
+  addTopic(label: string): DialogueTopic {
     this.topics.push(new DialogueTopic(label));
     return this.lastOf(this.topics);
   }
 
-  public removeGreeting(index: number): void {
+  removeGreeting(index: number): void {
     this.greetings.splice(index, 1);
   }
   //#endregion

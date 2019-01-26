@@ -17,10 +17,10 @@ export class DialogueTopicTreeComponent implements OnInit {
   @Input() dialogue: Dialogue;
   @Output() topicClicked: EventEmitter<DialogueTopic> = new EventEmitter;
 
-  private nestedTreeControl: NestedTreeControl<DialogueTopic>;
-  private nestedDataSource: MatTreeNestedDataSource<DialogueTopic>;
+  nestedTreeControl: NestedTreeControl<DialogueTopic>;
+  nestedDataSource: MatTreeNestedDataSource<DialogueTopic>;
 
-  constructor(private responsive: ResponsiveService) {
+  constructor(public responsive: ResponsiveService) {
     this.nestedTreeControl = new NestedTreeControl<DialogueTopic>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
   }
@@ -29,10 +29,11 @@ export class DialogueTopicTreeComponent implements OnInit {
     this.nestedDataSource.data = this.dialogue.topics;
   }
 
-  private onTopicClicked(topic: DialogueTopic) {
+  onTopicClicked(topic: DialogueTopic) {
     this.topicClicked.emit(topic);
   }
 
+  hasNestedChild = (_: number, node: DialogueTopic) => node.topics.length > 0;
+
   private _getChildren = (node: DialogueTopic) => observableOf(node.topics);
-  private hasNestedChild = (_: number, node: DialogueTopic) => node.topics.length > 0;
 }

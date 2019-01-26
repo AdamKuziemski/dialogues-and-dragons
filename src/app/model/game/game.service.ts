@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { Actor } from '../actor/actor';
 import { Game } from './game';
 import { Item } from '../item/item';
-import { Player } from '../player/player';
 import { NPC } from '../npc/npc';
+import { Player } from '../player/player';
+import { Quest } from '../quest/quest';
 
 @Injectable()
 export class GameService {
   private game: Game = null;
+  editMode = true;
+  isEditModeAvailable = true; // depends on the user being logged in AND the owner of the game
 
   createGame(title: string): Game {
     this.game = new Game(title);
@@ -28,6 +31,11 @@ export class GameService {
     return this.game;
   }
 
+  // test purposes only
+  setGame(newGame: Game): void {
+    this.game = newGame;
+  }
+
   createItem(id: string, name: string): Item {
     if (!this.game) {
       return null;
@@ -38,8 +46,12 @@ export class GameService {
     return createdItem;
   }
 
-  item (id: string): Item {
+  item(id: string): Item {
     return (this.game && this.game.hasItem(id)) ? this.game.items[id].clone() : null;
+  }
+
+  get items(): Object {
+    return this.game ? this.game.items : {};
   }
 
   actor(id: string): Actor {
@@ -75,5 +87,31 @@ export class GameService {
 
   npc(id: string): NPC {
     return (this.game && this.game.hasNPC(id)) ? this.game.npcs[id] : null;
+  }
+
+  get npcs(): Object {
+    return this.game ? this.game.npcs : {};
+  }
+
+  createQuest(id: string, name: string): Quest {
+    if (!this.game) {
+      return null;
+    }
+
+    const createdQuest = this.game.createQuest(id, name);
+    // insert the quest into the database
+    return createdQuest;
+  }
+
+  quest(id: string): Quest {
+    return (this.game && this.game.hasQuest(id)) ? this.game.quests[id] : null;
+  }
+
+  get quests(): Object {
+    return this.game ? this.game.quests : {};
+  }
+
+  toggleEditMode(): void {
+    this.editMode = !this.editMode;
   }
 }

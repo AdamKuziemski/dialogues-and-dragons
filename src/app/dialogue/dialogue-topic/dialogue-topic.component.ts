@@ -18,24 +18,27 @@ type OpenPanel = 'none' | 'lines' | 'actions' | 'conditions';
   styleUrls: ['./dialogue-topic.component.scss']
 })
 export class DialogueTopicComponent implements OnInit {
-  @Input() public topic: DialogueTopic;
-  @Input() public edit = false;
+  @Input() topic: DialogueTopic = new DialogueTopic('');
+  @Input() edit = false;
 
-  @Output() public click = new EventEmitter<DialogueTopic>();
-  @Output() public topicChange = new EventEmitter<DialogueTopic>();
+  @Output() click = new EventEmitter<DialogueTopic>();
+  @Output() topicChange = new EventEmitter<DialogueTopic>();
 
-  private currentPanel: OpenPanel = 'none';
-  private maximumLength = 100;
-  private moveLines = false;
-  private moveActions = false;
+  currentPanel: OpenPanel = 'none';
+  maximumLength = 100;
+  moveLines = false;
+  moveActions = false;
 
-  constructor(public dialog: MatDialog, private responsive: ResponsiveService) { }
+  constructor(
+    public dialog: MatDialog,
+    public responsive: ResponsiveService
+  ) { }
 
   ngOnInit() {
     this.closePanels();
   }
 
-  public onClick(event): void {
+  onClick(event): void {
     event.stopPropagation();
 
     if (!this.edit) {
@@ -43,55 +46,55 @@ export class DialogueTopicComponent implements OnInit {
     }
   }
 
-  public closePanels(): void {
+  closePanels(): void {
     this.expandPanel('none');
   }
 
   //#region lines
-  public openLinesPanel(): void {
+  openLinesPanel(): void {
     this.expandPanel('lines');
     this.moveLines = false;
   }
 
-  public get isLinesOpen(): boolean {
+  get isLinesOpen(): boolean {
     return this.currentPanel === 'lines';
   }
 
-  public addLine(): void {
+  addLine(): void {
     this.topic.addLine('');
   }
 
-  public deleteLine(index: number): void {
+  deleteLine(index: number): void {
     this.topic.removeLine(index);
   }
 
-  public toggleMoveLines(): void {
+  toggleMoveLines(): void {
     this.moveLines = !this.moveLines;
   }
 
-  public moveLineDown(index: number): void {
+  moveLineDown(index: number): void {
     this.topic.swapLines(index + 1, index);
   }
 
-  public moveLineUp(index: number): void {
+  moveLineUp(index: number): void {
     this.topic.swapLines(index - 1, index);
   }
   //#endregion
 
   //#region actions
-  public openActionsPanel(): void {
+  openActionsPanel(): void {
     this.expandPanel('actions');
   }
 
-  public get isActionsOpen(): boolean {
+  get isActionsOpen(): boolean {
     return this.currentPanel === 'actions';
   }
 
-  public toggleMoveActions(): void {
+  toggleMoveActions(): void {
     this.moveActions = !this.moveActions;
   }
 
-  public addAction(): void {
+  addAction(): void {
     if (this.responsive.isMobile()) {
       this.openActionDialog(actionList[0].clone<Action>());
     } else {
@@ -99,15 +102,15 @@ export class DialogueTopicComponent implements OnInit {
     }
   }
 
-  public handleActionChange(action: Action, index: number): void {
+  handleActionChange(action: Action, index: number): void {
     this.topic.actions[index] = action;
   }
 
-  public handleActionClick(action: Action, index: number): void {
+  handleActionClick(action: Action, index: number): void {
     this.openActionDialog(action, index);
   }
 
-  public openActionDialog(action: Action, index = -1): void {
+  openActionDialog(action: Action, index = -1): void {
     const dialogRef = this.dialog.open(ActionDialogComponent, {
       width: '80%',
       data: action
@@ -129,11 +132,11 @@ export class DialogueTopicComponent implements OnInit {
   //#endregion
 
   //#region conditions
-  public openConditionsPanel(): void {
+  openConditionsPanel(): void {
     this.expandPanel('conditions');
   }
 
-  public get isConditionsOpen(): boolean {
+  get isConditionsOpen(): boolean {
     return this.currentPanel === 'conditions';
   }
   //#endregion

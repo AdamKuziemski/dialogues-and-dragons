@@ -4,15 +4,15 @@ import { Injectable } from '@angular/core';
 export class ResponsiveService {
   private workspaceWidth: number = window.innerWidth;
 
-  public setWidth(newWidth: number): void {
+  setWidth(newWidth: number): void {
     this.workspaceWidth = newWidth;
   }
 
-  public isMobile(): boolean {
+  isMobile(): boolean {
     return this.workspaceWidth < 600;
   }
 
-  public isDesktop(): boolean {
+  isDesktop(): boolean {
     return !this.isMobile();
   }
 }

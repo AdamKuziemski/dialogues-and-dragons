@@ -2,37 +2,50 @@ import { GameObject } from '../game-object';
 import { QuestStage } from './quest-stage';
 
 export class Quest extends GameObject {
-  public completed = false;
-  public failed = false;
+  description = '';
 
-  public stages: QuestStage[] = [];
+  completed = false;
+  failed = false;
+
+  stages: QuestStage[] = [];
 
   private currentStageIndex = -1;
 
-  constructor(public name: string = '', public description: string = '') {
+  constructor(public name: string = '') {
     super();
   }
 
-  public start(): void {
+  start(): void {
     this.setStage(0);
   }
 
-  public setStage(stage: number): void {
+  setStage(stage: number): void {
     this.currentStageIndex = stage;
     this.updateFlags();
     this.updateJournal();
   }
 
-  public get currentStage(): QuestStage {
+  get currentStage(): QuestStage {
     return (this.isEmpty || !this.started ? new QuestStage() : this.stages[this.currentStageIndex]);
   }
 
-  public get started(): boolean {
+  get started(): boolean {
     return this.currentStageIndex !== -1;
   }
 
-  public get isEmpty(): boolean {
+  get isEmpty(): boolean {
     return this.stages.length === 0;
+  }
+
+  addStage(journalEntry: string = ''): QuestStage {
+    this.stages.push(new QuestStage(journalEntry));
+    return this.lastOf(this.stages);
+  }
+
+  removeStage(index: number): void {
+    if (index < this.stages.length) {
+      this.stages.splice(index, 1);
+    }
   }
 
   private updateFlags(): void {

@@ -1,11 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { Dialogue } from './model/dialogue/dialogue';
-import { createTestDialogue } from './model/dialogue/testing/test-dialogue';
-import { DialogueTopic } from './model/dialogue/dialogue-topic';
+import { createTestGame } from './model/game/testing/test-game';
+
+import { GameObject } from './model/game-object';
+
+import { GameService } from './model/game/game.service';
 import { ResponsiveService } from './shared/services/responsive.service';
-
-// import { GameObject } from './model/game-object';
 
 @Component({
   selector: 'ncv-root',
@@ -16,19 +17,21 @@ export class AppComponent implements OnInit {
   title = 'NPC Conversations';
   edit = true;
 
-  dialogue: Dialogue = createTestDialogue();
-
-  constructor(private responsive: ResponsiveService) {
+  constructor(
+    public gameService: GameService,
+    public responsive: ResponsiveService
+  ) {
     this.responsive.setWidth(window.innerWidth);
+    this.gameService.setGame(createTestGame());
+    GameObject.initializeGameService(this.gameService);
   }
 
   ngOnInit() {
-    // GameObject.initializeGameService(null);
-    this.dialogue.open();
+
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: any): void {
     this.responsive.setWidth(event.target.innerWidth);
   }
 
@@ -36,12 +39,12 @@ export class AppComponent implements OnInit {
     this.edit = action === 'edit';
   }
 
-  private isInternetExploder(): boolean {
+  isInternetExploder(): boolean {
     const agent = window.navigator.userAgent;
     return agent.indexOf('MSIE') > -1 || agent.indexOf('Trident') > -1 || agent.indexOf('Edge') > -1;
   }
 
-  private isBrowser(): boolean {
+  isBrowser(): boolean {
     return !this.isInternetExploder();
   }
 }

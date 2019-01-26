@@ -1,8 +1,8 @@
 import { ActionContainer } from '@action/action-container';
 
 export class QuestStage extends ActionContainer {
-  public completeQuest = false;
-  public failQuest = false;
+  completeQuest = false;
+  failQuest = false;
 
   constructor(public journalEntry = '') {
     super();

@@ -1,0 +1,41 @@
+<mat-tab-group class="ncv-tab-fill-available" [(selectedIndex)]="currentTab" mat-stretch-tabs>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>library_books</mat-icon>
+    </ng-template>
+    <div class="ncv-swiper" (swipeleft)="swipeLeft()">
+      <ncv-item-list></ncv-item-list>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>contacts</mat-icon>
+      <!--<mat-icon>people</mat-icon>-->
+    </ng-template>
+    <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+      <ncv-npc-list></ncv-npc-list>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>ballot</mat-icon>
+      <!--<mat-icon>school</mat-icon>-->
+    </ng-template>
+    <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+      <ncv-quest-list></ncv-quest-list>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>games</mat-icon>
+      <!--<mat-icon>videogame_asset</mat-icon>-->
+    </ng-template>
+    <div class="ncv-swiper" (swiperight)="swipeRight()">
+      <ncv-game-details></ncv-game-details>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>

@@ -11,13 +11,13 @@ import { ResponsiveService } from '@responsive-service';
 export class GreetingContainerComponent {
   @Input() dialogue: Dialogue;
 
-  constructor(private responsive: ResponsiveService) { }
+  constructor(public responsive: ResponsiveService) { }
 
-  public addGreeting(): void {
+  addGreeting(): void {
     this.dialogue.addGreeting('');
   }
 
-  public deleteGreeting(index: number): void {
+  deleteGreeting(index: number): void {
     this.dialogue.removeGreeting(index);
   }
 

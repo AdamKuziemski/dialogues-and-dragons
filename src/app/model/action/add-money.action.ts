@@ -4,14 +4,14 @@ import { ActionResult } from './action-result';
 import { GameObject } from '../game-object';
 
 export class AddMoney extends GameObject implements Action {
-  public readonly name = 'Add Money';
-  public readonly hasCount = true;
-  public readonly hasTargetId = true;
-  public readonly hasValue = false;
+  readonly name = 'Add Money';
+  readonly hasCount = true;
+  readonly hasTargetId = true;
+  readonly hasValue = false;
 
-  public count = 0;
-  public targetId = '';
-  public value = 0;
+  count = 0;
+  targetId = '';
+  value = 0;
 
   constructor() {
     super();

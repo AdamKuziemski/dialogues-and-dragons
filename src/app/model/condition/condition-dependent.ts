@@ -9,15 +9,15 @@ export class ConditionDependent extends ActionContainer {
     super();
   }
 
-  public get available(): boolean {
+  get available(): boolean {
     return this.conditions.filter(condition => condition.evaluate()).length === this.conditions.length;
   }
 
-  public addCondition(added: Condition): void {
+  addCondition(added: Condition): void {
     this.conditions.push(added);
   }
 
-  public removeCondition(index: number): void {
+  removeCondition(index: number): void {
     if (index < 0 || index >= this.conditions.length) {
       return;
     }
@@ -29,7 +29,7 @@ export class ConditionDependent extends ActionContainer {
     } */
   }
 
-  public clearConditions(): void {
+  clearConditions(): void {
     this.conditions = [];
   }
 }

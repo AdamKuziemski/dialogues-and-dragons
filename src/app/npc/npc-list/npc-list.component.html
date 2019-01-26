@@ -1,0 +1,8 @@
+<mat-card>
+  <mat-card-title>NPCs</mat-card-title>
+  <mat-list>
+    <mat-list-item *ngFor="let npc of game.npcs | keyvalue" [routerLink]="['/npc', npc.key]">
+      {{ npc.value.name }}
+    </mat-list-item>
+  </mat-list>
+</mat-card>

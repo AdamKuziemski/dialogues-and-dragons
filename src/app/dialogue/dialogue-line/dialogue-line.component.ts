@@ -8,15 +8,15 @@ import { DialogueLine } from '@dialogue/dialogue-line';
   styleUrls: ['./dialogue-line.component.scss']
 })
 export class DialogueLineComponent {
-  @Input() public line: DialogueLine;
-  @Input() public edit = false;
+  @Input() line: DialogueLine;
+  @Input() edit = false;
 
-  @Output() public click = new EventEmitter<DialogueLine>();
-  @Output() public lineChange = new EventEmitter<DialogueLine>();
+  @Output() click = new EventEmitter<DialogueLine>();
+  @Output() lineChange = new EventEmitter<DialogueLine>();
 
-  private maximumLength = 200;
+  maximumLength = 200;
 
-  onClick(event) {
+  onClick(event: any): void {
     event.stopPropagation();
 
     if (!this.edit) {
