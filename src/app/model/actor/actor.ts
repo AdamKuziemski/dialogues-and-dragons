@@ -97,12 +97,10 @@ export class Actor extends GameObject {
 
     if (base.isCountable) {
       this.backpack[id].count += (increase ? count : count * -1);
+    } else if (increase) {
+      this.backpack[id].push(...base.cloneArray<Item>(count));
     } else {
-      if (increase) {
-        this.backpack[id].push(...base.cloneArray<Item>(count));
-      } else {
-        this.backpack[id].splice(0, count);
-      }
+      this.backpack[id].splice(0, count);
     }
   }
 }
