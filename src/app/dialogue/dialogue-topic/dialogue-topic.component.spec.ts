@@ -3,12 +3,7 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatInputModule } from '@angular/material/input';
-
+import { MatCardModule, MatCheckboxModule, MatDialogModule, MatExpansionModule, MatInputModule } from '@angular/material';
 import { MatDialog } from '@angular/material';
 
 import { DialogueTopicComponent } from './dialogue-topic.component';

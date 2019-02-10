@@ -4,8 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { DialogueLine } from '@dialogue/dialogue-line';
 import { DialogueLineComponent } from './dialogue-line.component';

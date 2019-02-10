@@ -2,8 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
 // import { By } from '@angular/platform-browser';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
+import { MatCardModule, MatListModule } from '@angular/material';
 
 import { GameService } from '@game-service';
 import { QuestListComponent } from './quest-list.component';

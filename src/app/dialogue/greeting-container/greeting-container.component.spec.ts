@@ -3,8 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule, MatExpansionModule } from '@angular/material';
 
 import { Dialogue } from '@dialogue/dialogue';
 import { createTestDialogue } from '@dialogue/testing/test-dialogue';

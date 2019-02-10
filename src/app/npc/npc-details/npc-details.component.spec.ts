@@ -4,10 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule, MatCheckboxModule, MatInputModule, MatSelectModule } from '@angular/material';
 
 import { ActivatedRoute, ActivatedRouteStub } from 'app/shared/testing/activated-route-stub';
 import { createTestGame } from 'app/model/game/testing/test-game';
