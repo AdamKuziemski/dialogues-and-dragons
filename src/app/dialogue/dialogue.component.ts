@@ -26,7 +26,9 @@ export class DialogueComponent implements OnInit {
     public game: GameService,
     public responsive: ResponsiveService,
     private route: ActivatedRoute
-    ) { }
+  ) {
+    this.game.editModeChange.subscribe(() => this.dialogue.open());
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

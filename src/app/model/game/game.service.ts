@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 import { Actor } from '../actor/actor';
 import { Game } from './game';
@@ -10,8 +11,13 @@ import { Quest } from '../quest/quest';
 @Injectable()
 export class GameService {
   private game: Game = null;
+  private editSubject = new Subject<boolean>();
   editMode = true;
   isEditModeAvailable = true; // depends on the user being logged in AND the owner of the game
+
+  get editModeChange(): Observable<boolean> {
+    return this.editSubject.asObservable();
+  }
 
   createGame(title: string): Game {
     this.game = new Game(title);
@@ -113,5 +119,6 @@ export class GameService {
 
   toggleEditMode(): void {
     this.editMode = !this.editMode;
+    this.editSubject.next(this.editMode);
   }
 }

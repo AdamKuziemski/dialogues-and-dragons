@@ -1,18 +1,24 @@
-<mat-card *ngIf="!game.editMode" class="ncv-margin-around-no-top">
-  <mat-card-title>
-    {{ speaker }}
-  </mat-card-title>
+<div *ngIf="!game.editMode">
 
-  <mat-card-content>
-    <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
+  <mat-card class="ncv-margin-around-no-top">
+    <mat-card-title>
+      {{ speaker }}
+    </mat-card-title>
+    <mat-card-content>
+      <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
+    </mat-card-content>
+  </mat-card>
 
-    <mat-list *ngIf="dialogue.displayOptions">
+  <mat-card *ngIf="dialogue.displayOptions">
+    <mat-list>
       <mat-list-item *ngFor="let option of dialogue.options">
         <ncv-dialogue-topic [topic]="option" (click)="topicClicked($event)"></ncv-dialogue-topic>
       </mat-list-item>
     </mat-list>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
+
+</div>
+
 <div *ngIf="game.editMode">
   <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tab-fill-available" [(selectedIndex)]="currentTab" mat-stretch-tabs>
     <mat-tab label="Greetings">
@@ -22,7 +28,8 @@
     </mat-tab>
     <mat-tab label="Topics">
       <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-        <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+        <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)">
+        </ncv-dialogue-topic-tree>
       </div>
     </mat-tab>
     <mat-tab label="Editor">
