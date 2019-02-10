@@ -96,15 +96,12 @@ export class Actor extends GameObject {
     const base = Actor.game.item(id);
 
     if (base.isCountable) {
-      const item = <Item>this.getItem(id);
-      item.count += (increase ? count : count * -1);
+      this.backpack[id].count += (increase ? count : count * -1);
     } else {
-      const items = <Item[]>this.getItem(id);
-
       if (increase) {
-        items.concat(base.cloneArray<Item>(count));
+        this.backpack[id].push(...base.cloneArray<Item>(count));
       } else {
-        items.splice(0, count);
+        this.backpack[id].splice(0, count);
       }
     }
   }

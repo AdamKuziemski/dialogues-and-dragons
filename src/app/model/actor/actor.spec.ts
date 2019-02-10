@@ -2,15 +2,16 @@ import { Actor } from './actor';
 import { GameService } from '../game/game.service';
 
 describe('Actor', () => {
-  const testActor = new Actor('Lucien Lachance');
   const badIdentifiers = ['test', '', null, undefined];
   const bwhoa = 'DBBladeOfWoe01';
   const arrow = 'IronArrow01';
   const usles = 'UselessWasteOfSpace';
 
-  let service: GameService = new GameService;
+  let testActor: Actor;
+  let service: GameService;
 
   beforeEach(() => {
+    testActor = new Actor('Lucien Lachance');
     service = new GameService();
     Actor.initializeGameService(service);
 
@@ -44,10 +45,14 @@ describe('Actor', () => {
 
   it('should have 4 items in the backpack', () => {
     testActor.addItem(usles);
-    expect(testActor.getBackpack().length).toBe(4);
+    expect(testActor.getBackpack().length).toBe(1);
   });
 
   it(`should remove some items from the actor's backpack`, () => {
+    testActor.addItem(bwhoa);
+    testActor.addItem(bwhoa);
+    testActor.addItem(arrow, 10)
+
     testActor.removeItem(bwhoa);
     testActor.removeItem(arrow, 5);
 
@@ -57,6 +62,8 @@ describe('Actor', () => {
   });
 
   it(`should remove the rest of the items from the actor's backpack`, () => {
+    testActor.addItem(arrow, 10);
+
     testActor.removeItem(arrow, 20);
 
     expect(testActor.hasItem(arrow)).toBe(false);
@@ -75,17 +82,23 @@ describe('Actor', () => {
   });
 
   it('should be accurately checking if the actor has enough money', () => {
+    testActor.addMoney(150);
+
     expect(testActor.hasMoney(10)).toBe(true);
     expect(testActor.hasMoney(100)).toBe(true);
     expect(testActor.hasMoney(200)).toBe(false);
   });
 
   it('should be properly removing money', () => {
+    testActor.addMoney(100);
+
     testActor.removeMoney(50);
     expect(testActor.money).toBe(50);
   });
 
   it('should set money to 0 when trying to remove too much', () => {
+    testActor.addMoney(200);
+    
     testActor.removeMoney(1000);
     expect(testActor.money).toBe(0);
   });
