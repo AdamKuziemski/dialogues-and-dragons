@@ -35,13 +35,12 @@ export class DialogueComponent implements OnInit {
         return;
       }
 
+      if (npc.dialogue.topics.length === 0) {
+        npc.dialogue = Dialogue.exampleDialogue();
+      }
+
       this.speaker = npc.name;
       this.dialogue = npc.dialogue;
-
-      if (this.dialogue.topics.length === 0) {
-        this.dialogue.addTopic('Example Topic');
-      }
-      
       this.currentTopic = this.dialogue.topics[0];
       this.dialogue.reset();
     });

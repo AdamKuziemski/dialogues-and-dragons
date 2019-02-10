@@ -23,8 +23,8 @@ export class NpcDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.actorId = params['id'];
+    this.route.paramMap.subscribe(params => {
+      this.actorId = params.get('id');
       this.npc = this.game.npc(this.actorId);
     });
   }

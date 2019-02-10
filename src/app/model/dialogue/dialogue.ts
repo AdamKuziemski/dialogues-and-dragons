@@ -15,6 +15,13 @@ export class Dialogue extends GameObject {
     super();
   }
 
+  static exampleDialogue(): Dialogue {
+    let example = new Dialogue();
+    example.addGreeting('Example Greeting');
+    example.addTopic('Example Topic');
+    return example;
+  }
+
   //#region flow control
   get backToStart(): boolean {
     return this.isOpen ?

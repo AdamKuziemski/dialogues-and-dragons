@@ -16,7 +16,7 @@ export class DialogueLineComponent {
 
   maximumLength = 200;
 
-  onClick(event: any): void {
+  onClick(event: MouseEvent): void {
     event.stopPropagation();
 
     if (!this.edit) {

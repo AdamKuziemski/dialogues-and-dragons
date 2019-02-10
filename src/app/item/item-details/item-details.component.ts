@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Item } from 'app/model/item/item';
 
@@ -22,9 +22,7 @@ export class ItemDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.item = this.game.item(params['id']);
-    });
+    this.route.paramMap.subscribe((params: ParamMap) => this.item = this.game.item(params.get('id')));
   }
 
 }
