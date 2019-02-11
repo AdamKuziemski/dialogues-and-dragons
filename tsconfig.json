@@ -18,6 +18,7 @@
       "@action/*": ["app/model/action/*"],
       "@condition/*": ["app/model/condition/*"],
       "@dialogue/*": ["app/model/dialogue/*"],
+      "@game/*": ["app/model/game/*"],
       "@game-service": ["app/model/game/game.service"],
       "@responsive-service": ["app/shared/services/responsive.service"],
       "@testing/*": ["app/shared/testing/*"]
