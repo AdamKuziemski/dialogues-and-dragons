@@ -5,21 +5,25 @@ describe('Dialogue - opened', () => {
   const dialogue = createTestDialogue();
   let topic = null;
 
-  const startTopicAndSkip = function(index: number): void {
+  const startTopic = (index: number) => {
     topic = dialogue.options[index];
     dialogue.startTopic(topic);
+  }
+
+  const startTopicAndSkip = (index: number) => {
+    startTopic(index);
     dialogue.skipToOptions();
   };
 
-  const meetExpectations = function(callNumber: number, shouldDisplay: boolean, optionContainer: any): void {
+  const meetExpectations = (callNumber: number, shouldDisplay: boolean, optionContainer: any) => {
     expect(dialogue.advanceLine).toHaveBeenCalledTimes(callNumber);
     expect(dialogue.displayOptions).toBe(shouldDisplay);
     expect(dialogue.options).toEqual(optionContainer.topics);
   };
 
-  dialogue.open();
   beforeEach(() => {
     spyOn(dialogue, 'advanceLine').and.callThrough();
+    dialogue.open();
   });
 
   it('should be open', () => expect(dialogue.isOpen).toBe(true));
@@ -30,13 +34,12 @@ describe('Dialogue - opened', () => {
   it('should have 14 total topics', () => expect(dialogue.totalTopics).toBe(14));
 
   it('should click the first option', () => {
-    topic = dialogue.topics[0];
-    dialogue.startTopic(topic);
-
+    startTopic(0);
     expect(dialogue.displayOptions).toBe(false);
   });
 
   it('should advance through a line', () => {
+    startTopic(0);
     dialogue.advanceLine();
 
     expect(dialogue.advanceLine).toHaveBeenCalled();
@@ -44,23 +47,25 @@ describe('Dialogue - opened', () => {
   });
 
   it('should advance to the next topic list with 3 topics visible', () => {
+    startTopic(0);
     dialogue.skipToOptions();
-    meetExpectations(3, true, topic);
+    meetExpectations(4, true, topic);
   });
 
   it('should stay the same after trying to advance further', () => {
+    startTopicAndSkip(0);
     dialogue.advanceLine();
-    meetExpectations(1, true, topic);
+    meetExpectations(5, true, topic);
   });
 
-  xit('should click the third option and go back to the name question', () => {
+  it('should click the third option and go back to the name question', () => {
     startTopicAndSkip(2);
     meetExpectations(3, true, topic);
   });
 
   it('should click the second option from the name question, traverse it and go back to start', () => {
     startTopicAndSkip(1);
-    meetExpectations(4, true, dialogue);
+    meetExpectations(5, true, dialogue);
   });
 
   it('should click the second option from the start, traverse it and go back', () => {

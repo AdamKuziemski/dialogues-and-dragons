@@ -16,8 +16,12 @@ describe('GameService - no game', () => {
 });
 
 describe('GameService - empty game', () => {
-  const service = new GameService();
-  service.createGame('The Elder Parchments');
+  let service: GameService;
+
+  beforeEach(() => {
+    service = new GameService();
+    service.createGame('The Elder Parchments');
+  })
 
   it('should return null for non-existent item ids', () => badIdentifiers.forEach(id => expect(service.item(id)).toBeNull()));
   it('should return null for non-existent actor ids', () => badIdentifiers.forEach(id => expect(service.actor(id)).toBeNull()));
