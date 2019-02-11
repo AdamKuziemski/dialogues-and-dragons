@@ -26,13 +26,11 @@ export class DialogueComponent implements OnInit {
     public game: GameService,
     public responsive: ResponsiveService,
     private route: ActivatedRoute
-  ) {
-    this.game.editModeChange.subscribe(() => this.dialogue.open());
-  }
+  ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const npc = this.game.npc(params['id']);
+    this.route.paramMap.subscribe(params => {
+      const npc = this.game.npc(params.get('id'));
       if (!npc) {
         return;
       }
@@ -47,6 +45,7 @@ export class DialogueComponent implements OnInit {
       this.dialogue.reset();
     });
     // this.dialogue.finished.subscribe(status => {});
+    this.game.editModeChange.subscribe(() => this.dialogue.open());
   }
 
   lineClicked(line: DialogueLine): void {

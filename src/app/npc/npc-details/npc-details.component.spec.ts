@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule, MatCheckboxModule, MatInputModule, MatSelectModule } from '@angular/material';
 
 import { ActivatedRoute, ActivatedRouteStub } from 'app/shared/testing/activated-route-stub';
-import { createTestGame } from 'app/model/game/testing/test-game';
+import { createTestGame } from '@game/testing/test-game';
 import { GameService } from '@game-service';
 import { NpcDetailsComponent } from './npc-details.component';
 import { ResponsiveService } from '@responsive-service';

@@ -6,7 +6,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule, MatInputModule } from '@angular/material';
 
-import { createTestGame } from 'app/model/game/testing/test-game';
+import { createTestGame } from '@game/testing/test-game';
 import { GameService } from '@game-service';
 import { GameDetailsComponent } from './game-details.component';
 import { ResponsiveService } from '@responsive-service';
