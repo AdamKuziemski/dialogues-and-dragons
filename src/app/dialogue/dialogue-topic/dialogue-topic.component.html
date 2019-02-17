@@ -17,6 +17,7 @@
 
   <div class="ncv-margin-sides">
     <mat-accordion>
+
       <mat-expansion-panel [expanded]="isLinesOpen" (opened)="openLinesPanel()">
         <mat-expansion-panel-header>
           <mat-panel-title>Lines</mat-panel-title>
@@ -40,16 +41,12 @@
           <mat-panel-description>What should happen?</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <mat-list>
-          <mat-list-item *ngFor="let action of topic.actions; index as i">
-            <ncv-action [action]="action" (actionChange)="handleActionChange($event, i)" (click)="handleActionClick($event, i)"></ncv-action>
-          </mat-list-item>
-        </mat-list>
+        <ncv-action-list #actionList [actionContainer]="topic"></ncv-action-list>
 
         <mat-action-row>
-          <button mat-button color="primary" (click)="addAction()">Add</button>
-          <button *ngIf="!moveActions" mat-button color="primary" (click)="toggleMoveActions()">Move</button>
-          <button *ngIf="moveActions" mat-raised-button color="primary" (click)="toggleMoveActions()">Edit</button>
+          <button mat-button color="primary" (click)="actionList.addAction()">Add</button>
+          <button *ngIf="!actionList.moveActions" mat-button color="primary" (click)="actionList.toggleMoveActions()">Move</button>
+          <button *ngIf="actionList.moveActions" mat-raised-button color="primary" (click)="actionList.toggleMoveActions()">Edit</button>
         </mat-action-row>
       </mat-expansion-panel>
 
@@ -60,6 +57,7 @@
         </mat-expansion-panel-header>
         <p>Under construction</p>
       </mat-expansion-panel>
+      
     </mat-accordion>
   </div>
 </div>

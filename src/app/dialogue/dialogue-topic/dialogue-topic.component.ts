@@ -1,12 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
-import { MatDialog } from '@angular/material';
-
 import { DialogueTopic } from '@dialogue/dialogue-topic';
-
-import { ActionDialogComponent } from '../../action/action-dialog/action-dialog.component';
-import { Action } from '@action/action.interface';
-import { actionList } from '@action/action-list';
 
 import { ResponsiveService } from '@responsive-service';
 
@@ -27,10 +21,8 @@ export class DialogueTopicComponent implements OnInit {
   currentPanel: OpenPanel = 'none';
   maximumLength = 100;
   moveLines = false;
-  moveActions = false;
 
   constructor(
-    public dialog: MatDialog,
     public responsive: ResponsiveService
   ) { }
 
@@ -88,46 +80,6 @@ export class DialogueTopicComponent implements OnInit {
 
   get isActionsOpen(): boolean {
     return this.currentPanel === 'actions';
-  }
-
-  toggleMoveActions(): void {
-    this.moveActions = !this.moveActions;
-  }
-
-  addAction(): void {
-    if (this.responsive.isMobile()) {
-      this.openActionDialog(actionList[0].clone<Action>());
-    } else {
-      this.topic.addAction(actionList[0].clone<Action>());
-    }
-  }
-
-  handleActionChange(action: Action, index: number): void {
-    this.topic.actions[index] = action;
-  }
-
-  handleActionClick(action: Action, index: number): void {
-    this.openActionDialog(action, index);
-  }
-
-  openActionDialog(action: Action, index = -1): void {
-    const dialogRef = this.dialog.open(ActionDialogComponent, {
-      width: '80%',
-      data: action
-    });
-    dialogRef.componentInstance.edit = (index !== -1);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result) {
-        return;
-      }
-
-      if (index === -1) {
-        this.topic.addAction(result);
-      } else {
-        this.topic.actions[index] = result;
-      }
-    });
   }
   //#endregion
 

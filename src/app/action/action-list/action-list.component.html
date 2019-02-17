@@ -1,0 +1,6 @@
+<mat-list>
+  <mat-list-item *ngFor="let action of actionContainer.actions; index as i">
+    <ncv-action [action]="action" (actionChange)="handleActionChange($event, i)" (click)="handleActionClick($event, i)">
+    </ncv-action>
+  </mat-list-item>
+</mat-list>

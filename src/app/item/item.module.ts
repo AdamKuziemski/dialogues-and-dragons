@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MatCardModule, MatCheckboxModule, MatInputModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatExpansionModule, MatInputModule, MatListModule } from '@angular/material';
 
 import { GameService } from '@game-service';
+import { ActionModule } from '../action/action.module';
 
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { ItemListComponent } from './item-list/item-list.component';
@@ -19,10 +20,13 @@ import { ItemListComponent } from './item-list/item-list.component';
     CommonModule,
     FormsModule,
     RouterModule,
+    MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatExpansionModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    ActionModule
   ],
   providers: [
     GameService

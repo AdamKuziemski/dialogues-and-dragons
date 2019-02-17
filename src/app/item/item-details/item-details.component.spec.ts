@@ -1,11 +1,12 @@
-import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
 // import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
-import { MatCardModule, MatCheckboxModule, MatInputModule } from '@angular/material';
+import { MatCardModule, MatCheckboxModule, MatExpansionModule, MatInputModule } from '@angular/material';
 
+import { ActionModule } from '../../action/action.module';
 import { ActivatedRoute, ActivatedRouteStub } from 'app/shared/testing/activated-route-stub';
 import { createTestGame } from '@game/testing/test-game';
 import { GameService } from '@game-service';
@@ -27,8 +28,10 @@ describe('ItemDetailsComponent', () => {
         FormsModule,
         MatCardModule,
         MatCheckboxModule,
+        MatExpansionModule,
         MatInputModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        ActionModule
       ],
       providers: [
         GameService,
@@ -44,5 +47,5 @@ describe('ItemDetailsComponent', () => {
     });
   }));
 
-  it('should create', fakeAsync(() => expect(component).toBeTruthy()));
+  it('should create', () => expect(component).toBeTruthy());
 });
