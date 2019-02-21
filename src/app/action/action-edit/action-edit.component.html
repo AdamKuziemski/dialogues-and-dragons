@@ -11,8 +11,11 @@
   <mat-form-field *ngIf="action.hasTargetId">
     <mat-label>Target Id</mat-label>
     <mat-select [(ngModel)]="action.targetId">
-      <mat-option value="Player">
+      <mat-option *ngIf="action.targetType === 'actor'" value="Player">
         Player
+      </mat-option>
+      <mat-option *ngFor="let target of action.getTargets() | keyvalue" value="target.key">
+        {{ target.value.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -20,11 +23,8 @@
   <mat-form-field *ngIf="action.hasValue">
     <mat-label>Value</mat-label>
     <mat-select [(ngModel)]="action.value">
-      <mat-option value="Something">
-        Something
-      </mat-option>
-      <mat-option value="Potion">
-        Potion
+      <mat-option *ngFor="let item of game.items | keyvalue" value="item.key">
+        {{ item.value.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>

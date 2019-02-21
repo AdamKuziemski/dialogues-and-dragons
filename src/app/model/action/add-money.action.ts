@@ -8,6 +8,7 @@ export class AddMoney extends GameObject implements Action {
   readonly hasCount = true;
   readonly hasTargetId = true;
   readonly hasValue = false;
+  readonly targetType = 'actor'
 
   count = 0;
   targetId = '';
@@ -27,8 +28,8 @@ export class AddMoney extends GameObject implements Action {
     return new ActionResult(true);
   }
 
-  getTargetIds(): string[] {
-    return [];
+  getTargets(): Object {
+    return AddMoney.game.npcs;
   }
 
   getValues(): ActionValue[] {

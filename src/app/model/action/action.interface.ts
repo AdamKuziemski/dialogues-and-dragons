@@ -2,12 +2,14 @@ import { ActionResult } from './action-result';
 import { Cloneable } from '../cloneable.interface';
 
 export type ActionValue = string | number | boolean;
+export type ActionTarget = 'actor' | 'item' | 'quest';
 
 export interface Action extends Cloneable {
   readonly name: string;
   readonly hasCount: boolean;
   readonly hasTargetId: boolean;
   readonly hasValue: boolean;
+  readonly targetType: ActionTarget;
 
   count: number;
   targetId: string;
@@ -15,6 +17,6 @@ export interface Action extends Cloneable {
 
   perform(): ActionResult;
 
-  getTargetIds(): string[];
+  getTargets(): Object;
   getValues(): ActionValue[];
 }

@@ -8,6 +8,7 @@ export class AddItem extends GameObject implements Action {
   readonly hasCount = true;
   readonly hasTargetId = true;
   readonly hasValue = true;
+  readonly targetType = 'actor'
 
   count = 1;
   targetId = '';
@@ -27,8 +28,8 @@ export class AddItem extends GameObject implements Action {
     return new ActionResult(true);
   }
 
-  getTargetIds(): string[] {
-    return [];
+  getTargets(): Object {
+    return AddItem.game.items;
   }
 
   getValues(): ActionValue[] {

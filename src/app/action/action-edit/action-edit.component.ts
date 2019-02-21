@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Action } from '@action/action.interface';
 import { actionList } from '@action/action-list';
+import { GameService } from '@game-service';
 
 @Component({
   selector: 'ncv-action-edit',
@@ -14,7 +15,7 @@ export class ActionEditComponent implements OnInit {
 
   actions = actionList;
 
-  constructor() { }
+  constructor(public game: GameService) { }
 
   ngOnInit() { }
 

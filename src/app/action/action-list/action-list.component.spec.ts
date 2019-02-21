@@ -8,18 +8,13 @@ xdescribe('ActionListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActionListComponent ]
-    })
-    .compileComponents();
+      declarations: [ActionListComponent]
+    }).compileComponents().then(() => {
+      fixture = TestBed.createComponent(ActionListComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ActionListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => expect(component).toBeTruthy());
 });
