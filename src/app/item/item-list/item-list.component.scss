@@ -1,0 +1,21 @@
+@media only screen and (min-width: 600px) {
+  mat-list-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+
+    &:last-of-type {
+      border: none;
+    }
+  }
+
+  .ncv-item-header {
+    width: calc(100% - 32px);
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .ncv-item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 64px 64px 48px 48px 48px;
+  }
+}

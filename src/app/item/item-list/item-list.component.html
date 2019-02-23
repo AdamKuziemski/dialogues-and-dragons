@@ -1,8 +1,31 @@
 <mat-card>
   <mat-card-title>Items</mat-card-title>
+  <div *ngIf="responsive.isDesktop()" class="ncv-item-header ncv-item-row">
+    <div>Name</div>
+    <div>Type</div>
+    <div>Value</div>
+    <div>Weight</div>
+    <div>Cnt</div>
+    <div>Wrb</div>
+    <div>Rdb</div>
+  </div>
   <mat-list>
     <mat-list-item *ngFor="let item of game.items | keyvalue" [routerLink]="['/item', item.key]">
-      {{ item.value.name }}
+      <div class="ncv-item-row ncv-full-width">
+        <div>{{ item.value.name }}</div>
+        <div *ngIf="responsive.isDesktop()">{{ item.value.type }}</div>
+        <div *ngIf="responsive.isDesktop()">{{ item.value.value }}</div>
+        <div *ngIf="responsive.isDesktop()">{{ item.value.weight }}</div>
+        <div *ngIf="responsive.isDesktop()">
+          <mat-checkbox disabled [ngModel]="item.value.isCountable"></mat-checkbox>
+        </div>
+        <div *ngIf="responsive.isDesktop()">
+          <mat-checkbox disabled [ngModel]="item.value.isWearable"></mat-checkbox>
+        </div>
+        <div *ngIf="responsive.isDesktop()">
+          <mat-checkbox disabled [ngModel]="item.value.isReadable"></mat-checkbox>
+        </div>
+      </div>
     </mat-list-item>
   </mat-list>
 </mat-card>
