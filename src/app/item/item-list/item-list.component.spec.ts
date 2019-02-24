@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
 // import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-import { MatCardModule, MatListModule } from '@angular/material';
+import { MatCardModule, MatListModule, MatCheckboxModule } from '@angular/material';
 
 import { GameService } from '@game-service';
 import { ItemListComponent } from './item-list.component';
@@ -20,7 +21,9 @@ describe('ItemListComponent', () => {
         RouterLinkDirectiveStub
       ],
       imports: [
+        FormsModule,
         MatCardModule,
+        MatCheckboxModule,
         MatListModule
       ],
       providers: [
