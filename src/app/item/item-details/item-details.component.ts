@@ -15,6 +15,7 @@ type OpenPanel = 'none' | 'description' | 'content' | 'actions';
 })
 export class ItemDetailsComponent implements OnInit, OnDestroy {
   item: Item;
+  itemId: string;
   currentPanel: OpenPanel = 'none';
 
   maximumNameLength = 50;
@@ -30,12 +31,16 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.param$ = this.route.paramMap.subscribe(
-      (params: ParamMap) => this.item = this.game.item(params.get('id'))
+      (params: ParamMap) => {
+        this.itemId = params.get('id');
+        this.item = this.game.item(this.itemId);
+      }
     );
   }
 
   ngOnDestroy(): void {
     this.param$.unsubscribe();
+    this.game.items[this.itemId] = this.item;
   }
 
   //#region description

@@ -1,10 +1,6 @@
 @media only screen and (min-width: 600px) {
-  mat-list-item {
+  mat-list-item:not(:last-of-type) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
-
-    &:last-of-type {
-      border: none;
-    }
   }
 
   .ncv-item-header {
@@ -17,5 +13,14 @@
   .ncv-item-row {
     display: grid;
     grid-template-columns: 2fr 1fr 64px 64px 48px 48px 48px;
+  }
+
+  .ncv-item-number {
+    justify-self: right;
+    padding-right: 8px;
+  }
+
+  .ncv-item-checkbox {
+    justify-self: center;
   }
 }

@@ -3,27 +3,27 @@
   <div *ngIf="responsive.isDesktop()" class="ncv-item-header ncv-item-row">
     <div>Name</div>
     <div>Type</div>
-    <div>Value</div>
-    <div>Weight</div>
-    <div>Cnt</div>
-    <div>Wrb</div>
-    <div>Rdb</div>
+    <div class="ncv-item-number">Value</div>
+    <div class="ncv-item-number">Weight</div>
+    <div class="ncv-item-checkbox">Cnt</div>
+    <div class="ncv-item-checkbox">Wrb</div>
+    <div class="ncv-item-checkbox">Rdb</div>
   </div>
   <mat-list>
     <mat-list-item *ngFor="let item of game.items | keyvalue" [routerLink]="['/item', item.key]">
       <div class="ncv-item-row ncv-full-width">
         <div>{{ item.value.name }}</div>
         <div *ngIf="responsive.isDesktop()">{{ item.value.type }}</div>
-        <div *ngIf="responsive.isDesktop()">{{ item.value.value }}</div>
-        <div *ngIf="responsive.isDesktop()">{{ item.value.weight }}</div>
-        <div *ngIf="responsive.isDesktop()">
-          <mat-checkbox disabled [ngModel]="item.value.isCountable"></mat-checkbox>
+        <div *ngIf="responsive.isDesktop()" class="ncv-item-number">{{ item.value.value }}</div>
+        <div *ngIf="responsive.isDesktop()" class="ncv-item-number">{{ item.value.weight }}</div>
+        <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
+          <mat-checkbox disabled [(ngModel)]="item.value.isCountable"></mat-checkbox>
         </div>
-        <div *ngIf="responsive.isDesktop()">
-          <mat-checkbox disabled [ngModel]="item.value.isWearable"></mat-checkbox>
+        <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
+          <mat-checkbox disabled [(ngModel)]="item.value.isWearable"></mat-checkbox>
         </div>
-        <div *ngIf="responsive.isDesktop()">
-          <mat-checkbox disabled [ngModel]="item.value.isReadable"></mat-checkbox>
+        <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
+          <mat-checkbox disabled [(ngModel)]="item.value.isReadable"></mat-checkbox>
         </div>
       </div>
     </mat-list-item>
