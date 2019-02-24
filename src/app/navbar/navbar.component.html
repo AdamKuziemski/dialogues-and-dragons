@@ -1,6 +1,12 @@
 <mat-toolbar color="primary" class="mat-elevation-z6 ncv-navbar">
-  <span>{{ title }}</span>
 
+  <button mat-icon-button [routerLink]="['/']">
+    <mat-icon>
+      home
+    </mat-icon>
+  </button>
+
+  <span>{{ title }}</span>
   <span class="ncv-navbar-spacer"></span>
 
   <button mat-icon-button *ngIf="game.isEditModeAvailable" (click)="toggleEditMode()">
