@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Dialogue } from '@dialogue/dialogue';
@@ -13,14 +13,18 @@ import { ResponsiveService } from '@responsive-service';
   templateUrl: './dialogue.component.html',
   styleUrls: ['./dialogue.component.scss']
 })
-export class DialogueComponent implements OnInit {
+export class DialogueComponent implements OnInit, OnDestroy {
   @Input() dialogue: Dialogue;
   @Input() speaker = 'Some NPC';
 
   @Output() goodbye = new EventEmitter<Dialogue>();
 
+  npcId: string;
+
   currentTopic: DialogueTopic;
   currentTab = 1;
+
+  private param$: any;
 
   constructor(
     public game: GameService,
@@ -29,8 +33,9 @@ export class DialogueComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const npc = this.game.npc(params.get('id'));
+    this.param$ = this.route.paramMap.subscribe(params => {
+      this.npcId = params.get('id');
+      const npc = this.game.npc(this.npcId);
       if (!npc) {
         return;
       }
@@ -46,6 +51,11 @@ export class DialogueComponent implements OnInit {
     });
     // this.dialogue.finished.subscribe(status => {});
     this.game.editModeChange.subscribe(() => this.dialogue.open());
+  }
+
+  ngOnDestroy(): void {
+    this.param$.unsubscribe();
+    this.game.npc(this.npcId).dialogue = this.dialogue;
   }
 
   lineClicked(line: DialogueLine): void {

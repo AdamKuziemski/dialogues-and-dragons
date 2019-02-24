@@ -16,6 +16,8 @@ export class NpcDetailsComponent implements OnInit {
   maximumNameLength = 50;
   actorId: string;
 
+  private param$: any;
+
   constructor(
     public game: GameService,
     public responsive: ResponsiveService,
@@ -23,9 +25,14 @@ export class NpcDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.param$ = this.route.paramMap.subscribe(params => {
       this.actorId = params.get('id');
       this.npc = this.game.npc(this.actorId);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.param$.unsubscribe();
+    this.game.npcs[this.actorId] = this.npc;
   }
 }
