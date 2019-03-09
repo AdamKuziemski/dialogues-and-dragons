@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule } from '@angular/material';
 
 import { ActionComponent } from './action.component';
 import { ActionDialogComponent } from './action-dialog/action-dialog.component';
@@ -23,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
     MatInputModule,
     MatListModule,
     MatSelectModule,
