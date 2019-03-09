@@ -14,7 +14,7 @@
       <mat-option *ngIf="action.targetType === 'actor'" value="Player">
         Player
       </mat-option>
-      <mat-option *ngFor="let target of action.getTargets() | keyvalue" value="target.key">
+      <mat-option *ngFor="let target of action.getTargets() | keyvalue" [value]="target.key">
         {{ target.value.name }}
       </mat-option>
     </mat-select>
@@ -24,7 +24,7 @@
     <mat-label>Value</mat-label>
     <mat-select [(ngModel)]="action.value">
       <!-- game.items are temporary, need to figure out how to display possible values -->
-      <mat-option *ngFor="let item of game.items | keyvalue" value="item.key">
+      <mat-option *ngFor="let item of game.items | keyvalue" [value]="item.key">
         {{ item.value.name }}
       </mat-option>
     </mat-select>
