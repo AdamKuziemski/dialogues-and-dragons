@@ -1,5 +1,7 @@
 import { Game } from '../game';
 
+import { createTestDialogue } from '../../dialogue/testing/test-dialogue';
+
 export function createTestGame(): Game {
   const testGame = new Game('The Elder Parchments CLIX: The Tiny Cave That Was Not There');
 
@@ -40,6 +42,8 @@ export function createTestGame(): Game {
   dpuh.type = testItemTypes[3];
   dpuh.value = 617;
   dpuh.weight = 10;
+
+  testGame.createNPC('TestNPCTester', 'Karma the Tester').dialogue = createTestDialogue();
 
   testGame.createNPC('TestNPCGossip', 'Wirt');
   testGame.createNPC('TestNPCEnemy', 'Gary');
