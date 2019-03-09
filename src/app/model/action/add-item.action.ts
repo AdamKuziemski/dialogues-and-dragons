@@ -29,7 +29,7 @@ export class AddItem extends GameObject implements Action {
   }
 
   getTargets(): Object {
-    return AddItem.game.items;
+    return AddItem.game.npcs;
   }
 
   getValues(): ActionValue[] {
