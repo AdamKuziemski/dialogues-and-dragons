@@ -21,11 +21,13 @@ export function createTestGame(): Game {
 
   let potion = testGame.createItem('TestItemPotion', 'Potion');
   potion.type = testItemTypes[2];
+  potion.isCountable = true;
   potion.value = 50;
   potion.weight = 0.5;
 
   let superPotion = testGame.createItem('TestItemSuperPotion', 'Super Potion');
   superPotion.type = testItemTypes[2];
+  superPotion.isCountable = true;
   superPotion.value = 100;
   superPotion.weight = 0.5;
 

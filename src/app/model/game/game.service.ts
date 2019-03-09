@@ -60,6 +60,12 @@ export class GameService {
     return this.game ? this.game.items : {};
   }
 
+  removeItem(id: string): void {
+    if (this.game) {
+      this.game.removeItem(id);
+    }
+  }
+
   actor(id: string): Actor {
     if (id === null || id === undefined || id === '') {
       return null;
@@ -99,6 +105,12 @@ export class GameService {
     return this.game ? this.game.npcs : {};
   }
 
+  removeNPC(id: string): void {
+    if (this.game) {
+      this.game.removeNPC(id);
+    }
+  }
+
   createQuest(id: string, name: string): Quest {
     if (!this.game) {
       return null;
@@ -115,6 +127,12 @@ export class GameService {
 
   get quests(): Object {
     return this.game ? this.game.quests : {};
+  }
+
+  removeQuest(id: string): void {
+    if (this.game) {
+      this.game.removeQuest(id);
+    }
   }
 
   toggleEditMode(): void {

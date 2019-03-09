@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>Items</mat-card-title>
-  <div *ngIf="responsive.isDesktop()" class="ncv-item-header ncv-item-row">
+  <div *ngIf="responsive.isDesktop()" class="ncv-item-header ncv-entity-row">
     <div>Name</div>
     <div>Type</div>
     <div class="ncv-item-number">Value</div>
@@ -8,10 +8,11 @@
     <div class="ncv-item-checkbox">Cnt</div>
     <div class="ncv-item-checkbox">Wrb</div>
     <div class="ncv-item-checkbox">Rdb</div>
+    <div></div>
   </div>
   <mat-list>
     <mat-list-item *ngFor="let item of game.items | keyvalue" [routerLink]="['/item', item.key]">
-      <div class="ncv-item-row ncv-full-width">
+      <div class="ncv-entity-row ncv-full-width">
         <div>{{ item.value.name }}</div>
         <div *ngIf="responsive.isDesktop()">{{ item.value.type }}</div>
         <div *ngIf="responsive.isDesktop()" class="ncv-item-number">{{ item.value.value }}</div>
@@ -24,6 +25,11 @@
         </div>
         <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
           <mat-checkbox disabled [(ngModel)]="item.value.isReadable"></mat-checkbox>
+        </div>
+        <div class="ncv-delete-button">
+          <button mat-icon-button (click)="deleteItem($event, item.key)">
+            <mat-icon aria-label="Delete Item">delete</mat-icon>
+          </button>
         </div>
       </div>
     </mat-list-item>

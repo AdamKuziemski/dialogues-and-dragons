@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement /*, NO_ERRORS_SCHEMA */ } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { MatCardModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
 
 import { createTestGame } from '@game/testing/test-game';
 import { GameService } from '@game-service';
@@ -23,7 +23,9 @@ describe('QuestListComponent', () => {
         RouterLinkDirectiveStub
       ],
       imports: [
+        MatButtonModule,
         MatCardModule,
+        MatIconModule,
         MatListModule
       ],
       providers: [

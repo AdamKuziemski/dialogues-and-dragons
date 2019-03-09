@@ -1,3 +1,11 @@
+:not(.ncv-item-header) > div {
+  align-self: center;
+}
+
+mat-list {
+  padding-top: 0;
+}
+
 @media only screen and (min-width: 600px) {
   mat-list-item:not(:last-of-type) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
@@ -10,9 +18,8 @@
     background: rgba(0, 0, 0, 0.04);
   }
 
-  .ncv-item-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 64px 64px 48px 48px 48px;
+  .ncv-entity-row {
+    grid-template-columns: 2fr 1fr 64px 64px repeat(4, 48px);
   }
 
   .ncv-item-number {

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { MatCardModule, MatListModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatCheckboxModule } from '@angular/material';
 
 import { GameService } from '@game-service';
 import { ItemListComponent } from './item-list.component';
@@ -22,8 +22,10 @@ describe('ItemListComponent', () => {
       ],
       imports: [
         FormsModule,
+        MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
+        MatIconModule,
         MatListModule
       ],
       providers: [

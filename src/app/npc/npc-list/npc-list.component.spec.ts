@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
 // import { By } from '@angular/platform-browser';
 
-import { MatCardModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
 
 import { GameService } from '@game-service';
 import { NpcListComponent } from './npc-list.component';
@@ -20,7 +20,9 @@ describe('NpcListComponent', () => {
         RouterLinkDirectiveStub
       ],
       imports: [
+        MatButtonModule,
         MatCardModule,
+        MatIconModule,
         MatListModule
       ],
       providers: [

@@ -18,9 +18,6 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
   itemId: string;
   currentPanel: OpenPanel = 'none';
 
-  maximumNameLength = 50;
-  maximumDescriptionLength = 200;
-
   private param$: any;
 
   constructor(
@@ -79,4 +76,6 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
   }
   //#endregion
 
+  get maximumNameLength(): number { return Item.maximumNameLength; }
+  get maximumDescriptionLength(): number { return Item.maximumDescriptionLength; }
 }

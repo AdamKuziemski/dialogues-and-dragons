@@ -68,4 +68,22 @@ export class Game {
   hasQuest(id: string): boolean {
     return this.quests.hasOwnProperty(id);
   }
+
+  removeItem(id: string): void {
+    if (this.hasItem(id)) {
+      delete this.items[id];
+    }
+  }
+
+  removeNPC(id: string): void {
+    if (this.hasNPC(id)) {
+      delete this.npcs[id];
+    }
+  }
+
+  removeQuest(id: string): void {
+    if (this.hasQuest(id)) {
+      delete this.quests[id];
+    }
+  }
 }

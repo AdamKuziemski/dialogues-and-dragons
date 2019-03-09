@@ -2,7 +2,14 @@
   <mat-card-title>Quests</mat-card-title>
   <mat-list>
     <mat-list-item *ngFor="let quest of game.quests | keyvalue" [routerLink]="['/quest', quest.key]">
-      {{ quest.value.name }}
+      <div class="ncv-entity-row ncv-full-width">
+        <div>{{ quest.value.name }}</div>
+        <div class="ncv-delete-button">
+          <button mat-icon-button (click)="deleteQuest($event, quest.key)">
+            <mat-icon aria-label="Delete Quest">delete</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-list-item>
   </mat-list>
 </mat-card>

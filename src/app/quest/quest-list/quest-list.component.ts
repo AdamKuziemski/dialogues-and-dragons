@@ -18,4 +18,8 @@ export class QuestListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteQuest(event: MouseEvent, id: string): void {
+    event.preventDefault();
+    this.game.removeQuest(id);
+  }
 }

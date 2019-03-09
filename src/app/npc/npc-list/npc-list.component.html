@@ -2,7 +2,14 @@
   <mat-card-title>NPCs</mat-card-title>
   <mat-list>
     <mat-list-item *ngFor="let npc of game.npcs | keyvalue" [routerLink]="['/npc', npc.key]">
-      {{ npc.value.name }}
+      <div class="ncv-full-width ncv-entity-row">
+        <div>{{ npc.value.name }}</div>
+        <div class="ncv-delete-button">
+          <button mat-icon-button (click)="deleteNPC($event, npc.key)">
+            <mat-icon aria-label="Delete NPC">delete</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-list-item>
   </mat-list>
 </mat-card>

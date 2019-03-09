@@ -13,7 +13,6 @@ import { ResponsiveService } from '@responsive-service';
 })
 export class NpcDetailsComponent implements OnInit {
   npc: NPC;
-  maximumNameLength = 50;
   actorId: string;
 
   private param$: any;
@@ -35,4 +34,6 @@ export class NpcDetailsComponent implements OnInit {
     this.param$.unsubscribe();
     this.game.npcs[this.actorId] = this.npc;
   }
+
+  get maximumNameLength(): number { return NPC.maximumNameLength; }
 }

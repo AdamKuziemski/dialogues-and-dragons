@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule } from '@angular/material';
 
 import { GameService } from '../model/game/game.service';
 
@@ -22,6 +22,7 @@ import { NpcDetailsComponent } from './npc-details/npc-details.component';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatIconModule,
     MatInputModule,
     MatListModule,
     MatSelectModule

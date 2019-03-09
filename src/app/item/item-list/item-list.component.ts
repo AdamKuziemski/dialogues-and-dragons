@@ -18,4 +18,9 @@ export class ItemListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteItem(event: MouseEvent, itemId: string): void {
+    event.stopPropagation();
+    this.game.removeItem(itemId);
+  }
+
 }

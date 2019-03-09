@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { MatCardModule, MatInputModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule } from '@angular/material';
 
 import { GameService } from '../model/game/game.service';
 
@@ -17,7 +17,9 @@ import { QuestDetailsComponent } from './quest-details/quest-details.component';
   imports: [
     CommonModule,
     RouterModule,
+    MatButtonModule,
     MatCardModule,
+    MatIconModule,
     MatInputModule,
     MatListModule
   ],

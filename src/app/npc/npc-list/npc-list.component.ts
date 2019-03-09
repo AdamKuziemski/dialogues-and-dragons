@@ -17,4 +17,9 @@ export class NpcListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  deleteNPC(event: MouseEvent, id: string): void {
+    event.preventDefault();
+    this.game.removeNPC(id);
+  }
 }
