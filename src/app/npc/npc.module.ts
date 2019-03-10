@@ -1,19 +1,22 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule } from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule,
+  MatInputModule, MatListModule, MatSelectModule
+} from '@angular/material';
 
 import { GameService } from '../model/game/game.service';
 
-import { NpcListComponent } from './npc-list/npc-list.component';
 import { NpcDetailsComponent } from './npc-details/npc-details.component';
+import { NpcListComponent } from './npc-list/npc-list.component';
 
 @NgModule({
   declarations: [
-    NpcListComponent,
-    NpcDetailsComponent
+    NpcDetailsComponent,
+    NpcListComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { NpcDetailsComponent } from './npc-details/npc-details.component';
     GameService
   ],
   exports: [
+    NpcDetailsComponent,
     NpcListComponent
   ]
 })
