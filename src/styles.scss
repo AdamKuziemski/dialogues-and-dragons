@@ -34,6 +34,10 @@ mat-card {
 .ncv-entity-row {
   display: grid;
   grid-template-columns: 1fr 48px;
+
+  > div {
+    align-self: center;
+  }
 }
 
 .ncv-margin-sides {
@@ -55,6 +59,7 @@ mat-card {
 .ncv-fab {
   position: fixed;
   bottom: 32px;
+  z-index: 10;
 }
 
 .ncv-fab-right {
