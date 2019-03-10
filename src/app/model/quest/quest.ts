@@ -2,6 +2,8 @@ import { GameObject } from '../game-object';
 import { QuestStage } from './quest-stage';
 
 export class Quest extends GameObject {
+  static readonly maximumNameLength = 50;
+  
   description = '';
 
   completed = false;
