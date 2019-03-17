@@ -44,18 +44,16 @@ export function createTestGame(): Game {
   dpuh.weight = 10;
 
   testGame.createNPC('TestNPCTester', 'Karma the Tester').dialogue = createTestDialogue();
-
   testGame.createNPC('TestNPCGossip', 'Wirt');
   testGame.createNPC('TestNPCEnemy', 'Gary');
-
-  let creeper = testGame.createNPC('TestNPCMerchant', 'Creeper');
-  creeper.isMerchant = true;
-
+  testGame.createNPC('TestNPCMerchant', 'Creeper').isMerchant = true;
   testGame.createNPC('TestNPCTalker', 'Lucien Lachance');
   testGame.createNPC('TestNPCQuestGiver', 'Craptrap');
 
   const plumbersQuest = testGame.createQuest('TestQuestPlumberBros', 'Rescue the Princess from Another Castle');
+  plumbersQuest.description = 'Two plumbers, Lario and Muigi, embark on a journey to find a certain princess.';
   plumbersQuest.addStage('I just found out that the Princess is in another castle. Gotta go rescue her.');
+  plumbersQuest.addStage('I found the castle. Looks like it has been abandoned for quite a few centuries. Is it possible that this is an illusion? Need to find that out.');
 
   return testGame;
 }
