@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddEntityDialogComponent } from './add-entity/add-entity.component';
 import { GameService } from '@game/game.service';
+import { ResponsiveService } from '@responsive-service';
 
 @Component({
   selector: 'ncv-game',
@@ -13,7 +14,8 @@ export class GameComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public game: GameService
+    public game: GameService,
+    public responsive: ResponsiveService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class GameComponent implements OnInit {
 
   addEntity(): void {
     const dialogRef = this.dialog.open(AddEntityDialogComponent, {
-      width: '80%',
+      width: (this.responsive.isMobile() ? '80%' : '500px'),
       data: { type: this.resolveEntityType(), name: '', id: '' }
     });
 
