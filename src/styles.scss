@@ -40,6 +40,11 @@ mat-card {
   }
 }
 
+.ncv-split-vertical {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
 .ncv-margin-sides {
   margin: 0 8px;
 }

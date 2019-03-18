@@ -1,75 +1,79 @@
-<mat-card *ngIf="item">
+<div class="ncv-full-width" [class.ncv-split-vertical]="responsive.isDesktop()">
+  <mat-card *ngIf="item">
 
-  <mat-form-field class="ncv-full-width">
-    <textarea #itemName [(ngModel)]="item.name" [maxlength]="maximumNameLength" matInput placeholder="Name"
-      matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
-    <mat-hint align="end">{{itemName.value?.length || 0}}/{{maximumNameLength}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field class="ncv-full-width">
+      <textarea #itemName [(ngModel)]="item.name" [maxlength]="maximumNameLength" matInput placeholder="Name"
+        matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+      <mat-hint align="end">{{itemName.value?.length || 0}}/{{maximumNameLength}}</mat-hint>
+    </mat-form-field>
 
-  <mat-form-field class="ncv-half-width">
-    <input type="number" [(ngModel)]="item.value" matInput placeholder="Value" />
-  </mat-form-field>
+    <mat-form-field class="ncv-half-width">
+      <input type="number" [(ngModel)]="item.value" matInput placeholder="Value" />
+    </mat-form-field>
 
-  <mat-form-field class="ncv-half-width">
-    <input type="number" [(ngModel)]="item.weight" matInput placeholder="Weight" />
-  </mat-form-field>
+    <mat-form-field class="ncv-half-width">
+      <input type="number" [(ngModel)]="item.weight" matInput placeholder="Weight" />
+    </mat-form-field>
 
-  <mat-checkbox [(ngModel)]="item.isCountable">Countable</mat-checkbox>
-  <mat-checkbox [(ngModel)]="item.isWearable">Wearable</mat-checkbox>
-  <mat-checkbox [(ngModel)]="item.isReadable" (ngModelChange)="closeContentPanel()">Readable</mat-checkbox>
+    <mat-checkbox [(ngModel)]="item.isCountable">Countable</mat-checkbox>
+    <mat-checkbox [(ngModel)]="item.isWearable">Wearable</mat-checkbox>
+    <mat-checkbox [(ngModel)]="item.isReadable" (ngModelChange)="closeContentPanel()">Readable</mat-checkbox>
 
-</mat-card>
+  </mat-card>
 
-<div class="ncv-margin-sides">
-  <mat-accordion>
+  <div class="ncv-margin-sides" [class.ncv-margin-top]="responsive.isDesktop()">
+    <mat-accordion>
 
-    <mat-expansion-panel [expanded]="isDescriptionOpen" (opened)="openDescriptionPanel()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Description</mat-panel-title>
-        <mat-panel-description>Short inventory hint</mat-panel-description>
-      </mat-expansion-panel-header>
+      <mat-expansion-panel [expanded]="isDescriptionOpen" (opened)="openDescriptionPanel()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Description</mat-panel-title>
+          <mat-panel-description>Short inventory hint</mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <mat-form-field class="ncv-full-width">
-        <textarea #itemDescription [(ngModel)]="item.description" [maxlength]="maximumDescriptionLength" matInput
-          placeholder="Descrpition" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
-        <mat-hint align="end">{{itemDescription.value?.length || 0}}/{{maximumDescriptionLength}}</mat-hint>
-      </mat-form-field>
+        <mat-form-field class="ncv-full-width">
+          <textarea #itemDescription [(ngModel)]="item.description" [maxlength]="maximumDescriptionLength" matInput
+            placeholder="Descrpition" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
+          <mat-hint align="end">{{itemDescription.value?.length || 0}}/{{maximumDescriptionLength}}</mat-hint>
+        </mat-form-field>
 
-      <mat-action-row>
-        <button mat-button color="primary" (click)="item.description = ''">Clear</button>
-      </mat-action-row>
-    </mat-expansion-panel>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="item.description = ''">Clear</button>
+        </mat-action-row>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="item.isReadable" [expanded]="isContentOpen" (opened)="openContentPanel()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Content</mat-panel-title>
-        <mat-panel-description>The story or document</mat-panel-description>
-      </mat-expansion-panel-header>
+      <mat-expansion-panel *ngIf="item.isReadable" [expanded]="isContentOpen" (opened)="openContentPanel()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Content</mat-panel-title>
+          <mat-panel-description>The story or document</mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <mat-form-field class="ncv-full-width">
-        <textarea #itemContent [(ngModel)]="item.content" matInput placeholder="Content" matTextareaAutosize
-          matAutosizeMinRows="2"></textarea>
-      </mat-form-field>
+        <mat-form-field class="ncv-full-width">
+          <textarea #itemContent [(ngModel)]="item.content" matInput placeholder="Content" matTextareaAutosize
+            matAutosizeMinRows="2"></textarea>
+        </mat-form-field>
 
-      <mat-action-row>
-        <button mat-button color="primary" (click)="item.content = ''">Clear</button>
-      </mat-action-row>
-    </mat-expansion-panel>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="item.content = ''">Clear</button>
+        </mat-action-row>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="isActionsOpen" (opened)="openActionsPanel()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Actions</mat-panel-title>
-        <mat-panel-description>What happens when it's used?</mat-panel-description>
-      </mat-expansion-panel-header>
+      <mat-expansion-panel [expanded]="isActionsOpen" (opened)="openActionsPanel()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Actions</mat-panel-title>
+          <mat-panel-description>What happens when it's used?</mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <ncv-action-list #actionList [actionContainer]="item"></ncv-action-list>
+        <ncv-action-list #actionList [actionContainer]="item"></ncv-action-list>
 
-      <mat-action-row>
-        <button mat-button color="primary" (click)="actionList.addAction()">Add</button>
-        <button *ngIf="!actionList.moveActions" mat-button color="primary" (click)="actionList.toggleMoveActions()">Move</button>
-        <button *ngIf="actionList.moveActions" mat-raised-button color="primary" (click)="actionList.toggleMoveActions()">Edit</button>
-      </mat-action-row>
-    </mat-expansion-panel>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="actionList.addAction()">Add</button>
+          <button *ngIf="!actionList.moveActions" mat-button color="primary"
+            (click)="actionList.toggleMoveActions()">Move</button>
+          <button *ngIf="actionList.moveActions" mat-raised-button color="primary"
+            (click)="actionList.toggleMoveActions()">Edit</button>
+        </mat-action-row>
+      </mat-expansion-panel>
 
-  </mat-accordion>
+    </mat-accordion>
+  </div>
 </div>
