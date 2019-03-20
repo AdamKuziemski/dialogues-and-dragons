@@ -3,9 +3,9 @@ import { NG_VALIDATORS, AbstractControl, FormControl, Validator, ValidatorFn, Va
 
 import { GameService } from '@game/game.service';
 
-function validateIdFactory(isValidId: (value: string) => boolean): ValidatorFn {
+function validateIdFactory(isInvalidId: (value: string) => boolean): ValidatorFn {
   return (c: AbstractControl): ValidationErrors => {
-    return isValidId(c.value as string) ? {
+    return isInvalidId(c.value as string) ? {
       invalidId: true
     } : null;
   }
