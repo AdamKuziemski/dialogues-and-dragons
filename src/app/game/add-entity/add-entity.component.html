@@ -1,26 +1,38 @@
 <h2 mat-dialog-title>Add</h2>
 
 <mat-dialog-content>
-  <mat-form-field class="ncv-full-width">
-    <mat-select #entityType [(ngModel)]="data.type" required placeholder="Type">
-      <mat-option value="item">Item</mat-option>
-      <mat-option value="npc">NPC</mat-option>
-      <mat-option value="quest">Quest</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="ncv-full-width">
-    <input matInput #entityId [(ngModel)]="data.id" maxlength="30" required
-    [placeholder]="data.type + ' Id' | titlecase">
-    <mat-hint align="end">{{entityId.value?.length || 0}}/30</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="ncv-full-width">
-    <input matInput #entityName [(ngModel)]="data.name" [maxlength]="maximumNameLength" required
-    [placeholder]="data.type + ' Name' | titlecase">
-    <mat-hint align="end">{{entityName.value?.length || 0}}/{{maximumNameLength}}</mat-hint>
-  </mat-form-field>
+  <form #entity="ngForm">
+
+    <mat-form-field class="ncv-full-width">
+      <mat-select name="entity-type" #entityType="ngModel" [(ngModel)]="data.type" required placeholder="Type">
+        <mat-option value="item">Item</mat-option>
+        <mat-option value="npc">NPC</mat-option>
+        <mat-option value="quest">Quest</mat-option>
+      </mat-select>
+      <mat-error *ngIf="entityType.hasError('required')">Please select a type</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="ncv-full-width">
+      <input matInput name="entity-id" #entityId="ngModel" [(ngModel)]="data.id"
+        maxlength="30" required ncvIdValidator
+        [placeholder]="data.type + ' Id' | titlecase">
+      <mat-hint align="end">{{entityId.value?.length || 0}}/30</mat-hint>
+      <mat-error *ngIf="entityId.hasError('invalidId')">This id is already being used</mat-error>
+      <mat-error *ngIf="entityId.hasError('required')">Please provide an id</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="ncv-full-width">
+      <input matInput name="entity-name" #entityName="ngModel" [(ngModel)]="data.name"
+        [maxlength]="maximumNameLength" required
+        [placeholder]="data.type + ' Name' | titlecase">
+      <mat-hint align="end">{{entityName.value?.length || 0}}/{{maximumNameLength}}</mat-hint>
+      <mat-error *ngIf="entityName.hasError('required')">Please provide a name</mat-error>
+    </mat-form-field>
+    
+  </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" (click)="onSave()">Add</button>
+  <button mat-button color="primary" (click)="onSave()" [disabled]="!entity.form.valid">Add</button>
 </mat-dialog-actions>

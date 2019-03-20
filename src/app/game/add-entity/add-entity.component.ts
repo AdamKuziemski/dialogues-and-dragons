@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Item } from 'app/model/item/item';

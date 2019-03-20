@@ -17,6 +17,8 @@ import { GameComponent } from './game.component';
 import { GameDetailsComponent } from './game-details/game-details.component';
 import { AddEntityDialogComponent } from './add-entity/add-entity.component';
 
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [
     AddEntityDialogComponent,
@@ -35,7 +37,8 @@ import { AddEntityDialogComponent } from './add-entity/add-entity.component';
     MatTabsModule,
     ItemModule,
     NpcModule,
-    QuestModule
+    QuestModule,
+    SharedModule
   ],
   providers: [
     GameService
