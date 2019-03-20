@@ -31,7 +31,7 @@ describe('IdValidatorDirective', () => {
     directive = new IdValidatorDirective(gameService);
   });
 
-  describe('basic functionality', () => {
+  describe('Basic functionality', () => {
     let input: FormControl;
 
     function testInvalidId(id: string) {
@@ -52,7 +52,7 @@ describe('IdValidatorDirective', () => {
     });
   });
 
-  describe('reactive form', () => {
+  describe('Reactive form', () => {
     let fixture: ComponentFixture<FormControlTest>;
 
     function testIdValidity(id: string, errorFlag: boolean) {
@@ -71,7 +71,7 @@ describe('IdValidatorDirective', () => {
     it('should accept valid ids', () => testIdValidity(validId, false));
   });
 
-  describe('template driven form', () => {
+  describe('Template driven form', () => {
     let fixture: ComponentFixture<NgModelTest>;
 
     function testIdValidity(id: string, errorFlag: DebugElement) {
