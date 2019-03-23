@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Type, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { Component, Type } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -66,7 +66,7 @@ describe('IdValidatorDirective', () => {
     }
 
     beforeEach(() => fixture = initTest(FormControlTest, IdValidatorDirective));
-    
+
     it('should raise errors with invalid ids', () => invalidIds.forEach(id => testIdValidity(id, true)));
     it('should accept valid ids', () => testIdValidity(validId, false));
   });
@@ -74,23 +74,30 @@ describe('IdValidatorDirective', () => {
   describe('Template driven form', () => {
     let fixture: ComponentFixture<NgModelTest>;
 
-    function testIdValidity(id: string, errorFlag: DebugElement) {
-      const input = fixture.debugElement.query(By.css('input')).nativeElement;
-      input.value = id;
-      
-      tick();
-      fixture.detectChanges();
+    function testIdValidity(id: string, shouldHaveError: Boolean) {
+      fixture.whenStable().then(() => {
+        const input = fixture.debugElement.query(By.css('input')).nativeElement;
+        input.value = id;
 
-      const errorDiv = fixture.debugElement.query(By.css('div'));
+        fixture.detectChanges();
+        tick();
 
-      expect(input.value).toEqual(id);
-      expect(errorDiv).toBe(errorFlag);
+        expect(fixture.componentInstance.myEntityId).toBe(id);
+        expect(input.value).toEqual(id);
+
+        const errorDiv = fixture.debugElement.query(By.css('div'));
+        if (shouldHaveError) {
+          expect(errorDiv).toBeTruthy();
+        } else {
+          expect(errorDiv).toBeNull();
+        }
+      });
     }
 
-    beforeEach(() => fixture = initTest(NgModelTest, IdValidatorDirective));
-    
-    it('should raise errors with an invalid id', fakeAsync(() => testIdValidity('TestItemDPUH', null)));
-    it('should accept a valid id', fakeAsync(() => testIdValidity(validId, null))); 
+    beforeEach(() => { fixture = initTest(NgModelTest, IdValidatorDirective); fixture.detectChanges(); });
+
+    it('should raise errors with an invalid id', fakeAsync(() => testIdValidity(invalidIds[0], true)));
+    it('should accept a valid id', fakeAsync(() => testIdValidity(validId, false)));
   });
 });
 
@@ -110,10 +117,10 @@ class FormControlTest {
   selector: 'entity-template-form',
   template: `
     <form #entity="ngForm">
-      <input id="entity-id" name="entity-id" #entityId="ngModel" [(ngModel)]="myEntityId" ncvIdValidator>
-      <div *ngIf="entityId.hasError('invalidId')">This id is already being used</div>
+      <input name="entity-id" #entityId="ngModel" [(ngModel)]="myEntityId" ncvIdValidator>
+      <div *ngIf="entityId.hasError('invalidId')">😠</div>
     </form>`
 })
 class NgModelTest {
-  myEntityId: string;
+  myEntityId = '';
 }
