@@ -94,7 +94,10 @@ describe('IdValidatorDirective', () => {
       });
     }
 
-    beforeEach(() => { fixture = initTest(NgModelTest, IdValidatorDirective); fixture.detectChanges(); });
+    beforeEach(() => {
+      fixture = initTest(NgModelTest, IdValidatorDirective);
+      fixture.detectChanges();
+    });
 
     it('should raise errors with an invalid id', fakeAsync(() => testIdValidity(invalidIds[0], true)));
     it('should accept a valid id', fakeAsync(() => testIdValidity(validId, false)));
