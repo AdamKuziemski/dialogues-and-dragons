@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { IdValidatorDirective } from './id-validator.directive';
@@ -21,7 +21,7 @@ describe('IdValidatorDirective', () => {
       declarations: [component, ...directives],
       imports: [CommonModule, FormsModule, ReactiveFormsModule],
       providers: [GameService]
-    });
+    }).compileComponents();
     return TestBed.createComponent(component);
   }
 
@@ -74,42 +74,57 @@ describe('IdValidatorDirective', () => {
   describe('Template driven form', () => {
     let fixture: ComponentFixture<NgModelTest>;
 
-    function testIdValidity(id: string, shouldHaveError: Boolean) {
-      fixture.whenStable().then(() => {
-        const input = fixture.debugElement.query(By.css('input')).nativeElement;
-        input.value = id;
-
-        fixture.detectChanges();
-        tick();
-
-        expect(fixture.componentInstance.myEntityId).toBe(id);
-        expect(input.value).toEqual(id);
-
-        const errorDiv = fixture.debugElement.query(By.css('div'));
-        if (shouldHaveError) {
-          expect(errorDiv).toBeTruthy();
-        } else {
-          expect(errorDiv).toBeNull();
-        }
-      });
-    }
-
-    beforeEach(() => {
+    it('should raise errors with an invalid id', fakeAsync(() => {
       fixture = initTest(NgModelTest, IdValidatorDirective);
       fixture.detectChanges();
-    });
+      tick();
 
-    it('should raise errors with an invalid id', fakeAsync(() => testIdValidity(invalidIds[0], true)));
-    it('should accept a valid id', fakeAsync(() => testIdValidity(validId, false)));
+      const id = invalidIds[0];
+      const inputControl = fixture.debugElement.children[0].injector.get(NgForm).control.get('entityId');
+      const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+
+      expect(inputControl.hasError('invalidId')).toBe(false);
+      expect(inputElement.value).toBe('');
+      
+      inputElement.value = id;
+      inputElement.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+      tick();
+      
+      expect(fixture.componentInstance.myEntityId).toBe(id);
+      expect(inputControl.hasError('invalidId')).toBe(true);
+      expect(inputElement.value).toBe(id);
+    }));
+
+    it('should accept a valid id', fakeAsync(() => {
+      fixture = initTest(NgModelTest, IdValidatorDirective);
+      fixture.detectChanges();
+      tick();
+
+      const id = validId;
+      const inputControl = fixture.debugElement.children[0].injector.get(NgForm).control.get('entityId');
+      const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+
+      expect(inputControl.hasError('invalidId')).toBe(false);
+      expect(inputElement.value).toBe('');
+      
+      inputElement.value = id;
+      inputElement.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+      tick();
+      
+      expect(fixture.componentInstance.myEntityId).toBe(id);
+      expect(inputControl.hasError('invalidId')).toBe(false);
+      expect(inputElement.value).toBe(id);
+    }));
   });
 });
 
 @Component({
-  selector: 'entity-reactive-form',
-  template: `
-    <form [formGroup]="form">
-      <input type="text" formControlName="entityId">
-    </form>`
+  selector: 'ncv-entity-reactive-form',
+  template: `<form [formGroup]="form"><input type="text" formControlName="entityId"></form>`
 })
 class FormControlTest {
   control: FormControl;
@@ -117,13 +132,12 @@ class FormControlTest {
 }
 
 @Component({
-  selector: 'entity-template-form',
-  template: `
-    <form #entity="ngForm">
-      <input name="entity-id" #entityId="ngModel" [(ngModel)]="myEntityId" ncvIdValidator>
-      <div *ngIf="entityId.hasError('invalidId')">😠</div>
-    </form>`
+  selector: 'ncv-entity-template-form',
+  template: `<form><input name="entityId" [(ngModel)]="myEntityId" ncvIdValidator></form>`
 })
 class NgModelTest {
+  constructor(public game: GameService) {
+    this.game.setGame(createTestGame());
+  }
   myEntityId = '';
 }
