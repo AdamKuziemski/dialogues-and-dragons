@@ -19,7 +19,7 @@ export class Actor extends GameObject {
   }
 
   public removeItem(id: string, count = 1): void {
-    if (!this.hasItem(id) || count < 0) {
+    if (!this.hasItem(id) || count <= 0) {
       return;
     }
 
