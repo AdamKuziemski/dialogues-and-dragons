@@ -45,21 +45,49 @@ describe('IdValidatorDirective', () => {
 
   describe('Reactive form', () => {
     let fixture: ComponentFixture<FormControlTest>;
+    let entityForm: FormGroup;
 
-    function testIdValidity(id: string, errorFlag: boolean) {
-      const entityForm = new FormGroup({ 'entityId': new FormControl(id, directive.validator) });
-      fixture.componentInstance.form = entityForm;
-      fixture.detectChanges();
-
-      const input = fixture.debugElement.query(By.css('input'));
-      expect(input.nativeElement.value).toEqual(id);
-      expect(entityForm.controls['entityId'].hasError('invalidId')).toBe(errorFlag);
-    }
+    const hasError = () => entityForm.controls['entityId'].hasError('invalidId');
+    const getErrorDiv = () => fixture.debugElement.query(By.css('div'));
+    const getInput = () => fixture.debugElement.query(By.css('input')).nativeElement;
 
     beforeEach(() => fixture = initTest(FormControlTest, IdValidatorDirective));
 
-    it('should raise errors with invalid ids', () => invalidIds.forEach(id => testIdValidity(id, true)));
-    it('should accept valid ids', () => testIdValidity(validId, false));
+    it('should raise errors with an invalid id', fakeAsync(() => {
+      const id = invalidIds[0];
+
+      entityForm = new FormGroup({ 'entityId': new FormControl(id, directive.validator) });
+
+      expect(getInput().value).toEqual('', 'input value should not be set before detectChanges');
+      expect(hasError()).toBe(true, 'control should have an error in the beginning');
+      expect(getErrorDiv()).toBeNull('error div should not be visible before detectChanges');
+
+      fixture.componentInstance.form = entityForm;
+      fixture.detectChanges();
+      tick();
+
+      expect(getInput().value).toEqual(id, 'input value should set after detectChanges');
+      expect(hasError()).toBe(true, 'control should still have an error');
+      expect(getErrorDiv()).toBeTruthy('error div should be visible after detectChanges');
+    }));
+
+    it('should accept valid ids', fakeAsync(() => {
+      const id = validId;
+      
+      entityForm = new FormGroup({ 'entityId': new FormControl(id, directive.validator) });
+
+      expect(getInput().value).toEqual('', 'input value should not be set before detectChanges');
+      expect(hasError()).toBe(false, 'control should not have an error for a valid id');
+      expect(getErrorDiv()).toBeNull('error div should not be visible before detectChanges');
+
+      fixture.componentInstance.form = entityForm;
+      fixture.detectChanges();
+      tick();
+
+      expect(getInput().value).toEqual(id, 'input value should set after detectChanges');
+      expect(hasError()).toBe(false, 'control should not have an error for a valid id');
+      expect(getErrorDiv()).toBeNull('error div should not be visible for a valid id');
+    }));
   });
 
   describe('Template driven form', () => {
@@ -68,16 +96,18 @@ describe('IdValidatorDirective', () => {
       let page = new ModelPage();
 
       tick();
-      expect(page.inputControl.hasError('invalidId')).toBe(false);
-      expect(page.inputElement.value).toBe('');
+      expect(page.inputElement.value).toBe('', 'input element value should not be set after onInit');
+      expect(page.component.myEntityId).toBe('', 'component bound value should not be set after onInit');
+      expect(page.inputControl.hasError('invalidId')).toBe(false, 'input control should not have an error after onInit');
+      expect(page.errorDiv).toBeNull('there should be no error div after onInit');
       
       page.inputValue = id;
 
       tick();
-      expect(page.inputElement.value).toBe(id);
-      expect(page.component.myEntityId).toBe(id);
-      expect(page.inputControl.hasError('invalidId')).toBe(true);
-      expect(page.errorDiv).toBeTruthy();
+      expect(page.inputElement.value).toBe(id, 'input element value should be ' + id + ' after detectChanges');
+      expect(page.component.myEntityId).toBe(id, 'component bound value should be ' + id + ' after detectChanges');
+      expect(page.inputControl.hasError('invalidId')).toBe(true, 'input control should have an error flag set after detectChanges');
+      expect(page.errorDiv).toBeTruthy('error div should be displayed after detectChanges');
     }));
 
     it('should accept a valid id', fakeAsync(() => {
@@ -85,27 +115,35 @@ describe('IdValidatorDirective', () => {
       let page = new ModelPage();
 
       tick();
-      expect(page.inputControl.hasError('invalidId')).toBe(false);
-      expect(page.inputElement.value).toBe('');
+      expect(page.inputElement.value).toBe('', 'input element value should not be set after onInit');
+      expect(page.component.myEntityId).toBe('', 'component bound value should not be set after onInit');
+      expect(page.inputControl.hasError('invalidId')).toBe(false, 'input control should not have an error after onInit');
+      expect(page.errorDiv).toBeNull('there should be no error div after onInit');
       
       page.inputValue = id;
 
       tick();
-      expect(page.inputElement.value).toBe(id);
-      expect(page.component.myEntityId).toBe(id);
-      expect(page.inputControl.hasError('invalidId')).toBe(false);
-      expect(page.errorDiv).toBeNull();
+      expect(page.inputElement.value).toBe(id, 'input element value should be ' + id + ' after detectChanges');
+      expect(page.component.myEntityId).toBe(id, 'component bound value should be ' + id + ' after detectChanges');
+      expect(page.inputControl.hasError('invalidId')).toBe(false, 'input control should not have an error flag set after detectChanges');
+      expect(page.errorDiv).toBeNull('there should be no error div after detectChanges');
     }));
   });
 });
 
 @Component({
   selector: 'ncv-entity-reactive-form',
-  template: `<form [formGroup]="form"><input type="text" formControlName="entityId"></form>`
+  template: `
+    <form [formGroup]="form">
+      <input type="text" formControlName="entityId">
+      <div *ngIf="entityId.hasError('invalidId')">😠</div>
+    </form>`
 })
 class FormControlTest {
   control: FormControl;
   form: FormGroup;
+
+  get entityId() { return this.form.get('entityId'); }
 }
 
 @Component({
@@ -130,8 +168,8 @@ class ModelPage {
 
   constructor() {
     this.fixture = initTest(NgModelTest, IdValidatorDirective);
-    this.detectChanges();
     this.component = this.fixture.componentInstance;
+    this.fixture.detectChanges();
   }
 
   get inputControl(): AbstractControl { return this.fixture.debugElement.children[0].injector.get(NgForm).control.get('entityId'); }
@@ -141,10 +179,6 @@ class ModelPage {
   set inputValue(value: string) {
     this.inputElement.value = value;
     this.inputElement.dispatchEvent(new Event('input'));
-    this.detectChanges();
-  }
-
-  detectChanges(): void {
     this.fixture.detectChanges();
   }
 
