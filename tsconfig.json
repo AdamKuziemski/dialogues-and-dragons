@@ -20,6 +20,7 @@
       "@dialogue/*": ["app/model/dialogue/*"],
       "@game/*": ["app/model/game/*"],
       "@game-service": ["app/model/game/game.service"],
+      "@quest/*": ["app/model/quest/*"],
       "@responsive-service": ["app/shared/services/responsive.service"],
       "@testing/*": ["app/shared/testing/*"]
     },
