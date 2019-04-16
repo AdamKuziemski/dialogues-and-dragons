@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
+    "start:lan": "ng serve --prod --host 192.168.1.19",
     "build": "ng build",
     "test": "ng test --code-coverage",
     "lint": "ng lint",
