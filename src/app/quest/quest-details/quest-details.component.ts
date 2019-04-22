@@ -13,6 +13,7 @@ import { ResponsiveService } from '@responsive-service';
 export class QuestDetailsComponent implements OnDestroy, OnInit {
   quest: Quest;
   questId: string;
+  currentStage = -1;
 
   private param$: any;
 
@@ -37,5 +38,28 @@ export class QuestDetailsComponent implements OnDestroy, OnInit {
 
   get maximumNameLength(): number { return Quest.maximumNameLength; }
   get maximumDescriptionLength(): number { return Quest.maximumDescriptionLength; }
+
+  get hasSubscription(): boolean { return !!this.param$; }
+
+  isStageOpen(index: number): boolean {
+    return this.currentStage === index;
+  }
+
+  openStage(index: number): void {
+    this.currentStage = index;
+  }
+
+  addStage(): void {
+    this.quest.addStage('');
+
+    requestAnimationFrame(() => {
+      this.currentStage = this.quest.stages.length - 1;
+
+      window.scrollBy({
+        top: 100,
+        behavior: 'smooth'
+      });
+    });
+  }
 
 }

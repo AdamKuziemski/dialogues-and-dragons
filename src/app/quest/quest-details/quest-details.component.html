@@ -1,26 +1,45 @@
-<div class="ncv-full-width" [class.ncv-split-vertical]="responsive.isDesktop()">
-  <mat-card *ngIf="quest">
+<div *ngIf="quest" class="ncv-full-width" [class.ncv-split-vertical]="responsive.isDesktop()">
+  <mat-card>
     <mat-form-field class="ncv-full-width">
-      <textarea #questName [(ngModel)]="quest.name" [maxlength]="maximumNameLength" matInput placeholder="Name"
-        matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+      <input #questName matInput [(ngModel)]="quest.name" [maxlength]="maximumNameLength" placeholder="Name"
+        matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5">
       <mat-hint align="end">{{questName.value?.length || 0}}/{{maximumNameLength}}</mat-hint>
     </mat-form-field>
 
     <mat-form-field class="ncv-full-width">
-      <textarea #questDescription [(ngModel)]="quest.description" [maxlength]="maximumDescriptionLength" matInput
+      <textarea #questDescription matInput [(ngModel)]="quest.description" [maxlength]="maximumDescriptionLength"
         placeholder="Descrpition" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
       <mat-hint align="end">{{questDescription.value?.length || 0}}/{{maximumDescriptionLength}}</mat-hint>
     </mat-form-field>
   </mat-card>
 
-  <mat-card *ngIf="quest">
-    <mat-card-title>
-      Stages
-    </mat-card-title>
-    <mat-list>
-      <mat-list-item *ngFor="let stage of quest.stages" class="ncv-quest-stage">
-        {{stage.journalEntry}}
-      </mat-list-item>
-    </mat-list>
-  </mat-card>
+  <div class="ncv-margin-sides ncv-margin-top">
+
+    <div *ngIf="responsive.isMobile()" class="ncv-vertical-text-splitter">
+      <span>Stages</span>
+    </div>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let stage of quest.stages; let idx = index"
+        [expanded]="isStageOpen(idx)" (opened)="openStage(idx)"
+        class="ncv-full-width">
+
+        <mat-expansion-panel-header>
+          <mat-panel-title class="ncv-trimmed ncv-margin-all">{{ stage.journalEntry }}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="ncv-full-width">
+          <textarea #stageEntry matInput [(ngModel)]="stage.journalEntry" [maxlength]="maximumDescriptionLength"
+            placeholder="Journal entry" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
+          <mat-hint align="end">{{stageEntry.value?.length || 0}}/{{maximumDescriptionLength}}</mat-hint>
+        </mat-form-field>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="ncv-full-width ncv-margin-top-bottom ncv-center-content">
+      <button mat-button mat-raised-button color="primary" (click)="addStage()">Add Quest Stage</button>
+    </div>
+
+  </div>
 </div>
