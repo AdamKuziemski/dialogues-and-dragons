@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-@media only screen and (max-width: 599px) {
-  body {
-    overflow: hidden;
-  }
-}
-
 mat-card {
   margin: 8px;
+  height: fit-content;
+}
+
+.ncv-text {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .ncv-tab-fill-available {
@@ -28,6 +29,32 @@ mat-card {
 
   +.ncv-half-width {
     margin-left: 4%;
+  }
+}
+
+.ncv-trimmed {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ncv-center-content {
+  text-align: center;
+}
+
+.ncv-vertical-text-splitter {
+  @extend .ncv-full-width;
+  @extend .ncv-center-content;
+  @extend .ncv-text;
+
+  margin: 24px 0;
+  line-height: 0.1em;
+  border-bottom: 1px solid #c9c9c9;
+
+  > span {
+    padding: 0 8px; 
+    color: #a2a2a2;
+    background:#fff; 
   }
 }
 
@@ -55,6 +82,34 @@ mat-card {
 
 .ncv-margin-bottom {
   margin-bottom: 8px;
+}
+
+.ncv-margin-top-bottom {
+  margin: 8px 0;
+}
+
+.ncv-margin-all {
+  margin: 8px;
+}
+
+.ncv-pad-top {
+  padding-top: 8px;
+}
+
+.ncv-pad-bottom {
+  padding-bottom: 8px;
+}
+
+.ncv-pad-sides {
+  padding: 0 8px;
+}
+
+.ncv-pad-top-bottom {
+  padding: 8px 0;
+}
+
+.ncv-pad-all {
+  padding: 8px;
 }
 
 .ncv-delete-button {
