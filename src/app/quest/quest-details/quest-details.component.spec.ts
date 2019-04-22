@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -11,14 +10,13 @@ import { MatCardModule, MatExpansionModule, MatInputModule, MatListModule } from
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
 import { createTestGame } from '@game/testing/test-game';
 
-import { Quest } from '@quest/quest';
-
-import { QuestDetailsComponent } from './quest-details.component';
 import { Game } from '@game/game';
 import { GameService } from '@game/game.service';
+import { Quest } from '@quest/quest';
+import { QuestDetailsComponent } from './quest-details.component';
 import { ResponsiveService } from '@responsive-service';
 
-describe('QuestDetailsComponent', () => {
+describe('QuestDetailsComponent', () => { 
   let component: QuestDetailsComponent;
   let fixture: ComponentFixture<QuestDetailsComponent>;
   let activatedRoute = new ActivatedRouteStub();
@@ -49,7 +47,6 @@ describe('QuestDetailsComponent', () => {
         ResponsiveService,
         { provide: ActivatedRoute, useValue: activatedRoute }
       ],
-      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(QuestDetailsComponent);
       component = fixture.componentInstance;
