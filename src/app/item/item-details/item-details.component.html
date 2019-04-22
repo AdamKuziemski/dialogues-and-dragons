@@ -1,5 +1,5 @@
-<div class="ncv-full-width" [class.ncv-split-vertical]="responsive.isDesktop()">
-  <mat-card *ngIf="item">
+<div *ngIf="item" class="ncv-full-width" [class.ncv-split-vertical]="responsive.isDesktop()">
+  <mat-card>
 
     <mat-form-field class="ncv-full-width">
       <textarea #itemName [(ngModel)]="item.name" [maxlength]="maximumNameLength" matInput placeholder="Name"
@@ -15,9 +15,9 @@
       <input type="number" [(ngModel)]="item.weight" matInput placeholder="Weight" />
     </mat-form-field>
 
-    <mat-checkbox [(ngModel)]="item.isCountable">Countable</mat-checkbox>
-    <mat-checkbox [(ngModel)]="item.isWearable">Wearable</mat-checkbox>
-    <mat-checkbox [(ngModel)]="item.isReadable" (ngModelChange)="closeContentPanel()">Readable</mat-checkbox>
+    <mat-checkbox id="countable" [(ngModel)]="item.isCountable">Countable</mat-checkbox>
+    <mat-checkbox id="wearable" [(ngModel)]="item.isWearable">Wearable</mat-checkbox>
+    <mat-checkbox id="readable" [(ngModel)]="item.isReadable" (ngModelChange)="closeContentPanel()">Readable</mat-checkbox>
 
   </mat-card>
 

@@ -78,4 +78,6 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   get maximumNameLength(): number { return Item.maximumNameLength; }
   get maximumDescriptionLength(): number { return Item.maximumDescriptionLength; }
+
+  get hasSubscription(): boolean { return !!this.param$; }
 }
