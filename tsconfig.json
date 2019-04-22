@@ -20,6 +20,9 @@
       "@dialogue/*": ["app/model/dialogue/*"],
       "@game/*": ["app/model/game/*"],
       "@game-service": ["app/model/game/game.service"],
+      "@item/*": ["app/model/item/*"],
+      "@npc/*": ["app/model/npc/*"],
+      "@player": ["app/model/player/player"],
       "@quest/*": ["app/model/quest/*"],
       "@responsive-service": ["app/shared/services/responsive.service"],
       "@testing/*": ["app/shared/testing/*"]
