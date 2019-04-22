@@ -36,11 +36,6 @@ export class QuestDetailsComponent implements OnDestroy, OnInit {
     this.game.quests[this.questId] = this.quest;
   }
 
-  get maximumNameLength(): number { return Quest.maximumNameLength; }
-  get maximumDescriptionLength(): number { return Quest.maximumDescriptionLength; }
-
-  get hasSubscription(): boolean { return !!this.param$; }
-
   isStageOpen(index: number): boolean {
     return this.currentStage === index;
   }
@@ -61,5 +56,10 @@ export class QuestDetailsComponent implements OnDestroy, OnInit {
       });
     });
   }
+
+  get maximumNameLength(): number { return Quest.maximumNameLength; }
+  get maximumDescriptionLength(): number { return Quest.maximumDescriptionLength; }
+
+  get hasSubscription(): boolean { return !!this.param$; }
 
 }
