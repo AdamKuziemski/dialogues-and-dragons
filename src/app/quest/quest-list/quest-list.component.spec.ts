@@ -1,20 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement /*, NO_ERRORS_SCHEMA */ } from '@angular/core';
+import { DebugElement, Predicate } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
 
+import { click } from '@testing/click.function';
 import { createTestGame } from '@game/testing/test-game';
 import { GameService } from '@game-service';
 import { QuestListComponent } from './quest-list.component';
 import { ResponsiveService } from '@responsive-service';
-import { RouterLinkDirectiveStub } from 'app/shared/testing/router-link-directive-stub';
+import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
 
 describe('QuestListComponent', () => {
   let component: QuestListComponent;
-  let questListDebug: DebugElement;
   let fixture: ComponentFixture<QuestListComponent>;
   const testGame = createTestGame();
+  const questCount = Object.keys(testGame.quests).length;
+
+  const elements = (query: Predicate<DebugElement>) => fixture.debugElement.queryAll(query);
+  const linkElements = () => elements(By.directive(RouterLinkDirectiveStub));
+  const routerLinks = () => linkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
+  const randomQuest = () => Math.floor(Math.random() * questCount);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,19 +37,36 @@ describe('QuestListComponent', () => {
       providers: [
         GameService,
         ResponsiveService
-      ],
-      // schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(QuestListComponent);
       component = fixture.componentInstance;
       component.game.setGame(testGame);
-
-      questListDebug = fixture.debugElement;
 
       fixture.detectChanges();
     });
   }));
 
   it('should create', () => expect(component).toBeTruthy());
-  it('should display some quests', () => expect(questListDebug.queryAll(By.css('mat-list-item')).length).not.toBe(0));
+
+  it('should display some quests', () =>
+    expect(elements(By.css('mat-list-item')).length).toBe(Object.keys(testGame.quests).length)
+  );
+
+  it('should get RouterLinks from template', () => {
+    expect(routerLinks().length).toBe(questCount, `should have ${questCount} routerLinks`);
+  });
+
+  it('can click quest links in template', () => {
+    const clickedIndex = randomQuest();
+    const quest = linkElements()[clickedIndex];
+    const link = routerLinks()[clickedIndex];
+
+    expect(link.navigatedTo).toBeNull('should not have navigated yet');
+
+    click(quest);
+    fixture.detectChanges();
+
+    expect(link.navigatedTo).toEqual(['/quest', link.linkParams[1]]);
+  });
 });
