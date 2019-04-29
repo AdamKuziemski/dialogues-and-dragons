@@ -19,10 +19,11 @@ describe('ItemListComponent', () => {
   let testGame: Game;
   let itemCount: number;
 
-  const elements = (query: Predicate<DebugElement>) => fixture.debugElement.queryAll(query);
-  const linkElements = () => elements(By.directive(RouterLinkDirectiveStub));
-  const routerLinks = () => linkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
-  const randomItem = () => Math.floor(Math.random() * itemCount);
+  const getElements = (query: Predicate<DebugElement>) => fixture.debugElement.queryAll(query);
+  const getLinkElements = () => getElements(By.directive(RouterLinkDirectiveStub));
+  const getRouterLinks = () => getLinkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
+  const getRandomItem = () => Math.floor(Math.random() * itemCount);
+  const getItemIDs = () => Object.keys(testGame.items);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -46,7 +47,7 @@ describe('ItemListComponent', () => {
       fixture = TestBed.createComponent(ItemListComponent);
       component = fixture.componentInstance;
       testGame = createTestGame();
-      itemCount = Object.keys(testGame.items).length;
+      itemCount = getItemIDs().length;
 
       component.game.setGame(testGame);
       fixture.detectChanges();
@@ -56,17 +57,17 @@ describe('ItemListComponent', () => {
   it('should create', () => expect(component).toBeTruthy());
 
   it('should display some items', () =>
-    expect(elements(By.css('mat-list-item')).length).toBe(itemCount)
+    expect(getElements(By.css('mat-list-item')).length).toBe(itemCount)
   );
 
   it('should get RouterLinks from template', () => {
-    expect(routerLinks().length).toBe(itemCount, `should have ${itemCount} routerLinks`);
+    expect(getRouterLinks().length).toBe(itemCount, `should have ${itemCount} routerLinks`);
   });
 
   it('should click item links in template', () => {
-    const clickedIndex = randomItem();
-    const item = linkElements()[clickedIndex];
-    const link = routerLinks()[clickedIndex];
+    const clickedIndex = getRandomItem();
+    const item = getLinkElements()[clickedIndex];
+    const link = getRouterLinks()[clickedIndex];
 
     expect(link.navigatedTo).toBeNull('should not have navigated yet');
 
@@ -79,12 +80,12 @@ describe('ItemListComponent', () => {
   it('should react to adding items', () => {
     component.game.createItem('HelloUniqueItem', 'Some unique item');
     fixture.detectChanges();
-    expect(elements(By.css('mat-list-item')).length).toBe(itemCount + 1);
+    expect(getElements(By.css('mat-list-item')).length).toBe(itemCount + 1);
   });
 
   it('should react to removing items', () => {
-    const deletedIndex = randomItem();
-    const button = elements(By.css('button'))[deletedIndex];
+    const deletedIndex = getRandomItem();
+    const button = getElements(By.css('button'))[deletedIndex];
 
     spyOn(component, 'deleteItem').and.callThrough();
     click(button);
@@ -92,6 +93,6 @@ describe('ItemListComponent', () => {
     fixture.detectChanges();
 
     expect(component.deleteItem).toHaveBeenCalled();
-    expect(Object.keys(testGame.items).length).toBe(itemCount - 1);
+    expect(getItemIDs().length).toBe(itemCount - 1);
   });
 });
