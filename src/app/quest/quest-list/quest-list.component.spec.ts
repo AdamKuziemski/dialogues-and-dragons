@@ -6,6 +6,7 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@a
 
 import { click } from '@testing/click.function';
 import { createTestGame } from '@game/testing/test-game';
+import { Game } from '@game/game';
 import { GameService } from '@game-service';
 import { QuestListComponent } from './quest-list.component';
 import { ResponsiveService } from '@responsive-service';
@@ -14,13 +15,14 @@ import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
 describe('QuestListComponent', () => {
   let component: QuestListComponent;
   let fixture: ComponentFixture<QuestListComponent>;
-  const testGame = createTestGame();
-  const questCount = Object.keys(testGame.quests).length;
+  let testGame: Game;
+  let questCount: number;
 
-  const elements = (query: Predicate<DebugElement>) => fixture.debugElement.queryAll(query);
-  const linkElements = () => elements(By.directive(RouterLinkDirectiveStub));
-  const routerLinks = () => linkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
-  const randomQuest = () => Math.floor(Math.random() * questCount);
+  const getElements = (query: Predicate<DebugElement>) => fixture.debugElement.queryAll(query);
+  const getLinkElements = () => getElements(By.directive(RouterLinkDirectiveStub));
+  const getRouterLinks = () => getLinkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
+  const getRandomQuest = () => Math.floor(Math.random() * questCount);
+  const getQuestIDs = () => Object.keys(testGame.quests);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,6 +43,9 @@ describe('QuestListComponent', () => {
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(QuestListComponent);
       component = fixture.componentInstance;
+      testGame = createTestGame();
+      questCount = getQuestIDs().length;
+
       component.game.setGame(testGame);
 
       fixture.detectChanges();
@@ -50,17 +55,17 @@ describe('QuestListComponent', () => {
   it('should create', () => expect(component).toBeTruthy());
 
   it('should display some quests', () =>
-    expect(elements(By.css('mat-list-item')).length).toBe(Object.keys(testGame.quests).length)
+    expect(getElements(By.css('mat-list-item')).length).toBe(questCount)
   );
 
   it('should get RouterLinks from template', () => {
-    expect(routerLinks().length).toBe(questCount, `should have ${questCount} routerLinks`);
+    expect(getRouterLinks().length).toBe(questCount, `should have ${questCount} routerLinks`);
   });
 
-  it('can click quest links in template', () => {
-    const clickedIndex = randomQuest();
-    const quest = linkElements()[clickedIndex];
-    const link = routerLinks()[clickedIndex];
+  it('should click quest links in template', () => {
+    const clickedIndex = getRandomQuest();
+    const quest = getLinkElements()[clickedIndex];
+    const link = getRouterLinks()[clickedIndex];
 
     expect(link.navigatedTo).toBeNull('should not have navigated yet');
 
@@ -68,5 +73,24 @@ describe('QuestListComponent', () => {
     fixture.detectChanges();
 
     expect(link.navigatedTo).toEqual(['/quest', link.linkParams[1]]);
+  });
+
+  it('should react to adding quests', () => {
+    component.game.createQuest('VeryUniqueMissableQuest', 'This is quest is so missable even Chuck Norris finds it only 99.9% of the time');
+    fixture.detectChanges();
+    expect(getElements(By.css('mat-list-item')).length).toBe(questCount + 1);
+  });
+
+  it('should react to removing quests', () => {
+    const deletedIndex = getRandomQuest();
+    const button = getElements(By.css('button'))[deletedIndex];
+
+    spyOn(component, 'deleteQuest').and.callThrough();
+    click(button);
+
+    fixture.detectChanges();
+
+    expect(component.deleteQuest).toHaveBeenCalled();
+    expect(getQuestIDs().length).toBe(questCount - 1);
   });
 });
