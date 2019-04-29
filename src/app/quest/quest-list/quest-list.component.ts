@@ -19,7 +19,7 @@ export class QuestListComponent implements OnInit {
   }
 
   deleteQuest(event: MouseEvent, id: string): void {
-    event.preventDefault();
+    event.stopPropagation();
     this.game.removeQuest(id);
   }
 }

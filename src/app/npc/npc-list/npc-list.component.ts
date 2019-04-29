@@ -19,7 +19,7 @@ export class NpcListComponent implements OnInit {
   }
 
   deleteNPC(event: MouseEvent, id: string): void {
-    event.preventDefault();
+    event.stopPropagation();
     this.game.removeNPC(id);
   }
 }

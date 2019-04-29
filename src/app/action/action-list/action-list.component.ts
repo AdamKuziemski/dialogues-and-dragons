@@ -70,7 +70,7 @@ export class ActionListComponent implements OnInit {
   }
 
   deleteAction(event: MouseEvent, index: number): void {
-    event.preventDefault();
+    event.stopPropagation();
     this.actionContainer.removeAction(index);
   }
 
