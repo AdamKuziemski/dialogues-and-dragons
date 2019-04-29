@@ -2,7 +2,8 @@ import { DebugElement } from 'jasmine-core';
 
 export class MouseClick {
   constructor(public button: number) {}
-  stopPropagation() {}
+  stopPropagation() {} // stops the event from bubbling up the event chain
+  preventDefault() {} // prevents the default action the browser makes on that event
 }
 
 export const ButtonClick = {
