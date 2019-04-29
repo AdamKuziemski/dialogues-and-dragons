@@ -1,13 +1,20 @@
 import { DebugElement } from 'jasmine-core';
 
-export const ButtonClickEvents = {
-  left:  { button: 0 },
-  middle: { button: 1},
-  right: { button: 2 }
+export class MouseClick {
+  constructor(public button: number) {}
+  stopPropagation() {}
+}
+
+export const ButtonClick = {
+  left: 0,
+  middle: 1,
+  right: 2
 };
 
+export type Clicked = DebugElement | HTMLElement;
+
 /** Simulate element click. Defaults to mouse left-button click event. */
-export function click(el: DebugElement | HTMLElement, eventObj: any = ButtonClickEvents.left): void {
+export function click(el: Clicked, eventObj: MouseClick = new MouseClick(ButtonClick.left)): void {
  if (el instanceof HTMLElement) {
    el.click();
  } else {
