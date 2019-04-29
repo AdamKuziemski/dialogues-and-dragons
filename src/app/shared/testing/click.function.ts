@@ -6,7 +6,7 @@ export class MouseClick {
   preventDefault() {} // prevents the default action the browser makes on that event
 }
 
-export const ButtonClick = {
+export const MouseButton = {
   left: 0,
   middle: 1,
   right: 2
@@ -15,7 +15,7 @@ export const ButtonClick = {
 export type Clicked = DebugElement | HTMLElement;
 
 /** Simulate element click. Defaults to mouse left-button click event. */
-export function click(el: Clicked, eventObj: MouseClick = new MouseClick(ButtonClick.left)): void {
+export function click(el: Clicked, eventObj: MouseClick = new MouseClick(MouseButton.left)): void {
  if (el instanceof HTMLElement) {
    el.click();
  } else {
