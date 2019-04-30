@@ -53,10 +53,10 @@ describe('QuestListComponent', () => {
   }));
 
   it('should create', () => expect(component).toBeTruthy());
-
-  it('should display some quests', () =>
-    expect(getElements(By.css('mat-list-item')).length).toBe(questCount)
-  );
+  
+  it('should display some quests', () => {
+    expect(getElements(By.css('mat-list-item')).length).toBe(questCount, `should have ${questCount} list items`);
+  });
 
   it('should get RouterLinks from template', () => {
     expect(getRouterLinks().length).toBe(questCount, `should have ${questCount} routerLinks`);
@@ -72,13 +72,13 @@ describe('QuestListComponent', () => {
     click(quest);
     fixture.detectChanges();
 
-    expect(link.navigatedTo).toEqual(['/quest', link.linkParams[1]]);
+    expect(link.navigatedTo).toEqual(['/quest', link.linkParams[1]], 'should navigate to correct parameters');
   });
 
   it('should react to adding quests', () => {
     component.game.createQuest('VeryUniqueMissableQuest', 'This is quest is so missable even Chuck Norris finds it only 99.9% of the time');
     fixture.detectChanges();
-    expect(getElements(By.css('mat-list-item')).length).toBe(questCount + 1);
+    expect(getElements(By.css('mat-list-item')).length).toBe(questCount + 1, 'should display one more list item');
   });
 
   it('should react to removing quests', () => {
@@ -91,6 +91,6 @@ describe('QuestListComponent', () => {
     fixture.detectChanges();
 
     expect(component.deleteQuest).toHaveBeenCalled();
-    expect(getQuestIDs().length).toBe(questCount - 1);
+    expect(getQuestIDs().length).toBe(questCount - 1, 'should remove a quest from the service');
   });
 });

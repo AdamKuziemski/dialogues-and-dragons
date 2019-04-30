@@ -56,9 +56,9 @@ describe('ItemListComponent', () => {
 
   it('should create', () => expect(component).toBeTruthy());
 
-  it('should display some items', () =>
-    expect(getElements(By.css('mat-list-item')).length).toBe(itemCount)
-  );
+  it('should display some items', () => {
+    expect(getElements(By.css('mat-list-item')).length).toBe(itemCount, `should have ${itemCount} list items`);
+  });
 
   it('should get RouterLinks from template', () => {
     expect(getRouterLinks().length).toBe(itemCount, `should have ${itemCount} routerLinks`);
@@ -74,13 +74,13 @@ describe('ItemListComponent', () => {
     click(item);
     fixture.detectChanges();
 
-    expect(link.navigatedTo).toEqual(['/item', link.linkParams[1]]);
+    expect(link.navigatedTo).toEqual(['/item', link.linkParams[1]], 'should navigate to correct parameters');
   });
 
   it('should react to adding items', () => {
-    component.game.createItem('HelloUniqueItem', 'Some unique item');
+    component.game.createItem('PonyMadeOfDiamondsCauseYouRich', 'Butt Stallion');
     fixture.detectChanges();
-    expect(getElements(By.css('mat-list-item')).length).toBe(itemCount + 1);
+    expect(getElements(By.css('mat-list-item')).length).toBe(itemCount + 1, 'should display one more list item');
   });
 
   it('should react to removing items', () => {
@@ -93,6 +93,6 @@ describe('ItemListComponent', () => {
     fixture.detectChanges();
 
     expect(component.deleteItem).toHaveBeenCalled();
-    expect(getItemIDs().length).toBe(itemCount - 1);
+    expect(getItemIDs().length).toBe(itemCount - 1, 'should remove an item from the service');
   });
 });
