@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, Inject, ViewChild } from '@angular/core';
+
+import { MatDialogRef, MAT_DIALOG_DATA, MatSelect } from '@angular/material';
 
 import { Item } from 'app/model/item/item';
 import { NPC } from 'app/model/npc/npc';
@@ -17,6 +18,8 @@ export interface EntityData {
   styleUrls: ['./add-entity.component.scss']
 })
 export class AddEntityDialogComponent {
+  @ViewChild(MatSelect) typeSelect: MatSelect;
+
   constructor(
     public dialogRef: MatDialogRef<AddEntityDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EntityData
