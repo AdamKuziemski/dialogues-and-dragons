@@ -89,4 +89,42 @@ describe('NpcDetailsComponent', () => {
 
     expect(routerLink.navigatedTo).toEqual(expectedLink);
   });
+
+  xit('should double bind inputs', fakeAsync(() => {
+    tick();
+
+    const initialMerchantValue = component.npc.isMerchant;
+
+    const nameArea = fixture.debugElement.query(By.css('textarea'));
+    const moneyInput = fixture.debugElement.query(By.css('input[type=number]'));
+    const genderSelect = fixture.debugElement.query(By.css('mat-select'));
+    const merchantCheckbox = fixture.debugElement.query(By.css('#merchant'));
+    const merchantClickable = fixture.debugElement.query(By.css('#merchant label'));
+
+    const changeValue = (input: DebugElement, newValue: string | number) => {
+      input.nativeElement.value = newValue;
+      input.nativeElement.dispatchEvent(new Event('input'));
+    }
+
+    expect(nameArea).not.toBeNull();
+    expect(moneyInput).not.toBeNull();
+    expect(genderSelect).not.toBeNull();
+    expect(merchantCheckbox).not.toBeNull();
+    expect(merchantClickable).not.toBeNull();
+
+    expect(nameArea.nativeElement.value).toBe(component.npc.name, 'name input binds with NPC name');
+    expect(moneyInput.nativeElement.value).toBe('' + component.npc.money, 'money input binds with NPC money');
+    // expect(genderSelect.nativeElement.selected).toBe(component.npc.gender, 'gender select binds with NPC gender');
+
+    changeValue(nameArea, 'NewTestName');
+    changeValue(moneyInput, 666);
+    click(merchantClickable.nativeElement);
+
+    fixture.detectChanges();
+    tick();
+
+    expect(component.npc.name).toBe('NewTestName', 'NPC name changes when name input changes value');
+    expect(component.npc.money).toBe(666, 'NPC money changes when money input changes value');
+    expect(component.npc.isMerchant).toBe(!initialMerchantValue, 'NPC merchant flag changes when merchant checkbox is clicked');
+  }));
 });
