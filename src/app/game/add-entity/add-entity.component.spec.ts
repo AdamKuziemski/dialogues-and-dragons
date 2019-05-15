@@ -14,9 +14,7 @@ import { click } from '@testing/click.function';
 
 import { AddEntityDialogComponent } from './add-entity.component';
 
-@Component({
-  template: ''
-})
+@Component({ template: '' })
 class NoopComponent { }
 
 const TEST_DIRECTIVES = [
