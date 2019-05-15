@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
@@ -17,7 +18,6 @@ import { GameService } from '@game-service';
 import { Item } from '@item/item';
 import { ItemDetailsComponent } from './item-details.component';
 import { ResponsiveService } from '@responsive-service';
-import { DebugElement } from '@angular/core';
 
 describe('ItemDetailsComponent', () => {
   let component: ItemDetailsComponent;
