@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-// import { NO_ERRORS_SCHEMA } from '@angular/core';
-// import { By } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
+import { DebugElement, Predicate } from '@angular/core';
 
 import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
 
+import { click } from '@testing/click.function';
+import { createTestGame } from '@game/testing/test-game';
+import { Game } from '@game/game';
 import { GameService } from '@game-service';
 import { NpcListComponent } from './npc-list.component';
 import { ResponsiveService } from '@responsive-service';
@@ -12,6 +15,14 @@ import { RouterLinkDirectiveStub } from 'app/shared/testing/router-link-directiv
 describe('NpcListComponent', () => {
   let component: NpcListComponent;
   let fixture: ComponentFixture<NpcListComponent>;
+  let testGame: Game;
+  let npcCount: number;
+
+  const getElements = (query: Predicate<DebugElement>) => fixture.debugElement.queryAll(query);
+  const getLinkElements = () => getElements(By.directive(RouterLinkDirectiveStub));
+  const getRouterLinks = () => getLinkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
+  const getRandomNPC = () => Math.floor(Math.random() * npcCount);
+  const getNpcIDs = () => Object.keys(testGame.npcs);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -28,14 +39,57 @@ describe('NpcListComponent', () => {
       providers: [
         GameService,
         ResponsiveService
-      ],
-      // schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(NpcListComponent);
       component = fixture.componentInstance;
+      testGame = createTestGame();
+      npcCount = getNpcIDs().length;
+
+      component.game.setGame(testGame);
       fixture.detectChanges();
     });
   }));
 
   it('should create', () => expect(component).toBeTruthy());
+  
+  it('should display some NPCs', () => {
+    expect(getElements(By.css('mat-list-item')).length).toBe(npcCount, `should have ${npcCount} routerLinks`);
+  });
+
+  it('should get RouterLinks from template', () => {
+    expect(getRouterLinks().length).toBe(npcCount, `should have ${npcCount} routerLinks`);
+  });
+
+  it('should click NPC links in template', () => {
+    const clickedIndex = getRandomNPC();
+    const item = getLinkElements()[clickedIndex];
+    const link = getRouterLinks()[clickedIndex];
+
+    expect(link.navigatedTo).toBeNull('should not have navigated yet');
+
+    click(item);
+    fixture.detectChanges();
+
+    expect(link.navigatedTo).toEqual(['/npc', link.linkParams[1]], 'should navigate to correct parameters');
+  });
+
+  it('should react to adding NPCs', () => {
+    component.game.createNPC('KhargonianMixGeckoMaineCoon', 'Pawprints-On-Snow-Under-A-Tree');
+    fixture.detectChanges();
+    expect(getElements(By.css('mat-list-item')).length).toBe(npcCount + 1, 'should display one more list item');
+  });
+
+  it('should react to removing NPCs', () => {
+    const deletedIndex = getRandomNPC();
+    const button = getElements(By.css('button'))[deletedIndex];
+
+    spyOn(component, 'deleteNPC').and.callThrough();
+    click(button);
+
+    fixture.detectChanges();
+
+    expect(component.deleteNPC).toHaveBeenCalled();
+    expect(getNpcIDs().length).toBe(npcCount - 1, 'should remove an NPC from the service');
+  });
 });

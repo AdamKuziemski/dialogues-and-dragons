@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { NPC } from 'app/model/npc/npc';
+import { NPC } from '@npc/npc';
 
 import { GameService } from '@game-service';
 import { ResponsiveService } from '@responsive-service';
@@ -36,4 +36,6 @@ export class NpcDetailsComponent implements OnInit {
   }
 
   get maximumNameLength(): number { return NPC.maximumNameLength; }
+
+  get hasSubscription(): boolean { return !!this.param$; }
 }
