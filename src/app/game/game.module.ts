@@ -11,7 +11,7 @@ import { ItemModule } from '../item/item.module';
 import { NpcModule } from '../npc/npc.module';
 import { QuestModule } from '../quest/quest.module';
 
-import { GameService } from '../model/game/game.service';
+import { GameService } from '@game-service';
 
 import { GameComponent } from './game.component';
 import { GameDetailsComponent } from './game-details/game-details.component';
