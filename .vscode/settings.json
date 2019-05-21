@@ -4,5 +4,6 @@
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
   "editor.fontLigatures": true,
-  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace"
+  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.acceptSuggestionOnCommitCharacter": false
 }
