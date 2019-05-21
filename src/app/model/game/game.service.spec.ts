@@ -1,4 +1,5 @@
 import { GameService } from './game.service';
+import { Player } from '@player';
 
 describe('GameService', () => {
   const badIdentifiers = ['test', '', null, undefined];
@@ -58,7 +59,7 @@ describe('GameService', () => {
     it('should have a player', () => expect(service.player).toBeTruthy());
 
     it('should return actors', () => {
-      expect(service.actor('player')).toBeTruthy();
+      expect(service.actor(Player.globalId)).toBeTruthy();
       expect(service.actor('DBLucienLachance')).toBeTruthy();
     });
   });

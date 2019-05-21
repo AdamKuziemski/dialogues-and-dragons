@@ -2,6 +2,7 @@ import { Directive, forwardRef } from '@angular/core';
 import { NG_VALIDATORS, AbstractControl, FormControl, Validator, ValidatorFn, ValidationErrors } from '@angular/forms';
 
 import { GameService } from '@game/game.service';
+import { Player } from '@player';
 
 function validateIdFactory(isInvalidId: (value: string) => boolean): ValidatorFn {
   return (c: AbstractControl): ValidationErrors => {
@@ -29,7 +30,7 @@ export class IdValidatorDirective implements Validator {
   }
 
   hasId(value: string): boolean {
-    return value === 'player' ||
+    return value === Player.globalId ||
       this.game.items.hasOwnProperty(value) ||
       this.game.npcs.hasOwnProperty(value) ||
       this.game.quests.hasOwnProperty(value);

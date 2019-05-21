@@ -8,9 +8,10 @@ import { IdValidatorDirective } from './id-validator.directive';
 
 import { GameService } from '@game/game.service';
 import { createTestGame } from '@game/testing/test-game';
+import { Player } from '@player';
 
 describe('IdValidatorDirective', () => {
-  const invalidIds = ['TestItemDPUH', 'TestNPCTester', 'TestQuestPlumberBros', 'player'];
+  const invalidIds = ['TestItemDPUH', 'TestNPCTester', 'TestQuestPlumberBros', Player.globalId];
   const validId = 'TestVeryUniqueValidId';
 
   let gameService: GameService;

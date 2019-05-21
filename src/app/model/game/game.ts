@@ -6,13 +6,13 @@ import { Quest } from '../quest/quest';
 export class Game {
   constructor(public title: string) { }
 
-  items = {};
-  itemTypes: string[] = [];
-
   player: Player = null;
-  npcs = {};
 
-  quests = {};
+  itemTypes: string[] = [];
+  
+  items = new Map<string, Item>();
+  npcs = new Map<string, NPC>();
+  quests = new Map<string, Quest>();
 
   createItem(id: string, name: string): Item {
     if (!this.hasItem(id)) {
@@ -50,7 +50,7 @@ export class Game {
   }
 
   hasItem(id: string): boolean {
-    return this.items.hasOwnProperty(id);
+    return this.items.has(id);
   }
 
   hasItemType(name: string): boolean {
@@ -62,28 +62,22 @@ export class Game {
   }
 
   hasNPC(id: string): boolean {
-    return this.npcs.hasOwnProperty(id);
+    return this.npcs.has(id);
   }
 
   hasQuest(id: string): boolean {
-    return this.quests.hasOwnProperty(id);
+    return this.quests.has(id);
   }
 
-  removeItem(id: string): void {
-    if (this.hasItem(id)) {
-      delete this.items[id];
-    }
+  removeItem(id: string): boolean {
+    return this.items.delete(id);
   }
 
-  removeNPC(id: string): void {
-    if (this.hasNPC(id)) {
-      delete this.npcs[id];
-    }
+  removeNPC(id: string): boolean {
+    return this.npcs.delete(id);
   }
 
-  removeQuest(id: string): void {
-    if (this.hasQuest(id)) {
-      delete this.quests[id];
-    }
+  removeQuest(id: string): boolean {
+    return this.quests.delete(id);
   }
 }

@@ -56,8 +56,8 @@ export class GameService {
     return (this.game && this.game.hasItem(id)) ? this.game.items[id].clone() : null;
   }
 
-  get items(): Object {
-    return this.game ? this.game.items : {};
+  get items(): Map<string, Item> {
+    return this.game ? this.game.items : new Map<string, Item>();
   }
 
   removeItem(id: string): void {
@@ -71,11 +71,15 @@ export class GameService {
       return null;
     }
 
-    if (id === 'player') {
+    if (id === Player.globalId) {
       return this.player;
     } else {
       return this.npc(id);
     }
+  }
+
+  get actors(): Map<string, Actor> {
+    return new Map<string, Actor>(this.npcs).set(Player.globalId, this.player);
   }
 
   createPlayer(name: string): Player {
@@ -101,8 +105,8 @@ export class GameService {
     return (this.game && this.game.hasNPC(id)) ? this.game.npcs[id] : null;
   }
 
-  get npcs(): Object {
-    return this.game ? this.game.npcs : {};
+  get npcs(): Map<string, NPC> {
+    return this.game ? this.game.npcs : new Map<string, NPC>();
   }
 
   removeNPC(id: string): void {
@@ -125,8 +129,8 @@ export class GameService {
     return (this.game && this.game.hasQuest(id)) ? this.game.quests[id] : null;
   }
 
-  get quests(): Object {
-    return this.game ? this.game.quests : {};
+  get quests(): Map<string, Quest> {
+    return this.game ? this.game.quests : new Map<string, Quest>();
   }
 
   removeQuest(id: string): void {
