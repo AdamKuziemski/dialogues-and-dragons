@@ -53,7 +53,7 @@ export class GameService {
   }
 
   item(id: string): Item {
-    return (this.game && this.game.hasItem(id)) ? this.game.items[id].clone() : null;
+    return (this.game && this.game.hasItem(id)) ? this.game.items.get(id).clone() : null;
   }
 
   get items(): Map<string, Item> {
@@ -102,7 +102,7 @@ export class GameService {
   }
 
   npc(id: string): NPC {
-    return (this.game && this.game.hasNPC(id)) ? this.game.npcs[id] : null;
+    return (this.game && this.game.hasNPC(id)) ? this.game.npcs.get(id) : null;
   }
 
   get npcs(): Map<string, NPC> {
@@ -126,7 +126,7 @@ export class GameService {
   }
 
   quest(id: string): Quest {
-    return (this.game && this.game.hasQuest(id)) ? this.game.quests[id] : null;
+    return (this.game && this.game.hasQuest(id)) ? this.game.quests.get(id) : null;
   }
 
   get quests(): Map<string, Quest> {

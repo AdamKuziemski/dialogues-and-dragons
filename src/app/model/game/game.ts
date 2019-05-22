@@ -9,17 +9,17 @@ export class Game {
   player: Player = null;
 
   itemTypes: string[] = [];
-  
+
   items = new Map<string, Item>();
   npcs = new Map<string, NPC>();
   quests = new Map<string, Quest>();
 
   createItem(id: string, name: string): Item {
     if (!this.hasItem(id)) {
-      this.items[id] = new Item(name);
+      this.items.set(id, new Item(name));
     }
 
-    return this.items[id];
+    return this.items.get(id);
   }
 
   createItemType(name: string): void {
@@ -35,18 +35,18 @@ export class Game {
 
   createNPC(id: string, name: string): NPC {
     if (!this.hasNPC(id)) {
-      this.npcs[id] = new NPC(name);
+      this.npcs.set(id, new NPC(name));
     }
 
-    return this.npcs[id];
+    return this.npcs.get(id);
   }
 
   createQuest(id: string, name: string): Quest {
     if (!this.hasQuest(id)) {
-      this.quests[id] = new Quest(name);
+      this.quests.set(id, new Quest(name));
     }
 
-    return this.quests[id];
+    return this.quests.get(id);
   }
 
   hasItem(id: string): boolean {
