@@ -1,38 +1,29 @@
-import { Action, ActionValue } from './action.interface';
-import { ActionResult } from './action-result';
+import { Action, ActionResult } from './action.interface';
+import { ActionParameter, PicklistParameter } from './action-parameter';
 
 import { GameObject } from '../game-object';
+import { Actor } from '../actor/actor';
+import { Item } from '@item/item';
+import { Player } from '@player';
 
 export class RemoveItem extends GameObject implements Action {
   readonly name = 'Remove Item';
-  readonly hasCount = true;
-  readonly hasTargetId = true;
-  readonly hasValue = true;
-  readonly targetType = 'actor'
 
-  count = 1;
-  targetId = '';
-  value = '';
+  targetId = new PicklistParameter<Actor>(Player.globalId, () => RemoveItem.game.actors);
+  itemId = new PicklistParameter<Item>('', () => RemoveItem.game.items);
+  count = new ActionParameter<number>(1);
 
   constructor() {
     super();
   }
 
   perform(): ActionResult {
-    const target = RemoveItem.game.actor(this.targetId);
+    const target = RemoveItem.game.actor(this.targetId.value);
     if (target === null) {
-      return new ActionResult(false, `Actor '${this.targetId}' doesn't exist.`);
+      return new ActionResult(false, `Actor '${this.targetId.value}' doesn't exist.`);
     }
 
-    target.removeItem(this.value, this.count);
+    target.removeItem(this.itemId.value, this.count.value);
     return new ActionResult(true);
-  }
-
-  getTargets(): Object {
-    return RemoveItem.game.npcs;
-  }
-
-  getValues(): ActionValue[] {
-    return [];
   }
 }

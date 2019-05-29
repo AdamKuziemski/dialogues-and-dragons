@@ -1,6 +1,7 @@
 import { Dialogue } from '../dialogue';
 
 import { AddItem } from '@action/add-item.action';
+import { Player } from '@player';
 
 export function createTestDialogue(): Dialogue {
   const testDialogue = new Dialogue();
@@ -13,10 +14,13 @@ export function createTestDialogue(): Dialogue {
   testDialogue.topics[0].addLine(`It's so exciting!`);
   testDialogue.topics[0].addLine(`I'm Karma, by the way.`);
   testDialogue.topics[0].addLine(`What's your name?`);
-  testDialogue.topics[0].addAction(new AddItem());
-  testDialogue.topics[0].actions[0].targetId = 'Player';
-  testDialogue.topics[0].actions[0].value = 'Potion';
-  testDialogue.topics[0].actions[0].count = 5;
+
+  const potionAction = new AddItem();
+  potionAction.targetId.value = Player.globalId;
+  potionAction.itemId.value = 'Potion';
+  potionAction.count.value = 5;
+
+  testDialogue.topics[0].addAction(potionAction);
 
   testDialogue.topics[0].addTopic('My name is... (Huh?) My name is... (What?) My name is (chka-chka) Slim Shady.');
   testDialogue.topic([0, 0]).addLine('Nice. Mind if I call you Marshall?');
