@@ -18,7 +18,7 @@ export interface EntityData {
   styleUrls: ['./add-entity.component.scss']
 })
 export class AddEntityDialogComponent {
-  @ViewChild(MatSelect) typeSelect: MatSelect;
+  @ViewChild(MatSelect, { static: true }) typeSelect: MatSelect;
 
   constructor(
     public dialogRef: MatDialogRef<AddEntityDialogComponent>,
