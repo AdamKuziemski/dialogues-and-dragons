@@ -3,8 +3,11 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule, MatDialogModule, MatIconModule, MatTabsModule } from '@angular/material';
-import { MatDialog } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialog } from '@angular/material/dialog';
 
 import { GameComponent } from './game.component';
 import { GameService } from '@game/game.service';

@@ -5,7 +5,10 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatCardModule, MatExpansionModule, MatInputModule, MatListModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
 import { createTestGame } from '@game/testing/test-game';
@@ -23,7 +26,7 @@ describe('QuestDetailsComponent', () => {
 
   let testGame: Game;
   const testQuestId = 'TestQuestPlumberBros';
-  const testQuest = () => testGame.quests[testQuestId];
+  const testQuest = () => testGame.quests.get(testQuestId);
 
   beforeEach(() => {
     activatedRoute.setParamMap({ id: testQuestId });

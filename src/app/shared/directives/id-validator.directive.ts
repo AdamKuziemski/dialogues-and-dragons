@@ -9,7 +9,7 @@ function validateIdFactory(isInvalidId: (value: string) => boolean): ValidatorFn
     return isInvalidId(c.value as string) ? {
       invalidId: true
     } : null;
-  }
+  };
 }
 
 @Directive({
@@ -20,19 +20,19 @@ function validateIdFactory(isInvalidId: (value: string) => boolean): ValidatorFn
 })
 export class IdValidatorDirective implements Validator {
   validator: ValidatorFn;
-  
+
   constructor(public game: GameService) {
     this.validator = validateIdFactory(this.hasId.bind(this));
   }
-  
+
   validate(c: FormControl): ValidationErrors {
     return this.validator(c);
   }
 
   hasId(value: string): boolean {
     return value === Player.globalId ||
-      this.game.items.hasOwnProperty(value) ||
-      this.game.npcs.hasOwnProperty(value) ||
-      this.game.quests.hasOwnProperty(value);
+      this.game.items.has(value) ||
+      this.game.npcs.has(value) ||
+      this.game.quests.has(value);
   }
 }

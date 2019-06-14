@@ -6,7 +6,10 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatCardModule, MatCheckboxModule, MatExpansionModule, MatInputModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
 
 import { ActionModule } from '../../action/action.module';
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
@@ -26,7 +29,7 @@ describe('ItemDetailsComponent', () => {
 
   let testGame: Game;
   const testItemId = 'TestItemPotion';
-  const testItem = () => testGame.items[testItemId];
+  const testItem = () => testGame.items.get(testItemId);
 
   beforeEach(() => {
     activatedRoute.setParamMap({ id: testItemId });

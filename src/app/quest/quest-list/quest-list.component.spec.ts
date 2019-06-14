@@ -2,7 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, Predicate } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 import { click } from '@testing/click.function';
 import { createTestGame } from '@game/testing/test-game';
@@ -22,7 +25,6 @@ describe('QuestListComponent', () => {
   const getLinkElements = () => getElements(By.directive(RouterLinkDirectiveStub));
   const getRouterLinks = () => getLinkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
   const getRandomQuest = () => Math.floor(Math.random() * questCount);
-  const getQuestIDs = () => Object.keys(testGame.quests);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,7 +46,7 @@ describe('QuestListComponent', () => {
       fixture = TestBed.createComponent(QuestListComponent);
       component = fixture.componentInstance;
       testGame = createTestGame();
-      questCount = getQuestIDs().length;
+      questCount = testGame.quests.size;
 
       component.game.setGame(testGame);
 
@@ -91,6 +93,6 @@ describe('QuestListComponent', () => {
     fixture.detectChanges();
 
     expect(component.deleteQuest).toHaveBeenCalled();
-    expect(getQuestIDs().length).toBe(questCount - 1, 'should remove a quest from the service');
+    expect(testGame.quests.size).toBe(questCount - 1, 'should remove a quest from the service');
   });
 });

@@ -74,7 +74,7 @@ describe('IdValidatorDirective', () => {
 
     it('should accept valid ids', fakeAsync(() => {
       const id = validId;
-      
+
       entityForm = new FormGroup({ 'entityId': new FormControl(id, directive.validator) });
 
       expect(getInput().value).toEqual('', 'input value should not be set before detectChanges');
@@ -97,14 +97,16 @@ describe('IdValidatorDirective', () => {
       let page = new ModelPage();
 
       tick();
+
       expect(page.inputElement.value).toBe('', 'input element value should not be set after onInit');
       expect(page.component.myEntityId).toBe('', 'component bound value should not be set after onInit');
       expect(page.inputControl.hasError('invalidId')).toBe(false, 'input control should not have an error after onInit');
       expect(page.errorDiv).toBeNull('there should be no error div after onInit');
-      
+
       page.inputValue = id;
 
       tick();
+
       expect(page.inputElement.value).toBe(id, 'input element value should be ' + id + ' after detectChanges');
       expect(page.component.myEntityId).toBe(id, 'component bound value should be ' + id + ' after detectChanges');
       expect(page.inputControl.hasError('invalidId')).toBe(true, 'input control should have an error flag set after detectChanges');
@@ -120,7 +122,7 @@ describe('IdValidatorDirective', () => {
       expect(page.component.myEntityId).toBe('', 'component bound value should not be set after onInit');
       expect(page.inputControl.hasError('invalidId')).toBe(false, 'input control should not have an error after onInit');
       expect(page.errorDiv).toBeNull('there should be no error div after onInit');
-      
+
       page.inputValue = id;
 
       tick();

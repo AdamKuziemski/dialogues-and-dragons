@@ -4,7 +4,10 @@ import { DebugElement } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
-import { MatCardModule, MatCheckboxModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
 import { createTestGame } from '@game/testing/test-game';
@@ -23,7 +26,7 @@ describe('NpcDetailsComponent', () => {
   let testGame: Game;
 
   const testNpcId = 'TestNPCQuestGiver';
-  const testNPC = () => testGame.npcs[testNpcId];
+  const testNPC = () => testGame.npcs.get(testNpcId);
 
   beforeEach(() => {
     activatedRoute.setParamMap({ id: testNpcId });

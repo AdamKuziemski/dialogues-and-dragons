@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AddEntityDialogComponent } from './add-entity/add-entity.component';
 import { GameService } from '@game/game.service';
 import { ResponsiveService } from '@responsive-service';

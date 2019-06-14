@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { MatCardModule, MatTabsModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
 import { createTestDialogue } from '@dialogue/testing/test-dialogue';
@@ -13,11 +14,11 @@ import { ResponsiveService } from '@responsive-service';
 describe('DialogueComponent', () => {
   let component: DialogueComponent;
   let fixture: ComponentFixture<DialogueComponent>;
-  let activatedRoute = new ActivatedRouteStub();
+  const activatedRoute = new ActivatedRouteStub();
   const testNPC = 'TestNPCGossip';
 
   const testGame = createTestGame();
-  testGame.npcs[testNPC].dialogue = createTestDialogue();
+  testGame.npcs.get(testNPC).dialogue = createTestDialogue();
 
   beforeEach(() => activatedRoute.setParamMap({ id: testNPC }));
 

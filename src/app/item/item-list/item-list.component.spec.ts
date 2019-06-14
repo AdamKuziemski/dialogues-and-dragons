@@ -3,7 +3,11 @@ import { DebugElement, Predicate } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 import { click } from '@testing/click.function';
 import { createTestGame } from '@game/testing/test-game';
@@ -23,7 +27,6 @@ describe('ItemListComponent', () => {
   const getLinkElements = () => getElements(By.directive(RouterLinkDirectiveStub));
   const getRouterLinks = () => getLinkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
   const getRandomItem = () => Math.floor(Math.random() * itemCount);
-  const getItemIDs = () => Object.keys(testGame.items);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,7 +50,7 @@ describe('ItemListComponent', () => {
       fixture = TestBed.createComponent(ItemListComponent);
       component = fixture.componentInstance;
       testGame = createTestGame();
-      itemCount = getItemIDs().length;
+      itemCount = testGame.items.size;
 
       component.game.setGame(testGame);
       fixture.detectChanges();
@@ -93,6 +96,6 @@ describe('ItemListComponent', () => {
     fixture.detectChanges();
 
     expect(component.deleteItem).toHaveBeenCalled();
-    expect(getItemIDs().length).toBe(itemCount - 1, 'should remove an item from the service');
+    expect(testGame.items.size).toBe(itemCount - 1, 'should remove an item from the service');
   });
 });

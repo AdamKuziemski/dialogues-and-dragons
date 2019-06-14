@@ -1,6 +1,7 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatSelect } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSelect } from '@angular/material/select';
 
 import { Item } from 'app/model/item/item';
 import { NPC } from 'app/model/npc/npc';
