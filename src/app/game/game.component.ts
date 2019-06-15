@@ -39,7 +39,7 @@ export class GameComponent implements OnInit {
       if (!result) {
         return;
       }
-      
+
       if (result.type === 'item') {
         this.game.createItem(result.id, result.name);
       } else if (result.type === 'npc') {

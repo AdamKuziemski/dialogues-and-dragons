@@ -19,12 +19,12 @@ import { Quest } from '@quest/quest';
 import { QuestDetailsComponent } from './quest-details.component';
 import { ResponsiveService } from '@responsive-service';
 
-describe('QuestDetailsComponent', () => { 
+describe('QuestDetailsComponent', () => {
   let component: QuestDetailsComponent;
   let fixture: ComponentFixture<QuestDetailsComponent>;
-  let activatedRoute = new ActivatedRouteStub();
-
   let testGame: Game;
+
+  const activatedRoute = new ActivatedRouteStub();
   const testQuestId = 'TestQuestPlumberBros';
   const testQuest = () => testGame.quests.get(testQuestId);
 

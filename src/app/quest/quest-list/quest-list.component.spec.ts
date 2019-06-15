@@ -55,7 +55,7 @@ describe('QuestListComponent', () => {
   }));
 
   it('should create', () => expect(component).toBeTruthy());
-  
+
   it('should display some quests', () => {
     expect(getElements(By.css('mat-list-item')).length).toBe(questCount, `should have ${questCount} list items`);
   });

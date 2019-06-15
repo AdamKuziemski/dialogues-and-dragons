@@ -22,9 +22,9 @@ import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
 describe('NpcDetailsComponent', () => {
   let component: NpcDetailsComponent;
   let fixture: ComponentFixture<NpcDetailsComponent>;
-  let activatedRoute = new ActivatedRouteStub();
   let testGame: Game;
 
+  const activatedRoute = new ActivatedRouteStub();
   const testNpcId = 'TestNPCQuestGiver';
   const testNPC = () => testGame.npcs.get(testNpcId);
 
@@ -107,7 +107,7 @@ describe('NpcDetailsComponent', () => {
     const changeValue = (input: DebugElement, newValue: string | number) => {
       input.nativeElement.value = newValue;
       input.nativeElement.dispatchEvent(new Event('input'));
-    }
+    };
 
     expect(nameArea).not.toBeNull();
     expect(moneyInput).not.toBeNull();

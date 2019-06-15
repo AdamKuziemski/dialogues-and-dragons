@@ -17,7 +17,7 @@ export class ActionDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: Action
   ) {
     this.initialData = data.clone<Action>();
-    this.dialogRef.beforeClose().subscribe(
+    this.dialogRef.beforeClosed().subscribe(
       result => result === undefined ? this.onCancel() : this.onSave()
     );
   }

@@ -7,7 +7,9 @@ export class ActionParameter<T> {
 
   value: T;
 
-  get type(): string { return this.value.constructor.name.toLocaleLowerCase(); }
+  get type(): string {
+    return this.value.constructor.name.toLocaleLowerCase();
+  }
 }
 
 export class PicklistParameter<T> extends ActionParameter<string> {
@@ -24,7 +26,9 @@ export class PicklistParameter<T> extends ActionParameter<string> {
   possibleValues: () => Map<string, T>;
   labelField: string;
 
-  get type(): string { return 'picklist'; }
+  get type(): string {
+    return 'picklist';
+  }
 }
 
 export class RandomizedParameter extends ActionParameter<number> {

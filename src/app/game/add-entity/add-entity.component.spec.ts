@@ -70,7 +70,7 @@ describe('AddEntityDialogComponent', () => {
     noop.detectChanges();
 
     return dialog.openDialogs[0].componentInstance;
-  }
+  };
 
   it('should open with a preselected type and a disabled save button', fakeAsync(() => {
     const component = createDialog();

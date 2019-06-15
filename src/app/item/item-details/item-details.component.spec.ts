@@ -25,9 +25,9 @@ import { ResponsiveService } from '@responsive-service';
 describe('ItemDetailsComponent', () => {
   let component: ItemDetailsComponent;
   let fixture: ComponentFixture<ItemDetailsComponent>;
-  let activatedRoute = new ActivatedRouteStub();
-
   let testGame: Game;
+
+  const activatedRoute = new ActivatedRouteStub();
   const testItemId = 'TestItemPotion';
   const testItem = () => testGame.items.get(testItemId);
 
@@ -109,7 +109,7 @@ describe('ItemDetailsComponent', () => {
     const changeValue = (input: DebugElement, newValue: string | number) => {
       input.nativeElement.value = newValue;
       input.nativeElement.dispatchEvent(new Event('input'));
-    }
+    };
 
     expect(nameArea).not.toBeNull();
     expect(valueInput).not.toBeNull();
