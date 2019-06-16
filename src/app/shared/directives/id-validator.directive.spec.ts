@@ -45,14 +45,14 @@ describe('IdValidatorDirective', () => {
   });
 
   describe('Reactive form', () => {
-    let fixture: ComponentFixture<FormControlTest>;
+    let fixture: ComponentFixture<FormControlTestComponent>;
     let entityForm: FormGroup;
 
     const hasError = () => entityForm.controls['entityId'].hasError('invalidId');
     const getErrorDiv = () => fixture.debugElement.query(By.css('div'));
     const getInput = () => fixture.debugElement.query(By.css('input')).nativeElement;
 
-    beforeEach(() => fixture = initTest(FormControlTest, IdValidatorDirective));
+    beforeEach(() => fixture = initTest(FormControlTestComponent, IdValidatorDirective));
 
     it('should raise errors with an invalid id', fakeAsync(() => {
       const id = invalidIds[0];
@@ -94,7 +94,7 @@ describe('IdValidatorDirective', () => {
   describe('Template driven form', () => {
     it('should raise errors with an invalid id', fakeAsync(() => {
       const id = invalidIds[0];
-      let page = new ModelPage();
+      const page = new ModelPage();
 
       tick();
 
@@ -115,7 +115,7 @@ describe('IdValidatorDirective', () => {
 
     it('should accept a valid id', fakeAsync(() => {
       const id = validId;
-      let page = new ModelPage();
+      const page = new ModelPage();
 
       tick();
       expect(page.inputElement.value).toBe('', 'input element value should not be set after onInit');
@@ -142,7 +142,7 @@ describe('IdValidatorDirective', () => {
       <div *ngIf="entityId.hasError('invalidId')">😠</div>
     </form>`
 })
-class FormControlTest {
+class FormControlTestComponent {
   control: FormControl;
   form: FormGroup;
 
@@ -158,7 +158,7 @@ class FormControlTest {
     </form>
   `
 })
-class NgModelTest {
+class NgModelTestComponent {
   constructor(public game: GameService) {
     this.game.setGame(createTestGame());
   }
@@ -166,11 +166,11 @@ class NgModelTest {
 }
 
 class ModelPage {
-  fixture: ComponentFixture<NgModelTest>;
-  component: NgModelTest;
+  fixture: ComponentFixture<NgModelTestComponent>;
+  component: NgModelTestComponent;
 
   constructor() {
-    this.fixture = initTest(NgModelTest, IdValidatorDirective);
+    this.fixture = initTest(NgModelTestComponent, IdValidatorDirective);
     this.component = this.fixture.componentInstance;
     this.fixture.detectChanges();
   }
