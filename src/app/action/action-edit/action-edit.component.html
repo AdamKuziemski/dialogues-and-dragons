@@ -1,17 +1,20 @@
 <div class="ncv-action-form">
-  <mat-form-field>
-    <mat-label>Action Type</mat-label>
-    <mat-select [ngModel]="action?.name" (ngModelChange)="handleTypeChange($event)" [compareWith]="compareActions">
-      <mat-option *ngFor="let availableAction of actions" [value]="availableAction">
-        {{ availableAction.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div>
+    <mat-form-field>
+      <mat-label>Action Type</mat-label>
+      <mat-select [ngModel]="editedAction?.name" (ngModelChange)="handleTypeChange($event)"
+        [compareWith]="compareActions">
+        <mat-option *ngFor="let availableAction of actions" [value]="availableAction">
+          {{ availableAction.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <div *ngFor="let param of parameters">
 
     <mat-form-field *ngIf="param[1].type ==='picklist';else anInput">
-      <mat-label>{{ param[0] }}</mat-label>
+      <mat-label>{{ param[0] | splitUpperCase | titlecase }}</mat-label>
       <mat-select [(ngModel)]="param[1].value">
         <mat-option *ngFor="let option of param[1].possibleValues() | keyvalue" [value]="option.key">
           {{ option.value[param[1].labelField] }}
@@ -22,12 +25,12 @@
     <ng-template #anInput>
       <mat-form-field>
         <input matInput
-              type="param[1].type"
-              [placeholder]="param[0] | splitUpperCase | titlecase"
-              [(ngModel)]="param[1].value">
+          type="param[1].type"
+          [placeholder]="param[0] | splitUpperCase | titlecase"
+          [(ngModel)]="param[1].value">
       </mat-form-field>
     </ng-template>
 
   </div>
-  
+
 </div>

@@ -1,10 +1,20 @@
 <div *ngIf="responsive.isMobile()" class="ncv-action-code-clickable" (click)="handleActionClick($event)">
-    <span *ngIf="action?.hasTargetId">{{ action?.targetId | removeSpaces }}.</span>
 
-    <span class="ncv-action-name">{{ action?.name | removeSpaces }}</span>
+    <span *ngIf="target">{{ target?.value | removeSpaces }}.</span>
+    <span class="ncv-action-name">{{ displayedAction?.name | removeSpaces }}</span>
+    <span *ngIf="parameters.length > 0">
+        (
+        <span *ngFor="let param of parameters; let last = last">
+            <span [class.ncv-string-value]="param.type === 'string' || param.type === 'picklist'"
+                  [class.ncv-number-value]="param.type === 'number'">
+                {{ param.value }}
+            </span>
+            <span *ngIf="!last">,</span>
+        </span>
+        );
+    </span>
 
-    (<span *ngIf="action?.hasValue" class="ncv-action-value">{{ action?.value | removeSpaces }}</span>
-    <span *ngIf="action?.hasCount === action?.hasValue">, </span>
-    <span *ngIf="action?.hasCount" class="ncv-action-count">{{ action?.count }}</span>);
 </div>
-<ncv-action-edit *ngIf="responsive.isDesktop()" [action]="action" (actionChange)="handleActionChange($event)"></ncv-action-edit>
+
+<ncv-action-edit *ngIf="responsive.isDesktop()" [action]="displayedAction" (actionChange)="handleActionChange($event)">
+</ncv-action-edit>
