@@ -9,7 +9,7 @@ import { Player } from '@player';
 export class AddItem extends GameObject implements Action {
   readonly name = 'Add Item';
 
-  targetId = new PicklistParameter<Actor>(Player.globalId, () => AddItem.game.actors);
+  targetId = new PicklistParameter<Actor>(Player.globalId, () => AddItem.game.actors, true);
   itemId = new PicklistParameter<Item>('', () => AddItem.game.items);
   count = new ActionParameter<number>(1);
 

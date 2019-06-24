@@ -9,7 +9,7 @@ import { Player } from '@player';
 export class RemoveItem extends GameObject implements Action {
   readonly name = 'Remove Item';
 
-  targetId = new PicklistParameter<Actor>(Player.globalId, () => RemoveItem.game.actors);
+  targetId = new PicklistParameter<Actor>(Player.globalId, () => RemoveItem.game.actors, true);
   itemId = new PicklistParameter<Item>('', () => RemoveItem.game.items);
   count = new ActionParameter<number>(1);
 

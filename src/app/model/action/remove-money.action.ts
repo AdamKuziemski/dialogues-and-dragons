@@ -7,8 +7,8 @@ import { Player } from '@player';
 
 export class RemoveMoney extends GameObject implements Action {
   readonly name = 'Remove Money';
-  
-  targetId = new PicklistParameter<Actor>(Player.globalId, () => RemoveMoney.game.actors);
+
+  targetId = new PicklistParameter<Actor>(Player.globalId, () => RemoveMoney.game.actors, true);
   count = new ActionParameter<number>(0);
 
   constructor() {
