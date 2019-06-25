@@ -1,10 +1,11 @@
 import { Action } from './action.interface';
-import { Cloneable } from '../cloneable.interface';
+import { GameObject } from '../game-object';
 
 import lazy from 'lazy-eval';
 
-export class ActionParameter<T> implements Cloneable {
+export class ActionParameter<T> extends GameObject {
   constructor(defaultValue: T, public isInstanceParam = false) {
+    super();
     this.value = defaultValue;
   }
 
@@ -12,16 +13,6 @@ export class ActionParameter<T> implements Cloneable {
 
   get type(): string {
     return this.value.constructor.name.toLocaleLowerCase();
-  }
-
-  clone<S>(): S {
-    const otherHalf = new (this.constructor as { new(): S });
-    Object.keys(this).forEach(key => otherHalf[key] = this[key]);
-    return otherHalf;
-  }
-
-  cloneArray<S>(howMany: number): S[] {
-    return howMany > 0 ? Array.from({ length: howMany }, () => this.clone<S>()) : [];
   }
 }
 
