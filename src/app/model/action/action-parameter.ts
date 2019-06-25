@@ -20,7 +20,7 @@ export class PicklistParameter<T> extends ActionParameter<string> {
   constructor(
     defaultValue: string,
     possibleValues: () => Map<string, T>, // needs to be lazily evaluated
-    isInstanceParam = false,
+    isInstanceParam: boolean = false,
     labelField: string = 'name'
   ) {
     super(defaultValue, isInstanceParam);
