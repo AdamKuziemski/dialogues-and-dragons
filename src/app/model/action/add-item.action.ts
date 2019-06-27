@@ -23,7 +23,15 @@ export class AddItem extends GameObject implements Action {
       return new ActionResult(false, `Actor '${this.targetId.value}' doesn't exist.`);
     }
 
-    target.addItem(this.itemId.value, this.count.value);
-    return new ActionResult(true);
+    if (this.count.value <= 0) {
+      return new ActionResult(false, `Cannot add ${this.count.value} items.`);
+    }
+
+    try {
+      target.addItem(this.itemId.value, this.count.value);
+      return new ActionResult(true);
+    } catch (error) {
+      return new ActionResult(false, error.message);
+    }
   }
 }
