@@ -31,7 +31,7 @@ describe('AddItem', () => {
 
   it('should result in false when trying to perform on a non existent item', () => {
     const action = new AddItem();
-    const badItem = 'HelloIDoNotExistEitherCoincidence?';
+    const badItem = 'HelloIDoNotExist';
 
     action.itemId.value = badItem;
 
@@ -52,7 +52,7 @@ describe('AddItem', () => {
 
   it('should result in false when trying to perform on a non existent actor', () => {
     const action = new AddItem();
-    const badActor = 'HelloIDoNotExistAndNeverWill';
+    const badActor = 'HelloIDoNotExist';
 
     action.targetId.value = badActor;
 
@@ -63,12 +63,16 @@ describe('AddItem', () => {
 
   it('should successfully perform with correct parameters', () => {
     const action = new AddItem();
+    const target = service.actor(action.targetId.value);
     const item = service.items.keys().next().value;
+
+    spyOn(target, 'addItem').and.callThrough();
+
     action.itemId.value = item;
 
     const result = action.perform();
-
     expect(result.success).toBe(true);
-    expect(service.actor(action.targetId.value).hasItem(item)).toBe(true);
+    expect(target.hasItem(item)).toBe(true);
+    expect(target.addItem).toHaveBeenCalled();
   });
 });
