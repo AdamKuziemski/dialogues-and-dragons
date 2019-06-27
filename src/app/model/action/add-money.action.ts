@@ -9,7 +9,7 @@ export class AddMoney extends GameObject implements Action {
   readonly name = 'Add Money';
 
   targetId = new PicklistParameter<Actor>(Player.globalId, () => AddMoney.game.actors, true);
-  count = new ActionParameter<number>(0);
+  amount = new ActionParameter<number>(0);
 
   constructor() {
     super();
@@ -21,7 +21,11 @@ export class AddMoney extends GameObject implements Action {
       return new ActionResult(false, `Actor '${this.targetId.value}' doesn't exist.`);
     }
 
-    target.addMoney(this.count.value);
-    return new ActionResult(true);
+    try {
+      target.addMoney(this.amount.value);
+      return new ActionResult(true);
+    } catch (error) {
+      return new ActionResult(false, error.message);
+    }
   }
 }
