@@ -10,7 +10,7 @@ export class Actor extends GameObject {
     super();
   }
 
-  public addItem(id: string, count = 1): void {
+  addItem(id: string, count = 1): void {
     if (this.hasItem(id)) {
       this.increaseItemCount(id, count);
     } else {
@@ -18,7 +18,7 @@ export class Actor extends GameObject {
     }
   }
 
-  public removeItem(id: string, count = 1): void {
+  removeItem(id: string, count = 1): void {
     if (!this.hasItem(id) || count <= 0) {
       return;
     }
@@ -30,7 +30,7 @@ export class Actor extends GameObject {
     }
   }
 
-  public hasItem(id: string): boolean {
+  hasItem(id: string): boolean {
     if (id === null || id === undefined || id === '') {
       return false;
     }
@@ -38,7 +38,7 @@ export class Actor extends GameObject {
     return this.backpack.hasOwnProperty(id);
   }
 
-  public getItemCount(id: string): number {
+  getItemCount(id: string): number {
     if (this.hasItem(id)) {
       const item = this.getItem(id);
       return (Array.isArray(item) ? item.length : item.count);
@@ -46,16 +46,16 @@ export class Actor extends GameObject {
     return 0;
   }
 
-  public getItem(id: string): Item | Item[] {
+  getItem(id: string): Item | Item[] {
     return this.hasItem(id) ? this.backpack[id] : null;
   }
 
-  public getBackpack(): Item[] {
+  getBackpack(): Item[] {
     return Object.keys(this.backpack)
       .reduce((pack, id) => pack.concat(this.backpack[id]), []);
   }
 
-  public addMoney(amount: number): void {
+  addMoney(amount: number): void {
     if (amount < 0) {
       throw Error('Cannot remove money when adding it');
     }
@@ -63,18 +63,26 @@ export class Actor extends GameObject {
     this.money += amount;
   }
 
-  public removeMoney(amount: number): void {
+  removeMoney(amount: number): void {
+    if (amount < 0) {
+      throw Error('Cannot add money by removing a negative value');
+    }
+
     if ((this.money -= amount) < 0) {
       this.money = 0;
     }
   }
 
-  public hasMoney(amount: number): boolean {
+  hasMoney(amount: number): boolean {
     return this.money >= amount;
   }
 
   private createItem(id: string, count: number): void {
     const newItem = Actor.game.item(id);
+
+    if (newItem === null) {
+      throw Error(`Cannot add an item that does not exist (id: ${id})`);
+    }
 
     if (newItem.isCountable) {
       newItem.count = count;
