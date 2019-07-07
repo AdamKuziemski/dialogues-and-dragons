@@ -20,11 +20,7 @@ export class AddItem extends GameObject implements Action {
   perform(): ActionResult {
     const target = AddItem.game.actor(this.targetId.value);
     if (target === null) {
-      return new ActionResult(false, `Actor '${this.targetId.value}' doesn't exist.`);
-    }
-
-    if (this.count.value <= 0) {
-      return new ActionResult(false, `Cannot add ${this.count.value} items.`);
+      return new ActionResult(false, `Actor '${this.targetId.value}' doesn't exist`);
     }
 
     try {

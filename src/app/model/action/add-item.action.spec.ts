@@ -30,7 +30,7 @@ describe('AddItem', () => {
   });
 
   it('should result in false when trying to perform on a non existent item', () => {
-    const action = new AddItem();
+    const action = new AddItem(); 
     const badItem = 'HelloIDoNotExist';
 
     action.itemId.value = badItem;
@@ -47,7 +47,7 @@ describe('AddItem', () => {
 
     const result = action.perform();
     expect(result.success).toBe(false);
-    expect(result.error).toBe(`Cannot add -1 items.`);
+    expect(result.error).toBe(`Cannot remove an item by adding a negative value`);
   });
 
   it('should result in false when trying to perform on a non existent actor', () => {
@@ -58,7 +58,7 @@ describe('AddItem', () => {
 
     const result = action.perform();
     expect(result.success).toBe(false);
-    expect(result.error).toBe(`Actor '${badActor}' doesn't exist.`);
+    expect(result.error).toBe(`Actor '${badActor}' doesn't exist`);
   });
 
   it('should successfully perform with correct parameters', () => {
