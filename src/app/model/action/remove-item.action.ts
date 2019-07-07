@@ -11,7 +11,7 @@ export class RemoveItem extends GameObject implements Action {
 
   targetId = new PicklistParameter<Actor>(Player.globalId, () => RemoveItem.game.actors, true);
   itemId = new PicklistParameter<Item>('', () => RemoveItem.game.items);
-  count = new ActionParameter<number>(1);
+  amount = new ActionParameter<number>(1);
 
   constructor() {
     super();
@@ -20,10 +20,14 @@ export class RemoveItem extends GameObject implements Action {
   perform(): ActionResult {
     const target = RemoveItem.game.actor(this.targetId.value);
     if (target === null) {
-      return new ActionResult(false, `Actor '${this.targetId.value}' doesn't exist.`);
+      return new ActionResult(false, `Actor '${this.targetId.value}' doesn't exist`);
     }
 
-    target.removeItem(this.itemId.value, this.count.value);
-    return new ActionResult(true);
+    try {
+      target.removeItem(this.itemId.value, this.amount.value);
+      return new ActionResult(true);
+    } catch (error) {
+      return new ActionResult(false, error.message);
+    }
   }
 }
