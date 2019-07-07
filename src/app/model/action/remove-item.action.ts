@@ -11,7 +11,7 @@ export class RemoveItem extends GameObject implements Action {
 
   targetId = new PicklistParameter<Actor>(Player.globalId, () => RemoveItem.game.actors, true);
   itemId = new PicklistParameter<Item>('', () => RemoveItem.game.items);
-  amount = new ActionParameter<number>(1);
+  count = new ActionParameter<number>(1);
 
   constructor() {
     super();
@@ -24,7 +24,7 @@ export class RemoveItem extends GameObject implements Action {
     }
 
     try {
-      target.removeItem(this.itemId.value, this.amount.value);
+      target.removeItem(this.itemId.value, this.count.value);
       return new ActionResult(true);
     } catch (error) {
       return new ActionResult(false, error.message);

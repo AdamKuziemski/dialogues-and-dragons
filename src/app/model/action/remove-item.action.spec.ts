@@ -26,7 +26,7 @@ describe('RemoveItem', () => {
     expect(action.itemId.value).toBe('');
     expect(action.itemId.possibleValues()).toEqual(service.items);
 
-    expect(action.amount.value).toBe(1);
+    expect(action.count.value).toBe(1);
   });
 
   it('should result in false when trying to perform on an item the target does not have', () => {
@@ -47,7 +47,7 @@ describe('RemoveItem', () => {
 
     target.addItem(item);
     action.itemId.value = item;
-    action.amount.value = -1;
+    action.count.value = -1;
 
     const result = action.perform();
     expect(result.success).toBe(false);
