@@ -5,7 +5,7 @@ import { JournalEntry } from '../journal/journal-entry';
 
 export class Player extends Actor {
   public static readonly globalId = 'player';
-  
+
   journal: JournalEntry[] = [];
 
   constructor(name: string) {
