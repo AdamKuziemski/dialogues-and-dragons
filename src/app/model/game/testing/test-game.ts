@@ -3,6 +3,7 @@ import { createTestDialogue } from '../../dialogue/testing/test-dialogue';
 
 export { Game } from '../game'; // convenience
 export { GameService } from '../game.service'; // convenience
+
 export function createTestGame(): Game {
   const testGame = new Game('The Elder Parchments CLIX: The Tiny Cave That Was Not There');
 
