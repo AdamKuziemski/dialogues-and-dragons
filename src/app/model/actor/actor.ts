@@ -24,7 +24,7 @@ export class Actor extends GameObject {
 
   removeItem(id: string, count = 1): void {
     if (!this.hasItem(id)) {
-      throw Error(`Cannot remove an item because it's no in the backpack (id: ${id})`);
+      throw Error(`Cannot remove an item because it's not in the backpack (id: ${id})`);
     }
 
     if (count <= 0) {
