@@ -17,10 +17,14 @@ export class SetQuestStage extends GameObject implements Action {
   perform(): ActionResult {
     const target = SetQuestStage.game.quest(this.questId.value);
     if (target === null) {
-      return new ActionResult(false, `Quest '${this.questId.value}' doesn't exist.`);
+      return new ActionResult(false, `Quest '${this.questId.value}' doesn't exist`);
     }
 
-    target.setStage(this.stage.value);
-    return new ActionResult(true);
+    try {
+      target.setStage(this.stage.value);
+      return new ActionResult(true);
+    } catch (error) {
+      return new ActionResult(false, error.message);
+    }
   }
 }
