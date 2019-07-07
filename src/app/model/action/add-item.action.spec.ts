@@ -1,9 +1,7 @@
 import { AddItem } from './add-item.action';
 
-import { createTestGame } from '@game/testing/test-game';
-import { Game } from '@game/game';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
 import { GameObject } from '../game-object';
-import { GameService } from '@game/game.service';
 import { Player } from '@player';
 
 describe('AddItem', () => {

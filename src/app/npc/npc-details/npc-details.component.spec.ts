@@ -10,14 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
-import { createTestGame } from '@game/testing/test-game';
 import { click } from '@testing/click.function';
-import { Game } from '@game/game';
-import { GameService } from '@game-service';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
+import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
+
 import { NPC } from '@npc/npc';
 import { NpcDetailsComponent } from './npc-details.component';
 import { ResponsiveService } from '@responsive-service';
-import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
 
 describe('NpcDetailsComponent', () => {
   let component: NpcDetailsComponent;

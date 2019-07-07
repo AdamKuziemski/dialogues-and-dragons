@@ -3,6 +3,7 @@ import { Dialogue } from '../dialogue';
 import { AddItem } from '@action/add-item.action';
 import { Player } from '@player';
 
+export { Dialogue } from '../dialogue'; // convenience
 export function createTestDialogue(): Dialogue {
   const testDialogue = new Dialogue();
 

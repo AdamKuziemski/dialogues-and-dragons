@@ -14,10 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ActionModule } from '../../action/action.module';
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
 import { click } from '@testing/click.function';
-import { createTestGame } from '@game/testing/test-game';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
 
-import { Game } from '@game/game';
-import { GameService } from '@game-service';
 import { Item } from '@item/item';
 import { ItemDetailsComponent } from './item-details.component';
 import { ResponsiveService } from '@responsive-service';

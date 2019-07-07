@@ -7,8 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 
-import { createTestGame } from '@game/testing/test-game';
-import { GameService } from '@game-service';
+import { GameService, createTestGame } from '@game/testing/test-game';
 import { GameDetailsComponent } from './game-details.component';
 import { ResponsiveService } from '@responsive-service';
 

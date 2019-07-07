@@ -1,5 +1,4 @@
-import { Dialogue } from './dialogue';
-import { createTestDialogue } from './testing/test-dialogue';
+import { Dialogue, createTestDialogue } from './testing/test-dialogue';
 
 describe('Dialogue', () => {
   describe('Opened', () => {
@@ -9,7 +8,7 @@ describe('Dialogue', () => {
     const startTopic = (index: number) => {
       topic = dialogue.options[index];
       dialogue.startTopic(topic);
-    }
+    };
 
     const startTopicAndSkip = (index: number) => {
       startTopic(index);

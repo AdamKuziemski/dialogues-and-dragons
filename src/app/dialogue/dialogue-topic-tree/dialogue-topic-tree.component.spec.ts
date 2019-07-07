@@ -6,8 +6,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
 
 import { DialogueTopicTreeComponent } from './dialogue-topic-tree.component';
-import { createTestDialogue } from '@dialogue/testing/test-dialogue';
-import { Dialogue } from '@dialogue/dialogue';
+import { Dialogue, createTestDialogue } from '@dialogue/testing/test-dialogue';
 import { ResponsiveService } from '@responsive-service';
 
 describe('DialogueTopicTreeComponent', () => {

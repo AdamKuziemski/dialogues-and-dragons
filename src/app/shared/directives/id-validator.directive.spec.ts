@@ -6,8 +6,7 @@ import { By } from '@angular/platform-browser';
 
 import { IdValidatorDirective } from './id-validator.directive';
 
-import { GameService } from '@game/game.service';
-import { createTestGame } from '@game/testing/test-game';
+import { GameService, createTestGame } from '@game/testing/test-game';
 import { Player } from '@player';
 
 describe('IdValidatorDirective', () => {

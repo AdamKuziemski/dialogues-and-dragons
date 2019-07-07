@@ -11,10 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
-import { createTestGame } from '@game/testing/test-game';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
 
-import { Game } from '@game/game';
-import { GameService } from '@game/game.service';
 import { Quest } from '@quest/quest';
 import { QuestDetailsComponent } from './quest-details.component';
 import { ResponsiveService } from '@responsive-service';

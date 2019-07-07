@@ -8,12 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 import { click } from '@testing/click.function';
-import { createTestGame } from '@game/testing/test-game';
-import { Game } from '@game/game';
-import { GameService } from '@game-service';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
+import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
+
 import { QuestListComponent } from './quest-list.component';
 import { ResponsiveService } from '@responsive-service';
-import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
 
 describe('QuestListComponent', () => {
   let component: QuestListComponent;

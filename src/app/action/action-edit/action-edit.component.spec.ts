@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActionEditComponent } from './action-edit.component';
-import { createTestGame } from '@game/testing/test-game';
-import { GameService } from '@game-service';
+import { GameService, createTestGame } from '@game/testing/test-game';
 
 xdescribe('ActionEditComponent', () => {
   let component: ActionEditComponent;
