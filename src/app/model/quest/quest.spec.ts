@@ -53,6 +53,7 @@ describe('Quest', () => {
 
   it('should not allow setting a non-existent stage', () => {
     expect(() => quest.setStage(666)).toThrowError('Trying to set a stage that does not exist');
+    expect(() => quest.setStage(-32)).toThrowError('Trying to set a stage that does not exist');
   });
 
   it(`should update player's journal`, () => {

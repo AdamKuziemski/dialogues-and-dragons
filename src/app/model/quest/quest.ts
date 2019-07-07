@@ -23,7 +23,7 @@ export class Quest extends GameObject {
   }
 
   setStage(stage: number): void {
-    if (stage >= this.length) {
+    if (stage >= this.length || stage < 0) {
       throw Error('Trying to set a stage that does not exist');
     }
 
