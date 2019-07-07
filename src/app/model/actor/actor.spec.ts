@@ -83,7 +83,7 @@ describe('Actor', () => {
 
   it(`should throw an error when trying to remove an item which isn't in the actor's backpack`, () => {
     const badItem = 'NonExistentItem';
-    expect(() => testActor.removeItem(badItem)).toThrowError(`Cannot remove an item because it's no in the backpack (id: ${badItem})`);
+    expect(() => testActor.removeItem(badItem)).toThrowError(`Cannot remove an item because it's not in the backpack (id: ${badItem})`);
     expect(testActor.hasItem(badItem)).toBe(false);
   });
 
