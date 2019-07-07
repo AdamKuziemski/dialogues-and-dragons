@@ -11,6 +11,10 @@ export class Actor extends GameObject {
   }
 
   addItem(id: string, count = 1): void {
+    if (count <= 0) {
+      throw Error(`Cannot remove an item by adding a negative value`);
+    }
+
     if (this.hasItem(id)) {
       this.increaseItemCount(id, count);
     } else {
@@ -19,8 +23,12 @@ export class Actor extends GameObject {
   }
 
   removeItem(id: string, count = 1): void {
-    if (!this.hasItem(id) || count <= 0) {
-      return;
+    if (!this.hasItem(id)) {
+      throw Error(`Cannot remove an item because it's no in the backpack (id: ${id})`);
+    }
+
+    if (count <= 0) {
+      throw Error(`Cannot add an item by removing a negative value`);
     }
 
     if (this.getItemCount(id) > count) {

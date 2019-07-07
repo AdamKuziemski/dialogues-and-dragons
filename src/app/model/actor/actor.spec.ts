@@ -55,6 +55,10 @@ describe('Actor', () => {
     expect(() => testActor.addItem(badId)).toThrowError(`Cannot add an item that does not exist (id: ${badId})`);
   });
 
+  it('should throw an error when trying to add a neagtive count of an item', () => {
+    expect(() => testActor.addItem(arrow, -10)).toThrowError(`Cannot remove an item by adding a negative value`);
+  });
+
   it(`should remove some items from the actor's backpack`, () => {
     testActor.addItem(bwhoa);
     testActor.addItem(bwhoa);
@@ -77,13 +81,15 @@ describe('Actor', () => {
     expect(testActor.getItemCount(arrow)).toBe(0);
   });
 
-  it(`should not try to remove an item which isn't in the actor's backpack or removed count <= 0`, () => {
+  it(`should throw an error when trying to remove an item which isn't in the actor's backpack`, () => {
+    const badItem = 'NonExistentItem';
+    expect(() => testActor.removeItem(badItem)).toThrowError(`Cannot remove an item because it's no in the backpack (id: ${badItem})`);
+    expect(testActor.hasItem(badItem)).toBe(false);
+  });
+
+  it(`should throw an error when trying to remove an negative amount of an item`, () => {
     testActor.addItem(arrow, 10);
-
-    testActor.removeItem('NonExistentItem');
-    testActor.removeItem(arrow, -10);
-
-    expect(testActor.hasItem('NonExistentItem')).toBe(false);
+    expect(() => testActor.removeItem(arrow, -10)).toThrowError('Cannot add an item by removing a negative value');
     expect(testActor.getItemCount(arrow)).toBe(10);
   });
 
