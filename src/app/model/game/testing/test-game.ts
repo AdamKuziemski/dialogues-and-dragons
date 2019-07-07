@@ -1,5 +1,6 @@
 import { Game } from '../game';
 import { createTestDialogue } from '../../dialogue/testing/test-dialogue';
+import { createTestQuest } from '../../quest/testing/test-quest';
 
 export { Game } from '../game'; // convenience
 export { GameService } from '../game.service'; // convenience
@@ -59,6 +60,8 @@ export function createTestGame(): Game {
     'I found the castle. Looks like it has been abandoned for quite a few centuries. ' +
     'Is it possible that this is an illusion? Need to find that out.'
   );
+
+  testGame.quests.set('TestQuestCodeception', createTestQuest());
 
   return testGame;
 }

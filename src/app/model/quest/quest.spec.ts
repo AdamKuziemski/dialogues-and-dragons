@@ -1,4 +1,4 @@
-import { Quest, QuestStage, createTestQuest } from './testing/test-quest';
+import { Quest, QuestStage } from './testing/test-quest';
 
 import { GameService, createTestGame } from '../game/testing/test-game';
 import { GameObject } from '../game-object';
@@ -9,11 +9,12 @@ describe('Quest', () => {
   let service: GameService;
 
   beforeEach(() => {
-    quest = createTestQuest();
-    initialStages = quest.length;
     service = new GameService();
-
     service.setGame(createTestGame());
+
+    quest = service.quest('TestQuestCodeception');
+    initialStages = quest.length;
+
     GameObject.initializeGameService(service);
   });
 
