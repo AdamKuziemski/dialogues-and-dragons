@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
@@ -13,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { ActionModule } from '../../action/action.module';
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
+import { changeValue } from '@testing/changeValue.function';
 import { click } from '@testing/click.function';
 import { Game, GameService, createTestGame } from '@game/testing/test-game';
 
@@ -103,11 +103,6 @@ describe('ItemDetailsComponent', () => {
 
     const nameArea = fixture.debugElement.queryAll(By.css('textarea'))[0];
     const [valueInput, weightInput] = fixture.debugElement.queryAll(By.css('input[type=number]'));
-
-    const changeValue = (input: DebugElement, newValue: string | number) => {
-      input.nativeElement.value = newValue;
-      input.nativeElement.dispatchEvent(new Event('input'));
-    };
 
     expect(nameArea).not.toBeNull();
     expect(valueInput).not.toBeNull();

@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
+import { changeValue } from '@testing/changeValue.function';
 import { Game, GameService, createTestGame } from '@game/testing/test-game';
 
 import { Quest } from '@quest/quest';
@@ -92,10 +93,8 @@ describe('QuestDetailsComponent', () => {
     expect(nameInput.nativeElement.value).toBe(component.quest.name, 'name input binds with quest name');
     expect(descriptionArea.nativeElement.value).toBe(component.quest.description, 'description input binds with quest description');
 
-    nameInput.nativeElement.value = 'NewTestName';
-    nameInput.nativeElement.dispatchEvent(new Event('input'));
-    descriptionArea.nativeElement.value = 'Hurro';
-    descriptionArea.nativeElement.dispatchEvent(new Event('input'));
+    changeValue(nameInput, 'NewTestName');
+    changeValue(descriptionArea, 'Hurro');
 
     fixture.detectChanges();
     tick();
