@@ -37,7 +37,7 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.param$.unsubscribe();
-    this.game.items[this.itemId] = this.item;
+    this.game.items.set(this.itemId, this.item);
   }
 
   //#region description

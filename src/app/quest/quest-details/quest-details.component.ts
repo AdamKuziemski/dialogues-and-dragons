@@ -33,7 +33,7 @@ export class QuestDetailsComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.param$.unsubscribe();
-    this.game.quests[this.questId] = this.quest;
+    this.game.quests.set(this.questId, this.quest);
   }
 
   isStageOpen(index: number): boolean {

@@ -32,7 +32,7 @@ export class NpcDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.param$.unsubscribe();
-    this.game.npcs[this.actorId] = this.npc;
+    this.game.npcs.set(this.actorId, this.npc);
   }
 
   get maximumNameLength(): number { return NPC.maximumNameLength; }
