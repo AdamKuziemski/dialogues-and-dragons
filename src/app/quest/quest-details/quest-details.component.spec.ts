@@ -102,4 +102,21 @@ describe('QuestDetailsComponent', () => {
     expect(component.quest.name).toBe('NewTestName', 'quest name changes when name input changes value');
     expect(component.quest.description).toBe('Hurro', 'quest description changes when description input changes value');
   }));
+
+  it('should overwrite quest data during onDestroy', fakeAsync(() => {
+    tick();
+
+    const initialQuestData = {...testQuest()} as Quest;
+    const nameInput = fixture.debugElement.query(By.css('input'));
+
+    changeValue(nameInput, 'NewTestName');
+    fixture.detectChanges();
+    tick();
+
+    fixture.componentInstance.ngOnDestroy();
+    tick();
+
+    expect(component.quest).not.toEqual(initialQuestData, 'new quest should be different from the initial one');
+    expect(component.quest).toEqual(testQuest(), 'new quest data should be in the game');
+  }));
 });
