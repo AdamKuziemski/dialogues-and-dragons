@@ -142,14 +142,14 @@ describe('ItemDetailsComponent', () => {
     fixture.detectChanges();
     tick();
 
-    expect(component.item.isStackable).toBe(!initialStackableFlag);
-    expect(component.item.isWearable).toBe(!initialWearableFlag);
+    expect(component.item.isStackable).toBe(!initialStackableFlag, 'should be different from initial stackable setting');
+    expect(component.item.isWearable).toBe(!initialWearableFlag, 'should be different from initial wearable setting');
   }));
 
   it('should overwrite item data during onDestroy', fakeAsync(() => {
     tick();
 
-    const initialItemState = testItem();
+    const initialItemData = {...testItem()} as Item;
     const nameArea = fixture.debugElement.queryAll(By.css('textarea'))[0];
 
     changeValue(nameArea, 'NewTestName');
@@ -159,7 +159,7 @@ describe('ItemDetailsComponent', () => {
     fixture.componentInstance.ngOnDestroy();
     tick();
 
-    expect(component.item).not.toEqual(initialItemState);
-    expect(component.item).toEqual(testItem());
+    expect(component.item).not.toEqual(initialItemData, 'new item should be different from the initial one');
+    expect(component.item).toEqual(testItem(), 'new NPC data should be in the game');
   }));
 });
