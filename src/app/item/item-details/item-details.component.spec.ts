@@ -160,6 +160,6 @@ describe('ItemDetailsComponent', () => {
     tick();
 
     expect(component.item).not.toEqual(initialItemData, 'new item should be different from the initial one');
-    expect(component.item).toEqual(testItem(), 'new NPC data should be in the game');
+    expect(component.item).toEqual(testItem(), 'new item data should be in the game');
   }));
 });
