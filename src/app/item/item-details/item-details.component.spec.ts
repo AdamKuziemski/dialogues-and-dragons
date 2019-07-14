@@ -123,4 +123,43 @@ describe('ItemDetailsComponent', () => {
     expect(component.item.value).toBe(666, 'item value changes when value input changes value'); // MOAR VALUE
     expect(component.item.weight).toBe(128.32, 'item weight changes when weight input changes value');
   }));
+
+  it('should double bind checkboxes', fakeAsync(() => {
+    tick();
+
+    const initialStackableFlag = testItem().isStackable;
+    const initialWearableFlag = testItem().isWearable;
+
+    const stackableCheckbox = fixture.debugElement.query(By.css('#stackable label'));
+    const wearableCheckbox = fixture.debugElement.query(By.css('#wearable label'));
+
+    expect(stackableCheckbox).not.toBeNull();
+    expect(wearableCheckbox).not.toBeNull();
+
+    click(stackableCheckbox.nativeElement);
+    click(wearableCheckbox.nativeElement);
+
+    fixture.detectChanges();
+    tick();
+
+    expect(component.item.isStackable).toBe(!initialStackableFlag);
+    expect(component.item.isWearable).toBe(!initialWearableFlag);
+  }));
+
+  it('should overwrite item data during onDestroy', fakeAsync(() => {
+    tick();
+
+    const initialItemState = testItem();
+    const nameArea = fixture.debugElement.queryAll(By.css('textarea'))[0];
+
+    changeValue(nameArea, 'NewTestName');
+    fixture.detectChanges();
+    tick();
+
+    fixture.componentInstance.ngOnDestroy();
+    tick();
+
+    expect(component.item).not.toEqual(initialItemState);
+    expect(component.item).toEqual(testItem());
+  }));
 });
