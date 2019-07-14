@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
@@ -10,8 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
+import { changeValue } from '@testing/changeValue.function';
 import { click } from '@testing/click.function';
 import { Game, GameService, createTestGame } from '@game/testing/test-game';
+import { MatSelectFixture } from '@testing/mat-select-fixture';
 import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
 
 import { NPC } from '@npc/npc';
@@ -92,31 +93,23 @@ describe('NpcDetailsComponent', () => {
     expect(routerLink.navigatedTo).toEqual(expectedLink);
   });
 
-  xit('should double bind inputs', fakeAsync(() => {
+  it('should double bind input values', fakeAsync(() => {
     tick();
 
     const initialMerchantValue = component.npc.isMerchant;
 
     const nameArea = fixture.debugElement.query(By.css('textarea'));
     const moneyInput = fixture.debugElement.query(By.css('input[type=number]'));
-    const genderSelect = fixture.debugElement.query(By.css('mat-select'));
     const merchantCheckbox = fixture.debugElement.query(By.css('#merchant'));
     const merchantClickable = fixture.debugElement.query(By.css('#merchant label'));
 
-    const changeValue = (input: DebugElement, newValue: string | number) => {
-      input.nativeElement.value = newValue;
-      input.nativeElement.dispatchEvent(new Event('input'));
-    };
-
     expect(nameArea).not.toBeNull();
     expect(moneyInput).not.toBeNull();
-    expect(genderSelect).not.toBeNull();
     expect(merchantCheckbox).not.toBeNull();
     expect(merchantClickable).not.toBeNull();
 
     expect(nameArea.nativeElement.value).toBe(component.npc.name, 'name input binds with NPC name');
     expect(moneyInput.nativeElement.value).toBe('' + component.npc.money, 'money input binds with NPC money');
-    // expect(genderSelect.nativeElement.selected).toBe(component.npc.gender, 'gender select binds with NPC gender');
 
     changeValue(nameArea, 'NewTestName');
     changeValue(moneyInput, 666);
@@ -128,5 +121,44 @@ describe('NpcDetailsComponent', () => {
     expect(component.npc.name).toBe('NewTestName', 'NPC name changes when name input changes value');
     expect(component.npc.money).toBe(666, 'NPC money changes when money input changes value');
     expect(component.npc.isMerchant).toBe(!initialMerchantValue, 'NPC merchant flag changes when merchant checkbox is clicked');
+  }));
+
+  it('should double bind gender select', fakeAsync(() => {
+    const genderSelect = new MatSelectFixture<NpcDetailsComponent>(fixture);
+    expect(genderSelect.element).not.toBeNull();
+
+    genderSelect.click();
+    fixture.detectChanges();
+    flush();
+
+    genderSelect.findOptions();
+
+    expect(genderSelect.selectedValue).toBe(component.npc.gender, 'gender select binds with NPC gender');
+
+    genderSelect.clickOption(genderSelect.firstNotSelectedIndex);
+    fixture.detectChanges();
+    flush();
+
+    expect(component.npc.gender).toBe(genderSelect.firstNotSelectedValue, 'NPC gender should change when another option is clicked');
+  }));
+
+  it('should overwrite NPC data during onDestroy', fakeAsync(() => {
+    tick();
+
+    const initialNPCData = {...testNPC()} as NPC;
+    const nameArea = fixture.debugElement.query(By.css('textarea'));
+    const moneyInput = fixture.debugElement.query(By.css('input[type=number]'));
+
+    changeValue(nameArea, 'NewTestName');
+    changeValue(moneyInput, 666);
+
+    fixture.detectChanges();
+    tick();
+
+    fixture.componentInstance.ngOnDestroy();
+    tick();
+
+    expect(component.npc).not.toEqual(initialNPCData, 'new NPC should be different from the initial one');
+    expect(component.npc).toEqual(testNPC(), 'new NPC data should be in the game');
   }));
 });
