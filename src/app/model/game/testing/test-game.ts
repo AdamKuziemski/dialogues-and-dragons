@@ -26,13 +26,13 @@ export function createTestGame(): Game {
 
   const potion = testGame.createItem('TestItemPotion', 'Potion');
   potion.type = testItemTypes[2];
-  potion.isCountable = true;
+  potion.isStackable = true;
   potion.value = 50;
   potion.weight = 0.5;
 
   const superPotion = testGame.createItem('TestItemSuperPotion', 'Super Potion');
   superPotion.type = testItemTypes[2];
-  superPotion.isCountable = true;
+  superPotion.isStackable = true;
   superPotion.value = 100;
   superPotion.weight = 0.5;
 

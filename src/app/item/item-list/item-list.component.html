@@ -10,7 +10,7 @@
       <mat-icon aria-label="weight">layers</mat-icon>
     </div>
     <div class="ncv-item-checkbox">
-      <mat-icon aria-label="isCountable">filter_4</mat-icon>
+      <mat-icon aria-label="isStackable">filter_4</mat-icon>
     </div>
     <div class="ncv-item-checkbox">
       <mat-icon aria-label="isWearable">accessibility_new</mat-icon>
@@ -28,7 +28,7 @@
         <div *ngIf="responsive.isDesktop()" class="ncv-item-number">{{ item.value.value }}</div>
         <div *ngIf="responsive.isDesktop()" class="ncv-item-number">{{ item.value.weight }}</div>
         <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
-          <mat-checkbox disabled [(ngModel)]="item.value.isCountable"></mat-checkbox>
+          <mat-checkbox disabled [(ngModel)]="item.value.isStackable"></mat-checkbox>
         </div>
         <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
           <mat-checkbox disabled [(ngModel)]="item.value.isWearable"></mat-checkbox>

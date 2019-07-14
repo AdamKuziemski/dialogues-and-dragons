@@ -18,7 +18,7 @@ describe('Actor', () => {
 
     service.createGame('The Elder Parchments');
     service.createItem(bwhoa, 'Blade of Whoa');
-    service.createItem(arrow, 'Iron Arrow').isCountable = true;
+    service.createItem(arrow, 'Iron Arrow').isStackable = true;
     service.createItem(usles, 'Waste Of Space');
   });
 

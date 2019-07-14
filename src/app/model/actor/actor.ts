@@ -92,7 +92,7 @@ export class Actor extends GameObject {
       throw Error(`Cannot add an item that does not exist (id: ${id})`);
     }
 
-    if (newItem.isCountable) {
+    if (newItem.isStackable) {
       newItem.count = count;
       this.backpack[id] = newItem;
     } else {
@@ -111,7 +111,7 @@ export class Actor extends GameObject {
   private changeItemCount(id: string, count: number, increase: boolean): void {
     const base = Actor.game.item(id);
 
-    if (base.isCountable) {
+    if (base.isStackable) {
       this.backpack[id].count += (increase ? count : count * -1);
     } else if (increase) {
       this.backpack[id].push(...base.cloneArray<Item>(count));
