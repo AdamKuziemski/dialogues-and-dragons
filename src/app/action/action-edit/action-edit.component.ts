@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 
 import { Action } from '@action/action.interface';
 import { actionList } from '@action/action-list';
@@ -10,7 +10,7 @@ import { ActionParameter, ParameterList, parametersOf } from '@action/action-par
   templateUrl: './action-edit.component.html',
   styleUrls: ['./action-edit.component.scss']
 })
-export class ActionEditComponent implements OnInit {
+export class ActionEditComponent implements OnInit, OnDestroy {
   @Input() set action(newAction: Action) {
     this.editedAction = this.copyOf(newAction);
     this.parameters = !!newAction ? parametersOf(this.editedAction) : [];
@@ -25,6 +25,10 @@ export class ActionEditComponent implements OnInit {
   constructor(public game: GameService) { }
 
   ngOnInit() { }
+
+  ngOnDestroy() {
+    this.actionChange.emit(this.editedAction);
+  }
 
   handleTypeChange(newType: Action): void {
     this.action = newType;
