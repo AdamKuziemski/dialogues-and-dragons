@@ -1,11 +1,9 @@
 .ncv-action-form {
   display: grid;
-  grid-template-columns: auto;
   grid-column-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-@media only screen and (min-width: 600px) {
-  .ncv-action-form {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
+mat-form-field {
+  width: 100%;
 }

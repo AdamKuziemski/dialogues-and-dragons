@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NPC } from '@npc/npc';
@@ -11,7 +11,7 @@ import { ResponsiveService } from '@responsive-service';
   templateUrl: './npc-details.component.html',
   styleUrls: ['./npc-details.component.scss']
 })
-export class NpcDetailsComponent implements OnInit {
+export class NpcDetailsComponent implements OnInit, OnDestroy {
   npc: NPC;
   actorId: string;
 
@@ -32,7 +32,7 @@ export class NpcDetailsComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.param$.unsubscribe();
-    this.game.npcs[this.actorId] = this.npc;
+    this.game.npcs.set(this.actorId, this.npc);
   }
 
   get maximumNameLength(): number { return NPC.maximumNameLength; }

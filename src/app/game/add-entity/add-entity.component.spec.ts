@@ -6,9 +6,11 @@ import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
-import {
-  MatButtonModule, MatDialog, MatDialogModule, MatInputModule, MatOption, MatSelectModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOption } from '@angular/material/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { click } from '@testing/click.function';
 
@@ -68,7 +70,7 @@ describe('AddEntityDialogComponent', () => {
     noop.detectChanges();
 
     return dialog.openDialogs[0].componentInstance;
-  }
+  };
 
   it('should open with a preselected type and a disabled save button', fakeAsync(() => {
     const component = createDialog();

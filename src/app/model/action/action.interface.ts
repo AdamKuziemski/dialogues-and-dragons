@@ -1,22 +1,10 @@
 import { ActionResult } from './action-result';
 import { Cloneable } from '../cloneable.interface';
 
-export type ActionValue = string | number | boolean;
-export type ActionTarget = 'actor' | 'item' | 'quest';
+export { ActionResult } from './action-result';  // convenience
 
 export interface Action extends Cloneable {
   readonly name: string;
-  readonly hasCount: boolean;
-  readonly hasTargetId: boolean;
-  readonly hasValue: boolean;
-  readonly targetType: ActionTarget;
-
-  count: number;
-  targetId: string;
-  value: ActionValue;
 
   perform(): ActionResult;
-
-  getTargets(): Object;
-  getValues(): ActionValue[];
 }

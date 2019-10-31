@@ -13,7 +13,7 @@ export class ActionContainer extends GameObject {
 
   removeAction(index: number): void {
     if (index < 0 || index >= this.actions.length) {
-      return;
+      throw Error('Cannot remove a non-existent action');
     }
 
     this.actions.splice(index, 1);

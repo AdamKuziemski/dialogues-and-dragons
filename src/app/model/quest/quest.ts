@@ -4,7 +4,7 @@ import { QuestStage } from './quest-stage';
 export class Quest extends GameObject {
   static readonly maximumNameLength = 50;
   static readonly maximumDescriptionLength = 500;
-  
+
   description = '';
 
   completed = false;
@@ -23,6 +23,10 @@ export class Quest extends GameObject {
   }
 
   setStage(stage: number): void {
+    if (stage >= this.length || stage < 0) {
+      throw Error('Trying to set a stage that does not exist');
+    }
+
     this.currentStageIndex = stage;
     this.updateFlags();
     this.updateJournal();
@@ -37,7 +41,11 @@ export class Quest extends GameObject {
   }
 
   get isEmpty(): boolean {
-    return this.stages.length === 0;
+    return this.length === 0;
+  }
+
+  get length(): number {
+    return this.stages.length;
   }
 
   addStage(journalEntry: string = ''): QuestStage {
@@ -48,6 +56,8 @@ export class Quest extends GameObject {
   removeStage(index: number): void {
     if (index < this.stages.length) {
       this.stages.splice(index, 1);
+    } else {
+      throw Error(`Trying to remove a non-existent stage (${index})`);
     }
   }
 

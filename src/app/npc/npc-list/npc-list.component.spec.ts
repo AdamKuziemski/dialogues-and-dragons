@@ -2,15 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement, Predicate } from '@angular/core';
 
-import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 import { click } from '@testing/click.function';
-import { createTestGame } from '@game/testing/test-game';
-import { Game } from '@game/game';
-import { GameService } from '@game-service';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
+import { RouterLinkDirectiveStub } from 'app/shared/testing/router-link-directive-stub';
+
 import { NpcListComponent } from './npc-list.component';
 import { ResponsiveService } from '@responsive-service';
-import { RouterLinkDirectiveStub } from 'app/shared/testing/router-link-directive-stub';
 
 describe('NpcListComponent', () => {
   let component: NpcListComponent;
@@ -22,7 +24,6 @@ describe('NpcListComponent', () => {
   const getLinkElements = () => getElements(By.directive(RouterLinkDirectiveStub));
   const getRouterLinks = () => getLinkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
   const getRandomNPC = () => Math.floor(Math.random() * npcCount);
-  const getNpcIDs = () => Object.keys(testGame.npcs);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,7 +45,7 @@ describe('NpcListComponent', () => {
       fixture = TestBed.createComponent(NpcListComponent);
       component = fixture.componentInstance;
       testGame = createTestGame();
-      npcCount = getNpcIDs().length;
+      npcCount = testGame.npcs.size;
 
       component.game.setGame(testGame);
       fixture.detectChanges();
@@ -52,7 +53,7 @@ describe('NpcListComponent', () => {
   }));
 
   it('should create', () => expect(component).toBeTruthy());
-  
+
   it('should display some NPCs', () => {
     expect(getElements(By.css('mat-list-item')).length).toBe(npcCount, `should have ${npcCount} routerLinks`);
   });
@@ -90,6 +91,6 @@ describe('NpcListComponent', () => {
     fixture.detectChanges();
 
     expect(component.deleteNPC).toHaveBeenCalled();
-    expect(getNpcIDs().length).toBe(npcCount - 1, 'should remove an NPC from the service');
+    expect(testGame.npcs.size).toBe(npcCount - 1, 'should remove an NPC from the service');
   });
 });

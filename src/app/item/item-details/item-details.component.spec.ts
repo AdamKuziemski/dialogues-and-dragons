@@ -1,20 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatCardModule, MatCheckboxModule, MatExpansionModule, MatInputModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
 
 import { ActionModule } from '../../action/action.module';
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
+import { changeValue } from '@testing/changeValue.function';
 import { click } from '@testing/click.function';
-import { createTestGame } from '@game/testing/test-game';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
 
-import { Game } from '@game/game';
-import { GameService } from '@game-service';
 import { Item } from '@item/item';
 import { ItemDetailsComponent } from './item-details.component';
 import { ResponsiveService } from '@responsive-service';
@@ -22,11 +23,11 @@ import { ResponsiveService } from '@responsive-service';
 describe('ItemDetailsComponent', () => {
   let component: ItemDetailsComponent;
   let fixture: ComponentFixture<ItemDetailsComponent>;
-  let activatedRoute = new ActivatedRouteStub();
-
   let testGame: Game;
+
+  const activatedRoute = new ActivatedRouteStub();
   const testItemId = 'TestItemPotion';
-  const testItem = () => testGame.items[testItemId];
+  const testItem = () => testGame.items.get(testItemId);
 
   beforeEach(() => {
     activatedRoute.setParamMap({ id: testItemId });
@@ -103,11 +104,6 @@ describe('ItemDetailsComponent', () => {
     const nameArea = fixture.debugElement.queryAll(By.css('textarea'))[0];
     const [valueInput, weightInput] = fixture.debugElement.queryAll(By.css('input[type=number]'));
 
-    const changeValue = (input: DebugElement, newValue: string | number) => {
-      input.nativeElement.value = newValue;
-      input.nativeElement.dispatchEvent(new Event('input'));
-    }
-
     expect(nameArea).not.toBeNull();
     expect(valueInput).not.toBeNull();
     expect(weightInput).not.toBeNull();
@@ -126,5 +122,44 @@ describe('ItemDetailsComponent', () => {
     expect(component.item.name).toBe('NewTestName', 'item name changes when name input changes value');
     expect(component.item.value).toBe(666, 'item value changes when value input changes value'); // MOAR VALUE
     expect(component.item.weight).toBe(128.32, 'item weight changes when weight input changes value');
+  }));
+
+  it('should double bind checkboxes', fakeAsync(() => {
+    tick();
+
+    const initialStackableFlag = testItem().isStackable;
+    const initialWearableFlag = testItem().isWearable;
+
+    const stackableCheckbox = fixture.debugElement.query(By.css('#stackable label'));
+    const wearableCheckbox = fixture.debugElement.query(By.css('#wearable label'));
+
+    expect(stackableCheckbox).not.toBeNull();
+    expect(wearableCheckbox).not.toBeNull();
+
+    click(stackableCheckbox.nativeElement);
+    click(wearableCheckbox.nativeElement);
+
+    fixture.detectChanges();
+    tick();
+
+    expect(component.item.isStackable).toBe(!initialStackableFlag, 'should be different from initial stackable setting');
+    expect(component.item.isWearable).toBe(!initialWearableFlag, 'should be different from initial wearable setting');
+  }));
+
+  it('should overwrite item data during onDestroy', fakeAsync(() => {
+    tick();
+
+    const initialItemData = {...testItem()} as Item;
+    const nameArea = fixture.debugElement.queryAll(By.css('textarea'))[0];
+
+    changeValue(nameArea, 'NewTestName');
+    fixture.detectChanges();
+    tick();
+
+    fixture.componentInstance.ngOnDestroy();
+    tick();
+
+    expect(component.item).not.toEqual(initialItemData, 'new item should be different from the initial one');
+    expect(component.item).toEqual(testItem(), 'new item data should be in the game');
   }));
 });

@@ -1,12 +1,11 @@
-<mat-list>
-  <mat-list-item *ngFor="let action of actionContainer.actions; index as i">
-    <div class="ncv-entity-row ncv-full-width">
-      <ncv-action [action]="action" (actionChange)="handleActionChange($event, i)" (click)="handleActionClick($event, i)"></ncv-action>
-      <div class="ncv-delete-button">
-        <button mat-icon-button (click)="deleteAction($event, i)">
-          <mat-icon aria-label="Delete Action">delete</mat-icon>
-        </button>
-      </div>
+<div *ngFor="let action of actionContainer.actions; index as i" class="ncv-item-separated">
+  <div class="ncv-entity-row ncv-full-width">
+    <ncv-action [action]="action" (actionChange)="handleActionChange($event, i)" (click)="handleActionClick($event, i)">
+    </ncv-action>
+    <div class="ncv-margin-sides">
+      <button mat-icon-button (click)="deleteAction($event, i)">
+        <mat-icon aria-label="Delete Action">delete</mat-icon>
+      </button>
     </div>
-  </mat-list-item>
-</mat-list>
+  </div>
+</div>

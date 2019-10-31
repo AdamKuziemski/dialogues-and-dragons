@@ -1,38 +1,30 @@
-import { Action, ActionValue } from './action.interface';
-import { ActionResult } from './action-result';
+import { Action, ActionResult } from './action.interface';
+import { ActionParameter, PicklistParameter } from './action-parameter';
 
 import { GameObject } from '../game-object';
+import { Quest } from '@quest/quest';
 
 export class SetQuestStage extends GameObject implements Action {
   readonly name = 'Set Quest Stage';
-  readonly hasCount = false;
-  readonly hasTargetId = true;
-  readonly hasValue = true;
-  readonly targetType = 'quest';
 
-  count = 0;
-  targetId = '';
-  value = 0;
+  questId = new PicklistParameter<Quest>('', () => SetQuestStage.game.quests);
+  stage = new ActionParameter<number>(0);
 
   constructor() {
     super();
   }
 
   perform(): ActionResult {
-    const target = SetQuestStage.game.quest(this.targetId);
+    const target = SetQuestStage.game.quest(this.questId.value);
     if (target === null) {
-      return new ActionResult(false, `Quest '${this.targetId}' doesn't exist.`);
+      return new ActionResult(false, `Quest '${this.questId.value}' doesn't exist`);
     }
 
-    target.setStage(this.value);
-    return new ActionResult(true);
-  }
-
-  getTargets(): Object {
-    return SetQuestStage.game.quests;
-  }
-
-  getValues(): ActionValue[] {
-    return [];
+    try {
+      target.setStage(this.stage.value);
+      return new ActionResult(true);
+    } catch (error) {
+      return new ActionResult(false, error.message);
+    }
   }
 }

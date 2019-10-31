@@ -1,36 +1,36 @@
 <div class="ncv-action-form">
-  <mat-form-field>
-    <mat-label>Action Type</mat-label>
-    <mat-select [ngModel]="action?.name" (ngModelChange)="handleTypeChange($event)" [compareWith]="compareActions">
-      <mat-option *ngFor="let availableAction of actions" [value]="availableAction">
-        {{ availableAction.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div>
+    <mat-form-field>
+      <mat-label>Action Type</mat-label>
+      <mat-select [ngModel]="editedAction?.name" (ngModelChange)="handleTypeChange($event)"
+        [compareWith]="compareActions">
+        <mat-option *ngFor="let availableAction of actions" [value]="availableAction">
+          {{ availableAction.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-  <mat-form-field *ngIf="action.hasTargetId">
-    <mat-label>Target Id</mat-label>
-    <mat-select [(ngModel)]="action.targetId">
-      <mat-option *ngIf="action.targetType === 'actor'" value="Player">
-        Player
-      </mat-option>
-      <mat-option *ngFor="let target of action.getTargets() | keyvalue" [value]="target.key">
-        {{ target.value.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div *ngFor="let param of parameters">
 
-  <mat-form-field *ngIf="action.hasValue">
-    <mat-label>Value</mat-label>
-    <mat-select [(ngModel)]="action.value">
-      <!-- game.items are temporary, need to figure out how to display possible values -->
-      <mat-option *ngFor="let item of game.items | keyvalue" [value]="item.key">
-        {{ item.value.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field *ngIf="param[1].type ==='picklist';else anInput">
+      <mat-label>{{ param[0] | splitUpperCase | titlecase }}</mat-label>
+      <mat-select [(ngModel)]="param[1].value">
+        <mat-option *ngFor="let option of param[1].possibleValues() | keyvalue" [value]="option.key">
+          {{ option.value[param[1].labelField] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field *ngIf="action.hasCount">
-    <input matInput type="number" placeholder="Count" [(ngModel)]="action.count">
-  </mat-form-field>
+    <ng-template #anInput>
+      <mat-form-field>
+        <input matInput
+          type="param[1].type"
+          [placeholder]="param[0] | splitUpperCase | titlecase"
+          [(ngModel)]="param[1].value">
+      </mat-form-field>
+    </ng-template>
+
+  </div>
+
 </div>

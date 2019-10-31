@@ -3,10 +3,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatExpansionModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 
-import { Dialogue } from '@dialogue/dialogue';
-import { createTestDialogue } from '@dialogue/testing/test-dialogue';
+import { Dialogue, createTestDialogue } from '@dialogue/testing/test-dialogue';
 import { ResponsiveService } from '@responsive-service';
 
 import { GreetingContainerComponent } from './greeting-container.component';

@@ -2,15 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, Predicate } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 import { click } from '@testing/click.function';
-import { createTestGame } from '@game/testing/test-game';
-import { Game } from '@game/game';
-import { GameService } from '@game-service';
+import { Game, GameService, createTestGame } from '@game/testing/test-game';
+import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
+
 import { QuestListComponent } from './quest-list.component';
 import { ResponsiveService } from '@responsive-service';
-import { RouterLinkDirectiveStub } from '@testing/router-link-directive-stub';
 
 describe('QuestListComponent', () => {
   let component: QuestListComponent;
@@ -22,7 +24,6 @@ describe('QuestListComponent', () => {
   const getLinkElements = () => getElements(By.directive(RouterLinkDirectiveStub));
   const getRouterLinks = () => getLinkElements().map(de => de.injector.get(RouterLinkDirectiveStub));
   const getRandomQuest = () => Math.floor(Math.random() * questCount);
-  const getQuestIDs = () => Object.keys(testGame.quests);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,7 +45,7 @@ describe('QuestListComponent', () => {
       fixture = TestBed.createComponent(QuestListComponent);
       component = fixture.componentInstance;
       testGame = createTestGame();
-      questCount = getQuestIDs().length;
+      questCount = testGame.quests.size;
 
       component.game.setGame(testGame);
 
@@ -53,7 +54,7 @@ describe('QuestListComponent', () => {
   }));
 
   it('should create', () => expect(component).toBeTruthy());
-  
+
   it('should display some quests', () => {
     expect(getElements(By.css('mat-list-item')).length).toBe(questCount, `should have ${questCount} list items`);
   });
@@ -91,6 +92,6 @@ describe('QuestListComponent', () => {
     fixture.detectChanges();
 
     expect(component.deleteQuest).toHaveBeenCalled();
-    expect(getQuestIDs().length).toBe(questCount - 1, 'should remove a quest from the service');
+    expect(testGame.quests.size).toBe(questCount - 1, 'should remove a quest from the service');
   });
 });

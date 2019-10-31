@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     public responsive: ResponsiveService
   ) {
     this.responsive.setWidth(window.innerWidth);
-    
+
     if (this.gameService.getGame('') === null) {
       this.gameService.setGame(createTestGame());
       GameObject.initializeGameService(this.gameService);

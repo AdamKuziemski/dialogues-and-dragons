@@ -6,8 +6,7 @@ import { By } from '@angular/platform-browser';
 
 import { IdValidatorDirective } from './id-validator.directive';
 
-import { GameService } from '@game/game.service';
-import { createTestGame } from '@game/testing/test-game';
+import { GameService, createTestGame } from '@game/testing/test-game';
 import { Player } from '@player';
 
 describe('IdValidatorDirective', () => {
@@ -45,14 +44,14 @@ describe('IdValidatorDirective', () => {
   });
 
   describe('Reactive form', () => {
-    let fixture: ComponentFixture<FormControlTest>;
+    let fixture: ComponentFixture<FormControlTestComponent>;
     let entityForm: FormGroup;
 
     const hasError = () => entityForm.controls['entityId'].hasError('invalidId');
     const getErrorDiv = () => fixture.debugElement.query(By.css('div'));
     const getInput = () => fixture.debugElement.query(By.css('input')).nativeElement;
 
-    beforeEach(() => fixture = initTest(FormControlTest, IdValidatorDirective));
+    beforeEach(() => fixture = initTest(FormControlTestComponent, IdValidatorDirective));
 
     it('should raise errors with an invalid id', fakeAsync(() => {
       const id = invalidIds[0];
@@ -74,7 +73,7 @@ describe('IdValidatorDirective', () => {
 
     it('should accept valid ids', fakeAsync(() => {
       const id = validId;
-      
+
       entityForm = new FormGroup({ 'entityId': new FormControl(id, directive.validator) });
 
       expect(getInput().value).toEqual('', 'input value should not be set before detectChanges');
@@ -94,17 +93,19 @@ describe('IdValidatorDirective', () => {
   describe('Template driven form', () => {
     it('should raise errors with an invalid id', fakeAsync(() => {
       const id = invalidIds[0];
-      let page = new ModelPage();
+      const page = new ModelPage();
 
       tick();
+
       expect(page.inputElement.value).toBe('', 'input element value should not be set after onInit');
       expect(page.component.myEntityId).toBe('', 'component bound value should not be set after onInit');
       expect(page.inputControl.hasError('invalidId')).toBe(false, 'input control should not have an error after onInit');
       expect(page.errorDiv).toBeNull('there should be no error div after onInit');
-      
+
       page.inputValue = id;
 
       tick();
+
       expect(page.inputElement.value).toBe(id, 'input element value should be ' + id + ' after detectChanges');
       expect(page.component.myEntityId).toBe(id, 'component bound value should be ' + id + ' after detectChanges');
       expect(page.inputControl.hasError('invalidId')).toBe(true, 'input control should have an error flag set after detectChanges');
@@ -113,14 +114,14 @@ describe('IdValidatorDirective', () => {
 
     it('should accept a valid id', fakeAsync(() => {
       const id = validId;
-      let page = new ModelPage();
+      const page = new ModelPage();
 
       tick();
       expect(page.inputElement.value).toBe('', 'input element value should not be set after onInit');
       expect(page.component.myEntityId).toBe('', 'component bound value should not be set after onInit');
       expect(page.inputControl.hasError('invalidId')).toBe(false, 'input control should not have an error after onInit');
       expect(page.errorDiv).toBeNull('there should be no error div after onInit');
-      
+
       page.inputValue = id;
 
       tick();
@@ -140,7 +141,7 @@ describe('IdValidatorDirective', () => {
       <div *ngIf="entityId.hasError('invalidId')">😠</div>
     </form>`
 })
-class FormControlTest {
+class FormControlTestComponent {
   control: FormControl;
   form: FormGroup;
 
@@ -156,7 +157,7 @@ class FormControlTest {
     </form>
   `
 })
-class NgModelTest {
+class NgModelTestComponent {
   constructor(public game: GameService) {
     this.game.setGame(createTestGame());
   }
@@ -164,11 +165,11 @@ class NgModelTest {
 }
 
 class ModelPage {
-  fixture: ComponentFixture<NgModelTest>;
-  component: NgModelTest;
+  fixture: ComponentFixture<NgModelTestComponent>;
+  component: NgModelTestComponent;
 
   constructor() {
-    this.fixture = initTest(NgModelTest, IdValidatorDirective);
+    this.fixture = initTest(NgModelTestComponent, IdValidatorDirective);
     this.component = this.fixture.componentInstance;
     this.fixture.detectChanges();
   }
