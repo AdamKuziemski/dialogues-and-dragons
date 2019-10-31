@@ -84,18 +84,18 @@ export class Dialogue extends GameObject {
     return greets[index];
   }
 
-  topic(traverse: number[]): DialogueTopic {
-    if (!Array.isArray(traverse) || traverse.length < 1 || traverse[0] >= this.topics.length) {
+  topic(path: number[]): DialogueTopic {
+    if (!Array.isArray(path) || path.length < 1 || path[0] >= this.topics.length) {
       return null;
     }
 
-    let result = this.topics[traverse[0]];
+    let result = this.topics[path[0]];
 
-    for (let i = 1; i < traverse.length; ++i) {
-      if (result.topics.length < traverse[i]) {
+    for (let i = 1; i < path.length; ++i) {
+      if (result.topics.length < path[i]) {
         return null;
       } else {
-        result = result.topics[traverse[i]];
+        result = result.topics[path[i]];
       }
     }
 
