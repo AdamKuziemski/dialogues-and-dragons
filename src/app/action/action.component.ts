@@ -38,7 +38,7 @@ export class ActionComponent implements OnInit {
 
   refreshParameters(): void {
     const allParameters = parametersOf(this.displayedAction).map(entity => entity[1]);
-    this.target = allParameters.filter(param => param.isInstanceParam)[0];
-    this.parameters = allParameters.filter(param => !param.isInstanceParam);
+    this.target = allParameters.filter(param => param.isTargetReference)[0];
+    this.parameters = allParameters.filter(param => !param.isTargetReference);
   }
 }

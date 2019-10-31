@@ -4,7 +4,10 @@ import { GameObject } from '../game-object';
 import lazy from 'lazy-eval';
 
 export class ActionParameter<T> extends GameObject {
-  constructor(defaultValue: T, public isInstanceParam = false) {
+  constructor(
+    defaultValue: T,
+    public isTargetReference = false
+  ) {
     super();
     this.value = defaultValue;
   }
@@ -17,19 +20,19 @@ export class ActionParameter<T> extends GameObject {
 }
 
 export class PicklistParameter<T> extends ActionParameter<string> {
+  possibleValues: () => Map<string, T>;
+  labelField: string;
+
   constructor(
     defaultValue: string,
     possibleValues: () => Map<string, T>, // needs to be lazily evaluated
-    isInstanceParam: boolean = false,
+    isTargetReference: boolean = false,
     labelField: string = 'name'
   ) {
-    super(defaultValue, isInstanceParam);
+    super(defaultValue, isTargetReference);
     this.possibleValues = !!possibleValues ? lazy(possibleValues) : lazy(() => new Map<string, T>());
     this.labelField = labelField;
   }
-
-  possibleValues: () => Map<string, T>;
-  labelField: string;
 
   get type(): string {
     return 'picklist';
