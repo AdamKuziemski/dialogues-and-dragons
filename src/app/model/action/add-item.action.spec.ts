@@ -28,7 +28,7 @@ describe('AddItem', () => {
   });
 
   it('should result in false when trying to perform on a non existent item', () => {
-    const action = new AddItem(); 
+    const action = new AddItem();
     const badItem = 'HelloIDoNotExist';
 
     action.itemId.value = badItem;
