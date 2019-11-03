@@ -45,7 +45,7 @@ export class DialogueTopicTreeComponent implements OnInit {
     this.setTreeData(this.dialogue.topics);
     this.nestedTreeControl.expand(node);
 
-    if (this.responsive.isMobile() && this.shouldOpenNewTopicsOnMobile) {
+    if (this.responsive.isDesktop() || this.shouldOpenNewTopicsOnMobile) {
       this.topicClicked.emit(node.lastOf(node.topics));
     }
   }
