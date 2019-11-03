@@ -1,15 +1,21 @@
 <mat-card>
-  <mat-card-title *ngIf="responsive.isDesktop()">
-    Topics ({{ dialogue.totalTopics }} total)
+  <mat-card-title>
+    <div *ngIf="responsive.isDesktop()" class="ncv-margin-bottom">Topics ({{ dialogue.totalTopics }} total)</div>
+    <div class="ncv-expand-collapse-tree">
+      <button mat-button (click)="nestedTreeControl.expandAll()">Expand all</button>
+      <button mat-button (click)="nestedTreeControl.collapseAll()">Collapse all</button>
+    </div>
   </mat-card-title>
 
   <mat-card-content class="ncv-tree-container">
+
     <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
 
       <mat-tree-node *matTreeNodeDef="let topic" matTreeNodeToggle>
         <li class="mat-tree-node">
           <button mat-icon-button disabled></button>
           <span (click)="onTopicClicked(topic)">{{ topic.label }}</span>
+          <button mat-icon-button (click)="addNewItem(topic)"><mat-icon>add</mat-icon></button>
         </li>
       </mat-tree-node>
 
@@ -22,13 +28,14 @@
               </mat-icon>
             </button>
             <span (click)="onTopicClicked(topic)">{{ topic.label }}</span>
+            <button mat-icon-button (click)="addNewItem(topic)"><mat-icon>add</mat-icon></button>
           </div>
           <ul [class.ncv-topic-tree-invisible]="!nestedTreeControl.isExpanded(topic)">
             <ng-container matTreeNodeOutlet></ng-container>
           </ul>
         </li>
       </mat-nested-tree-node>
-
     </mat-tree>
+    
   </mat-card-content>
 </mat-card>

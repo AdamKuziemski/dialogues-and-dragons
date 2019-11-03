@@ -20,13 +20,15 @@ export class DialogueTopicTreeComponent implements OnInit {
   nestedTreeControl: NestedTreeControl<DialogueTopic>;
   nestedDataSource: MatTreeNestedDataSource<DialogueTopic>;
 
+  shouldOpenNewTopicsOnMobile = false; // this will do for now until we get a settings screen
+
   constructor(public responsive: ResponsiveService) {
     this.nestedTreeControl = new NestedTreeControl<DialogueTopic>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
   }
 
   ngOnInit() {
-    this.nestedDataSource.data = this.dialogue.topics;
+    this.setTreeData(this.dialogue.topics);
   }
 
   onTopicClicked(topic: DialogueTopic) {
@@ -34,6 +36,28 @@ export class DialogueTopicTreeComponent implements OnInit {
   }
 
   hasNestedChild = (_: number, node: DialogueTopic) => node.topics.length > 0;
+
+  addNewItem(node: DialogueTopic) {
+    this.clearTree(); // triggers change detection
+
+    node.addTopic('New Topic');
+
+    this.setTreeData(this.dialogue.topics);
+    this.nestedTreeControl.expand(node);
+
+    if (this.responsive.isMobile() && this.shouldOpenNewTopicsOnMobile) {
+      this.topicClicked.emit(node.lastOf(node.topics));
+    }
+  }
+
+  private clearTree(): void {
+    this.setTreeData([]);
+  }
+
+  private setTreeData(data: DialogueTopic[]): void {
+    this.nestedDataSource.data = data;
+    this.nestedTreeControl.dataNodes = data;
+  }
 
   private _getChildren = (node: DialogueTopic) => observableOf(node.topics);
 }

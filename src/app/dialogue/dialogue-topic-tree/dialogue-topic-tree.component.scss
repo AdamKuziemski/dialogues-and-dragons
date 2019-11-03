@@ -8,6 +8,11 @@
   width: calc(100% + 20px);
 }
 
+.ncv-expand-collapse-tree {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
 ul {
   -webkit-padding-start: 16px;
 }
