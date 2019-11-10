@@ -1,18 +1,18 @@
 <div *ngIf="!game.editMode">
 
-  <mat-card class="ncv-margin-around-no-top">
+  <mat-card class="ncv-margin-around-no-top" (click)="dialogue.advanceLine()">
     <mat-card-title>
       {{ speaker }}
     </mat-card-title>
     <mat-card-content>
-      <ncv-dialogue-line [line]="dialogue.currentLine" (click)="lineClicked($event)"></ncv-dialogue-line>
+      <ncv-dialogue-line [line]="dialogue.currentLine"></ncv-dialogue-line>
     </mat-card-content>
   </mat-card>
 
   <mat-card *ngIf="dialogue.displayOptions">
     <mat-list>
       <mat-list-item *ngFor="let option of dialogue.options">
-        <ncv-dialogue-topic [topic]="option" (click)="topicClicked($event)"></ncv-dialogue-topic>
+        <ncv-dialogue-topic [topic]="option" (click)="dialogue.startTopic($event)"></ncv-dialogue-topic>
       </mat-list-item>
     </mat-list>
   </mat-card>
@@ -20,18 +20,24 @@
 </div>
 
 <div *ngIf="game.editMode">
-  <mat-tab-group *ngIf="responsive.isMobile()" class="ncv-tab-fill-available" [(selectedIndex)]="currentTab" mat-stretch-tabs>
+  <mat-tab-group *ngIf="responsive.isMobile()"
+                 class="ncv-tab-fill-available"
+                 [(selectedIndex)]="currentTab"
+                 mat-stretch-tabs>
+
     <mat-tab label="Greetings">
       <div class="ncv-swiper" (swipeleft)="swipeLeft()">
         <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
       </div>
     </mat-tab>
+
     <mat-tab label="Topics">
       <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-        <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)">
+        <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)">
         </ncv-dialogue-topic-tree>
       </div>
     </mat-tab>
+
     <mat-tab label="Editor">
       <!-- to fix incorrect accordion behavior -->
       <ng-template matTabContent>
@@ -40,13 +46,15 @@
         </div>
       </ng-template>
     </mat-tab>
+
   </mat-tab-group>
 
   <div *ngIf="responsive.isDesktop()">
     <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
     <div class="ncv-dialogue-editor">
-      <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicClicked($event)"></ncv-dialogue-topic-tree>
+      <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)"></ncv-dialogue-topic-tree>
       <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
     </div>
   </div>
+
 </div>
