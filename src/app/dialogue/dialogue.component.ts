@@ -58,14 +58,6 @@ export class DialogueComponent implements OnInit, OnDestroy {
     this.game.npc(this.npcId).dialogue = this.dialogue;
   }
 
-  lineClicked(line: DialogueLine): void {
-    this.dialogue.advanceLine();
-  }
-
-  topicClicked(topic: DialogueTopic): void {
-    this.dialogue.startTopic(topic);
-  }
-
   swipeLeft(): void {
     this.currentTab += 1;
   }
@@ -74,7 +66,7 @@ export class DialogueComponent implements OnInit, OnDestroy {
     this.currentTab -= 1;
   }
 
-  onTopicClicked(topic: DialogueTopic): void {
+  onTopicSelected(topic: DialogueTopic): void {
     this.currentTopic = topic;
     this.currentTab = 2;
   }
