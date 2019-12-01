@@ -15,7 +15,10 @@
       "severity": "warn"
     },
     "eofline": true,
-    "forin": true,
+    "file-name-casing": [
+      true,
+      "kebab-case"
+    ],
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -43,10 +46,16 @@
         ]
       }
     ],
+    "newline-before-return": true,
+    "no-angle-bracket-type-assertion": true,
     "no-arg": true,
     "no-bitwise": true,
+    "no-boolean-literal-compare": true,
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": true,
     "no-console": [
       true,
+      "log",
       "debug",
       "info",
       "time",
@@ -59,15 +68,16 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-for-in-array": true,
+    "no-inferrable-types": false,
+    "no-invalid-template-strings": true,
+    "no-invalid-this": true,
+    "no-irregular-whitespace": true,
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
     "no-shadowed-variable": true,
-    "no-string-literal": false,
+    "no-string-literal": true,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
@@ -75,7 +85,15 @@
     "no-unused-expression": true,
     "no-use-before-declare": false,
     "no-var-keyword": true,
-    "object-literal-sort-keys": false,
+    "object-literal-key-quotes": [
+      true,
+      "as-needed"
+    ],
+    "object-literal-sort-keys": [
+      true,
+      "ignore-blank-lines",
+      "shorthand-first"
+    ],
     "one-line": [
       true,
       "check-open-brace",
@@ -83,6 +101,16 @@
       "check-else",
       "check-whitespace"
     ],
+    "one-variable-per-declaration": true,
+    "ordered-imports": [
+      true,
+      {
+        "grouped-imports": true,
+        "import-sources-order": "lowercase-last",
+        "named-imports-order": "lowercase-first"
+      }
+    ],
+    "prefer-conditional-expression": true,
     "prefer-const": true,
     "quotemark": [
       true,
@@ -93,9 +121,20 @@
       true,
       "always"
     ],
+    "switch-default": true,
     "triple-equals": [
       true,
       "allow-null-check"
+    ],
+    "typedef": [
+      true,
+      "call-signature",
+      "arrow-call-signature",
+      "parameter",
+      "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration"
     ],
     "typedef-whitespace": [
       true,
@@ -105,6 +144,13 @@
         "parameter": "nospace",
         "property-declaration": "nospace",
         "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
       }
     ],
     "typeof-compare": true,
