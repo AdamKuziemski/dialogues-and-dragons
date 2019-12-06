@@ -1,4 +1,4 @@
-# NpcConversations
+# Dialogues and Dragons
 
 **Note: this describes the future state of the app. It's still in development and it's not even an alpha. This readme describes the idea behind it, nothing more, nothing less.**
 
