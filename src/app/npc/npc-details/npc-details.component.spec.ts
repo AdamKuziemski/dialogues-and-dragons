@@ -65,7 +65,6 @@ describe('NpcDetailsComponent', () => {
   it('should subscribe to route params and retrieve an NPC', () => {
     expect(component.actorId).toBe(testNpcId);
     expect(component.npc).toEqual(testNPC());
-    expect(component.hasSubscription).toBe(true);
   });
 
   it('should correctly return constants from NPC', () => {

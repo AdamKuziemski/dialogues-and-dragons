@@ -1,41 +1,39 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { NPC } from '@npc/npc';
 
 import { GameService } from '@game-service';
 import { ResponsiveService } from '@responsive-service';
+import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
   selector: 'ncv-npc-details',
+  styleUrls: ['./npc-details.component.scss'],
   templateUrl: './npc-details.component.html',
-  styleUrls: ['./npc-details.component.scss']
 })
-export class NpcDetailsComponent implements OnInit, OnDestroy {
+export class NpcDetailsComponent extends Destroyable implements OnInit, OnDestroy {
   npc: NPC;
   actorId: string;
-
-  private param$: any;
 
   constructor(
     public game: GameService,
     public responsive: ResponsiveService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.param$ = this.route.paramMap.subscribe(params => {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params: ParamMap) => {
       this.actorId = params.get('id');
       this.npc = this.game.npc(this.actorId);
     });
   }
 
   ngOnDestroy(): void {
-    this.param$.unsubscribe();
     this.game.npcs.set(this.actorId, this.npc);
   }
 
   get maximumNameLength(): number { return NPC.maximumNameLength; }
-
-  get hasSubscription(): boolean { return !!this.param$; }
 }

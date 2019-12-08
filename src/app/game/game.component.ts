@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AddEntityDialogComponent } from './add-entity/add-entity.component';
+import { Component } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
 import { GameService } from '@game/game.service';
 import { ResponsiveService } from '@responsive-service';
 
+import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+
+import { AddEntityDialogComponent, EntityData } from './add-entity/add-entity.component';
+
 @Component({
   selector: 'ncv-game',
+  styleUrls: ['./game.component.scss'],
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
-  currentTab = 0;
+export class GameComponent extends Destroyable {
+  currentTab: number = 0;
 
   constructor(
     public dialog: MatDialog,
     public game: GameService,
     public responsive: ResponsiveService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
+    super();
   }
 
   swipeLeft(): void {
@@ -30,12 +33,12 @@ export class GameComponent implements OnInit {
   }
 
   addEntity(): void {
-    const dialogRef = this.dialog.open(AddEntityDialogComponent, {
+    const dialogRef: MatDialogRef<AddEntityDialogComponent> = this.dialog.open(AddEntityDialogComponent, {
+      data: { type: this.resolveEntityType(), name: '', id: '' },
       width: (this.responsive.isMobile() ? '80%' : '500px'),
-      data: { type: this.resolveEntityType(), name: '', id: '' }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(untilDestroyed(this)).subscribe((result: EntityData) => {
       if (!result) {
         return;
       }

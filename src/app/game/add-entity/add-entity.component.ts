@@ -15,8 +15,8 @@ export interface EntityData {
 
 @Component({
   selector: 'ncv-add-entity',
+  styleUrls: ['./add-entity.component.scss'],
   templateUrl: './add-entity.component.html',
-  styleUrls: ['./add-entity.component.scss']
 })
 export class AddEntityDialogComponent {
   @ViewChild(MatSelect, { static: true }) typeSelect: MatSelect;

@@ -1,38 +1,37 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Quest } from 'app/model/quest/quest';
 import { GameService } from '@game/game.service';
 import { ResponsiveService } from '@responsive-service';
 
+import { Quest } from 'app/model/quest/quest';
+import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+
 @Component({
   selector: 'ncv-quest-details',
+  styleUrls: ['./quest-details.component.scss'],
   templateUrl: './quest-details.component.html',
-  styleUrls: ['./quest-details.component.scss']
 })
-export class QuestDetailsComponent implements OnDestroy, OnInit {
+export class QuestDetailsComponent extends Destroyable implements OnDestroy, OnInit {
   quest: Quest;
   questId: string;
-  currentStage = -1;
-
-  private param$: any;
+  currentStage: number = -1;
 
   constructor(public game: GameService,
     public responsive: ResponsiveService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.param$ = this.route.paramMap.subscribe(
-      (params: ParamMap) => {
-        this.questId = params.get('id');
-        this.quest = this.game.quest(this.questId);
-      }
-    );
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params: ParamMap) => {
+      this.questId = params.get('id');
+      this.quest = this.game.quest(this.questId);
+    });
   }
 
   ngOnDestroy(): void {
-    this.param$.unsubscribe();
     this.game.quests.set(this.questId, this.quest);
   }
 
@@ -51,15 +50,12 @@ export class QuestDetailsComponent implements OnDestroy, OnInit {
       this.currentStage = this.quest.stages.length - 1;
 
       window.scrollBy({
+        behavior: 'smooth',
         top: 100,
-        behavior: 'smooth'
       });
     });
   }
 
   get maximumNameLength(): number { return Quest.maximumNameLength; }
   get maximumDescriptionLength(): number { return Quest.maximumDescriptionLength; }
-
-  get hasSubscription(): boolean { return !!this.param$; }
-
 }

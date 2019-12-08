@@ -5,38 +5,36 @@ import { Item } from 'app/model/item/item';
 
 import { GameService } from '@game-service';
 import { ResponsiveService } from '@responsive-service';
+import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 
 type OpenPanel = 'none' | 'description' | 'content' | 'actions';
 
 @Component({
   selector: 'ncv-item-details',
+  styleUrls: ['./item-details.component.scss'],
   templateUrl: './item-details.component.html',
-  styleUrls: ['./item-details.component.scss']
 })
-export class ItemDetailsComponent implements OnInit, OnDestroy {
+export class ItemDetailsComponent extends Destroyable implements OnInit, OnDestroy {
   item: Item;
   itemId: string;
   currentPanel: OpenPanel = 'none';
-
-  private param$: any;
 
   constructor(
     public game: GameService,
     public responsive: ResponsiveService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.param$ = this.route.paramMap.subscribe(
-      (params: ParamMap) => {
-        this.itemId = params.get('id');
-        this.item = this.game.item(this.itemId);
-      }
-    );
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params: ParamMap) => {
+      this.itemId = params.get('id');
+      this.item = this.game.item(this.itemId);
+    });
   }
 
   ngOnDestroy(): void {
-    this.param$.unsubscribe();
     this.game.items.set(this.itemId, this.item);
   }
 
@@ -78,6 +76,4 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   get maximumNameLength(): number { return Item.maximumNameLength; }
   get maximumDescriptionLength(): number { return Item.maximumDescriptionLength; }
-
-  get hasSubscription(): boolean { return !!this.param$; }
 }

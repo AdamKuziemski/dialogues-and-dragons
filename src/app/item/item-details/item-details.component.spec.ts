@@ -65,7 +65,6 @@ describe('ItemDetailsComponent', () => {
   it('should subscribe to route params and retrieve an item', () => {
     expect(component.itemId).toBe(testItemId);
     expect(component.item).toEqual(testItem());
-    expect(component.hasSubscription).toBe(true);
   });
 
   it('should correctly return constants from Item', () => {
