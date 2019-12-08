@@ -7,6 +7,9 @@ export class Destroyable implements OnDestroy {
   destroyed$: Subject<void> = new Subject<void>();
 
   constructor() {
+    // we're overwriting ngOnDestroy with a wrapper
+    // this way ngOnDestroy is always called
+    // regardless of whether the child class calls super.ngOnDestroy() or not
     const originalOnDestroy: () => void = this.ngOnDestroy;
 
     this.ngOnDestroy = (): void => {
