@@ -1,24 +1,26 @@
 import { GameObject } from '../game-object';
-import { DialogueTopic } from './dialogue-topic';
+
 import { DialogueLine } from './dialogue-line';
+import { DialogueTopic } from './dialogue-topic';
 
 export class Dialogue extends GameObject {
   greetings: DialogueLine[] = [];
   topics: DialogueTopic[] = [];
-  isOpen = false;
+  isOpen: boolean = false;
 
   currentLine: DialogueLine = null;
   currentTopic: DialogueTopic = null;
-  lineIndex = -1;
+  lineIndex: number = -1;
 
   constructor() {
     super();
   }
 
   static exampleDialogue(): Dialogue {
-    let example = new Dialogue();
+    const example: Dialogue = new Dialogue();
     example.addGreeting('Example Greeting');
     example.addTopic('Example Topic');
+
     return example;
   }
 
@@ -52,10 +54,10 @@ export class Dialogue extends GameObject {
   }
 
   get topicOptions(): DialogueTopic[] {
-    return this.hasTopic ? this.currentTopic.topics.filter(topic => topic.available) : [];
+    return this.hasTopic ? this.currentTopic.topics.filter((topic: DialogueTopic) => topic.available) : [];
   }
   //#endregion
-  
+
   //#region conversation
   open(): void {
     this.isOpen = true;
@@ -67,20 +69,21 @@ export class Dialogue extends GameObject {
       return [];
     }
 
-    return (this.hasTopic ? this.topicOptions : this.topics.filter(option => option.available));
+    return (this.hasTopic ? this.topicOptions : this.topics.filter((option: DialogueTopic) => option.available));
   }
 
   get availableGreetings(): DialogueLine[] {
-    return this.greetings.filter(greet => greet.available);
+    return this.greetings.filter((greet: DialogueLine) => greet.available);
   }
 
   get randomGreeting(): DialogueLine {
-    const greets = this.availableGreetings;
+    const greets: DialogueLine[] = this.availableGreetings;
     if (greets.length === 0) {
       return null;
     }
 
-    const index = this.getRandomInt(greets.length);
+    const index: number = this.getRandomInt(greets.length);
+
     return greets[index];
   }
 
@@ -89,9 +92,9 @@ export class Dialogue extends GameObject {
       return null;
     }
 
-    let result = this.topics[path[0]];
+    let result: DialogueTopic = this.topics[path[0]];
 
-    for (let i = 1; i < path.length; ++i) {
+    for (let i: number = 1; i < path.length; ++i) {
       if (result.topics.length < path[i]) {
         return null;
       } else {
@@ -118,8 +121,7 @@ export class Dialogue extends GameObject {
     if (!this.displayOptions) {
       this.currentLine = this.currentTopic.lines[this.lineIndex];
     } else if (this.goodbye) {
-      // temporary - update an observable in the future
-      console.log('goodbye');
+      // todo update an observable
       // this.isOpen = false;
       this.reset();
     } else if (this.backToStart) {
@@ -153,7 +155,7 @@ export class Dialogue extends GameObject {
   }
 
   get length(): number {
-    return this.topics.reduce((sum, topic) => sum + topic.length, this.totalTopics);
+    return this.topics.reduce((sum: number, topic: DialogueTopic) => sum + topic.length, this.totalTopics);
   }
 
   get totalGreetings(): number {
@@ -161,31 +163,39 @@ export class Dialogue extends GameObject {
   }
 
   get totalTopics(): number {
-    return this.topics.reduce((sum, topic) => sum + topic.totalTopics, this.topics.length);
+    return this.topics.reduce((sum: number, topic: DialogueTopic) => sum + topic.totalTopics, this.topics.length);
   }
   //#endregion
 
   //#region adders/removers
   addGreeting(greeting: string): DialogueLine {
     this.greetings.push(new DialogueLine(greeting, true));
+
     return this.lastOf(this.greetings);
   }
 
   addGreetings(greetings: string[]): DialogueLine {
-    greetings.forEach(elem => this.addGreeting(elem));
+    greetings.forEach((elem: string) => this.addGreeting(elem));
+
     return this.lastOf(this.greetings);
   }
 
   addTopic(label: string): DialogueTopic {
     this.topics.push(new DialogueTopic(label));
+
     return this.lastOf(this.topics);
   }
 
-  removeGreeting(index: number): void {
-    this.greetings.splice(index, 1);
+  removeGreeting(index: number): DialogueLine {
+    return this.greetings.splice(index, 1)[0];
+  }
+
+  removeTopic(index: number): DialogueTopic {
+    return this.topics.splice(index, 1)[0];
   }
   //#endregion
 
+  // todo: move this to a service that provides more functionality
   private getRandomInt(max: number): number {
     return Math.floor(Math.random() * Math.floor(max));
   }

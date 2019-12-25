@@ -1,9 +1,62 @@
-import { Dialogue, createTestDialogue } from './testing/test-dialogue';
+import { createTestDialogue, Dialogue } from './testing/test-dialogue';
+import { DialogueTopic } from './dialogue-topic';
 
 describe('Dialogue', () => {
+  describe('Basic functionality', () => {
+    let dialogue: Dialogue;
+
+    beforeEach(() => dialogue = createTestDialogue());
+
+    it('should add topics', () => {
+      const previousLength = dialogue.topics.length;
+
+      dialogue.addTopic('New Topic');
+
+      expect(dialogue.topics.length).toBe(previousLength + 1);
+    });
+
+    it('should add a single greeting', () => {
+      const previousLength = dialogue.greetings.length;
+
+      dialogue.addGreeting('New Greeting');
+
+      expect(dialogue.greetings.length).toBe(previousLength + 1);
+    });
+
+    it('should add multiple greetings', () => {
+      const previousLength = dialogue.greetings.length;
+
+      dialogue.addGreetings([
+        'Chicken chaser! Do you chase chickens?',
+        'I used to be an adventurer, like you. Then I took an arrow in the knee',
+        `You'll never take me alive, you robotic sumbitch!`
+      ]);
+
+      expect(dialogue.greetings.length).toBe(previousLength + 3);
+    });
+
+    it('should remove topics', () => {
+      const previousLength = dialogue.topics.length;
+
+      dialogue.removeTopic(0);
+
+      expect(dialogue.topics.length).toBe(previousLength - 1);
+      expect(dialogue.removeTopic(666)).toBeUndefined();
+    });
+
+    it('should remove greetings', () => {
+      const previousLength = dialogue.greetings.length;
+
+      dialogue.removeGreeting(0);
+
+      expect(dialogue.greetings.length).toBe(previousLength - 1);
+      expect(dialogue.removeGreeting(666)).toBeUndefined();
+    });
+  });
+
   describe('Opened', () => {
-    const dialogue = createTestDialogue();
-    let topic = null;
+    const dialogue: Dialogue = createTestDialogue();
+    let topic: DialogueTopic = null;
 
     const startTopic = (index: number) => {
       topic = dialogue.options[index];
@@ -81,14 +134,14 @@ describe('Dialogue', () => {
   });
 
   describe('Closed', () => {
-    const dialogue = createTestDialogue();
+    const dialogue: Dialogue = createTestDialogue();
 
     it('should be closed', () => expect(dialogue.isOpen).toBe(false));
     it('should be considered as goodbye', () => expect(dialogue.goodbye).toBe(true));
   });
 
   describe('Blank', () => {
-    const dialogue = new Dialogue();
+    const dialogue: Dialogue = new Dialogue();
 
     it('should be empty', () => expect(dialogue.empty).toBe(true));
     it('should have length === 0', () => expect(dialogue.length).toBe(0));
