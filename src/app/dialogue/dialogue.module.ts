@@ -31,6 +31,13 @@ import { GreetingContainerComponent } from './greeting-container/greeting-contai
     LineContainerComponent,
     GreetingContainerComponent
   ],
+  exports: [
+    DialogueComponent,
+    DialogueLineComponent,
+    DialogueTopicComponent,
+    DialogueTopicTreeComponent,
+    LineContainerComponent
+  ],
   imports: [
     ActionModule,
     CommonModule,
@@ -47,12 +54,5 @@ import { GreetingContainerComponent } from './greeting-container/greeting-contai
     MatTreeModule
   ],
   providers: [],
-  exports: [
-    DialogueComponent,
-    DialogueLineComponent,
-    DialogueTopicComponent,
-    DialogueTopicTreeComponent,
-    LineContainerComponent
-  ]
 })
 export class DialogueModule { }

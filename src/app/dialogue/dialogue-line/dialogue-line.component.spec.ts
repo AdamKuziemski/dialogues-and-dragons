@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogueLine } from '@dialogue/dialogue-line';
 import { DialogueLineComponent } from './dialogue-line.component';
@@ -17,13 +17,13 @@ describe('DialogueLineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [DialogueLineComponent],
       imports: [
         FormsModule,
         MatFormFieldModule,
         MatInputModule,
         NoopAnimationsModule
       ],
-      declarations: [DialogueLineComponent],
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(DialogueLineComponent);
       component = fixture.componentInstance;
@@ -38,9 +38,9 @@ describe('DialogueLineComponent', () => {
 
   it('should emit a click event with the test line when the span is clicked', () => {
     spyOn(component, 'onClick');
-    component.click.subscribe(line => expect(line).toBe(testLine));
+    component.click.subscribe((line: DialogueLine) => expect(line).toBe(testLine));
 
-    const span = fixture.nativeElement.querySelector('span');
+    const span: HTMLSpanElement = fixture.nativeElement.querySelector('span');
     span.click();
 
     expect(component.onClick).toHaveBeenCalled();
@@ -58,7 +58,7 @@ describe('DialogueLineComponent', () => {
     fixture.detectChanges();
 
     const debugComponent: DebugElement = fixture.debugElement;
-    const debugArea = debugComponent.query(By.css('textarea'));
+    const debugArea: DebugElement = debugComponent.query(By.css('textarea'));
     const textarea: HTMLInputElement = debugArea.nativeElement;
 
     textarea.value = 'Hello';
