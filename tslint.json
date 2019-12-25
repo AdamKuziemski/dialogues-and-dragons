@@ -106,7 +106,7 @@
       true,
       {
         "grouped-imports": true,
-        "import-sources-order": "case-insensitive",
+        "import-sources-order": "any",
         "named-imports-order": "case-insensitive"
       }
     ],
@@ -132,7 +132,7 @@
       "parameter",
       "arrow-parameter",
       "property-declaration",
-      "variable-declaration",
+      "variable-declaration-ignore-function",
       "member-variable-declaration"
     ],
     "typedef-whitespace": [
