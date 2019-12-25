@@ -60,4 +60,14 @@ describe('DialogueTopic', () => {
     topic.topics[1].addTopic('Maybe.');
     expect(topic.totalTopics).toBe(5);
   });
+
+  it('should remove topics successfully', () => {
+    topic.addTopic('Yes, I am.');
+    topic.addTopic('Are you?');
+    topic.addTopic('Howdy. Is there anything I can do?');
+
+    expect(topic.removeTopic(1).label).toBe('Are you?');
+    expect(topic.totalTopics).toBe(2);
+    expect(topic.removeTopic(666)).toBeUndefined();
+  });
 });
