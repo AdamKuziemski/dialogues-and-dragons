@@ -24,15 +24,23 @@
           <mat-panel-description>What is the NPC saying?</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <ncv-line-container [lines]="topic.lines" [moveLines]="moveLines" (moveUp)="moveLineUp($event)" (moveDown)="moveLineDown($event)"
-          (delete)="deleteLine($event)">
-        </ncv-line-container>
-
-        <mat-action-row>
-          <button mat-button color="primary" (click)="addLine()">Add</button>
-          <button *ngIf="!moveLines" mat-button color="primary" (click)="toggleMoveLines()">Move</button>
-          <button *ngIf="moveLines" mat-raised-button color="primary" (click)="toggleMoveLines()">Edit</button>
-        </mat-action-row>
+        <!-- TODO change lines.lines to plain lines
+          (use LineContainer inside ncv-line-container ncv-line-container) -->
+          <ncv-line-container 
+            *ngIf="isLinesOpen"
+            [lines]="topic.lines.lines"
+            [moveLines]="moveLines"
+            (moveUp)="moveLineUp($event)"
+            (moveDown)="moveLineDown($event)"
+            (delete)="deleteLine($event)"
+          >
+          </ncv-line-container>
+        
+          <mat-action-row *ngIf="isLinesOpen">
+            <button mat-button color="primary" (click)="addLine()">Add</button>
+            <button *ngIf="!moveLines" mat-button color="primary" (click)="toggleMoveLines()">Move</button>
+            <button *ngIf="moveLines" mat-raised-button color="primary" (click)="toggleMoveLines()">Edit</button>
+          </mat-action-row>
       </mat-expansion-panel>
 
       <mat-expansion-panel [expanded]="isActionsOpen" (opened)="openActionsPanel()">
@@ -40,10 +48,15 @@
           <mat-panel-title>Actions</mat-panel-title>
           <mat-panel-description>What should happen?</mat-panel-description>
         </mat-expansion-panel-header>
+        
+        <ncv-action-list
+          *ngIf="isActionsOpen"
+          #actionList
+          [actionContainer]="topic"
+        ></ncv-action-list>
 
-        <ncv-action-list #actionList [actionContainer]="topic"></ncv-action-list>
-
-        <mat-action-row>
+        <mat-action-row *ngIf="isActionsOpen">
+          <!-- TODO fix undefined #actionList -->
           <button mat-button color="primary" (click)="actionList.addAction()">Add</button>
           <button *ngIf="!actionList.moveActions" mat-button color="primary" (click)="actionList.toggleMoveActions()">Move</button>
           <button *ngIf="actionList.moveActions" mat-raised-button color="primary" (click)="actionList.toggleMoveActions()">Edit</button>
@@ -59,5 +72,9 @@
       </mat-expansion-panel>
       
     </mat-accordion>
+
+    <div class="ncv-center-content ncv-margin-top">
+      <button mat-button (click)="removeTopic()" color="warn">Remove Topic</button>
+    </div>
   </div>
 </div>

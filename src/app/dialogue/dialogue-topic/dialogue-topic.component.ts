@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { DialogueTopic } from '@dialogue/dialogue-topic';
 
@@ -8,29 +8,30 @@ type OpenPanel = 'none' | 'lines' | 'actions' | 'conditions';
 
 @Component({
   selector: 'ncv-dialogue-topic',
+  styleUrls: ['./dialogue-topic.component.scss'],
   templateUrl: './dialogue-topic.component.html',
-  styleUrls: ['./dialogue-topic.component.scss']
 })
 export class DialogueTopicComponent implements OnInit {
   @Input() topic: DialogueTopic = new DialogueTopic('');
-  @Input() edit = false;
+  @Input() edit: boolean = false;
 
-  @Output() click = new EventEmitter<DialogueTopic>();
-  @Output() topicChange = new EventEmitter<DialogueTopic>();
+  @Output() click: EventEmitter<DialogueTopic> = new EventEmitter<DialogueTopic>();
+  @Output() topicChange: EventEmitter<DialogueTopic> = new EventEmitter<DialogueTopic>();
+  @Output() topicRemove: EventEmitter<DialogueTopic> = new EventEmitter<DialogueTopic>();
 
   currentPanel: OpenPanel = 'none';
-  maximumLength = 100;
-  moveLines = false;
+  maximumLength: number = 100;
+  moveLines: boolean = false;
 
   constructor(
     public responsive: ResponsiveService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.closePanels();
   }
 
-  onClick(event): void {
+  onClick(event: MouseEvent): void {
     event.stopPropagation();
 
     if (!this.edit) {
@@ -53,11 +54,11 @@ export class DialogueTopicComponent implements OnInit {
   }
 
   addLine(): void {
-    this.topic.addLine('');
+    this.topic.lines.add('');
   }
 
   deleteLine(index: number): void {
-    this.topic.removeLine(index);
+    this.topic.lines.remove(index);
   }
 
   toggleMoveLines(): void {
@@ -65,11 +66,11 @@ export class DialogueTopicComponent implements OnInit {
   }
 
   moveLineDown(index: number): void {
-    this.topic.swapLines(index + 1, index);
+    this.topic.lines.swap(index + 1, index);
   }
 
   moveLineUp(index: number): void {
-    this.topic.swapLines(index - 1, index);
+    this.topic.lines.swap(index - 1, index);
   }
   //#endregion
 
@@ -93,7 +94,11 @@ export class DialogueTopicComponent implements OnInit {
   }
   //#endregion
 
-  private expandPanel(panel: OpenPanel) {
+  removeTopic(): void {
+
+  }
+
+  private expandPanel(panel: OpenPanel): void {
     if (this.edit) {
       this.currentPanel = panel;
     }

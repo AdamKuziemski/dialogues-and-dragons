@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -35,8 +35,8 @@ describe('DialogueTopicComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents().then(() => {
       topic = new DialogueTopic('Hey there, Ellie');
-      topic.addLine(`Oh, howdy! I didn't see you there.`);
-      topic.addLine(`Name's Ellie. I like cuddles and murder.`);
+      topic.lines.add(`Oh, howdy! I didn't see you there.`);
+      topic.lines.add(`Name's Ellie. I like cuddles and murder.`);
 
       fixture = TestBed.createComponent(DialogueTopicComponent);
       component = fixture.componentInstance;
