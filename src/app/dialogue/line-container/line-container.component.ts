@@ -5,12 +5,12 @@ import { ResponsiveService } from '@responsive-service';
 
 @Component({
   selector: 'ncv-line-container',
+  styleUrls: ['./line-container.component.scss'],
   templateUrl: './line-container.component.html',
-  styleUrls: ['./line-container.component.scss']
 })
 export class LineContainerComponent {
   @Input() lines: DialogueLine[];
-  @Input() moveLines = false;
+  @Input() moveLines: boolean = false;
 
   @Output() moveUp: EventEmitter<number> = new EventEmitter();
   @Output() moveDown: EventEmitter<number> = new EventEmitter();
