@@ -1,4 +1,4 @@
-import { DialogueTopic } from './dialogue-topic';
+import { DialogueTopic, TopicContainer } from './dialogue-topic';
 
 describe('DialogueTopic', () => {
   let topic: DialogueTopic;
@@ -10,64 +10,118 @@ describe('DialogueTopic', () => {
   it('should be empty right after creation', () => expect(topic.empty).toBe(true));
 
   it('should have 2 lines', () => {
-    topic.addLine('Are you the Tester?');
-    topic.addLine('I thought you would come sooner or later');
-    expect(topic.length).toBe(2);
+    topic.lines.add('Are you the Tester?');
+    topic.lines.add('I thought you would come sooner or later');
+    expect(topic.lineCount).toBe(2);
   });
 
-  it('should swap lines successfully', () => {
-    topic.addLine('Are you the Tester?');
-    topic.addLine('I thought you would come sooner or later');
+  it(`should properly count lines (including children's lines)`, () => {
+    topic.lines.add('Are you the Tester?');
+    topic.lines.add('I thought you would come sooner or later');
 
-    topic.swapLines(0, 1);
+    topic.topics.add('Yes, I am.');
+    topic.topics.add('Are you?');
 
-    expect(topic.lines[0].line).toBe('I thought you would come sooner or later');
-    expect(topic.lines[1].line).toBe('Are you the Tester?');
+    topic.topics.topic(0).lines.add('Whoa! I knew it!');
+    topic.topics.topic(1).lines.add(`Do you know something I don't?`);
+    expect(topic.lineCount).toBe(4);
+  });
+});
+
+describe('TopicContainer', () => {
+  let container: TopicContainer;
+
+  const fill = () => container.add(
+    'Identify items',
+    '[Say nothing.]',
+    `You'll never take me alive, you robotic sumbitch!`
+  );
+
+  beforeEach(() => container = new TopicContainer());
+
+  it('should add single topics', () => {
+    expect(container.empty).toBe(true);
+
+    container.add('Hurro');
+
+    expect(container.length).toBe(1);
+    expect(container.empty).toBe(false);
   });
 
-  it('should remove lines successfully', () => {
-    topic.addLine('Are you the Tester?');
-    topic.addLine('I thought you would come sooner or later');
+  it('should add multiple topics', () => {
+    container.add(
+      'Identify items',
+      '[Say nothing.]',
+      `You'll never take me alive, you robotic sumbitch!`
+    );
 
-    topic.removeLine(1);
-    expect(topic.lines.length).toBe(1);
+    expect(container.length).toBe(3);
   });
 
-  it('should have 2 child topics', () => {
-    topic.addTopic('Yes, I am.');
-    topic.addTopic('Are you?');
-    expect(topic.totalTopics).toBe(2);
+  it(`should properly count topics (including children)`, () => {
+    fill();
+
+    container.topic(0).topics.add('Thank you, Deckard.');
+    container.topic(0, 0).topics.add(`You've always been a great help.`);
+    container.topic(1).topics.add('Please continue Mr. Lachance.');
+
+    expect(container.count).toBe(6);
   });
 
-  it(`should have 4 lines (including children's lines)`, () => {
-    topic.addLine('Are you the Tester?');
-    topic.addLine('I thought you would come sooner or later');
+  it('should access topics via path', () => {
+    fill();
 
-    topic.addTopic('Yes, I am.');
-    topic.addTopic('Are you?');
+    container.topic(0).topics.add('Thank you, Deckard.');
+    container.topic(1).topics.add('Please continue Mr. Lachance.').topics.add('Rufio will die by my hand!');
 
-    topic.topics[0].addLine('Whoa! I knew it!');
-    topic.topics[1].addLine(`Do you know something I don't?`);
-    expect(topic.length).toBe(4);
+    expect(container.topic(1, 0, 0).label).toBe('Rufio will die by my hand!');
+
+    container.topic(1, 0).topics.add(`But I'm no murderer!`);
+
+    expect(container.topic(1, 0, 1).label).toBe(`But I'm no murderer!`);
   });
 
-  it(`should have 5 topics (including children's topics)`, () => {
-    topic.addTopic('Yes, I am.');
-    topic.addTopic('Are you?');
+  it('should remove topics', () => {
+    fill();
 
-    topic.topics[0].addTopic('I need you to keep it a secret, though');
-    topic.topics[0].topics[0].addTopic('Glad we could make it clear');
-    topic.topics[1].addTopic('Maybe.');
-    expect(topic.totalTopics).toBe(5);
+    expect(container.remove(1).label).toBe('[Say nothing.]');
+    expect(container.length).toBe(2);
   });
 
-  it('should remove topics successfully', () => {
-    topic.addTopic('Yes, I am.');
-    topic.addTopic('Are you?');
-    topic.addTopic('Howdy. Is there anything I can do?');
+  describe('#swap', () => {
+    it('should swap topics', () => {
+      fill();
 
-    expect(topic.removeTopic(1).label).toBe('Are you?');
-    expect(topic.totalTopics).toBe(2);
-    expect(topic.removeTopic(666)).toBeUndefined();
+      container.swap(0, 1);
+      expect(container.topic(0).label).toBe('[Say nothing.]');
+
+      container.swap(0, 2);
+      expect(container.topic(0).label).toBe(`You'll never take me alive, you robotic sumbitch!`);
+    });
+
+    it('should not swap when one of the indices is not in the topics array', () => {
+      const deckardPlease = 'Identify items';
+
+      fill();
+
+      container.swap(0, 42);
+      expect(container.topic(0).label).toBe(deckardPlease);
+
+      container.swap(42, 0);
+      expect(container.topic(0).label).toBe(deckardPlease);
+
+      container.swap(0, -1);
+      expect(container.topic(0).label).toBe(deckardPlease);
+
+      container.swap(-1, 0);
+      expect(container.topic(0).label).toBe(deckardPlease);
+    });
+  });
+
+  it('should clear', () => {
+    fill();
+    expect(container.empty).toBe(false);
+    container.clear();
+    expect(container.empty).toBe(true);
   });
 });
