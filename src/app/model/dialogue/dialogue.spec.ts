@@ -2,58 +2,6 @@ import { createTestDialogue, Dialogue } from './testing/test-dialogue';
 import { DialogueTopic } from './dialogue-topic';
 
 describe('Dialogue', () => {
-  describe('Basic functionality', () => {
-    let dialogue: Dialogue;
-
-    beforeEach(() => dialogue = createTestDialogue());
-
-    it('should add topics', () => {
-      const previousLength = dialogue.topics.length;
-
-      dialogue.addTopic('New Topic');
-
-      expect(dialogue.topics.length).toBe(previousLength + 1);
-    });
-
-    it('should add a single greeting', () => {
-      const previousLength = dialogue.greetings.length;
-
-      dialogue.addGreeting('New Greeting');
-
-      expect(dialogue.greetings.length).toBe(previousLength + 1);
-    });
-
-    it('should add multiple greetings', () => {
-      const previousLength = dialogue.greetings.length;
-
-      dialogue.addGreetings([
-        'Chicken chaser! Do you chase chickens?',
-        'I used to be an adventurer, like you. Then I took an arrow in the knee',
-        `You'll never take me alive, you robotic sumbitch!`
-      ]);
-
-      expect(dialogue.greetings.length).toBe(previousLength + 3);
-    });
-
-    it('should remove topics', () => {
-      const previousLength = dialogue.topics.length;
-
-      dialogue.removeTopic(0);
-
-      expect(dialogue.topics.length).toBe(previousLength - 1);
-      expect(dialogue.removeTopic(666)).toBeUndefined();
-    });
-
-    it('should remove greetings', () => {
-      const previousLength = dialogue.greetings.length;
-
-      dialogue.removeGreeting(0);
-
-      expect(dialogue.greetings.length).toBe(previousLength - 1);
-      expect(dialogue.removeGreeting(666)).toBeUndefined();
-    });
-  });
-
   describe('Opened', () => {
     const dialogue: Dialogue = createTestDialogue();
     let topic: DialogueTopic = null;
@@ -145,7 +93,7 @@ describe('Dialogue', () => {
 
     it('should be empty', () => expect(dialogue.empty).toBe(true));
     it('should have length === 0', () => expect(dialogue.length).toBe(0));
-    it('should have 0 greetings', () => expect(dialogue.totalGreetings).toBe(0));
+    it('should have 0 greetings', () => expect(dialogue.greetings.length).toBe(0));
     it('should have 0 topics', () => expect(dialogue.totalTopics).toBe(0));
     it('should return an empty options array', () => expect(dialogue.options).toEqual([]));
     it('should return an empty available greetings array', () => expect(dialogue.availableGreetings).toEqual([]));
