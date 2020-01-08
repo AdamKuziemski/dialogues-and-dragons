@@ -1,63 +1,131 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
-
-import { of as observableOf } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Dialogue } from '@dialogue/dialogue';
-import { DialogueTopic } from '@dialogue/dialogue-topic';
+import { DialogueTopic, TopicContainer } from '@dialogue/dialogue-topic';
 import { ResponsiveService } from '@responsive-service';
+import { ActivatedRoute } from '@angular/router';
+import { GameService } from '@game/game.service';
+
+// TODO create a fuction in a file and replace extends GameObject where possible
+function lastOf<T>(elements: T[]): T {
+  return elements[elements.length - 1];
+}
+
+type Panel = '' | 'searchBox' | 'breadcrumbs';
 
 @Component({
   selector: 'ncv-dialogue-topic-tree',
+  styleUrls: ['dialogue-topic-tree.component.scss'],
   templateUrl: 'dialogue-topic-tree.component.html',
-  styleUrls: ['dialogue-topic-tree.component.scss']
 })
 export class DialogueTopicTreeComponent implements OnInit {
   @Input() dialogue: Dialogue;
-  @Output() topicClicked: EventEmitter<DialogueTopic> = new EventEmitter;
+  @Output() topicClicked: EventEmitter<number[]> = new EventEmitter;
 
-  nestedTreeControl: NestedTreeControl<DialogueTopic>;
-  nestedDataSource: MatTreeNestedDataSource<DialogueTopic>;
+  shouldOpenNewTopicsOnMobile: boolean = false; // this will do for now until we get a settings screen
 
-  shouldOpenNewTopicsOnMobile = false; // this will do for now until we get a settings screen
+  breadcrumbs: number[][] = [];
+  searchPhrase: string = '';
+  selectedTopic: number = 0;
 
-  constructor(public responsive: ResponsiveService) {
-    this.nestedTreeControl = new NestedTreeControl<DialogueTopic>(this._getChildren);
-    this.nestedDataSource = new MatTreeNestedDataSource();
+  panelAboveContent: Panel = '';
+
+  npcName: string;
+
+  constructor(
+    public responsive: ResponsiveService,
+    public game: GameService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.npcName = this.game.npc(this.route.snapshot.params.id).name;
   }
 
-  ngOnInit() {
-    this.setTreeData(this.dialogue.topics);
+  get topics(): DialogueTopic[] {
+    return this.currentTopicList.topics;
   }
 
-  onTopicClicked(topic: DialogueTopic) {
-    this.topicClicked.emit(topic);
+  get currentTopicList(): TopicContainer {
+    return this.breadcrumbs.length === 0 ?
+      this.dialogue.topics :
+      this.dialogue.topics.topic(...this.path).topics;
   }
 
-  hasNestedChild = (_: number, node: DialogueTopic) => node.topics.length > 0;
+  get path(): number[] {
+    return this.breadcrumbs.length > 0 ? lastOf(this.breadcrumbs) : [];
+  }
 
-  addNewItem(node: DialogueTopic) {
-    this.clearTree(); // triggers change detection
+  get breadcrumbTopics(): DialogueTopic[] {
+    return this.breadcrumbs.slice(0, -1).map((crumb: number[]) => this.dialogue.topics.topic(...crumb));
+  }
 
-    node.addTopic('New Topic');
+  get parentTopic(): DialogueTopic {
+    return this.dialogue.topics.topic(...this.path);
+  }
 
-    this.setTreeData(this.dialogue.topics);
-    this.nestedTreeControl.expand(node);
+  get canShowBreadcrumbList(): boolean {
+    return this.breadcrumbs.slice(0, -1).length > 0;
+  }
 
-    if (this.responsive.isDesktop() || this.shouldOpenNewTopicsOnMobile) {
-      this.topicClicked.emit(node.lastOf(node.topics));
+  goToTop(): void {
+    if (this.path.length === 0) {
+      return;
+    }
+
+    this.selectedTopic = this.breadcrumbs[0][0] || 0;
+    this.breadcrumbs = [];
+
+    this.closePanel();
+  }
+
+  onTopicClicked(index: number): void {
+    this.selectedTopic = index;
+    this.topicClicked.emit([...this.path, index]);
+  }
+
+  addTopic(): void {
+    this.currentTopicList.add('New topic');
+    this.onTopicClicked(this.currentTopicList.length - 1);
+  }
+
+  toggleSearchBoxVisibility(): void {
+    this.togglePanel('searchBox');
+  }
+
+  toggleBreadcrumbPanelVisibility(): void {
+    this.togglePanel('breadcrumbs');
+  }
+
+  back(): void {
+    this.breadcrumbs.pop();
+
+    if (this.breadcrumbs.length === 0) {
+      this.closePanel();
     }
   }
 
-  private clearTree(): void {
-    this.setTreeData([]);
+  open(index: number): void {
+    this.breadcrumbs.push([...this.path, index]);
+
+    if (this.breadcrumbs.length === 0) {
+      this.closePanel();
+    }
   }
 
-  private setTreeData(data: DialogueTopic[]): void {
-    this.nestedDataSource.data = data;
-    this.nestedTreeControl.dataNodes = data;
+  goToPath(breadcrumbIndex: number): void {
+    const topicIndex = lastOf(this.breadcrumbs[breadcrumbIndex]);
+
+    this.breadcrumbs = this.breadcrumbs.slice(0, breadcrumbIndex);
+    this.togglePanel('breadcrumbs');
+    this.open(topicIndex);
   }
 
-  private _getChildren = (node: DialogueTopic) => observableOf(node.topics);
+  private togglePanel(panelName: Panel): void {
+    this.panelAboveContent = this.panelAboveContent === panelName ? '' : panelName;
+  }
+
+  private closePanel(): void {
+    this.panelAboveContent = '';
+  }
 }
