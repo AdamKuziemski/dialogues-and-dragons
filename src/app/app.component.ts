@@ -10,12 +10,12 @@ import { ResponsiveService } from './shared/services/responsive.service';
 
 @Component({
   selector: 'ncv-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  title = 'NPC Conversations';
-  edit = true;
+  title: string = 'Dialogues and Dragons';
+  edit: boolean = true;
 
   constructor(
     public gameService: GameService,
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
 
@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
 
   isInternetExploder(): boolean {
     const agent = window.navigator.userAgent;
+
     return agent.indexOf('MSIE') > -1 || agent.indexOf('Trident') > -1 || agent.indexOf('Edge') > -1;
   }
 

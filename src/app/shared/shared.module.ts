@@ -8,14 +8,14 @@ import { SplitUpperCasePipe } from './pipes/split-upper-case.pipe';
   declarations: [
     IdValidatorDirective,
     RemoveSpacesPipe,
-    SplitUpperCasePipe
+    SplitUpperCasePipe,
   ],
-  imports: [],
-  providers: [],
   exports: [
     IdValidatorDirective,
     RemoveSpacesPipe,
-    SplitUpperCasePipe
-  ]
+    SplitUpperCasePipe,
+  ],
+  imports: [],
+  providers: [],
 })
 export class SharedModule { }
