@@ -79,7 +79,11 @@ export class DialogueTopicTreeComponent implements OnInit {
     this.closePanel();
   }
 
-  onTopicClicked(index: number): void {
+  onTopicClicked(index: number, event?: MouseEvent): void {
+    if (!!event) {
+      event.stopPropagation();
+    }
+
     this.selectedTopic = index;
     this.topicClicked.emit([...this.path, index]);
   }
