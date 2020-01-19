@@ -9,7 +9,7 @@ import { GameService } from './model/game/game.service';
 import { ResponsiveService } from './shared/services/responsive.service';
 
 @Component({
-  selector: 'ncv-root',
+  selector: 'dnd-root',
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'
 })

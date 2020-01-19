@@ -4,9 +4,9 @@ import { Dialogue } from '@dialogue/dialogue';
 import { ResponsiveService } from '@responsive-service';
 
 @Component({
-  selector: 'ncv-greeting-container',
+  selector: 'dnd-greeting-container',
+  styleUrls: ['./greeting-container.component.scss'],
   templateUrl: './greeting-container.component.html',
-  styleUrls: ['./greeting-container.component.scss']
 })
 export class GreetingContainerComponent {
   @Input() dialogue: Dialogue;

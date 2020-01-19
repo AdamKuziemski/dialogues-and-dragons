@@ -3,12 +3,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GameService } from '@game-service';
 
 @Component({
-  selector: 'ncv-navbar',
+  selector: 'dnd-navbar',
+  styleUrls: ['./navbar.component.scss'],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  @Input() title = '';
+  @Input() title: string = '';
   @Output() action: EventEmitter<string> = new EventEmitter();
 
   constructor(public game: GameService) { }

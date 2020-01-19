@@ -13,7 +13,7 @@ import { ResponsiveService } from '@responsive-service';
 import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
-  selector: 'ncv-dialogue',
+  selector: 'dnd-dialogue',
   styleUrls: ['./dialogue.component.scss'],
   templateUrl: './dialogue.component.html',
 })

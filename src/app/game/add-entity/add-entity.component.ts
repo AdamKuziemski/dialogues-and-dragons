@@ -14,7 +14,7 @@ export interface EntityData {
 }
 
 @Component({
-  selector: 'ncv-add-entity',
+  selector: 'dnd-add-entity',
   styleUrls: ['./add-entity.component.scss'],
   templateUrl: './add-entity.component.html',
 })

@@ -3,18 +3,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DialogueLine } from '@dialogue/dialogue-line';
 
 @Component({
-  selector: 'ncv-dialogue-line',
+  selector: 'dnd-dialogue-line',
+  styleUrls: ['./dialogue-line.component.scss'],
   templateUrl: './dialogue-line.component.html',
-  styleUrls: ['./dialogue-line.component.scss']
 })
 export class DialogueLineComponent {
   @Input() line: DialogueLine;
-  @Input() edit = false;
+  @Input() edit: boolean = false;
 
-  @Output() click = new EventEmitter<DialogueLine>();
-  @Output() lineChange = new EventEmitter<DialogueLine>();
+  @Output() click: EventEmitter<DialogueLine> = new EventEmitter<DialogueLine>();
+  @Output() lineChange: EventEmitter<DialogueLine> = new EventEmitter<DialogueLine>();
 
-  maximumLength = 200;
+  maximumLength: number = 200;
 
   onClick(event: MouseEvent): void {
     event.stopPropagation();

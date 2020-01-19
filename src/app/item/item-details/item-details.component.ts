@@ -10,7 +10,7 @@ import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 type OpenPanel = 'none' | 'description' | 'content' | 'actions';
 
 @Component({
-  selector: 'ncv-item-details',
+  selector: 'dnd-item-details',
   styleUrls: ['./item-details.component.scss'],
   templateUrl: './item-details.component.html',
 })

@@ -1,14 +1,14 @@
-.ncv-tree-navigation {
+.dnd-tree-navigation {
   display: grid;
   grid-template-columns: repeat(5, auto);
 }
 
-.ncv-topic-entry {
+.dnd-topic-entry {
   display: grid;
   grid-template-columns: auto auto;
 }
 
-.ncv-topic-selected {
+.dnd-topic-selected {
   font-weight: bold !important;
 }
 
@@ -16,10 +16,10 @@
   color: rgba(0,0,0,.54);
 }
 
-.ncv-rotate-clockwise {
+.dnd-rotate-clockwise {
   transform: rotateZ(90deg);
 }
 
-.ncv-topic-list {
+.dnd-topic-list {
   border-top: 1px solid #c9c9c9;
 }

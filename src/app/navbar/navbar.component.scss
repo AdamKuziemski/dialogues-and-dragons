@@ -1,4 +1,4 @@
-.ncv-navbar {
+.dnd-navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,17 +6,17 @@
   z-index: 2;
 }
 
-.ncv-navbar-spacer {
+.dnd-navbar-spacer {
   flex: 1 1 auto;
 }
 
-.ncv-navbar-offset {
+.dnd-navbar-offset {
   top: 0;
   height: 52px;
 }
 
 @media only screen and (min-width: 600px) {
-  .ncv-navbar-offset {
+  .dnd-navbar-offset {
     height: 60px;
   }
 }

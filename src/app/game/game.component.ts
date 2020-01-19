@@ -9,7 +9,7 @@ import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 import { AddEntityDialogComponent, EntityData } from './add-entity/add-entity.component';
 
 @Component({
-  selector: 'ncv-game',
+  selector: 'dnd-game',
   styleUrls: ['./game.component.scss'],
   templateUrl: './game.component.html',
 })

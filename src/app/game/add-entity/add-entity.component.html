@@ -3,7 +3,7 @@
 <mat-dialog-content>
   <form #entity="ngForm">
 
-    <mat-form-field class="ncv-full-width">
+    <mat-form-field class="dnd-full-width">
       <mat-select name="entity-type" #entityType="ngModel" [(ngModel)]="data.type" required placeholder="Type">
         <mat-option value="item">Item</mat-option>
         <mat-option value="npc">NPC</mat-option>
@@ -12,7 +12,7 @@
       <mat-error *ngIf="entityType.hasError('required')">Please select a type</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="ncv-full-width">
+    <mat-form-field class="dnd-full-width">
       <input matInput name="entity-id" #entityId="ngModel" [(ngModel)]="data.id"
         maxlength="30" required ncvIdValidator
         [placeholder]="data.type + ' Id' | titlecase">
@@ -21,7 +21,7 @@
       <mat-error *ngIf="entityId.hasError('required')">Please provide an id</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="ncv-full-width">
+    <mat-form-field class="dnd-full-width">
       <input matInput name="entity-name" #entityName="ngModel" [(ngModel)]="data.name"
         [maxlength]="maximumNameLength" required
         [placeholder]="data.type + ' Name' | titlecase">

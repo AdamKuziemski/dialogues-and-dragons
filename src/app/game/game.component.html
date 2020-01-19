@@ -1,10 +1,10 @@
-<mat-tab-group class="ncv-tab-fill-available" [(selectedIndex)]="currentTab" mat-stretch-tabs>
+<mat-tab-group class="dnd-tab-fill-available" [(selectedIndex)]="currentTab" mat-stretch-tabs>
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon>library_books</mat-icon>
     </ng-template>
-    <div class="ncv-swiper" (swipeleft)="swipeLeft()">
-      <ncv-item-list></ncv-item-list>
+    <div class="dnd-swiper" (swipeleft)="swipeLeft()">
+      <dnd-item-list></dnd-item-list>
     </div>
   </mat-tab>
 
@@ -12,8 +12,8 @@
     <ng-template mat-tab-label>
       <mat-icon>people</mat-icon>
     </ng-template>
-    <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-      <ncv-npc-list></ncv-npc-list>
+    <div class="dnd-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+      <dnd-npc-list></dnd-npc-list>
     </div>
   </mat-tab>
 
@@ -21,8 +21,8 @@
     <ng-template mat-tab-label>
       <mat-icon>ballot</mat-icon>
     </ng-template>
-    <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-      <ncv-quest-list></ncv-quest-list>
+    <div class="dnd-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+      <dnd-quest-list></dnd-quest-list>
     </div>
   </mat-tab>
 
@@ -30,14 +30,14 @@
     <ng-template mat-tab-label>
       <mat-icon>videogame_asset</mat-icon>
     </ng-template>
-    <div class="ncv-swiper" (swiperight)="swipeRight()">
-      <ncv-game-details></ncv-game-details>
+    <div class="dnd-swiper" (swiperight)="swipeRight()">
+      <dnd-game-details></dnd-game-details>
     </div>
   </mat-tab>
 
 </mat-tab-group>
 
-<div class="ncv-fab ncv-fab-right">
+<div class="dnd-fab dnd-fab-right">
   <button mat-fab (click)="addEntity()">
     <mat-icon>add</mat-icon>
   </button>

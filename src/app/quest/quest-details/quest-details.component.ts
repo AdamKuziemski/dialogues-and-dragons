@@ -8,7 +8,7 @@ import { Quest } from 'app/model/quest/quest';
 import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
-  selector: 'ncv-quest-details',
+  selector: 'dnd-quest-details',
   styleUrls: ['./quest-details.component.scss'],
   templateUrl: './quest-details.component.html',
 })

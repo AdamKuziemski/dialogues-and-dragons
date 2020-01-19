@@ -12,34 +12,34 @@ import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   {
-    path: 'dialogue/:id',
     component: DialogueComponent,
+    path: 'dialogue/:id',
   },
   {
-    path: 'item/:id',
     component: ItemDetailsComponent,
+    path: 'item/:id',
   },
   {
-    path: 'npc/:id',
     component: NpcDetailsComponent,
+    path: 'npc/:id',
   },
   {
-    path: 'quest/:id',
     component: QuestDetailsComponent,
+    path: 'quest/:id',
   },
   { path: '', component: HomeComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
+  exports: [
+    RouterModule
+  ],
   imports: [
     RouterModule.forRoot(appRoutes, {
       enableTracing: !environment.production
       // preloadingStrategy: SelectivePreloadingStrategyService,
     })
   ],
-  exports: [
-    RouterModule
-  ]
 })
 export class AppRoutingModule { }

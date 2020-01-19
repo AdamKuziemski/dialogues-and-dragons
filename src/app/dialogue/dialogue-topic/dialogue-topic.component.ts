@@ -7,7 +7,7 @@ import { ResponsiveService } from '@responsive-service';
 type OpenPanel = 'none' | 'lines' | 'actions' | 'conditions';
 
 @Component({
-  selector: 'ncv-dialogue-topic',
+  selector: 'dnd-dialogue-topic',
   styleUrls: ['./dialogue-topic.component.scss'],
   templateUrl: './dialogue-topic.component.html',
 })

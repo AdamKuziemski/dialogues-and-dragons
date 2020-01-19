@@ -1,7 +1,7 @@
-<div *ngFor="let line of lines; let i = index" class="ncv-line-container">
-  <ncv-dialogue-line [line]="line" [edit]="!moveLines" class="ncv-line-fill"></ncv-dialogue-line>
+<div *ngFor="let line of lines; let i = index" class="dnd-line-container">
+  <dnd-dialogue-line [line]="line" [edit]="!moveLines" class="dnd-line-fill"></dnd-dialogue-line>
 
-  <div *ngIf="!moveLines" class="ncv-line-buttons">
+  <div *ngIf="!moveLines" class="dnd-line-buttons">
     <button mat-icon-button *ngIf="canShowDeleteButton()" (click)="deleteLine(i)">
       <mat-icon aria-label="Delete line">delete</mat-icon>
     </button>
@@ -9,7 +9,7 @@
       <mat-icon aria-label="More">more_vert</mat-icon>
     </button>
   </div>
-  <div *ngIf="moveLines" class="ncv-line-buttons">
+  <div *ngIf="moveLines" class="dnd-line-buttons">
     <button mat-icon-button [disabled]="isFirstLine(i)" (click)="onMoveUp(i)">
       <mat-icon aria-label="Move up">arrow_upward</mat-icon>
     </button>

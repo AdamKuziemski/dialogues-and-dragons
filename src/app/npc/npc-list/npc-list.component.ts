@@ -5,9 +5,9 @@ import { GameService } from 'app/model/game/game.service';
 import { ResponsiveService } from '@responsive-service';
 
 @Component({
-  selector: 'ncv-npc-list',
+  selector: 'dnd-npc-list',
+  styleUrls: ['./npc-list.component.scss'],
   templateUrl: './npc-list.component.html',
-  styleUrls: ['./npc-list.component.scss']
 })
 export class NpcListComponent implements OnInit {
   constructor(

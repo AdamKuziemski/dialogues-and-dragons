@@ -6,9 +6,9 @@ import { GameService } from '@game-service';
 import { ActionParameter, ParameterList, parametersOf } from '@action/action-parameter';
 
 @Component({
-  selector: 'ncv-action-edit',
+  selector: 'dnd-action-edit',
+  styleUrls: ['./action-edit.component.scss'],
   templateUrl: './action-edit.component.html',
-  styleUrls: ['./action-edit.component.scss']
 })
 export class ActionEditComponent implements OnInit, OnDestroy {
   @Input() set action(newAction: Action) {

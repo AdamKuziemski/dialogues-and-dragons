@@ -17,13 +17,13 @@ describe('LineContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        MatButtonModule,
-        MatIconModule
-      ],
       declarations: [
         DialogueLineComponent,
         LineContainerComponent
+      ],
+      imports: [
+        MatButtonModule,
+        MatIconModule
       ],
       providers: [ResponsiveService],
       schemas: [NO_ERRORS_SCHEMA]
@@ -49,11 +49,11 @@ describe('LineContainerComponent', () => {
   it('should create', () => expect(component).toBeTruthy());
 
   it('should display 3 lines', () => {
-    expect(fixture.debugElement.queryAll(By.css('.ncv-line-container')).length).toBe(lines.length);
+    expect(fixture.debugElement.queryAll(By.css('.dnd-line-container')).length).toBe(lines.length);
   });
 
   it('should react to the #delete click', () => {
-    component.delete.subscribe(index => expect(index).toBe(1));
+    component.delete.subscribe((index: number) => expect(index).toBe(1));
 
     const buttons = fixture.debugElement.queryAll(By.css('button'));
     buttons[2].nativeElement.click(); // first button in the second row
@@ -63,7 +63,7 @@ describe('LineContainerComponent', () => {
   });
 
   it('should react to the #moveUp click', () => {
-    component.moveUp.subscribe(index => expect(index).toBe(1));
+    component.moveUp.subscribe((index: number) => expect(index).toBe(1));
 
     component.moveLines = true;
     fixture.detectChanges();
@@ -76,7 +76,7 @@ describe('LineContainerComponent', () => {
   });
 
   it('should react to the #moveDown click', () => {
-    component.moveDown.subscribe(index => expect(index).toBe(1));
+    component.moveDown.subscribe((index: number) => expect(index).toBe(1));
 
     component.moveLines = true;
     fixture.detectChanges();

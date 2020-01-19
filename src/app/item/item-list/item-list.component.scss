@@ -7,23 +7,23 @@ mat-list {
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
   }
 
-  .ncv-item-header {
+  .dnd-item-header {
     width: calc(100% - 32px);
     padding: 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
     background: rgba(0, 0, 0, 0.04);
   }
 
-  .ncv-entity-row {
+  .dnd-entity-row {
     grid-template-columns: 2fr 1fr 64px 64px repeat(4, 48px);
   }
 
-  .ncv-item-number {
+  .dnd-item-number {
     justify-self: right;
     padding-right: 8px;
   }
 
-  .ncv-item-checkbox {
+  .dnd-item-checkbox {
     justify-self: center;
   }
 }

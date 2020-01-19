@@ -5,7 +5,7 @@ import { Action } from '@action/action.interface';
 import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
-  selector: 'ncv-action-dialog',
+  selector: 'dnd-action-dialog',
   styleUrls: ['./action-dialog.component.scss'],
   templateUrl: './action-dialog.component.html',
 })

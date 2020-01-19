@@ -7,14 +7,14 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "ncv",
+      "prefix": "dnd",
       "schematics": {
         "@schematics/angular:component": {
-          "prefix": "ncv",
+          "prefix": "dnd",
           "styleext": "scss"
         },
         "@schematics/angular:directive": {
-          "prefix": "ncv"
+          "prefix": "dnd"
         }
       },
       "architect": {

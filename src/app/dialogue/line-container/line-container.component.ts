@@ -4,7 +4,7 @@ import { DialogueLine } from '@dialogue/dialogue-line';
 import { ResponsiveService } from '@responsive-service';
 
 @Component({
-  selector: 'ncv-line-container',
+  selector: 'dnd-line-container',
   styleUrls: ['./line-container.component.scss'],
   templateUrl: './line-container.component.html',
 })

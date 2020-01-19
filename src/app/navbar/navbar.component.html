@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="mat-elevation-z6 ncv-navbar">
+<mat-toolbar color="primary" class="mat-elevation-z6 dnd-navbar">
 
   <button mat-icon-button [routerLink]="['/']">
     <mat-icon>
@@ -7,7 +7,7 @@
   </button>
 
   <span>{{ title }}</span>
-  <span class="ncv-navbar-spacer"></span>
+  <span class="dnd-navbar-spacer"></span>
 
   <button mat-icon-button *ngIf="game.isEditModeAvailable" (click)="toggleEditMode()">
     <mat-icon aria-label="Toggle edit mode">
@@ -16,4 +16,4 @@
   </button>
 
 </mat-toolbar>
-<div class="ncv-navbar-offset"></div>
+<div class="dnd-navbar-offset"></div>

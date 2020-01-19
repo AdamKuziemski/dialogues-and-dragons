@@ -1,17 +1,17 @@
-<div *ngIf="item" class="ncv-full-width" [class.ncv-split-vertical]="responsive.isDesktop()">
+<div *ngIf="item" class="dnd-full-width" [class.dnd-split-vertical]="responsive.isDesktop()">
   <mat-card>
 
-    <mat-form-field class="ncv-full-width">
+    <mat-form-field class="dnd-full-width">
       <textarea #itemName [(ngModel)]="item.name" [maxlength]="maximumNameLength" matInput placeholder="Name"
         matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
       <mat-hint align="end">{{itemName.value?.length || 0}}/{{maximumNameLength}}</mat-hint>
     </mat-form-field>
 
-    <mat-form-field class="ncv-half-width">
+    <mat-form-field class="dnd-half-width">
       <input type="number" [(ngModel)]="item.value" matInput placeholder="Value" />
     </mat-form-field>
 
-    <mat-form-field class="ncv-half-width">
+    <mat-form-field class="dnd-half-width">
       <input type="number" [(ngModel)]="item.weight" matInput placeholder="Weight" />
     </mat-form-field>
 
@@ -21,7 +21,7 @@
 
   </mat-card>
 
-  <div class="ncv-margin-sides" [class.ncv-margin-top]="responsive.isDesktop()">
+  <div class="dnd-margin-sides" [class.dnd-margin-top]="responsive.isDesktop()">
     <mat-accordion>
 
       <mat-expansion-panel [expanded]="isDescriptionOpen" (opened)="openDescriptionPanel()">
@@ -30,7 +30,7 @@
           <mat-panel-description>Short inventory hint</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <mat-form-field class="ncv-full-width">
+        <mat-form-field class="dnd-full-width">
           <textarea #itemDescription [(ngModel)]="item.description" [maxlength]="maximumDescriptionLength" matInput
             placeholder="Descrpition" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
           <mat-hint align="end">{{itemDescription.value?.length || 0}}/{{maximumDescriptionLength}}</mat-hint>
@@ -47,7 +47,7 @@
           <mat-panel-description>The story or document</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <mat-form-field class="ncv-full-width">
+        <mat-form-field class="dnd-full-width">
           <textarea #itemContent [(ngModel)]="item.content" matInput placeholder="Content" matTextareaAutosize
             matAutosizeMinRows="2"></textarea>
         </mat-form-field>
@@ -63,7 +63,7 @@
           <mat-panel-description>What happens when it's used?</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <ncv-action-list #actionList [actionContainer]="item"></ncv-action-list>
+        <dnd-action-list #actionList [actionContainer]="item"></dnd-action-list>
 
         <mat-action-row>
           <button mat-button color="primary" (click)="actionList.addAction()">Add</button>

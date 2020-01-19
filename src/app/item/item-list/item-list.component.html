@@ -1,42 +1,42 @@
 <mat-card>
   <mat-card-title>Items</mat-card-title>
-  <div *ngIf="responsive.isDesktop()" class="ncv-item-header ncv-entity-row">
+  <div *ngIf="responsive.isDesktop()" class="dnd-item-header dnd-entity-row">
     <div>Name</div>
     <div>Type</div>
-    <div class="ncv-item-number">
+    <div class="dnd-item-number">
       <mat-icon aria-label="value">attach_money</mat-icon>
     </div>
-    <div class="ncv-item-number">
+    <div class="dnd-item-number">
       <mat-icon aria-label="weight">layers</mat-icon>
     </div>
-    <div class="ncv-item-checkbox">
+    <div class="dnd-item-checkbox">
       <mat-icon aria-label="isStackable">filter_4</mat-icon>
     </div>
-    <div class="ncv-item-checkbox">
+    <div class="dnd-item-checkbox">
       <mat-icon aria-label="isWearable">accessibility_new</mat-icon>
     </div>
-    <div class="ncv-item-checkbox">
+    <div class="dnd-item-checkbox">
       <mat-icon aria-label="isReadable">import_contacts</mat-icon>
     </div>
     <div></div>
   </div>
   <mat-list>
     <mat-list-item *ngFor="let item of game.items | keyvalue" [routerLink]="['/item', item.key]">
-      <div class="ncv-entity-row ncv-full-width">
+      <div class="dnd-entity-row dnd-full-width">
         <div>{{ item.value.name }}</div>
         <div *ngIf="responsive.isDesktop()">{{ item.value.type }}</div>
-        <div *ngIf="responsive.isDesktop()" class="ncv-item-number">{{ item.value.value }}</div>
-        <div *ngIf="responsive.isDesktop()" class="ncv-item-number">{{ item.value.weight }}</div>
-        <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
+        <div *ngIf="responsive.isDesktop()" class="dnd-item-number">{{ item.value.value }}</div>
+        <div *ngIf="responsive.isDesktop()" class="dnd-item-number">{{ item.value.weight }}</div>
+        <div *ngIf="responsive.isDesktop()" class="dnd-item-checkbox">
           <mat-checkbox disabled [(ngModel)]="item.value.isStackable"></mat-checkbox>
         </div>
-        <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
+        <div *ngIf="responsive.isDesktop()" class="dnd-item-checkbox">
           <mat-checkbox disabled [(ngModel)]="item.value.isWearable"></mat-checkbox>
         </div>
-        <div *ngIf="responsive.isDesktop()" class="ncv-item-checkbox">
+        <div *ngIf="responsive.isDesktop()" class="dnd-item-checkbox">
           <mat-checkbox disabled [(ngModel)]="item.value.isReadable"></mat-checkbox>
         </div>
-        <div class="ncv-delete-button">
+        <div class="dnd-delete-button">
           <button mat-icon-button (click)="deleteItem($event, item.key)">
             <mat-icon aria-label="Delete Item">delete</mat-icon>
           </button>

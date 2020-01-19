@@ -6,9 +6,9 @@ import { ActionParameter, parametersOf } from '@action/action-parameter';
 import { ResponsiveService } from '@responsive-service';
 
 @Component({
-  selector: 'ncv-action',
+  selector: 'dnd-action',
+  styleUrls: ['./action.component.scss'],
   templateUrl: './action.component.html',
-  styleUrls: ['./action.component.scss']
 })
 export class ActionComponent implements OnInit {
   @Input() set action(newAction: Action) {

@@ -167,13 +167,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "ncv",
+      "dnd",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "ncv",
+      "dnd",
       "kebab-case"
     ],
     "no-inputs-metadata-property": true,

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { AbstractControl, NgForm, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { AbstractControl, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { IdValidatorDirective } from './id-validator.directive';
 
-import { GameService, createTestGame } from '@game/testing/test-game';
+import { createTestGame, GameService } from '@game/testing/test-game';
 import { Player } from '@player';
 
 describe('IdValidatorDirective', () => {
@@ -25,7 +25,7 @@ describe('IdValidatorDirective', () => {
   describe('Basic functionality', () => {
     let input: FormControl;
 
-    function testInvalidId(id: string) {
+    function testInvalidId(id: string): void {
       input.setValue(id);
       expect(directive.validate(input)).toEqual({
         invalidId: true
@@ -35,7 +35,9 @@ describe('IdValidatorDirective', () => {
     beforeEach(() => input = new FormControl());
 
     it('should create an instance', () => expect(directive).toBeTruthy());
-    it('should return an error when trying to use an existing or invalid ID', () => invalidIds.forEach(id => testInvalidId(id)));
+    it('should return an error when trying to use an existing or invalid ID', () => {
+      invalidIds.forEach((id: string) => testInvalidId(id));
+    });
 
     it('should return null when using a valid ID', () => {
       input.setValue(validId);
@@ -47,7 +49,7 @@ describe('IdValidatorDirective', () => {
     let fixture: ComponentFixture<FormControlTestComponent>;
     let entityForm: FormGroup;
 
-    const hasError = () => entityForm.controls['entityId'].hasError('invalidId');
+    const hasError = () => entityForm.get('entityId').hasError('invalidId');
     const getErrorDiv = () => fixture.debugElement.query(By.css('div'));
     const getInput = () => fixture.debugElement.query(By.css('input')).nativeElement;
 
@@ -56,7 +58,7 @@ describe('IdValidatorDirective', () => {
     it('should raise errors with an invalid id', fakeAsync(() => {
       const id = invalidIds[0];
 
-      entityForm = new FormGroup({ 'entityId': new FormControl(id, directive.validator) });
+      entityForm = new FormGroup({ entityId: new FormControl(id, directive.validator) });
 
       expect(getInput().value).toEqual('', 'input value should not be set before detectChanges');
       expect(hasError()).toBe(true, 'control should have an error in the beginning');
@@ -74,7 +76,7 @@ describe('IdValidatorDirective', () => {
     it('should accept valid ids', fakeAsync(() => {
       const id = validId;
 
-      entityForm = new FormGroup({ 'entityId': new FormControl(id, directive.validator) });
+      entityForm = new FormGroup({ entityId: new FormControl(id, directive.validator) });
 
       expect(getInput().value).toEqual('', 'input value should not be set before detectChanges');
       expect(hasError()).toBe(false, 'control should not have an error for a valid id');
@@ -134,7 +136,7 @@ describe('IdValidatorDirective', () => {
 });
 
 @Component({
-  selector: 'ncv-entity-reactive-form',
+  selector: 'dnd-entity-reactive-form',
   template: `
     <form [formGroup]="form">
       <input type="text" formControlName="entityId">
@@ -145,11 +147,11 @@ class FormControlTestComponent {
   control: FormControl;
   form: FormGroup;
 
-  get entityId() { return this.form.get('entityId'); }
+  get entityId(): FormControl { return this.form.get('entityId') as FormControl; }
 }
 
 @Component({
-  selector: 'ncv-entity-template-form',
+  selector: 'dnd-entity-template-form',
   template: `
     <form>
       <input name="entityId" #entityId="ngModel" [(ngModel)]="myEntityId" ncvIdValidator>
@@ -161,7 +163,7 @@ class NgModelTestComponent {
   constructor(public game: GameService) {
     this.game.setGame(createTestGame());
   }
-  myEntityId = '';
+  myEntityId: string = '';
 }
 
 class ModelPage {
@@ -195,5 +197,6 @@ function initTest<T>(component: Type<T>, ...directives: Type<any>[]): ComponentF
     imports: [CommonModule, FormsModule, ReactiveFormsModule],
     providers: [GameService]
   }).compileComponents();
+
   return TestBed.createComponent(component);
 }

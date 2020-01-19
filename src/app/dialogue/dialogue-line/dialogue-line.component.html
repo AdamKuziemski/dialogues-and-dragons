@@ -1,8 +1,8 @@
-<span *ngIf="!edit" class="ncv-line-clickable" (click)="onClick($event)">
+<span *ngIf="!edit" class="dnd-line-clickable" (click)="onClick($event)">
   {{ line.line }}
 </span>
 <div *ngIf="edit">
-  <mat-form-field class="ncv-full-width">
+  <mat-form-field class="dnd-full-width">
     <textarea #lineContent [(ngModel)]="line.line" maxlength="maximumLength" matInput
       matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     <mat-hint align="end">{{lineContent.value?.length || 0}}/{{maximumLength}}</mat-hint>

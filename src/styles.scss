@@ -6,46 +6,46 @@ mat-card {
   height: fit-content;
 }
 
-.ncv-text {
+.dnd-text {
   font-family: Roboto,"Helvetica Neue",sans-serif;
   font-size: 15px;
   font-weight: 400;
 }
 
-.ncv-tab-fill-available {
+.dnd-tab-fill-available {
   max-height: calc(100vh - 68px);
 }
 
-.ncv-swiper {
+.dnd-swiper {
   min-height: calc(100vh - 150px);
 }
 
-.ncv-full-width {
+.dnd-full-width {
   width: 100%;
 }
 
-.ncv-half-width {
+.dnd-half-width {
   width: 48%;
 
-  +.ncv-half-width {
+  +.dnd-half-width {
     margin-left: 4%;
   }
 }
 
-.ncv-trimmed {
+.dnd-trimmed {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.ncv-center-content {
+.dnd-center-content {
   text-align: center;
 }
 
-.ncv-vertical-text-splitter {
-  @extend .ncv-full-width;
-  @extend .ncv-center-content;
-  @extend .ncv-text;
+.dnd-vertical-text-splitter {
+  @extend .dnd-full-width;
+  @extend .dnd-center-content;
+  @extend .dnd-text;
 
   margin: 24px 0;
   line-height: 0.1em;
@@ -58,7 +58,7 @@ mat-card {
   }
 }
 
-.ncv-entity-row {
+.dnd-entity-row {
   display: grid;
   grid-template-columns: 1fr 48px;
 
@@ -67,65 +67,65 @@ mat-card {
   }
 }
 
-.ncv-split-vertical {
+.dnd-split-vertical {
   display: grid;
   grid-template-columns: 50% 50%;
 }
 
-.ncv-margin-sides {
+.dnd-margin-sides {
   margin: 0 8px;
 }
 
-.ncv-margin-top {
+.dnd-margin-top {
   margin-top: 8px;
 }
 
-.ncv-margin-bottom {
+.dnd-margin-bottom {
   margin-bottom: 8px;
 }
 
-.ncv-margin-top-bottom {
+.dnd-margin-top-bottom {
   margin: 8px 0;
 }
 
-.ncv-margin-all {
+.dnd-margin-all {
   margin: 8px;
 }
 
-.ncv-pad-top {
+.dnd-pad-top {
   padding-top: 8px;
 }
 
-.ncv-pad-bottom {
+.dnd-pad-bottom {
   padding-bottom: 8px;
 }
 
-.ncv-pad-sides {
+.dnd-pad-sides {
   padding: 0 8px;
 }
 
-.ncv-pad-top-bottom {
+.dnd-pad-top-bottom {
   padding: 8px 0;
 }
 
-.ncv-pad-all {
+.dnd-pad-all {
   padding: 8px;
 }
 
-.ncv-delete-button {
+.dnd-delete-button {
   margin-left: 24px;
 }
 
-.ncv-fab {
+.dnd-fab {
   position: fixed;
   bottom: 32px;
   z-index: 10;
 }
 
-.ncv-fab-right {
+.dnd-fab-right {
   right: 32px;
 }
 
-.ncv-fab-left {
+.dnd-fab-left {
   left: 32px;
 }

@@ -1,18 +1,18 @@
 <div *ngIf="!game.editMode">
 
-  <mat-card class="ncv-margin-around-no-top" (click)="dialogue.advanceLine()">
+  <mat-card class="dnd-margin-around-no-top" (click)="dialogue.advanceLine()">
     <mat-card-title>
       {{ speaker }}
     </mat-card-title>
     <mat-card-content>
-      <ncv-dialogue-line [line]="dialogue.currentLine"></ncv-dialogue-line>
+      <dnd-dialogue-line [line]="dialogue.currentLine"></dnd-dialogue-line>
     </mat-card-content>
   </mat-card>
 
   <mat-card *ngIf="dialogue.displayOptions">
     <mat-list>
       <mat-list-item *ngFor="let option of dialogue.options">
-        <ncv-dialogue-topic [topic]="option" (click)="dialogue.startTopic($event)"></ncv-dialogue-topic>
+        <dnd-dialogue-topic [topic]="option" (click)="dialogue.startTopic($event)"></dnd-dialogue-topic>
       </mat-list-item>
     </mat-list>
   </mat-card>
@@ -21,28 +21,28 @@
 
 <div *ngIf="game.editMode">
   <mat-tab-group *ngIf="responsive.isMobile()"
-                 class="ncv-tab-fill-available"
+                 class="dnd-tab-fill-available"
                  [(selectedIndex)]="currentTab"
                  mat-stretch-tabs>
 
     <mat-tab label="Greetings">
-      <div class="ncv-swiper" (swipeleft)="swipeLeft()">
-        <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
+      <div class="dnd-swiper" (swipeleft)="swipeLeft()">
+        <dnd-greeting-container [dialogue]="dialogue"></dnd-greeting-container>
       </div>
     </mat-tab>
 
     <mat-tab label="Topics">
-      <div class="ncv-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-        <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)">
-        </ncv-dialogue-topic-tree>
+      <div class="dnd-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+        <dnd-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)">
+        </dnd-dialogue-topic-tree>
       </div>
     </mat-tab>
 
     <mat-tab label="Editor">
       <!-- to fix incorrect accordion behavior -->
       <ng-template matTabContent>
-        <div class="ncv-swiper" (swiperight)="swipeRight()">
-          <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+        <div class="dnd-swiper" (swiperight)="swipeRight()">
+          <dnd-dialogue-topic [topic]="currentTopic" [edit]="true"></dnd-dialogue-topic>
         </div>
       </ng-template>
     </mat-tab>
@@ -50,10 +50,10 @@
   </mat-tab-group>
 
   <div *ngIf="responsive.isDesktop()">
-    <ncv-greeting-container [dialogue]="dialogue"></ncv-greeting-container>
-    <div class="ncv-dialogue-editor">
-      <ncv-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)"></ncv-dialogue-topic-tree>
-      <ncv-dialogue-topic [topic]="currentTopic" [edit]="true"></ncv-dialogue-topic>
+    <dnd-greeting-container [dialogue]="dialogue"></dnd-greeting-container>
+    <div class="dnd-dialogue-editor">
+      <dnd-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)"></dnd-dialogue-topic-tree>
+      <dnd-dialogue-topic [topic]="currentTopic" [edit]="true"></dnd-dialogue-topic>
     </div>
   </div>
 

@@ -1,8 +1,8 @@
-<div *ngFor="let action of actionContainer.actions; index as i" class="ncv-item-separated">
-  <div class="ncv-entity-row ncv-full-width">
-    <ncv-action [action]="action" (actionChange)="handleActionChange($event, i)" (click)="handleActionClick($event, i)">
-    </ncv-action>
-    <div class="ncv-margin-sides">
+<div *ngFor="let action of actionContainer.actions; index as i" class="dnd-item-separated">
+  <div class="dnd-entity-row dnd-full-width">
+    <dnd-action [action]="action" (actionChange)="handleActionChange($event, i)" (click)="handleActionClick($event, i)">
+    </dnd-action>
+    <div class="dnd-margin-sides">
       <button mat-icon-button (click)="deleteAction($event, i)">
         <mat-icon aria-label="Delete Action">delete</mat-icon>
       </button>

@@ -12,7 +12,7 @@ import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 import { ActionDialogComponent } from '../../action/action-dialog/action-dialog.component';
 
 @Component({
-  selector: 'ncv-action-list',
+  selector: 'dnd-action-list',
   styleUrls: ['./action-list.component.scss'],
   templateUrl: './action-list.component.html',
 })

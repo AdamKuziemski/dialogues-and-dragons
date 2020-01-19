@@ -1,21 +1,21 @@
-<div *ngIf="!edit" class="ncv-topic-clickable">
+<div *ngIf="!edit" class="dnd-topic-clickable">
   <span (click)="onClick($event)">{{ topic.label }}</span>
 </div>
 
 <div *ngIf="edit">
-  <mat-card class="ncv-topic-basics">
-    <mat-form-field class="ncv-full-width">
+  <mat-card class="dnd-topic-basics">
+    <mat-form-field class="dnd-full-width">
       <textarea #topicContent [(ngModel)]="topic.label" [maxlength]="maximumLength" matInput placeholder="Topic text"
         matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
       <mat-hint align="end">{{topicContent.value?.length || 0}}/{{maximumLength}}</mat-hint>
     </mat-form-field>
-    <div class="ncv-topic-flags">
+    <div class="dnd-topic-flags">
       <mat-checkbox [(ngModel)]="topic.goodbye">Goodbye</mat-checkbox>
       <mat-checkbox [(ngModel)]="topic.backToStart">Back to start</mat-checkbox>
     </div>
   </mat-card>
 
-  <div class="ncv-margin-sides">
+  <div class="dnd-margin-sides">
     <mat-accordion>
 
       <mat-expansion-panel [expanded]="isLinesOpen" (opened)="openLinesPanel()">
@@ -25,8 +25,8 @@
         </mat-expansion-panel-header>
 
         <!-- TODO change lines.lines to plain lines
-          (use LineContainer inside ncv-line-container ncv-line-container) -->
-          <ncv-line-container 
+          (use LineContainer inside dnd-line-container dnd-line-container) -->
+          <dnd-line-container 
             *ngIf="isLinesOpen"
             [lines]="topic.lines.lines"
             [moveLines]="moveLines"
@@ -34,7 +34,7 @@
             (moveDown)="moveLineDown($event)"
             (delete)="deleteLine($event)"
           >
-          </ncv-line-container>
+          </dnd-line-container>
         
           <mat-action-row *ngIf="isLinesOpen">
             <button mat-button color="primary" (click)="addLine()">Add</button>
@@ -49,11 +49,11 @@
           <mat-panel-description>What should happen?</mat-panel-description>
         </mat-expansion-panel-header>
         
-        <ncv-action-list
+        <dnd-action-list
           *ngIf="isActionsOpen"
           #actionList
           [actionContainer]="topic"
-        ></ncv-action-list>
+        ></dnd-action-list>
 
         <mat-action-row *ngIf="isActionsOpen">
           <!-- TODO fix undefined #actionList -->
@@ -73,7 +73,7 @@
       
     </mat-accordion>
 
-    <div class="ncv-center-content ncv-margin-top">
+    <div class="dnd-center-content dnd-margin-top">
       <button mat-button (click)="removeTopic()" color="warn">Remove Topic</button>
     </div>
   </div>

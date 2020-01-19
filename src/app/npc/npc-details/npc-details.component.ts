@@ -8,7 +8,7 @@ import { ResponsiveService } from '@responsive-service';
 import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
-  selector: 'ncv-npc-details',
+  selector: 'dnd-npc-details',
   styleUrls: ['./npc-details.component.scss'],
   templateUrl: './npc-details.component.html',
 })

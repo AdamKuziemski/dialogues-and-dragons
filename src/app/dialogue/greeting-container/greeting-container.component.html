@@ -1,11 +1,11 @@
 <mat-card *ngIf="responsive.isMobile()">
-  <ncv-line-container [lines]="dialogue.greetings.lines" (delete)="deleteGreeting($event)"></ncv-line-container>
+  <dnd-line-container [lines]="dialogue.greetings.lines" (delete)="deleteGreeting($event)"></dnd-line-container>
   <mat-card-actions>
     <button mat-button color="primary" (click)="addGreeting()">Add</button>
   </mat-card-actions>
 </mat-card>
 
-<div *ngIf="responsive.isDesktop()" class="ncv-margin-sides ncv-margin-top">
+<div *ngIf="responsive.isDesktop()" class="dnd-margin-sides dnd-margin-top">
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -15,7 +15,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <ncv-line-container [lines]="dialogue.greetings.lines" (delete)="deleteGreeting($event)"></ncv-line-container>
+      <dnd-line-container [lines]="dialogue.greetings.lines" (delete)="deleteGreeting($event)"></dnd-line-container>
 
       <mat-action-row>
         <button mat-button color="primary" (click)="addGreeting()">Add</button>
