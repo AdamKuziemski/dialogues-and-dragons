@@ -1,6 +1,6 @@
 import { ConditionDependent } from '../condition/condition-dependent';
 
-import { GameObject } from '../game-object';
+import { lastOf } from '../../shared/functions/last-of.function';
 
 export class DialogueLine extends ConditionDependent {
   constructor(
@@ -11,12 +11,8 @@ export class DialogueLine extends ConditionDependent {
   }
 }
 
-export class LineContainer extends GameObject {
+export class LineContainer {
   lines: DialogueLine[] = [];
-
-  [Symbol.iterator](): DialogueLine[] {
-    return this.lines;
-  }
 
   get available(): DialogueLine[] {
     return this.lines.filter((line: DialogueLine) => line.available);
@@ -33,7 +29,7 @@ export class LineContainer extends GameObject {
   add(...lines: string[]): DialogueLine {
     this.lines.push(...lines.map((line: string) => new DialogueLine(line)));
 
-    return this.lastOf(this.lines);
+    return lastOf(this.lines);
   }
 
   remove(index: number): DialogueLine {

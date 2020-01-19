@@ -1,22 +1,21 @@
-import { GameObject } from '../game-object';
 import { QuestStage } from './quest-stage';
 
-export class Quest extends GameObject {
-  static readonly maximumNameLength = 50;
-  static readonly maximumDescriptionLength = 500;
+import { lastOf } from 'app/shared/functions/last-of.function';
 
-  description = '';
+export class Quest {
+  static readonly maximumNameLength: number = 50;
+  static readonly maximumDescriptionLength: number = 500;
 
-  completed = false;
-  failed = false;
+  description: string = '';
+
+  completed: boolean = false;
+  failed: boolean = false;
 
   stages: QuestStage[] = [];
 
-  private currentStageIndex = -1;
+  private currentStageIndex: number = -1;
 
-  constructor(public name: string = '') {
-    super();
-  }
+  constructor(public name: string = '') { }
 
   start(): void {
     this.setStage(0);
@@ -50,7 +49,8 @@ export class Quest extends GameObject {
 
   addStage(journalEntry: string = ''): QuestStage {
     this.stages.push(new QuestStage(journalEntry));
-    return this.lastOf(this.stages);
+
+    return lastOf(this.stages);
   }
 
   removeStage(index: number): void {

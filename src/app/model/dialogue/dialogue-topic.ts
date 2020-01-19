@@ -1,7 +1,8 @@
 import { ConditionDependent } from '../condition/condition-dependent';
 
 import { LineContainer } from './dialogue-line';
-import { GameObject } from '../game-object';
+
+import { lastOf } from 'app/shared/functions/last-of.function';
 
 export class DialogueTopic extends ConditionDependent {
   goodbye: boolean = false;
@@ -23,7 +24,7 @@ export class DialogueTopic extends ConditionDependent {
   }
 }
 
-export class TopicContainer extends GameObject {
+export class TopicContainer {
   topics: DialogueTopic[] = [];
 
   [Symbol.iterator](): DialogueTopic[] {
@@ -68,10 +69,10 @@ export class TopicContainer extends GameObject {
   add(...topics: string[]): DialogueTopic {
     this.topics.push(...topics.map((topic: string) => new DialogueTopic(topic)));
 
-    return this.lastOf(this.topics);
+    return lastOf(this.topics);
   }
 
-  topic(...path: number[]): DialogueTopic {
+  topic(...path: number[]): DialogueTopic | null {
     if (path.length < 1 || path[0] >= this.topics.length) {
       return null;
     }

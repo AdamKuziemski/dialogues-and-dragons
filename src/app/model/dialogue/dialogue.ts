@@ -1,9 +1,9 @@
-import { GameObject } from '../game-object';
-
 import { DialogueLine, LineContainer } from './dialogue-line';
 import { DialogueTopic, TopicContainer } from './dialogue-topic';
 
-export class Dialogue extends GameObject {
+import { lastOf } from 'app/shared/functions/last-of.function';
+
+export class Dialogue {
   greetings: LineContainer = new LineContainer();
   topics: TopicContainer = new TopicContainer();
   isOpen: boolean = false;
@@ -13,7 +13,6 @@ export class Dialogue extends GameObject {
   lineIndex: number = -1;
 
   constructor() {
-    super();
   }
 
   static exampleDialogue(): Dialogue {
@@ -148,7 +147,7 @@ export class Dialogue extends GameObject {
   addGreetings(greetings: string[]): DialogueLine {
     greetings.forEach((elem: string) => this.greetings.add(elem));
 
-    return this.lastOf(this.greetings.lines);
+    return lastOf(this.greetings.lines);
   }
 
   // todo: move this to a service that provides more functionality
