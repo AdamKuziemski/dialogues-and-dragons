@@ -2,7 +2,9 @@ import { QuestStage } from './quest-stage';
 
 import { lastOf } from 'app/shared/functions/last-of.function';
 
-export class Quest {
+import { GameObject } from '../game-object';
+
+export class Quest extends GameObject {
   static readonly maximumNameLength: number = 50;
   static readonly maximumDescriptionLength: number = 500;
 
@@ -15,7 +17,9 @@ export class Quest {
 
   private currentStageIndex: number = -1;
 
-  constructor(public name: string = '') { }
+  constructor(public name: string = '') {
+    super();
+  }
 
   start(): void {
     this.setStage(0);
