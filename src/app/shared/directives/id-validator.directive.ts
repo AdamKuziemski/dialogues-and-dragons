@@ -1,5 +1,5 @@
 import { Directive, forwardRef } from '@angular/core';
-import { NG_VALIDATORS, AbstractControl, FormControl, Validator, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
 
 import { GameService } from '@game/game.service';
 import { Player } from '@player';
@@ -13,10 +13,10 @@ function validateIdFactory(isInvalidId: (value: string) => boolean): ValidatorFn
 }
 
 @Directive({
-  selector: '[ncvIdValidator][ngModel],[ncvIdValidator][formControl]',
   providers: [
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => IdValidatorDirective), multi: true }
-  ]
+  ],
+  selector: '[dndIdValidator][ngModel],[dndIdValidator][formControl]',
 })
 export class IdValidatorDirective implements Validator {
   validator: ValidatorFn;

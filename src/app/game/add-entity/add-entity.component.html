@@ -14,7 +14,7 @@
 
     <mat-form-field class="dnd-full-width">
       <input matInput name="entity-id" #entityId="ngModel" [(ngModel)]="data.id"
-        maxlength="30" required ncvIdValidator
+        maxlength="30" required dndIdValidator
         [placeholder]="data.type + ' Id' | titlecase">
       <mat-hint align="end">{{entityId.value?.length || 0}}/30</mat-hint>
       <mat-error *ngIf="entityId.hasError('invalidId')">This id is already being used</mat-error>

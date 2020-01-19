@@ -154,7 +154,7 @@ class FormControlTestComponent {
   selector: 'dnd-entity-template-form',
   template: `
     <form>
-      <input name="entityId" #entityId="ngModel" [(ngModel)]="myEntityId" ncvIdValidator>
+      <input name="entityId" #entityId="ngModel" [(ngModel)]="myEntityId" dndIdValidator>
       <div *ngIf="entityId.hasError('invalidId')">😠</div>
     </form>
   `
