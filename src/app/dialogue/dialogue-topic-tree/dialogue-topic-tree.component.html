@@ -1,9 +1,9 @@
 <mat-card>
   <mat-card-title>
 
-    <div class="ncv-tree-navigation">
+    <div class="dnd-tree-navigation">
       <button mat-icon-button aria-label="Top level" (click)="goToTop()" [disabled]="path.length === 0">
-        <mat-icon class="ncv-rotate-clockwise">first_page</mat-icon>
+        <mat-icon class="dnd-rotate-clockwise">first_page</mat-icon>
       </button>
       <button mat-icon-button aria-label="Breadcrumbs" (click)="toggleBreadcrumbPanelVisibility()" [disabled]="!canShowBreadcrumbList">
         <mat-icon [color]="panelAboveContent === 'breadcrumbs' ? 'primary' : ''">account_tree</mat-icon>
@@ -18,7 +18,7 @@
 
   </mat-card-title>
 
-  <mat-form-field *ngIf="panelAboveContent === 'searchBox'" class="ncv-full-width">
+  <mat-form-field *ngIf="panelAboveContent === 'searchBox'" class="dnd-full-width">
     <input matInput [(ngModel)]="searchPhrase" placeholder="Find topic"/>
   </mat-form-field>
 
@@ -47,11 +47,11 @@
     </mat-list-item>
   </mat-list>
 
-  <mat-card-content [class.ncv-topic-list]="panelAboveContent === 'breadcrumbs'">
+  <mat-card-content [class.dnd-topic-list]="panelAboveContent === 'breadcrumbs'">
 
     <mat-list *ngIf="topics.length > 0; else emptyTopicList">
-      <mat-list-item *ngFor="let topic of topics; let i = index" class="ncv-topic-entry" (click)="open(i)">
-        <h3 mat-line [class.ncv-topic-selected]="i === selectedTopic">{{ topic.label }}</h3>
+      <mat-list-item *ngFor="let topic of topics; let i = index" class="dnd-topic-entry" (click)="open(i)">
+        <h3 mat-line [class.dnd-topic-selected]="i === selectedIndex">{{ topic.label }}</h3>
         <p mat-line><ng-container *ngTemplateOutlet="subLine; context: {$implicit: topic}"></ng-container></p>
         <button mat-icon-button [attr.aria-label]="'Open ' + topic.label" (click)="onTopicClicked(i, $event)">
           <mat-icon>chevron_right</mat-icon>
