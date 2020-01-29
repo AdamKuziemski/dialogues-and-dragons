@@ -27,10 +27,6 @@ export class DialogueTopic extends ConditionDependent {
 export class TopicContainer {
   topics: DialogueTopic[] = [];
 
-  [Symbol.iterator](): DialogueTopic[] {
-    return this.topics;
-  }
-
   /**
    * @returns all topics that are currently available to choose in the dialogue
    */
