@@ -1,5 +1,5 @@
 <mat-card *ngIf="responsive.isMobile()">
-  <dnd-line-container [lines]="dialogue.greetings.lines" (delete)="deleteGreeting($event)"></dnd-line-container>
+  <dnd-line-container [lines]="dialogue.greetings" (delete)="deleteGreeting($event)"></dnd-line-container>
   <mat-card-actions>
     <button mat-button color="primary" (click)="addGreeting()">Add</button>
   </mat-card-actions>
@@ -15,7 +15,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <dnd-line-container [lines]="dialogue.greetings.lines" (delete)="deleteGreeting($event)"></dnd-line-container>
+      <dnd-line-container [lines]="dialogue.greetings" (delete)="deleteGreeting($event)"></dnd-line-container>
 
       <mat-action-row>
         <button mat-button color="primary" (click)="addGreeting()">Add</button>

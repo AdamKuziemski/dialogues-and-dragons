@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ActionContainer } from '@action/action-container';
@@ -19,17 +21,11 @@ import { ActionDialogComponent } from '../../action/action-dialog/action-dialog.
 export class ActionListComponent extends Destroyable {
   @Input() actionContainer: ActionContainer;
 
-  moveActions: boolean = false;
-
   constructor(
     public dialog: MatDialog,
     private responsive: ResponsiveService
   ) {
     super();
-  }
-
-  toggleMoveActions(): void {
-    this.moveActions = !this.moveActions;
   }
 
   addAction(): void {
@@ -73,6 +69,10 @@ export class ActionListComponent extends Destroyable {
   deleteAction(event: MouseEvent, index: number): void {
     event.stopPropagation();
     this.actionContainer.removeAction(index);
+  }
+
+  drop(event: CdkDragDrop<Action[]>): void {
+    moveItemInArray(this.actionContainer.actions, event.previousIndex, event.currentIndex);
   }
 
 }

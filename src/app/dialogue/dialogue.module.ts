@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -41,6 +42,7 @@ import { GreetingContainerComponent } from './greeting-container/greeting-contai
   imports: [
     ActionModule,
     CommonModule,
+    DragDropModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,

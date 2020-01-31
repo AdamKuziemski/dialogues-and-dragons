@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DialogueLine } from '@dialogue/dialogue-line';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
+import { DialogueLine, LineContainer } from '@dialogue/dialogue-line';
 import { ResponsiveService } from '@responsive-service';
 
 @Component({
@@ -9,37 +11,22 @@ import { ResponsiveService } from '@responsive-service';
   templateUrl: './line-container.component.html',
 })
 export class LineContainerComponent {
-  @Input() lines: DialogueLine[];
-  @Input() moveLines: boolean = false;
+  @Input() lines: LineContainer;
 
-  @Output() moveUp: EventEmitter<number> = new EventEmitter();
-  @Output() moveDown: EventEmitter<number> = new EventEmitter();
   @Output() delete: EventEmitter<number> = new EventEmitter();
 
   constructor(public responsive: ResponsiveService) { }
-
-  onMoveUp(index: number): void {
-    this.moveUp.emit(index);
-  }
-
-  onMoveDown(index: number): void {
-    this.moveDown.emit(index);
-  }
 
   deleteLine(index: number): void {
     this.delete.emit(index);
   }
 
-  isFirstLine(index: number): boolean {
-    return index === 0;
-  }
-
-  isLastLine(index: number): boolean {
-    return index === this.lines.length - 1;
-  }
-
   canShowDeleteButton(): boolean {
     return this.responsive.isDesktop();
+  }
+
+  drop(event: CdkDragDrop<DialogueLine[]>): void {
+    moveItemInArray(this.lines.lines, event.previousIndex, event.currentIndex);
   }
 
 }

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 import { DialogueTopic } from '@dialogue/dialogue-topic';
 
+import { ActionListComponent } from 'app/action/action-list/action-list.component';
 import { ResponsiveService } from '@responsive-service';
 
 type OpenPanel = 'none' | 'lines' | 'actions' | 'conditions';
@@ -19,9 +20,10 @@ export class DialogueTopicComponent implements OnInit {
   @Output() topicChange: EventEmitter<DialogueTopic> = new EventEmitter<DialogueTopic>();
   @Output() topicRemove: EventEmitter<DialogueTopic> = new EventEmitter<DialogueTopic>();
 
+  @ViewChild('actionList', { static: false }) actionList: ActionListComponent;
+
   currentPanel: OpenPanel = 'none';
   maximumLength: number = 100;
-  moveLines: boolean = false;
 
   constructor(
     public responsive: ResponsiveService
@@ -46,7 +48,6 @@ export class DialogueTopicComponent implements OnInit {
   //#region lines
   openLinesPanel(): void {
     this.expandPanel('lines');
-    this.moveLines = false;
   }
 
   get isLinesOpen(): boolean {
@@ -60,18 +61,6 @@ export class DialogueTopicComponent implements OnInit {
   deleteLine(index: number): void {
     this.topic.lines.remove(index);
   }
-
-  toggleMoveLines(): void {
-    this.moveLines = !this.moveLines;
-  }
-
-  moveLineDown(index: number): void {
-    this.topic.lines.swap(index + 1, index);
-  }
-
-  moveLineUp(index: number): void {
-    this.topic.lines.swap(index - 1, index);
-  }
   //#endregion
 
   //#region actions
@@ -81,6 +70,10 @@ export class DialogueTopicComponent implements OnInit {
 
   get isActionsOpen(): boolean {
     return this.currentPanel === 'actions';
+  }
+
+  addAction(): void {
+    this.actionList.addAction();
   }
   //#endregion
 
@@ -95,7 +88,7 @@ export class DialogueTopicComponent implements OnInit {
   //#endregion
 
   removeTopic(): void {
-
+    // TODO
   }
 
   private expandPanel(panel: OpenPanel): void {
