@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -20,6 +20,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { environment } from '../environments/environment';
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     PageNotFoundComponent
@@ -30,6 +31,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     DialogueModule,
     GameModule,
+    HammerModule,
     HomeModule,
     ItemModule,
     NavbarModule,
@@ -38,8 +40,7 @@ import { environment } from '../environments/environment';
   ],
   providers: [
     ResponsiveService
-  ],
-  bootstrap: [AppComponent]
+  ]
 })
 export class AppModule {
   constructor(router: Router) {
