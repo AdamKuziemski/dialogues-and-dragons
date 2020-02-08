@@ -25,6 +25,8 @@ const TEST_DIRECTIVES = [
 ];
 
 @NgModule({
+  declarations: TEST_DIRECTIVES,
+  exports: TEST_DIRECTIVES,
   imports: [
     CommonModule,
     FormsModule,
@@ -34,9 +36,6 @@ const TEST_DIRECTIVES = [
     MatSelectModule,
     NoopAnimationsModule
   ],
-  exports: TEST_DIRECTIVES,
-  declarations: TEST_DIRECTIVES,
-  entryComponents: [AddEntityDialogComponent],
 })
 class DialogTestModule { }
 

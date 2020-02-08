@@ -23,9 +23,6 @@ import { SharedModule } from '../shared/shared.module';
     ActionEditComponent,
     ActionListComponent,
   ],
-  entryComponents: [
-    ActionDialogComponent
-  ],
   exports: [
     ActionComponent,
     ActionDialogComponent,

@@ -28,6 +28,11 @@ import { SharedModule } from '../shared/shared.module';
     GameComponent,
     GameDetailsComponent
   ],
+  exports: [
+    AddEntityDialogComponent,
+    GameComponent,
+    GameDetailsComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -46,13 +51,5 @@ import { SharedModule } from '../shared/shared.module';
   providers: [
     GameService
   ],
-  entryComponents: [
-    AddEntityDialogComponent
-  ],
-  exports: [
-    AddEntityDialogComponent,
-    GameComponent,
-    GameDetailsComponent
-  ]
 })
 export class GameModule { }
