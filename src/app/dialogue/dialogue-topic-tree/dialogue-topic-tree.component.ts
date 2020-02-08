@@ -160,11 +160,24 @@ export class DialogueTopicTreeComponent implements OnInit {
   }
 
   private replaceSelectedPathIndex(previousIndex: number, currentIndex: number): void {
-    if (this.selectedIndex === -1) {
+    if (this.selectedIndex === -1 || !this.isSelectionInRange(previousIndex, currentIndex)) {
       return;
     }
 
-    this.selectedTopicPath[this.level] = this.selectedIndex === previousIndex ? currentIndex : previousIndex;
+    const direction = (previousIndex - currentIndex > 0 ? 1 : -1);
+
+    if (this.selectedIndex === previousIndex) {
+      this.selectedTopicPath[this.level] = currentIndex;
+    } else if (this.selectedIndex <= currentIndex) {
+      this.selectedTopicPath[this.level] += direction;
+    } else if (this.selectedIndex > currentIndex) {
+      this.selectedTopicPath[this.level] += direction;
+    }
+
     this.selectedIndex = this.selectedTopicPath[this.level];
+  }
+
+  private isSelectionInRange(beginning: number, end: number): boolean {
+    return Math.min(beginning, end) <= this.selectedIndex && Math.max(beginning, end) >= this.selectedIndex;
   }
 }
