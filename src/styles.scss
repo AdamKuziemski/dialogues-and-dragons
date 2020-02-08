@@ -1,15 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+body {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 mat-card {
   margin: 8px;
   height: fit-content;
-}
-
-.dnd-text {
-  font-family: Roboto,"Helvetica Neue",sans-serif;
-  font-size: 15px;
-  font-weight: 400;
 }
 
 .dnd-tab-fill-available {
@@ -45,7 +45,6 @@ mat-card {
 .dnd-vertical-text-splitter {
   @extend .dnd-full-width;
   @extend .dnd-center-content;
-  @extend .dnd-text;
 
   margin: 24px 0;
   line-height: 0.1em;
