@@ -1,6 +1,6 @@
 .dnd-dialogue-editor {
-  display: inline-flex;
-  width: stretch;
+  display: grid;
+  grid-template-columns: 25% 1fr;
 }
 
 mat-list {
@@ -10,16 +10,4 @@ mat-list {
 .mat-list .mat-list-item {
   min-height: 48px;
   height: fit-content; // we want the lines to always fit content, no matter the screen size
-}
-
-@media only screen and (min-width: 600px) {
-  dnd-dialogue-topic {
-    margin-left: 0px;
-    width: stretch;
-  }
-
-  dnd-dialogue-topic-tree {
-    min-width: 30%;
-    max-width: 30%;
-  }
 }
