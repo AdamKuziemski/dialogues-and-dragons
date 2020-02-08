@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 import { Dialogue } from '@dialogue/dialogue';
 import { DialogueTopic, TopicContainer } from '@dialogue/dialogue-topic';
 import { ResponsiveService } from '@responsive-service';
@@ -132,10 +134,9 @@ export class DialogueTopicTreeComponent implements OnInit {
     this.calculateSelectedIndex();
   }
 
-  private calculateSelectedIndex(): void {
-    this.selectedIndex = this.hasConvergingPaths() && this.selectedTopicPath[this.level] !== undefined
-      ? this.selectedTopicPath[this.level]
-      : -1;
+  drop(event: CdkDragDrop<DialogueTopic[]>): void {
+    moveItemInArray(this.topics, event.previousIndex, event.currentIndex);
+    this.replaceSelectedPathIndex(event.previousIndex, event.currentIndex);
   }
 
   private togglePanel(panelName: Panel): void {
@@ -146,9 +147,24 @@ export class DialogueTopicTreeComponent implements OnInit {
     this.panelAboveContent = '';
   }
 
+  private calculateSelectedIndex(): void {
+    this.selectedIndex = this.hasConvergingPaths() && this.selectedTopicPath[this.level] !== undefined
+      ? this.selectedTopicPath[this.level]
+      : -1;
+  }
+
   private hasConvergingPaths(): boolean {
     const pathPart = this.path.slice(0, this.level);
 
     return this.selectedTopicPath.slice(0, this.level).every((elem: number, index: number) => elem === pathPart[index]);
+  }
+
+  private replaceSelectedPathIndex(previousIndex: number, currentIndex: number): void {
+    if (this.selectedIndex === -1) {
+      return;
+    }
+
+    this.selectedTopicPath[this.level] = this.selectedIndex === previousIndex ? currentIndex : previousIndex;
+    this.selectedIndex = this.selectedTopicPath[this.level];
   }
 }

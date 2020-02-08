@@ -49,8 +49,8 @@
 
   <mat-card-content [class.dnd-topic-list]="panelAboveContent === 'breadcrumbs'">
 
-    <mat-list *ngIf="topics.length > 0; else emptyTopicList">
-      <mat-list-item *ngFor="let topic of topics; let i = index" class="dnd-topic-entry" (click)="open(i)">
+    <mat-list *ngIf="topics.length > 0; else emptyTopicList" cdkDropList (cdkDropListDropped)="drop($event)">
+      <mat-list-item *ngFor="let topic of topics; let i = index" class="dnd-topic-entry" (click)="open(i)" cdkDrag>
         <h3 mat-line [class.dnd-topic-selected]="i === selectedIndex">{{ topic.label }}</h3>
         <p mat-line><ng-container *ngTemplateOutlet="subLine; context: {$implicit: topic}"></ng-container></p>
         <button mat-icon-button [attr.aria-label]="'Open ' + topic.label" (click)="onTopicClicked(i, $event)">
