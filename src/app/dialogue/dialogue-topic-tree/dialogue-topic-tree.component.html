@@ -25,29 +25,27 @@
   <mat-card-content>
     <mat-divider></mat-divider>
 
-    <div *ngIf="navigationPanel === 'searchBox'" [@panelToggle]>
+    <div *ngIf="navigationPanel === 'searchBox'" @panelToggle>
       <mat-form-field class="dnd-full-width dnd-margin-top">
         <input matInput aria-label="Find topic" [(ngModel)]="searchPhrase" placeholder="Find topic"/>
       </mat-form-field>
     </div>
     
     <mat-list class="dnd-breadcrumbs">
-      <mat-list-item *ngIf="path.length === 0 || navigationPanel === 'breadcrumbs'; else backItem" (click)="goToTop()">
+      <mat-list-item *ngIf="path.length === 0 || navigationPanel === 'breadcrumbs'; else backItem" @squeezeOut (click)="goToTop()">
         <h4 mat-line>{{ npcName }} 's topics</h4>
         <p mat-line><dnd-topic-children-stats [source]="dialogue"></dnd-topic-children-stats></p>
       </mat-list-item>
       <ng-template #backItem>
         <mat-list-item aria-label="Parent topic (click to open)" (click)="back()">
-          <mat-icon mat-list-icon>arrow_upward</mat-icon>
-          <h4 mat-line>{{ parentTopic.label }}</h4>
-          <p mat-line><dnd-topic-children-stats [source]="parentTopic"></dnd-topic-children-stats></p>
+          <mat-icon mat-list-icon @popInOut>arrow_upward</mat-icon>
+          <h4 mat-line @moveOver>{{ parentTopic.label }}</h4>
+          <p mat-line @moveOver><dnd-topic-children-stats [source]="parentTopic"></dnd-topic-children-stats></p>
         </mat-list-item>
       </ng-template>
 
-      <div *ngIf="navigationPanel === 'breadcrumbs' && canShowBreadcrumbList" [@panelToggle]>
-        <mat-list-item *ngFor="let breadcrumb of breadcrumbTopics; let i = index; let last = last"
-                       [@topicItem]
-                       (click)="last ? back() : goToPath(i)">
+      <div *ngIf="navigationPanel === 'breadcrumbs' && canShowBreadcrumbList" @panelToggle>
+        <mat-list-item *ngFor="let breadcrumb of breadcrumbTopics; let i = index; let last = last" @popInOut (click)="last ? back() : goToPath(i)">
           <mat-icon mat-list-icon>{{ last ? 'arrow_upward' : 'subdirectory_arrow_right' }}</mat-icon>
           <h4 mat-line>{{ breadcrumb.label }}</h4>
           <p mat-line><dnd-topic-children-stats [source]="breadcrumb"></dnd-topic-children-stats></p>
