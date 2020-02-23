@@ -1,10 +1,16 @@
 <mat-card>
   <mat-card-title>
     <div class="dnd-tree-navigation">
-      <button mat-icon-button aria-label="Top level" (click)="goToTop()" [disabled]="path.length === 0">
+      <button mat-icon-button
+              aria-label="Top level"
+              [disabled]="path.length === 0"
+              (click)="goToTop()">
         <mat-icon class="dnd-rotate-clockwise">first_page</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Breadcrumbs" (click)="toggleBreadcrumbPanelVisibility()" [disabled]="!canShowBreadcrumbList">
+      <button mat-icon-button
+              aria-label="Breadcrumbs"
+              [disabled]="!canShowBreadcrumbList"
+              (click)="toggleBreadcrumbPanelVisibility()">
         <mat-icon [color]="navigationPanel === 'breadcrumbs' ? 'primary' : ''">account_tree</mat-icon>
       </button>
       <button mat-icon-button aria-label="Find topic" (click)="toggleSearchBoxVisibility()">
@@ -19,32 +25,34 @@
   <mat-card-content>
     <mat-divider></mat-divider>
 
-    <mat-form-field *ngIf="navigationPanel === 'searchBox'" class="dnd-full-width dnd-margin-top">
-      <input matInput aria-label="Find topic" [(ngModel)]="searchPhrase" placeholder="Find topic"/>
-    </mat-form-field>
+    <div *ngIf="navigationPanel === 'searchBox'" [@panelToggle]>
+      <mat-form-field class="dnd-full-width dnd-margin-top">
+        <input matInput aria-label="Find topic" [(ngModel)]="searchPhrase" placeholder="Find topic"/>
+      </mat-form-field>
+    </div>
     
     <mat-list class="dnd-breadcrumbs">
-      <ng-container *ngIf="navigationPanel === 'breadcrumbs' && canShowBreadcrumbList">
-        <mat-list-item (click)="goToTop()">
-          <h4 mat-line>{{ npcName }} 's topics (top level)</h4>
-          <p mat-line><dnd-topic-children-stats [source]="dialogue"></dnd-topic-children-stats></p>
-        </mat-list-item>
-        <mat-list-item *ngFor="let breadcrumb of breadcrumbTopics; let i = index" (click)="goToPath(i)">
-          <mat-icon mat-list-icon>subdirectory_arrow_right</mat-icon>
-          <h4 mat-line>{{ breadcrumb.label }}</h4>
-          <p mat-line><dnd-topic-children-stats [source]="breadcrumb"></dnd-topic-children-stats></p>
-        </mat-list-item>
-      </ng-container>
-  
-      <mat-list-item *ngIf="path.length > 0" aria-label="Parent topic (click to open)" (click)="back()">
-        <mat-icon mat-list-icon>arrow_upward</mat-icon>
-        <h4 mat-line>{{ parentTopic.label }}</h4>
-        <p mat-line><dnd-topic-children-stats [source]="parentTopic"></dnd-topic-children-stats></p>
-      </mat-list-item>
-      <mat-list-item *ngIf="path.length === 0">
+      <mat-list-item *ngIf="path.length === 0 || navigationPanel === 'breadcrumbs'; else backItem" (click)="goToTop()">
         <h4 mat-line>{{ npcName }} 's topics</h4>
         <p mat-line><dnd-topic-children-stats [source]="dialogue"></dnd-topic-children-stats></p>
       </mat-list-item>
+      <ng-template #backItem>
+        <mat-list-item aria-label="Parent topic (click to open)" (click)="back()">
+          <mat-icon mat-list-icon>arrow_upward</mat-icon>
+          <h4 mat-line>{{ parentTopic.label }}</h4>
+          <p mat-line><dnd-topic-children-stats [source]="parentTopic"></dnd-topic-children-stats></p>
+        </mat-list-item>
+      </ng-template>
+
+      <div *ngIf="navigationPanel === 'breadcrumbs' && canShowBreadcrumbList" [@panelToggle]>
+        <mat-list-item *ngFor="let breadcrumb of breadcrumbTopics; let i = index; let last = last"
+                       [@topicItem]
+                       (click)="last ? back() : goToPath(i)">
+          <mat-icon mat-list-icon>{{ last ? 'arrow_upward' : 'subdirectory_arrow_right' }}</mat-icon>
+          <h4 mat-line>{{ breadcrumb.label }}</h4>
+          <p mat-line><dnd-topic-children-stats [source]="breadcrumb"></dnd-topic-children-stats></p>
+        </mat-list-item>
+      </div>
     </mat-list>
 
     <mat-divider></mat-divider>

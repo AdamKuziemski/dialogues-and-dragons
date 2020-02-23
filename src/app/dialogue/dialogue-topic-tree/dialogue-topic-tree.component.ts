@@ -1,18 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { Dialogue } from '@dialogue/dialogue';
 import { DialogueTopic, TopicContainer } from '@dialogue/dialogue-topic';
 import { ResponsiveService } from '@responsive-service';
-import { ActivatedRoute } from '@angular/router';
 import { GameService } from '@game/game.service';
+import { dialogueTreePanelAnimations } from './dialogue-topic-tree.animations';
 
 import { lastOf } from '../../shared/functions/last-of.function';
 
 type Panel = '' | 'searchBox' | 'breadcrumbs';
 
 @Component({
+  animations: dialogueTreePanelAnimations,
   selector: 'dnd-dialogue-topic-tree',
   styleUrls: ['dialogue-topic-tree.component.scss'],
   templateUrl: 'dialogue-topic-tree.component.html',
@@ -36,7 +38,7 @@ export class DialogueTopicTreeComponent implements OnInit {
     public responsive: ResponsiveService,
     public game: GameService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.npcName = this.game.npc(this.route.snapshot.params.id).name;
@@ -65,7 +67,7 @@ export class DialogueTopicTreeComponent implements OnInit {
   }
 
   get canShowBreadcrumbList(): boolean {
-    return this.breadcrumbs.length > 1;
+    return this.breadcrumbs.length > 0;
   }
 
   get level(): number {
@@ -113,7 +115,7 @@ export class DialogueTopicTreeComponent implements OnInit {
     this.breadcrumbs.pop();
     this.calculateSelectedIndex();
 
-    if (this.breadcrumbs.length === 0) {
+    if (this.breadcrumbs.length === 1) {
       this.closePanel();
     }
   }
