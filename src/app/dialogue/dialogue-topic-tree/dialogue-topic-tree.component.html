@@ -55,7 +55,12 @@
       </div>
     </mat-list>
 
-    <mat-divider></mat-divider>
+    <div *ngIf="navigationPanel === 'breadcrumbs'; else divider" class="dnd-vertical-text-splitter">
+      <span>{{ parentTopic.label }}</span>
+    </div>
+    <ng-template #divider>
+      <mat-divider></mat-divider>
+    </ng-template>
 
     <mat-list *ngIf="topics.length > 0; else emptyTopicList" cdkDropList (cdkDropListDropped)="drop($event)">
       <mat-list-item *ngFor="let topic of topics; let i = index" class="dnd-topic-entry" (click)="open(i)" cdkDrag>
