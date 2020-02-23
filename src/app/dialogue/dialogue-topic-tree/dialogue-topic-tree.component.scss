@@ -9,7 +9,7 @@
 }
 
 .dnd-topic-selected {
-  font-weight: bold !important;
+  font-weight: bold !important; // TODO try to replace with a better selector
 }
 
 .mat-list-base .mat-list-item .mat-line:nth-child(n+2) {
@@ -20,6 +20,6 @@
   transform: rotateZ(90deg);
 }
 
-.dnd-topic-list {
-  border-top: 1px solid #c9c9c9;
+mat-list.dnd-breadcrumbs {
+  padding-top: 0;
 }

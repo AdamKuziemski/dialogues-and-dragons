@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +23,7 @@ import { DialogueTopicComponent } from './dialogue-topic/dialogue-topic.componen
 import { DialogueTopicTreeComponent } from './dialogue-topic-tree/dialogue-topic-tree.component';
 import { LineContainerComponent } from './line-container/line-container.component';
 import { GreetingContainerComponent } from './greeting-container/greeting-container.component';
+import { TopicChildrenStatsComponent } from './topic-children-stats/topic-children-stats.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { GreetingContainerComponent } from './greeting-container/greeting-contai
     DialogueTopicComponent,
     DialogueTopicTreeComponent,
     LineContainerComponent,
-    GreetingContainerComponent
+    GreetingContainerComponent,
+    TopicChildrenStatsComponent
   ],
   exports: [
     DialogueComponent,
@@ -48,6 +51,7 @@ import { GreetingContainerComponent } from './greeting-container/greeting-contai
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatDividerModule,
     MatExpansionModule,
     MatIconModule,
     MatInputModule,

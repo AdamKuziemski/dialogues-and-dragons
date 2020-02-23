@@ -21,11 +21,11 @@ export class DialogueTopicTreeComponent implements OnInit {
   @Input() dialogue: Dialogue;
   @Output() topicClicked: EventEmitter<number[]> = new EventEmitter;
 
-  shouldOpenNewTopicsOnMobile: boolean = false; // this will do for now until we get a settings screen
+  shouldOpenNewTopics: boolean = false; // this will do for now until we get a settings screen
 
   breadcrumbs: number[][] = [];
   searchPhrase: string = '';
-  panelAboveContent: Panel = '';
+  navigationPanel: Panel = '';
 
   selectedTopicPath: number[] = [0];
   selectedIndex: number = 0;
@@ -95,7 +95,10 @@ export class DialogueTopicTreeComponent implements OnInit {
 
   addTopic(): void {
     this.currentTopicList.add('New topic');
-    this.onTopicClicked(this.currentTopicList.length - 1);
+
+    if (this.shouldOpenNewTopics) {
+      this.onTopicClicked(this.currentTopicList.length - 1);
+    }
   }
 
   toggleSearchBoxVisibility(): void {
@@ -140,11 +143,11 @@ export class DialogueTopicTreeComponent implements OnInit {
   }
 
   private togglePanel(panelName: Panel): void {
-    this.panelAboveContent = this.panelAboveContent === panelName ? '' : panelName;
+    this.navigationPanel = this.navigationPanel === panelName ? '' : panelName;
   }
 
   private closePanel(): void {
-    this.panelAboveContent = '';
+    this.navigationPanel = '';
   }
 
   private calculateSelectedIndex(): void {

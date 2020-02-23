@@ -5,10 +5,10 @@
         <mat-icon class="dnd-rotate-clockwise">first_page</mat-icon>
       </button>
       <button mat-icon-button aria-label="Breadcrumbs" (click)="toggleBreadcrumbPanelVisibility()" [disabled]="!canShowBreadcrumbList">
-        <mat-icon [color]="panelAboveContent === 'breadcrumbs' ? 'primary' : ''">account_tree</mat-icon>
+        <mat-icon [color]="navigationPanel === 'breadcrumbs' ? 'primary' : ''">account_tree</mat-icon>
       </button>
       <button mat-icon-button aria-label="Find topic" (click)="toggleSearchBoxVisibility()">
-        <mat-icon [color]="panelAboveContent === 'searchBox' ? 'primary' : ''">search</mat-icon>
+        <mat-icon [color]="navigationPanel === 'searchBox' ? 'primary' : ''">search</mat-icon>
       </button>
       <button mat-icon-button aria-label="Add topic" (click)="addTopic()">
         <mat-icon>add</mat-icon>
@@ -17,41 +17,42 @@
   </mat-card-title>
 
   <mat-card-content>
-    <mat-form-field *ngIf="panelAboveContent === 'searchBox'" class="dnd-full-width">
-      <input matInput [(ngModel)]="searchPhrase" placeholder="Find topic"/>
+    <mat-divider></mat-divider>
+
+    <mat-form-field *ngIf="navigationPanel === 'searchBox'" class="dnd-full-width dnd-margin-top">
+      <input matInput aria-label="Find topic" [(ngModel)]="searchPhrase" placeholder="Find topic"/>
     </mat-form-field>
     
-    <div [class.dnd-topic-list]="panelAboveContent === 'breadcrumbs'">
-      <mat-list>
-        <ng-container *ngIf="panelAboveContent === 'breadcrumbs' && canShowBreadcrumbList">
-          <mat-list-item (click)="goToTop()">
-            <h4 mat-line>{{ npcName }} 's topics (top level)</h4>
-            <p mat-line><ng-container *ngTemplateOutlet="subLine; context: {$implicit: dialogue}"></ng-container></p>
-          </mat-list-item>
-          <mat-list-item *ngFor="let breadcrumb of breadcrumbTopics; let i = index" (click)="goToPath(i)">
-            <mat-icon mat-list-icon>subdirectory_arrow_right</mat-icon>
-            <h4 mat-line>{{ breadcrumb.label }}</h4>
-            <p mat-line><ng-container *ngTemplateOutlet="subLine; context: {$implicit: breadcrumb}"></ng-container></p>
-          </mat-list-item>
-        </ng-container>
-    
-        <mat-list-item *ngIf="path.length > 0" aria-label="Parent topic (click to open)" (click)="back()">
-          <mat-icon mat-list-icon>arrow_upward</mat-icon>
-          <h4 mat-line>{{ parentTopic.label }}</h4>
-          <p mat-line><ng-container *ngTemplateOutlet="subLine; context: {$implicit: parentTopic}"></ng-container></p>
+    <mat-list class="dnd-breadcrumbs">
+      <ng-container *ngIf="navigationPanel === 'breadcrumbs' && canShowBreadcrumbList">
+        <mat-list-item (click)="goToTop()">
+          <h4 mat-line>{{ npcName }} 's topics (top level)</h4>
+          <p mat-line><dnd-topic-children-stats [source]="dialogue"></dnd-topic-children-stats></p>
         </mat-list-item>
-    
-        <mat-list-item *ngIf="path.length === 0">
-          <h4 mat-line>{{ npcName }} 's topics</h4>
-          <p mat-line><ng-container *ngTemplateOutlet="subLine; context: {$implicit: dialogue}"></ng-container></p>
+        <mat-list-item *ngFor="let breadcrumb of breadcrumbTopics; let i = index" (click)="goToPath(i)">
+          <mat-icon mat-list-icon>subdirectory_arrow_right</mat-icon>
+          <h4 mat-line>{{ breadcrumb.label }}</h4>
+          <p mat-line><dnd-topic-children-stats [source]="breadcrumb"></dnd-topic-children-stats></p>
         </mat-list-item>
-      </mat-list>
-    </div>
+      </ng-container>
+  
+      <mat-list-item *ngIf="path.length > 0" aria-label="Parent topic (click to open)" (click)="back()">
+        <mat-icon mat-list-icon>arrow_upward</mat-icon>
+        <h4 mat-line>{{ parentTopic.label }}</h4>
+        <p mat-line><dnd-topic-children-stats [source]="parentTopic"></dnd-topic-children-stats></p>
+      </mat-list-item>
+      <mat-list-item *ngIf="path.length === 0">
+        <h4 mat-line>{{ npcName }} 's topics</h4>
+        <p mat-line><dnd-topic-children-stats [source]="dialogue"></dnd-topic-children-stats></p>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-divider></mat-divider>
 
     <mat-list *ngIf="topics.length > 0; else emptyTopicList" cdkDropList (cdkDropListDropped)="drop($event)">
       <mat-list-item *ngFor="let topic of topics; let i = index" class="dnd-topic-entry" (click)="open(i)" cdkDrag>
         <h3 mat-line [class.dnd-topic-selected]="i === selectedIndex">{{ topic.label }}</h3>
-        <p mat-line><ng-container *ngTemplateOutlet="subLine; context: {$implicit: topic}"></ng-container></p>
+        <p mat-line><dnd-topic-children-stats [source]="topic"></dnd-topic-children-stats></p>
         <button mat-icon-button [attr.aria-label]="'Open ' + topic.label" (click)="onTopicClicked(i, $event)">
           <mat-icon>chevron_right</mat-icon>
         </button>
@@ -67,8 +68,3 @@
     
   </mat-card-content>
 </mat-card>
-
-<!-- TODO create a separate component or pipe to display -->
-<ng-template #subLine let-container>
-  {{ container.topics.length }} immediate children, {{ container.topics.count }} total
-</ng-template>
