@@ -4,12 +4,12 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import { first } from 'rxjs/operators';
+
 import { ActionContainer } from '@action/action-container';
 import { actionList } from '@action/action-list';
 import { Action } from '@action/action.interface';
 import { ResponsiveService } from '@responsive-service';
-
-import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
 
 import { ActionDialogComponent } from '../../action/action-dialog/action-dialog.component';
 
@@ -18,15 +18,13 @@ import { ActionDialogComponent } from '../../action/action-dialog/action-dialog.
   styleUrls: ['./action-list.component.scss'],
   templateUrl: './action-list.component.html',
 })
-export class ActionListComponent extends Destroyable {
+export class ActionListComponent {
   @Input() actionContainer: ActionContainer;
 
   constructor(
     public dialog: MatDialog,
     private responsive: ResponsiveService
-  ) {
-    super();
-  }
+  ) {}
 
   addAction(): void {
     if (this.responsive.isMobile()) {
@@ -53,7 +51,7 @@ export class ActionListComponent extends Destroyable {
     });
     dialogRef.componentInstance.edit = (index !== -1);
 
-    dialogRef.afterClosed().pipe(untilDestroyed(this)).subscribe((result: Action) => {
+    dialogRef.afterClosed().pipe(first()).subscribe((result: Action) => {
       if (!result) {
         return;
       }
