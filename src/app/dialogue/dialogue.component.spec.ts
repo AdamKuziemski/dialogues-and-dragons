@@ -6,7 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { ActivatedRoute, ActivatedRouteStub } from '@testing/activated-route-stub';
 import { createTestDialogue } from '@dialogue/testing/test-dialogue';
-import { GameService, createTestGame } from '@game/testing/test-game';
+import { createTestGame, GameService } from '@game/testing/test-game';
 
 import { DialogueComponent } from './dialogue.component';
 import { ResponsiveService } from '@responsive-service';
