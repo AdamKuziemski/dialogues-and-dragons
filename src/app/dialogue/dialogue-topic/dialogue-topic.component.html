@@ -1,5 +1,5 @@
 <div *ngIf="!edit" class="dnd-topic-clickable">
-  <span (click)="onClick($event)">{{ topic.label }}</span>
+  <span (click)="emitTopicClick($event)">{{ topic.label }}</span>
 </div>
 
 <div *ngIf="edit">

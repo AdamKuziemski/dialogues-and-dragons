@@ -33,7 +33,7 @@ export class DialogueTopicComponent implements OnInit {
     this.closePanels();
   }
 
-  onClick(event: MouseEvent): void {
+  emitTopicClick(event: MouseEvent): void {
     event.stopPropagation();
 
     if (!this.edit) {
@@ -88,7 +88,7 @@ export class DialogueTopicComponent implements OnInit {
   //#endregion
 
   removeTopic(): void {
-    // TODO
+    this.topicRemove.emit();
   }
 
   private expandPanel(panel: OpenPanel): void {

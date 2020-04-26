@@ -33,7 +33,7 @@
 
     <mat-tab label="Topics">
       <div class="dnd-swiper" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
-        <dnd-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)">
+        <dnd-dialogue-topic-tree [dialogue]="dialogue" (topicClick)="onTopicSelected($event)">
         </dnd-dialogue-topic-tree>
       </div>
     </mat-tab>
@@ -42,7 +42,7 @@
       <!-- to fix incorrect accordion behavior -->
       <ng-template matTabContent>
         <div class="dnd-swiper" (swiperight)="swipeRight()">
-          <dnd-dialogue-topic [topic]="currentTopic" [edit]="true"></dnd-dialogue-topic>
+          <dnd-dialogue-topic [topic]="currentTopic" [edit]="true" (topicRemove)="onTopicRemoved()"></dnd-dialogue-topic>
         </div>
       </ng-template>
     </mat-tab>
@@ -52,8 +52,8 @@
   <div *ngIf="responsive.isDesktop()">
     <dnd-greeting-container [dialogue]="dialogue"></dnd-greeting-container>
     <div class="dnd-dialogue-editor">
-      <dnd-dialogue-topic-tree [dialogue]="dialogue" (topicClicked)="onTopicSelected($event)"></dnd-dialogue-topic-tree>
-      <dnd-dialogue-topic [topic]="currentTopic" [edit]="true"></dnd-dialogue-topic>
+      <dnd-dialogue-topic-tree [dialogue]="dialogue" (topicClick)="onTopicSelected($event)"></dnd-dialogue-topic-tree>
+      <dnd-dialogue-topic [topic]="currentTopic" [edit]="true" (topicRemove)="onTopicRemoved()"></dnd-dialogue-topic>
     </div>
   </div>
 

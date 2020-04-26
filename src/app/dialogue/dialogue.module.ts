@@ -24,6 +24,7 @@ import { DialogueTopicTreeComponent } from './dialogue-topic-tree/dialogue-topic
 import { LineContainerComponent } from './line-container/line-container.component';
 import { GreetingContainerComponent } from './greeting-container/greeting-container.component';
 import { TopicChildrenStatsComponent } from './topic-children-stats/topic-children-stats.component';
+import { RemoveTopicDialogComponent } from './remove-topic-dialog/remove-topic-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +34,16 @@ import { TopicChildrenStatsComponent } from './topic-children-stats/topic-childr
     DialogueTopicTreeComponent,
     LineContainerComponent,
     GreetingContainerComponent,
-    TopicChildrenStatsComponent
+    TopicChildrenStatsComponent,
+    RemoveTopicDialogComponent
   ],
   exports: [
     DialogueComponent,
     DialogueLineComponent,
     DialogueTopicComponent,
     DialogueTopicTreeComponent,
-    LineContainerComponent
+    LineContainerComponent,
+    RemoveTopicDialogComponent
   ],
   imports: [
     ActionModule,

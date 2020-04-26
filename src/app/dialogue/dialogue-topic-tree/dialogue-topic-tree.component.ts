@@ -5,8 +5,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { Dialogue } from '@dialogue/dialogue';
 import { DialogueTopic, TopicContainer } from '@dialogue/dialogue-topic';
-import { ResponsiveService } from '@responsive-service';
 import { GameService } from '@game/game.service';
+import { ResponsiveService } from '@responsive-service';
 import { dialogueTreePanelAnimations } from './dialogue-topic-tree.animations';
 
 import { lastOf } from '../../shared/functions/last-of.function';
@@ -21,9 +21,9 @@ type Panel = '' | 'searchBox' | 'breadcrumbs';
 })
 export class DialogueTopicTreeComponent implements OnInit {
   @Input() dialogue: Dialogue;
-  @Output() topicClicked: EventEmitter<number[]> = new EventEmitter;
+  @Output() topicClick: EventEmitter<number[]> = new EventEmitter;
 
-  shouldOpenNewTopics: boolean = false; // this will do for now until we get a settings screen
+  shouldOpenNewTopics: boolean = false; // SETTINGS to see
 
   breadcrumbs: number[][] = [];
   searchPhrase: string = '';
@@ -92,7 +92,7 @@ export class DialogueTopicTreeComponent implements OnInit {
 
     this.selectedTopicPath = [...this.path, index];
     this.calculateSelectedIndex();
-    this.topicClicked.emit(this.selectedTopicPath);
+    this.topicClick.emit(this.selectedTopicPath);
   }
 
   addTopic(): void {

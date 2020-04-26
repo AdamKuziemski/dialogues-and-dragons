@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 import { Dialogue } from '@dialogue/dialogue';
 import { DialogueTopic } from '@dialogue/dialogue-topic';
@@ -11,6 +11,9 @@ import { NPC } from '@npc/npc';
 import { ResponsiveService } from '@responsive-service';
 
 import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+import { lastOf } from 'app/shared/functions/last-of.function';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Decision, RemoveTopicDialogComponent } from './remove-topic-dialog/remove-topic-dialog.component';
 
 @Component({
   selector: 'dnd-dialogue',
@@ -25,13 +28,15 @@ export class DialogueComponent extends Destroyable implements OnInit, OnDestroy 
 
   npcId: string;
 
+  currentTopicPath: number[] = [0];
   currentTopic: DialogueTopic;
   currentTab: number = 1;
 
   constructor(
     public game: GameService,
     public responsive: ResponsiveService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -80,7 +85,61 @@ export class DialogueComponent extends Destroyable implements OnInit, OnDestroy 
   }
 
   onTopicSelected(path: number[]): void {
+    this.currentTopicPath = [...path];
     this.currentTopic = this.dialogue.topics.topic(...path);
     this.currentTab = 2;
+  }
+
+  onTopicRemoved(): void {
+    const removedTopic = this.dialogue.topics.topic(...this.currentTopicPath);
+
+    const dialogRef: MatDialogRef<RemoveTopicDialogComponent> = this.dialog.open(RemoveTopicDialogComponent, {
+      data: removedTopic,
+      width: this.responsive.isDesktop() ? '40%' : '80%'
+    });
+
+    dialogRef.afterClosed().pipe(first()).subscribe((decision: Decision) => {
+      switch (decision) {
+        case Decision.Cancel:
+          return;
+        case Decision.MoveUp:
+          this.moveChildrenUp(removedTopic);
+          this.removeCurrentTopic();
+          break;
+        case Decision.RemoveTopic:
+          this.removeCurrentTopic();
+          break;
+        default: break;
+      }
+    });
+  }
+
+  private removeCurrentTopic(): void {
+    const parentTopic = this.getParentTopic();
+
+    if (parentTopic === null) {
+      this.dialogue.topics.remove(lastOf(this.currentTopicPath));
+    } else {
+      parentTopic
+        .topics.topic(...this.currentTopicPath.slice(0, -2))
+        .topics.remove(lastOf(this.currentTopicPath));
+    }
+
+    // TODO open closest neighbor
+  }
+
+  private moveChildrenUp(source: DialogueTopic): void {
+    const parentTopic = this.getParentTopic();
+
+    // TODO put the children where the removed topic was
+    if (parentTopic === null) {
+      this.dialogue.topics.topics.push(...source.topics.topics);
+    } else {
+      parentTopic.topics.topics.push(...source.topics.topics);
+    }
+  }
+
+  private getParentTopic(): DialogueTopic | null {
+    return this.dialogue.topics.topic(...this.currentTopicPath.slice(0, -1));
   }
 }

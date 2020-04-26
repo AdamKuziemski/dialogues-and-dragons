@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Remove topic?</h2>
+
+<mat-dialog-content>
+  <ng-container *ngIf="hasChildren; else removeTopic">
+    This topic contains children. What would you like to do with them?
+  </ng-container>
+  <ng-template #removeTopic>
+    Would you like to remove this topic?
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="send(decision.Cancel)">Cancel</button>
+  <ng-container *ngIf="hasChildren; else noChildren">
+    <button mat-button (click)="send(decision.RemoveTopic)">Remove as well</button>
+    <button mat-button color="primary" (click)="send(decision.MoveUp)">Move up</button>
+  </ng-container>
+  <ng-template #noChildren>
+    <button mat-button color="primary" (click)="send(decision.RemoveTopic)">Remove</button>
+  </ng-template>
+</mat-dialog-actions>
