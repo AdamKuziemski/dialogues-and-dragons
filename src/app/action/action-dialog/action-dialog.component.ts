@@ -2,14 +2,14 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Action } from '@action/action.interface';
-import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+import { DestroyableComponent, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
   selector: 'dnd-action-dialog',
   styleUrls: ['./action-dialog.component.scss'],
   templateUrl: './action-dialog.component.html',
 })
-export class ActionDialogComponent extends Destroyable {
+export class ActionDialogComponent extends DestroyableComponent {
   public edit: boolean;
   private initialData: Action;
 

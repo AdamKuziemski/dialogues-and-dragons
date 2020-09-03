@@ -11,7 +11,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "prefix": "dnd",
-          "styleext": "scss"
+          "style": "scss"
         },
         "@schematics/angular:directive": {
           "prefix": "dnd"

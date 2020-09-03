@@ -1,9 +1,13 @@
-import { OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-export class Destroyable implements OnDestroy {
+@Component({
+  selector: 'dnd-destroyable',
+  template: ''
+})
+export class DestroyableComponent implements OnDestroy {
   destroyed$: Subject<void> = new Subject<void>();
 
   constructor() {
@@ -23,6 +27,6 @@ export class Destroyable implements OnDestroy {
   ngOnDestroy(): void {}
 }
 
-export function untilDestroyed<T extends Destroyable>(who: T): (source: Observable<any>) => Observable<any> {
+export function untilDestroyed<T extends DestroyableComponent>(who: T): (source: Observable<any>) => Observable<any> {
   return (source: Observable<any>) => source.pipe(takeUntil(who.destroyed$));
 }

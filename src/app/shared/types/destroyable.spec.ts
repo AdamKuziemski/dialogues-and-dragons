@@ -1,10 +1,14 @@
-import { OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
-import { Destroyable } from './destroyable';
+import { DestroyableComponent } from './destroyable';
 
-class WithoutOnDestroy extends Destroyable {}
+class WithoutOnDestroy extends DestroyableComponent {}
 
-class WithOnDestroy extends Destroyable implements OnDestroy {
+@Component({
+  selector: 'dnd-with-ondestroy',
+  template: ''
+})
+class WithOnDestroyComponent extends DestroyableComponent implements OnDestroy {
   hasDestroyed: boolean = false;
 
   ngOnDestroy(): void {
@@ -32,7 +36,7 @@ describe('Destroyable', () => {
 
   describe('with original onDestroy handler', () => {
     it('should call ngOnDestroy from the child class before emitting', () => {
-      const instance: WithOnDestroy = new WithOnDestroy();
+      const instance: WithOnDestroyComponent = new WithOnDestroyComponent();
 
       expect(instance.hasDestroyed).toBe(false);
       expect(instance.destroyed$.isStopped).toBe(false);

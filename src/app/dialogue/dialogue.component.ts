@@ -10,7 +10,7 @@ import { GameService } from '@game-service';
 import { NPC } from '@npc/npc';
 import { ResponsiveService } from '@responsive-service';
 
-import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+import { DestroyableComponent, untilDestroyed } from 'app/shared/types/destroyable';
 import { lastOf } from 'app/shared/functions/last-of.function';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Decision, RemoveTopicDialogComponent } from './remove-topic-dialog/remove-topic-dialog.component';
@@ -20,7 +20,7 @@ import { Decision, RemoveTopicDialogComponent } from './remove-topic-dialog/remo
   styleUrls: ['./dialogue.component.scss'],
   templateUrl: './dialogue.component.html',
 })
-export class DialogueComponent extends Destroyable implements OnInit, OnDestroy {
+export class DialogueComponent extends DestroyableComponent implements OnInit, OnDestroy {
   @Input() dialogue: Dialogue;
   @Input() speaker: string = 'Some NPC';
 

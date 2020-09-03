@@ -5,14 +5,14 @@ import { NPC } from '@npc/npc';
 
 import { GameService } from '@game-service';
 import { ResponsiveService } from '@responsive-service';
-import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+import { DestroyableComponent, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
   selector: 'dnd-npc-details',
   styleUrls: ['./npc-details.component.scss'],
   templateUrl: './npc-details.component.html',
 })
-export class NpcDetailsComponent extends Destroyable implements OnInit, OnDestroy {
+export class NpcDetailsComponent extends DestroyableComponent implements OnInit, OnDestroy {
   npc: NPC;
   actorId: string;
 

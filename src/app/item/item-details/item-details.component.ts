@@ -5,7 +5,7 @@ import { Item } from 'app/model/item/item';
 
 import { GameService } from '@game-service';
 import { ResponsiveService } from '@responsive-service';
-import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+import { DestroyableComponent, untilDestroyed } from 'app/shared/types/destroyable';
 
 type OpenPanel = 'none' | 'description' | 'content' | 'actions';
 
@@ -14,7 +14,7 @@ type OpenPanel = 'none' | 'description' | 'content' | 'actions';
   styleUrls: ['./item-details.component.scss'],
   templateUrl: './item-details.component.html',
 })
-export class ItemDetailsComponent extends Destroyable implements OnInit, OnDestroy {
+export class ItemDetailsComponent extends DestroyableComponent implements OnInit, OnDestroy {
   item: Item;
   itemId: string;
   currentPanel: OpenPanel = 'none';

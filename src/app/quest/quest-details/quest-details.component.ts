@@ -5,14 +5,14 @@ import { GameService } from '@game/game.service';
 import { ResponsiveService } from '@responsive-service';
 
 import { Quest } from 'app/model/quest/quest';
-import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+import { DestroyableComponent, untilDestroyed } from 'app/shared/types/destroyable';
 
 @Component({
   selector: 'dnd-quest-details',
   styleUrls: ['./quest-details.component.scss'],
   templateUrl: './quest-details.component.html',
 })
-export class QuestDetailsComponent extends Destroyable implements OnDestroy, OnInit {
+export class QuestDetailsComponent extends DestroyableComponent implements OnDestroy, OnInit {
   quest: Quest;
   questId: string;
   currentStage: number = -1;

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GameService } from '@game/game.service';
 import { ResponsiveService } from '@responsive-service';
 
-import { Destroyable, untilDestroyed } from 'app/shared/types/destroyable';
+import { DestroyableComponent, untilDestroyed } from 'app/shared/types/destroyable';
 
 import { AddEntityDialogComponent, EntityData } from './add-entity/add-entity.component';
 
@@ -13,7 +13,7 @@ import { AddEntityDialogComponent, EntityData } from './add-entity/add-entity.co
   styleUrls: ['./game.component.scss'],
   templateUrl: './game.component.html',
 })
-export class GameComponent extends Destroyable {
+export class GameComponent extends DestroyableComponent {
   currentTab: number = 0;
 
   constructor(
